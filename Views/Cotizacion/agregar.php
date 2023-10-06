@@ -131,7 +131,6 @@
                                         <option value="<?php echo $row['ID_PACIENTE'] ?>"><?php echo $row['NOMBRES'] ?></option>
                                     <?php } ?>
                                 </select>
-                                <label for="select2Basic">Nombre del Paciente</label>
                             </div>
                         </div>
                         <div id="ServicioManual" class="col-md-4" style="display: none;">
@@ -174,11 +173,11 @@
                         </div>
 
                         <div class="input-group input-group-merge mb-4">
-                        <div class="form-floating form-floating-outline">
-                            <input type="number" class="form-control" id="cantidadManual" placeholder="Cantidad Protesis" min="1" value="1" required />
-                            <label for="cantidadManual">Cantidad Protesis</label>
+                            <div class="form-floating form-floating-outline">
+                                <input type="number" class="form-control" id="cantidadManual" placeholder="Cantidad Protesis" min="1" value="1" required />
+                                <label for="cantidadManual">Cantidad Protesis</label>
+                            </div>
                         </div>
-                    </div>
 
                         <div class="input-group input-group-merge">
                             <span class="input-group-text">S/.</span>
@@ -186,6 +185,13 @@
                                 <input type="text" class="form-control" id="montoManual" name="montoManual" placeholder="Precio Unitario" required />
                                 <label for="montoManual">Precio Unitario</label>
                             </div>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-between mb-2">
+                            <label class="mb-0">Incluir IGV (18%)</label>
+                            <label class="form-check form-switch mb-2">
+                                <input type="checkbox" name="IGVManual" id="IGVManual" class="form-check-input">
+                            </label>
                         </div>
                     </div>
                 </div>

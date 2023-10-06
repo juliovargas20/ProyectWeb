@@ -624,7 +624,7 @@ function RegistrarCotiManual(callback) {
   const monto = document.getElementById("montoManual").value;
   const obs = document.getElementById("ObservacionManual").value;
   const peso = document.getElementById("PesoManual").value;
-  const igv = document.getElementById("IGV");
+  const igv = document.getElementById("IGVManual");
   const cant = document.getElementById("cantidadManual").value;
   let che = 0;
 
@@ -721,7 +721,7 @@ function RegistrarCotiManual2() {
   const monto = document.getElementById("montoManual").value;
   const obs = document.getElementById("ObservacionManual").value;
   const peso = document.getElementById("PesoManual").value;
-  const igv = document.getElementById("IGV");
+  const igv = document.getElementById("IGVManual");
   const cant = document.getElementById("cantidadManual").value;
   let che = 0;
 
