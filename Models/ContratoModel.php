@@ -18,6 +18,7 @@ class ContratoModel extends Query
         return $this->selectAll($sql);
     }
 
+    
     public function ListaComponente($id)
     {
         $sql = "SELECT LISTA FROM lista_cotizacion WHERE ID_COTI = $id";
