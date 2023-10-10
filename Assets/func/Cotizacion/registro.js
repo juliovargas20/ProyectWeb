@@ -574,6 +574,7 @@ function ExisteManual() {
   };
 }
 
+/************* COTIZACION MANUAL LOGICA 1 *************/
 function RegistrarServicioManual(callback) {
   // Cambiar el contenido del botón y deshabilitarlo en RegistrarServicio
   btnGenManual.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
@@ -710,6 +711,7 @@ function RegistrarListaManual(id) {
   http.send(JSON.stringify(datos));
 }
 
+/************* COTIZACION MANUAL LOGICA 2 *************/
 function RegistrarCotiManual2() {
   // Cambiar el contenido del botón y deshabilitarlo en RegistrarServicio
   btnGenManual.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;

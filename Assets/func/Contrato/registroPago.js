@@ -60,7 +60,6 @@ function handleFrmPagos(event) {
       if (http.readyState == 4 && http.status == 200) {
         const res = JSON.parse(http.responseText);
         setTimeout(function () {
-          //AlertaPerzonalizada(res.tipo, res.mensaje);
           if (res.tipo == "success") {
             Swal.fire({
               icon: res.tipo,

@@ -1,6 +1,7 @@
 const btnAgregar = document.querySelector("#btnAgregar");
 const FrmAcc = document.querySelector("#FrmAcc");
 const TblAcc = document.querySelector("#FrmAcc");
+const btnGenerar = document.querySelector("#btnGenerar");
 var tbody = TblAcc.getElementsByTagName("tbody")[0];
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -33,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
   FrmAcc.addEventListener("submit", function (e) {
     e.preventDefault();
     if (tbody.rows.length > 0) {
+      btnGenerar.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
+      btnGenerar.disabled = true;
+
       const url = base_url + "Pacientes/RealizarPago";
       const frm = new FormData(FrmAcc);
       const http = new XMLHttpRequest();
@@ -41,18 +45,20 @@ document.addEventListener("DOMContentLoaded", function () {
       http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           const res = JSON.parse(this.responseText);
-          Swal.fire({
-            icon: res.tipo,
-            title: res.mensaje,
-            showConfirmButton: true,
-            timer: 2000,
-            didClose: () => {
-              if ((res.tipo = "success")) {
-                PDfPago(res.id);
-                window.location.reload();
-              }
-            },
-          });
+          setTimeout(() => {
+            if (res.tipo == "success") {
+              Swal.fire({
+                icon: res.tipo,
+                title: res.mensaje,
+                showConfirmButton: true,
+                timer: 2000,
+                didClose: () => {
+                  PDfPago(res.id);
+                  window.location.reload();
+                },
+              });
+            }
+          }, 3000);
         }
       };
     }
