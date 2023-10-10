@@ -357,11 +357,16 @@ function Accesorios(id) {
 }
 
 function ModalReciboPago() {
-
   ModalOpenAcc.show();
 }
 
 function PDfPago(id) {
   const url = base_url + "Pacientes/MostrarReciboPagos/" + id;
+  window.open(url, "_blank");
+}
+
+function EvaluacionTransfemoral() {
+  const id = document.querySelector("#IDTipI").value;
+  const url = base_url + "Pacientes/FichaEvaluacionTransfemoral/" + id;
   window.open(url, "_blank");
 }

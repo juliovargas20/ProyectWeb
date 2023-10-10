@@ -651,7 +651,7 @@ class Pacientes extends Controller
 
     /************** <EVALUACIÓN TRANSFEMORAL> **************/
 
-    public function EvTransfemoral()
+    public function FichaEvaluacionTransfemoral($id)
     {
         require('include/fpdf_temp.php');
 
@@ -661,6 +661,16 @@ class Pacientes extends Controller
 
         $pdf->AddPage();
         $pdf->AliasNbPages();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 16);
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN TRANSFEMORAL"), 0, 1, 'C');
+        $pdf->Ln(15);
+        
+        $pdf->Output('I', 'FichaEvaluacion.pdf');
+        die();        
     }
 
     /************** </EVALUACIÓN TRANSFEMORAL> **************/

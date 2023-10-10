@@ -24,6 +24,7 @@
       </table>
     </div>
   </div>
+
 </div>
 
 <!-- Tipo de Servicio -->
@@ -199,7 +200,7 @@
           <input type="hidden" id="IDTipI" readonly>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionTransfemoral();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>
@@ -382,6 +383,6 @@
     </div>
   </div>
 </div>
-</div>
+
 
 <?php include "Views/templates/footer.php"; ?>
