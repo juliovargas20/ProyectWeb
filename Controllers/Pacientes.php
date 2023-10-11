@@ -665,11 +665,113 @@ class Pacientes extends Controller
         $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
         $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
 
-        $pdf->SetFont('RubikMedium', '', 16);
+        $pdf->SetFont('RubikMedium', '', 14);
         $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN TRANSFEMORAL"), 0, 1, 'C');
-        $pdf->Ln(15);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('NOMBRES DEL PACIENTE: '), 1);
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE ENCAJE'), 0);
+        $pdf->Ln(9);
         
-        $pdf->Output('I', 'FichaEvaluacion.pdf');
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE SUJECIÓN'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(50, 7, utf8_decode('( )  Sujeción Lanyard'), 0);
+        $pdf->Cell(40, 7, utf8_decode('( )  Locker Pin'), 0);
+        $pdf->Cell(0, 7, utf8_decode('( )  Valvula de Vacío y Oring.   TALLA: ____'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TALLA LINER'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(45, 7, utf8_decode('TALLA: _____'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) Lineal'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) Cónica'), 0);
+        $pdf->Cell(0, 14, utf8_decode('( ) K1 - 0.0    ( ) k2 - 0.5    ( ) k3 - 10'), 0, 0, 'C');
+        $pdf->Ln(7);
+        $pdf->Cell(45, 7, utf8_decode('LONGITUD: _____'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) C/Adaptador'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) S/Adaptador'), 0);
+        $pdf->Ln(13);
+
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE RODILLA'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(50, 7, utf8_decode('( ) Mecánica'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Hidráulica'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Neumática'), 0);
+        $pdf->Ln(8);
+        $pdf->Cell(50, 7, utf8_decode('( ) Win Walker'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Össur'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Ottobock'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) LIMP'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE PIE'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(100, 7, utf8_decode('( ) Clásica'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Fibra de Carbono'), 0);
+        $pdf->Ln(8);
+        $pdf->Cell(40, 7, utf8_decode('( ) Multiaxial'), 0);
+        $pdf->Cell(60, 7, utf8_decode('( ) Sach'), 0);
+        $pdf->Cell(40, 7, utf8_decode('( ) Tobillo Alto'), 0);
+        $pdf->Cell(40, 7, utf8_decode('( ) Tobillo Bajo'), 0);
+        $pdf->Ln(13);
+        $pdf->Cell(50, 7, utf8_decode('( ) LIMP'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Win Walker'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Össur'), 0);
+        $pdf->Ln(13);
+        $pdf->Cell(50, 7, utf8_decode('TALLA: ____      LADO: ( ) L     ( ) R'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(100, 7, utf8_decode('ACABADO ESTÉTICO'), 0);
+        $pdf->Cell(70, 7, utf8_decode('CONECTORES ESPECIALES'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(50, 7, utf8_decode('( ) Neopreno'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Telireno'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Si'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) No'), 0);
+        $pdf->Ln(8);
+        $pdf->Cell(50, 7, utf8_decode('( ) Cover 3D'), 0);
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(100, 7, utf8_decode('MONTO COTIZADO: S/. _______________'), 0);
+        $pdf->Ln(9);
+
+        $pdf->AddPage();
+
+        $M1 = BASE_URL . 'Assets/img/M1.jpg';
+        $pdf->Image($M1, 0, 0, 210, 297);
+
+        $pdf->Output('I', 'EvaluacionTransfemoral.pdf');
         die();        
     }
 

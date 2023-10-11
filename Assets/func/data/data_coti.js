@@ -361,6 +361,7 @@ const transfemoral_tmp = `
           <option value="" disabled selected>Seleccione</option>
           <option value="1 Rodilla Mecánica Win Walker">Mecánica Win Walker</option>
           <option value="1 Rodilla Mecánica Össur">Mecánica Össur</option>
+          <option value="1 Rodilla Mecánica LIMP">Mecánica LIMP</option>
           <option value="1 Rodilla Hidráulica Ottobock">Hidráulica Ottobock</option>
           <option value="1 Rodilla Hidráulica Össur">Hidráulica Össur</option>
           <option value="1 Rodilla Neumática Win Walker">Neumática Win Walker</option>
@@ -455,6 +456,35 @@ const transfemoral_tmp = `
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 25D">Fibra de Carbono Tobillo Bajo LIMP 25D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 26D">Fibra de Carbono Tobillo Bajo LIMP 26D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 27D">Fibra de Carbono Tobillo Bajo LIMP 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22I">Fibra de Carbono Tobillo Alto Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23I">Fibra de Carbono Tobillo Alto Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24I">Fibra de Carbono Tobillo Alto Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25I">Fibra de Carbono Tobillo Alto Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26I">Fibra de Carbono Tobillo Alto Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27I">Fibra de Carbono Tobillo Alto Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22D">Fibra de Carbono Tobillo Alto Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23D">Fibra de Carbono Tobillo Alto Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24D">Fibra de Carbono Tobillo Alto Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25D">Fibra de Carbono Tobillo Alto Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26D">Fibra de Carbono Tobillo Alto Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27D">Fibra de Carbono Tobillo Alto Össur 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22I">Fibra de Carbono Tobillo Bajo Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23I">Fibra de Carbono Tobillo Bajo Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24I">Fibra de Carbono Tobillo Bajo Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25I">Fibra de Carbono Tobillo Bajo Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26I">Fibra de Carbono Tobillo Bajo Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27I">Fibra de Carbono Tobillo Bajo Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22D">Fibra de Carbono Tobillo Bajo Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23D">Fibra de Carbono Tobillo Bajo Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24D">Fibra de Carbono Tobillo Bajo Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25D">Fibra de Carbono Tobillo Bajo Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26D">Fibra de Carbono Tobillo Bajo Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27D">Fibra de Carbono Tobillo Bajo Össur 27D</option>
+      
       </select>
     </div>
   </div>
@@ -466,6 +496,7 @@ const transfemoral_tmp = `
           <option value="" disabled selected>Seleccione</option>
           <option value="Acabado Neopreno">Neopreno</option>
           <option value="Acabado Telireno">Telireno</option>
+          <option value="Acabado Cover 3D">Cover 3D</option>
       </select>
     </div>
   </div>
@@ -677,6 +708,34 @@ const transtibial_tmp = `
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 25D">Fibra de Carbono Tobillo Bajo LIMP 25D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 26D">Fibra de Carbono Tobillo Bajo LIMP 26D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 27D">Fibra de Carbono Tobillo Bajo LIMP 27D</option>
+      
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22I">Fibra de Carbono Tobillo Alto Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23I">Fibra de Carbono Tobillo Alto Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24I">Fibra de Carbono Tobillo Alto Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25I">Fibra de Carbono Tobillo Alto Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26I">Fibra de Carbono Tobillo Alto Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27I">Fibra de Carbono Tobillo Alto Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22D">Fibra de Carbono Tobillo Alto Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23D">Fibra de Carbono Tobillo Alto Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24D">Fibra de Carbono Tobillo Alto Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25D">Fibra de Carbono Tobillo Alto Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26D">Fibra de Carbono Tobillo Alto Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27D">Fibra de Carbono Tobillo Alto Össur 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22I">Fibra de Carbono Tobillo Bajo Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23I">Fibra de Carbono Tobillo Bajo Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24I">Fibra de Carbono Tobillo Bajo Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25I">Fibra de Carbono Tobillo Bajo Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26I">Fibra de Carbono Tobillo Bajo Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27I">Fibra de Carbono Tobillo Bajo Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22D">Fibra de Carbono Tobillo Bajo Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23D">Fibra de Carbono Tobillo Bajo Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24D">Fibra de Carbono Tobillo Bajo Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25D">Fibra de Carbono Tobillo Bajo Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26D">Fibra de Carbono Tobillo Bajo Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27D">Fibra de Carbono Tobillo Bajo Össur 27D</option>
       </select>
     </div>
   </div>
@@ -688,6 +747,7 @@ const transtibial_tmp = `
           <option value="" disabled selected>Seleccione</option>
           <option value="Acabado Neopreno">Neopreno</option>
           <option value="Acabado Telireno">Telireno</option>
+          <option value="Acabado Cover 3D">Cover 3D</option>
       </select>
     </div>
   </div>
@@ -780,6 +840,7 @@ const desartRodilla_tmp = `
           <option value="" disabled selected>Seleccione</option>
           <option value="1 Rodilla Mecánica Win Walker">Mecánica Win Walker</option>
           <option value="1 Rodilla Mecánica Össur">Mecánica Össur</option>
+          <option value="1 Rodilla Mecánica LIMP">Mecánica c</option>
           <option value="1 Rodilla Hidráulica Ottobock">Hidráulica Ottobock</option>
           <option value="1 Rodilla Hidráulica Össur">Hidráulica Össur</option>
           <option value="1 Rodilla Neumática Win Walker">Neumática Win Walker</option>
@@ -874,6 +935,34 @@ const desartRodilla_tmp = `
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 25D">Fibra de Carbono Tobillo Bajo LIMP 25D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 26D">Fibra de Carbono Tobillo Bajo LIMP 26D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 27D">Fibra de Carbono Tobillo Bajo LIMP 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22I">Fibra de Carbono Tobillo Alto Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23I">Fibra de Carbono Tobillo Alto Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24I">Fibra de Carbono Tobillo Alto Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25I">Fibra de Carbono Tobillo Alto Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26I">Fibra de Carbono Tobillo Alto Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27I">Fibra de Carbono Tobillo Alto Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22D">Fibra de Carbono Tobillo Alto Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23D">Fibra de Carbono Tobillo Alto Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24D">Fibra de Carbono Tobillo Alto Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25D">Fibra de Carbono Tobillo Alto Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26D">Fibra de Carbono Tobillo Alto Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27D">Fibra de Carbono Tobillo Alto Össur 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22I">Fibra de Carbono Tobillo Bajo Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23I">Fibra de Carbono Tobillo Bajo Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24I">Fibra de Carbono Tobillo Bajo Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25I">Fibra de Carbono Tobillo Bajo Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26I">Fibra de Carbono Tobillo Bajo Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27I">Fibra de Carbono Tobillo Bajo Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22D">Fibra de Carbono Tobillo Bajo Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23D">Fibra de Carbono Tobillo Bajo Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24D">Fibra de Carbono Tobillo Bajo Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25D">Fibra de Carbono Tobillo Bajo Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26D">Fibra de Carbono Tobillo Bajo Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27D">Fibra de Carbono Tobillo Bajo Össur 27D</option>
       </select>
     </div>
   </div>
@@ -885,6 +974,7 @@ const desartRodilla_tmp = `
           <option value="" disabled selected>Seleccione</option>
           <option value="Acabado Neopreno">Neopreno</option>
           <option value="Acabado Telireno">Telireno</option>
+          <option value="Acabado Cover 3D">Cover 3D</option>
       </select>
     </div>
   </div>
@@ -939,6 +1029,7 @@ const cadera_tmp = `
         <option value="" disabled selected>Seleccione</option>
         <option value="Rodilla Mecánica Win Walker">Mecánica Win Walker</option>
         <option value="Rodilla Mecánica Össur">Mecánica Össur</option>
+        <option value="Rodilla Mecánica LIMP">Mecánica LIMP</option>
         <option value="Rodilla Hidráulica Ottobock">Hidráulica Ottobock</option>
         <option value="Rodilla Hidráulica Össur">Hidráulica Össur</option>
         <option value="Rodilla Neumática Win Walker">Neumática Win Walker</option>
@@ -952,31 +1043,31 @@ const cadera_tmp = `
     <div class="col-sm-9">
       <select class="selectL form-select" id="Pie" required>
           <option value="" disabled selected>Seleccione</option>
-          <option value="Pie Clásica Multiaxial KYP 22I">Clásica Multiaxial KYP 22I</option>
-          <option value="Pie Clásica Multiaxial KYP 23I">Clásica Multiaxial KYP 23I</option>
-          <option value="Pie Clásica Multiaxial KYP 24I">Clásica Multiaxial KYP 24I</option>
-          <option value="Pie Clásica Multiaxial KYP 25I">Clásica Multiaxial KYP 25I</option>
-          <option value="Pie Clásica Multiaxial KYP 26I">Clásica Multiaxial KYP 26I</option>
-          <option value="Pie Clásica Multiaxial KYP 27I">Clásica Multiaxial KYP 27I</option>
-          <option value="Pie Clásica Multiaxial KYP 22D">Clásica Multiaxial KYP 22D</option>
-          <option value="Pie Clásica Multiaxial KYP 23D">Clásica Multiaxial KYP 23D</option>
-          <option value="Pie Clásica Multiaxial KYP 24D">Clásica Multiaxial KYP 24D</option>
-          <option value="Pie Clásica Multiaxial KYP 25D">Clásica Multiaxial KYP 25D</option>
-          <option value="Pie Clásica Multiaxial KYP 26D">Clásica Multiaxial KYP 26D</option>
-          <option value="Pie Clásica Multiaxial KYP 27D">Clásica Multiaxial KYP 27D</option>
+          <option value="Pie Clásica Multiaxial LIMP 22I">Clásica Multiaxial LIMP 22I</option>
+          <option value="Pie Clásica Multiaxial LIMP 23I">Clásica Multiaxial LIMP 23I</option>
+          <option value="Pie Clásica Multiaxial LIMP 24I">Clásica Multiaxial LIMP 24I</option>
+          <option value="Pie Clásica Multiaxial LIMP 25I">Clásica Multiaxial LIMP 25I</option>
+          <option value="Pie Clásica Multiaxial LIMP 26I">Clásica Multiaxial LIMP 26I</option>
+          <option value="Pie Clásica Multiaxial LIMP 27I">Clásica Multiaxial LIMP 27I</option>
+          <option value="Pie Clásica Multiaxial LIMP 22D">Clásica Multiaxial LIMP 22D</option>
+          <option value="Pie Clásica Multiaxial LIMP 23D">Clásica Multiaxial LIMP 23D</option>
+          <option value="Pie Clásica Multiaxial LIMP 24D">Clásica Multiaxial LIMP 24D</option>
+          <option value="Pie Clásica Multiaxial LIMP 25D">Clásica Multiaxial LIMP 25D</option>
+          <option value="Pie Clásica Multiaxial LIMP 26D">Clásica Multiaxial LIMP 26D</option>
+          <option value="Pie Clásica Multiaxial LIMP 27D">Clásica Multiaxial LIMP 27D</option>
 
-          <option value="Pie Clásica Sach KYP 22I">Clásica Sach KYP 22I</option>
-          <option value="Pie Clásica Sach KYP 23I">Clásica Sach KYP 23I</option>
-          <option value="Pie Clásica Sach KYP 24I">Clásica Sach KYP 24I</option>
-          <option value="Pie Clásica Sach KYP 25I">Clásica Sach KYP 25I</option>
-          <option value="Pie Clásica Sach KYP 26I">Clásica Sach KYP 26I</option>
-          <option value="Pie Clásica Sach KYP 27I">Clásica Sach KYP 27I</option>
-          <option value="Pie Clásica Sach KYP 22D">Clásica Sach KYP 22D</option>
-          <option value="Pie Clásica Sach KYP 23D">Clásica Sach KYP 23D</option>
-          <option value="Pie Clásica Sach KYP 24D">Clásica Sach KYP 24D</option>
-          <option value="Pie Clásica Sach KYP 25D">Clásica Sach KYP 25D</option>
-          <option value="Pie Clásica Sach KYP 26D">Clásica Sach KYP 26D</option>
-          <option value="Pie Clásica Sach KYP 27D">Clásica Sach KYP 27D</option>
+          <option value="Pie Clásica Sach LIMP 22I">Clásica Sach LIMP 22I</option>
+          <option value="Pie Clásica Sach LIMP 23I">Clásica Sach LIMP 23I</option>
+          <option value="Pie Clásica Sach LIMP 24I">Clásica Sach LIMP 24I</option>
+          <option value="Pie Clásica Sach LIMP 25I">Clásica Sach LIMP 25I</option>
+          <option value="Pie Clásica Sach LIMP 26I">Clásica Sach LIMP 26I</option>
+          <option value="Pie Clásica Sach LIMP 27I">Clásica Sach LIMP 27I</option>
+          <option value="Pie Clásica Sach LIMP 22D">Clásica Sach LIMP 22D</option>
+          <option value="Pie Clásica Sach LIMP 23D">Clásica Sach LIMP 23D</option>
+          <option value="Pie Clásica Sach LIMP 24D">Clásica Sach LIMP 24D</option>
+          <option value="Pie Clásica Sach LIMP 25D">Clásica Sach LIMP 25D</option>
+          <option value="Pie Clásica Sach LIMP 26D">Clásica Sach LIMP 26D</option>
+          <option value="Pie Clásica Sach LIMP 27D">Clásica Sach LIMP 27D</option>
 
           <option value="Pie Fibra de Carbono Tobillo Alto Win Walker 22I">Fibra de Carbono Tobillo Alto Win Walker 22I</option>
           <option value="Pie Fibra de Carbono Tobillo Alto Win Walker 23I">Fibra de Carbono Tobillo Alto Win Walker 23I</option>
@@ -1006,33 +1097,61 @@ const cadera_tmp = `
           <option value="Pie Fibra de Carbono Tobillo Bajo Win Walker 26D">Fibra de Carbono Tobillo Bajo Win Walker 26D</option>
           <option value="Pie Fibra de Carbono Tobillo Bajo Win Walker 27D">Fibra de Carbono Tobillo Bajo Win Walker 27D</option>
 
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 22I">Fibra de Carbono Tobillo Alto KYP 22I</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 23I">Fibra de Carbono Tobillo Alto KYP 23I</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 24I">Fibra de Carbono Tobillo Alto KYP 24I</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 25I">Fibra de Carbono Tobillo Alto KYP 25I</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 26I">Fibra de Carbono Tobillo Alto KYP 26I</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 27I">Fibra de Carbono Tobillo Alto KYP 27I</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 22I">Fibra de Carbono Tobillo Alto LIMP 22I</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 23I">Fibra de Carbono Tobillo Alto LIMP 23I</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 24I">Fibra de Carbono Tobillo Alto LIMP 24I</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 25I">Fibra de Carbono Tobillo Alto LIMP 25I</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 26I">Fibra de Carbono Tobillo Alto LIMP 26I</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 27I">Fibra de Carbono Tobillo Alto LIMP 27I</option>
 
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 22D">Fibra de Carbono Tobillo Alto KYP 22D</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 23D">Fibra de Carbono Tobillo Alto KYP 23D</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 24D">Fibra de Carbono Tobillo Alto KYP 24D</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 25D">Fibra de Carbono Tobillo Alto KYP 25D</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 26D">Fibra de Carbono Tobillo Alto KYP 26D</option>
-          <option value="Pie Fibra de Carbono Tobillo Alto KYP 27D">Fibra de Carbono Tobillo Alto KYP 27D</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 22D">Fibra de Carbono Tobillo Alto LIMP 22D</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 23D">Fibra de Carbono Tobillo Alto LIMP 23D</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 24D">Fibra de Carbono Tobillo Alto LIMP 24D</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 25D">Fibra de Carbono Tobillo Alto LIMP 25D</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 26D">Fibra de Carbono Tobillo Alto LIMP 26D</option>
+          <option value="Pie Fibra de Carbono Tobillo Alto LIMP 27D">Fibra de Carbono Tobillo Alto LIMP 27D</option>
 
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 22I">Fibra de Carbono Tobillo Bajo KYP 22I</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 23I">Fibra de Carbono Tobillo Bajo KYP 23I</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 24I">Fibra de Carbono Tobillo Bajo KYP 24I</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 25I">Fibra de Carbono Tobillo Bajo KYP 25I</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 26I">Fibra de Carbono Tobillo Bajo KYP 26I</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 27I">Fibra de Carbono Tobillo Bajo KYP 27I</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 22I">Fibra de Carbono Tobillo Bajo LIMP 22I</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 23I">Fibra de Carbono Tobillo Bajo LIMP 23I</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 24I">Fibra de Carbono Tobillo Bajo LIMP 24I</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 25I">Fibra de Carbono Tobillo Bajo LIMP 25I</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 26I">Fibra de Carbono Tobillo Bajo LIMP 26I</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 27I">Fibra de Carbono Tobillo Bajo LIMP 27I</option>
 
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 22D">Fibra de Carbono Tobillo Bajo KYP 22D</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 23D">Fibra de Carbono Tobillo Bajo KYP 23D</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 24D">Fibra de Carbono Tobillo Bajo KYP 24D</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 25D">Fibra de Carbono Tobillo Bajo KYP 25D</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 26D">Fibra de Carbono Tobillo Bajo KYP 26D</option>
-          <option value="Pie Fibra de Carbono Tobillo Bajo KYP 27D">Fibra de Carbono Tobillo Bajo KYP 27D</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 22D">Fibra de Carbono Tobillo Bajo LIMP 22D</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 23D">Fibra de Carbono Tobillo Bajo LIMP 23D</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 24D">Fibra de Carbono Tobillo Bajo LIMP 24D</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 25D">Fibra de Carbono Tobillo Bajo LIMP 25D</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 26D">Fibra de Carbono Tobillo Bajo LIMP 26D</option>
+          <option value="Pie Fibra de Carbono Tobillo Bajo LIMP 27D">Fibra de Carbono Tobillo Bajo LIMP 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22I">Fibra de Carbono Tobillo Alto Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23I">Fibra de Carbono Tobillo Alto Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24I">Fibra de Carbono Tobillo Alto Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25I">Fibra de Carbono Tobillo Alto Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26I">Fibra de Carbono Tobillo Alto Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27I">Fibra de Carbono Tobillo Alto Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 22D">Fibra de Carbono Tobillo Alto Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 23D">Fibra de Carbono Tobillo Alto Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 24D">Fibra de Carbono Tobillo Alto Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 25D">Fibra de Carbono Tobillo Alto Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 26D">Fibra de Carbono Tobillo Alto Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Alto Össur 27D">Fibra de Carbono Tobillo Alto Össur 27D</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22I">Fibra de Carbono Tobillo Bajo Össur 22I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23I">Fibra de Carbono Tobillo Bajo Össur 23I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24I">Fibra de Carbono Tobillo Bajo Össur 24I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25I">Fibra de Carbono Tobillo Bajo Össur 25I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26I">Fibra de Carbono Tobillo Bajo Össur 26I</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27I">Fibra de Carbono Tobillo Bajo Össur 27I</option>
+
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 22D">Fibra de Carbono Tobillo Bajo Össur 22D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 23D">Fibra de Carbono Tobillo Bajo Össur 23D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 24D">Fibra de Carbono Tobillo Bajo Össur 24D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 25D">Fibra de Carbono Tobillo Bajo Össur 25D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 26D">Fibra de Carbono Tobillo Bajo Össur 26D</option>
+          <option value="1 Pie Fibra de Carbono Tobillo Bajo Össur 27D">Fibra de Carbono Tobillo Bajo Össur 27D</option>
       </select>
     </div>
   </div>
@@ -1044,6 +1163,7 @@ const cadera_tmp = `
           <option value="" disabled selected>Seleccione</option>
           <option value="Acabado Neopreno">Neopreno</option>
           <option value="Acabado Telireno">Telireno</option>
+          <option value="Acabado Cover 3D">Cover 3D</option>
       </select>
     </div>
   </div>
@@ -1201,6 +1321,7 @@ const bitranfe = `
           <option value="" disabled selected>Seleccione</option>
           <option value="2 Rodilla Mecánica Win Walker">Mecánica Win Walker</option>
           <option value="2 Rodilla Mecánica Össur">Mecánica Össur</option>
+          <option value="2 Rodilla Mecánica LIMP">Mecánica LIMP</option
           <option value="2 Rodilla Hidráulica Ottobock">Hidráulica Ottobock</option>
           <option value="2 Rodilla Hidráulica Össur">Hidráulica Össur</option>
           <option value="2 Rodilla Neumática Win Walker">Neumática Win Walker</option>
@@ -1306,6 +1427,34 @@ const bitranfe = `
           <option value="2 Pie Fibra de Carbono Tobillo Bajo LIMP 25D">Fibra de Carbono Tobillo Bajo LIMP 25D</option>
           <option value="2 Pie Fibra de Carbono Tobillo Bajo LIMP 26D">Fibra de Carbono Tobillo Bajo LIMP 26D</option>
           <option value="2 Pie Fibra de Carbono Tobillo Bajo LIMP 27D">Fibra de Carbono Tobillo Bajo LIMP 27D</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 22I">Fibra de Carbono Tobillo Alto Össur 22I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 23I">Fibra de Carbono Tobillo Alto Össur 23I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 24I">Fibra de Carbono Tobillo Alto Össur 24I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 25I">Fibra de Carbono Tobillo Alto Össur 25I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 26I">Fibra de Carbono Tobillo Alto Össur 26I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 27I">Fibra de Carbono Tobillo Alto Össur 27I</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 22D">Fibra de Carbono Tobillo Alto Össur 22D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 23D">Fibra de Carbono Tobillo Alto Össur 23D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 24D">Fibra de Carbono Tobillo Alto Össur 24D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 25D">Fibra de Carbono Tobillo Alto Össur 25D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 26D">Fibra de Carbono Tobillo Alto Össur 26D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 27D">Fibra de Carbono Tobillo Alto Össur 27D</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 22I">Fibra de Carbono Tobillo Bajo Össur 22I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 23I">Fibra de Carbono Tobillo Bajo Össur 23I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 24I">Fibra de Carbono Tobillo Bajo Össur 24I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 25I">Fibra de Carbono Tobillo Bajo Össur 25I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 26I">Fibra de Carbono Tobillo Bajo Össur 26I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 27I">Fibra de Carbono Tobillo Bajo Össur 27I</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 22D">Fibra de Carbono Tobillo Bajo Össur 22D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 23D">Fibra de Carbono Tobillo Bajo Össur 23D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 24D">Fibra de Carbono Tobillo Bajo Össur 24D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 25D">Fibra de Carbono Tobillo Bajo Össur 25D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 26D">Fibra de Carbono Tobillo Bajo Össur 26D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 27D">Fibra de Carbono Tobillo Bajo Össur 27D</option>
       </select>
     </div>
   </div>
@@ -1317,6 +1466,7 @@ const bitranfe = `
           <option value="" disabled selected>Seleccione</option>
           <option value="Acabado Neopreno">Neopreno</option>
           <option value="Acabado Telireno">Telireno</option>
+          <option value="Acabado Cover 3D">Cover 3D</option>
       </select>
     </div>
   </div>
@@ -1559,6 +1709,34 @@ const bitrasnti = `
           <option value="2 Pie Fibra de Carbono Tobillo Bajo LIMP 25D">Fibra de Carbono Tobillo Bajo LIMP 25D</option>
           <option value="2 Pie Fibra de Carbono Tobillo Bajo LIMP 26D">Fibra de Carbono Tobillo Bajo LIMP 26D</option>
           <option value="2 Pie Fibra de Carbono Tobillo Bajo LIMP 27D">Fibra de Carbono Tobillo Bajo LIMP 27D</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 22I">Fibra de Carbono Tobillo Alto Össur 22I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 23I">Fibra de Carbono Tobillo Alto Össur 23I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 24I">Fibra de Carbono Tobillo Alto Össur 24I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 25I">Fibra de Carbono Tobillo Alto Össur 25I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 26I">Fibra de Carbono Tobillo Alto Össur 26I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 27I">Fibra de Carbono Tobillo Alto Össur 27I</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 22D">Fibra de Carbono Tobillo Alto Össur 22D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 23D">Fibra de Carbono Tobillo Alto Össur 23D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 24D">Fibra de Carbono Tobillo Alto Össur 24D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 25D">Fibra de Carbono Tobillo Alto Össur 25D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 26D">Fibra de Carbono Tobillo Alto Össur 26D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Alto Össur 27D">Fibra de Carbono Tobillo Alto Össur 27D</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 22I">Fibra de Carbono Tobillo Bajo Össur 22I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 23I">Fibra de Carbono Tobillo Bajo Össur 23I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 24I">Fibra de Carbono Tobillo Bajo Össur 24I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 25I">Fibra de Carbono Tobillo Bajo Össur 25I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 26I">Fibra de Carbono Tobillo Bajo Össur 26I</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 27I">Fibra de Carbono Tobillo Bajo Össur 27I</option>
+
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 22D">Fibra de Carbono Tobillo Bajo Össur 22D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 23D">Fibra de Carbono Tobillo Bajo Össur 23D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 24D">Fibra de Carbono Tobillo Bajo Össur 24D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 25D">Fibra de Carbono Tobillo Bajo Össur 25D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 26D">Fibra de Carbono Tobillo Bajo Össur 26D</option>
+          <option value="2 Pie Fibra de Carbono Tobillo Bajo Össur 27D">Fibra de Carbono Tobillo Bajo Össur 27D</option>
       </select>
     </div>
   </div>
@@ -1570,6 +1748,7 @@ const bitrasnti = `
           <option value="" disabled selected>Seleccione</option>
           <option value="2 Acabados Neopreno">Neopreno</option>
           <option value="2 Acabados Telireno">Telireno</option>
+          <option value="2 Acabados Cover 3D">Cover 3D</option>
       </select>
     </div>
   </div>
