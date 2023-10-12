@@ -221,6 +221,20 @@
             </a>
           </li>
 
+          <!-- Ordenes Internas -->
+          <li class="menu-header fw-light mt-4">
+            <span class="menu-header-text">Ordenes Internas</span>
+          </li>
+
+          <li class="menu-item <?php echo !empty($data['activeTrabajo']) ? $data['activeTrabajo'] : ''; ?>">
+            <a href="<?php echo BASE_URL . 'Ordenes/trabajo' ?>" class="menu-link">
+              <i class="menu-icon tf-icons mdi mdi-clipboard-file-outline"></i>
+              <div data-i18n="Orden de Trabajo">Orden de Trabajo</div>
+            </a>
+          </li>
+
+          <!-- /Ordenes Internas -->
+
 
           <!-- Gestion de Proyectos 
           <li class="menu-header fw-light mt-4">

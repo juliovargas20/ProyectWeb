@@ -666,11 +666,11 @@ class Pacientes extends Controller
         $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
 
         $pdf->SetFont('RubikMedium', '', 14);
-        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN TRANSFEMORAL"), 0, 1, 'C');
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN TRANSFEMORAL O DESARTICULADO DE RODILLA"), 0, 1, 'C');
         $pdf->Ln(8);
 
         $pdf->SetFont('RubikRegular', '', 12);
-        $pdf->Cell(70, 7, utf8_decode('NOMBRES DEL PACIENTE: '), 1);
+        $pdf->Cell(40, 7, utf8_decode(' PACIENTE: '), 1);
         $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
         $pdf->Ln(10);
 
@@ -773,6 +773,240 @@ class Pacientes extends Controller
 
         $pdf->Output('I', 'EvaluacionTransfemoral.pdf');
         die();        
+    }
+
+    public function FichaEvaluacionTranstibial($id)
+    {
+        require('include/fpdf_temp.php');
+
+        $datos = $this->model->Mostrar($id);
+
+        $pdf = new PDF($datos['ID_PACIENTE']);
+
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN TRANSTIBIAL O SYME"), 0, 1, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(40, 7, utf8_decode(' PACIENTE: '), 1);
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE ENCAJE'), 0);
+        $pdf->Ln(9);
+        
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE SUJECIÓN'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(40, 7, utf8_decode('( )  Locker Pin'), 0);
+        $pdf->Cell(0, 7, utf8_decode('( )  Rodillera.   TALLA: ____'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TALLA LINER'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(45, 7, utf8_decode('TALLA: _____'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) Lineal'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) Cónica'), 0);
+        $pdf->Cell(0, 14, utf8_decode('( ) K1 - 0.0    ( ) k2 - 0.5    ( ) k3 - 10'), 0, 0, 'C');
+        $pdf->Ln(7);
+        $pdf->Cell(45, 7, utf8_decode('LONGITUD: _____'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) C/Adaptador'), 0);
+        $pdf->Cell(35, 7, utf8_decode('( ) S/Adaptador'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(70, 7, utf8_decode('TIPO DE PIE'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(100, 7, utf8_decode('( ) Clásica'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Fibra de Carbono'), 0);
+        $pdf->Ln(8);
+        $pdf->Cell(40, 7, utf8_decode('( ) Multiaxial'), 0);
+        $pdf->Cell(60, 7, utf8_decode('( ) Sach'), 0);
+        $pdf->Cell(40, 7, utf8_decode('( ) Tobillo Alto'), 0);
+        $pdf->Cell(40, 7, utf8_decode('( ) Tobillo Bajo'), 0);
+        $pdf->Ln(13);
+        $pdf->Cell(50, 7, utf8_decode('( ) LIMP'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Win Walker'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Össur'), 0);
+        $pdf->Ln(13);
+        $pdf->Cell(50, 7, utf8_decode('TALLA: ____      LADO: ( ) L     ( ) R'), 0);
+        $pdf->Ln(13);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(100, 7, utf8_decode('ACABADO ESTÉTICO'), 0);
+        $pdf->Cell(70, 7, utf8_decode('CONECTORES ESPECIALES'), 0);
+        $pdf->Ln(9);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(50, 7, utf8_decode('( ) Neopreno'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Telireno'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) Si'), 0);
+        $pdf->Cell(50, 7, utf8_decode('( ) No'), 0);
+        $pdf->Ln(8);
+        $pdf->Cell(50, 7, utf8_decode('( ) Cover 3D'), 0);
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(100, 7, utf8_decode('MONTO COTIZADO: S/. _______________'), 0);
+        $pdf->Ln(9);
+
+        $pdf->AddPage();
+
+        $M1 = BASE_URL . 'Assets/img/M1.jpg';
+        $pdf->Image($M1, 0, 0, 210, 297);
+
+        $pdf->Output('I', 'EvaluacionTransfemoral.pdf');
+        die();        
+    }
+
+    public function FichaEvaluacionManoParcial($id)
+    {
+        require('include/fpdf_temp.php');
+
+        $datos = $this->model->Mostrar($id);
+
+        $pdf = new PDF($datos['ID_PACIENTE']);
+
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN MANO PARCIAL"), 0, 1, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(40, 7, utf8_decode(' PACIENTE: '), 1);
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
+        $pdf->Ln(10);
+
+        $M1 = BASE_URL . 'Assets/img/LadoMP.PNG';
+        $pdf->Image($M1, 20, 58, 170, 120);
+
+        $pdf->SetY(180);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('SELECCIÓN DE PRÓTESIS: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(55, 7, utf8_decode(' ( ) Mano Parcial Mecánica'), 0);
+        $pdf->Cell(55, 7, utf8_decode(' ( ) Mano Parcial Biónica'), 0);
+        $pdf->Cell(80, 7, utf8_decode(' ( ) Mano Parcial de Articulación Manual'), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('PRUEBAS BIOMECÁNICAS: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 7, utf8_decode(' - Extensión / Flexión de Muñeca : '), 0);
+        $pdf->Cell(0, 7, utf8_decode(' ________ / ________    (1 -> 10)'), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 7, utf8_decode(' - Fuerza : '), 0);
+        $pdf->Cell(0, 7, utf8_decode(' _________________     (1 -> 10)'), 0);
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('OBSERVACIONES: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->MultiCell(0, 10, '_________________________________________________________________________________________________________________________________________________________________________________', 0);
+
+        $pdf->Output('I', 'EvaluacionManoParcial.pdf');
+        die();
+    }
+
+    public function FichaEvaluacionTransradial($id)
+    {
+        require('include/fpdf_temp.php');
+
+        $datos = $this->model->Mostrar($id);
+
+        $pdf = new PDF($datos['ID_PACIENTE']);
+
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN TRANSRADIAL"), 0, 1, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(40, 7, utf8_decode(' PACIENTE: '), 1);
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
+        $pdf->Ln(10);
+
+        $M1 = BASE_URL . 'Assets/img/LadoTransradial.PNG';
+        $pdf->Image($M1, 20, 58, 170, 120);
+
+        $pdf->SetY(180);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('SELECCIÓN DE PRÓTESIS: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(70, 7, utf8_decode(' ( ) Transradial Mecánica de TPU'), 0);
+        $pdf->Cell(70, 7, utf8_decode(' ( ) Transradial tipo gancho con guante Cosmético'), 0);
+        $pdf->Ln(7);
+        $pdf->Cell(70, 7, utf8_decode(' ( ) Mano Completa Biónica'), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('PRUEBAS BIOMECÁNICAS: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 7, utf8_decode(' - Extensión / Flexión de Codo : '), 0);
+        $pdf->Cell(0, 7, utf8_decode(' ________ / ________    (1 -> 10)'), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 7, utf8_decode(' - Fuerza : '), 0);
+        $pdf->Cell(0, 7, utf8_decode(' _________________     (1 -> 10)'), 0);
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('OBSERVACIONES: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->MultiCell(0, 10, '______________________________________________________________________________________________________________________', 0);
+
+        $pdf->Output('I', 'EvaluacionTransradial.pdf');
+        die();
     }
 
     /************** </EVALUACIÓN TRANSFEMORAL> **************/

@@ -370,3 +370,21 @@ function EvaluacionTransfemoral() {
   const url = base_url + "Pacientes/FichaEvaluacionTransfemoral/" + id;
   window.open(url, "_blank");
 }
+
+function EvaluacionTranstibial() {
+  const id = document.querySelector("#IDTipI").value;
+  const url = base_url + "Pacientes/FichaEvaluacionTranstibial/" + id;
+  window.open(url, "_blank");
+}
+
+function EvaluacionManoParcial() {
+  const id = document.querySelector("#IDTip").value;
+  const url = base_url + "Pacientes/FichaEvaluacionManoParcial/" + id;
+  window.open(url, "_blank");
+}
+
+function EvaluacionTransradial() {
+  const id = document.querySelector("#IDTip").value;
+  const url = base_url + "Pacientes/FichaEvaluacionTransradial/" + id;
+  window.open(url, "_blank");
+}

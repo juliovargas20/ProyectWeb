@@ -112,7 +112,7 @@
           <input type="hidden" id="IDTip" readonly>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionManoParcial();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-account-injury-outline mdi-36px me-3"></i>
@@ -121,7 +121,7 @@
                       <span class="h5 mb-1">Mano Parcial</span>
                     </span>
                     <span class="custom-option-body">
-                      <span class="mb-0">Mano Parcial Mecánica</span>
+                      <span class="mb-0">Mano Parcial Mecánica, Mano Parcial Biónica, Mano Parcial de articulación Manual</span>
                     </span>
                   </span>
                 </span>
@@ -145,7 +145,7 @@
           </div>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionTransradial();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-account-injury-outline mdi-36px me-3"></i>
@@ -206,7 +206,7 @@
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>
                   <span>
                     <span class="custom-option-header">
-                      <span class="h5 mb-1">Protesis Transfemoral</span>
+                      <span class="h5 mb-1">Protesis Transfemoral o Desarticuladp de Rodilla</span>
                     </span>
 
                   </span>
@@ -216,13 +216,13 @@
           </div>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionTranstibial();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>
                   <span>
                     <span class="custom-option-header">
-                      <span class="h5 mb-1">Protesis Transtibial o Desarticulado de Rodilla</span>
+                      <span class="h5 mb-1">Protesis Transtibial o Syme</span>
                     </span>
 
                   </span>
@@ -257,7 +257,7 @@
                       <span class="h5 mb-1">Amputación de Pie</span>
                     </span>
                     <span class="custom-option-body">
-                      <span class="mb-0">Protesis Syme, Protesis Chopart, Protesis Linsfrack, Metatarsal, </span>
+                      <span class="mb-0">Protesis Chopart, Protesis Linsfrack, Metatarsal, </span>
                     </span>
                   </span>
                 </span>
