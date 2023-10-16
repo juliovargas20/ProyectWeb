@@ -206,7 +206,7 @@
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>
                   <span>
                     <span class="custom-option-header">
-                      <span class="h5 mb-1">Protesis Transfemoral o Desarticuladp de Rodilla</span>
+                      <span class="h5 mb-1">Protesis Transfemoral o Desarticulado de Rodilla</span>
                     </span>
 
                   </span>
