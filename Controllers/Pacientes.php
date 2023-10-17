@@ -672,10 +672,13 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(40, 7, utf8_decode(' PACIENTE: '), 1);
         $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
-        $pdf->Ln(10);
+        $pdf->Ln(13);
 
         $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->Cell(70, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Cell(50, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Cell(60, 7, utf8_decode('Selección de Prótesis: '), 0, 0, 'R');
+        $pdf->Cell(40, 7, utf8_decode('( ) Transfemoral'), 0, 0, 'C');
+        $pdf->Cell(40, 7, utf8_decode('( ) Rodilla'), 0, 0, 'C');
         $pdf->Ln(13);
 
         $pdf->SetFont('RubikMedium', '', 12);
@@ -799,7 +802,10 @@ class Pacientes extends Controller
         $pdf->Ln(10);
 
         $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->Cell(70, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Cell(50, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Cell(60, 7, utf8_decode('Selección de Prótesis: '), 0, 0, 'R');
+        $pdf->Cell(40, 7, utf8_decode('( ) Transtibial'), 0, 0, 'C');
+        $pdf->Cell(40, 7, utf8_decode('( ) Syme'), 0, 0, 'C');
         $pdf->Ln(13);
 
         $pdf->SetFont('RubikMedium', '', 12);
