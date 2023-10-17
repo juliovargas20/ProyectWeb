@@ -266,7 +266,7 @@
           </div>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionBiTransfemoral();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>
@@ -282,7 +282,7 @@
           </div>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionBiTranstibial();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>

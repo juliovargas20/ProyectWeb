@@ -377,6 +377,18 @@ function EvaluacionTranstibial() {
   window.open(url, "_blank");
 }
 
+function EvaluacionBiTransfemoral() {
+  const id = document.querySelector("#IDTipI").value;
+  const url = base_url + "Pacientes/FichaEvaluacionBiTransfemoral/" + id;
+  window.open(url, "_blank");
+}
+
+function EvaluacionBiTranstibial() {
+  const id = document.querySelector("#IDTipI").value;
+  const url = base_url + "Pacientes/FichaEvaluacionBiTranstibial/" + id;
+  window.open(url, "_blank");
+}
+
 function EvaluacionManoParcial() {
   const id = document.querySelector("#IDTip").value;
   const url = base_url + "Pacientes/FichaEvaluacionManoParcial/" + id;
