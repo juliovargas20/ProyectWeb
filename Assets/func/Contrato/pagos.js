@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "NOMBRES" },
       { data: "MONTO", className: "text-center" },
       { data: "FECHA", className: "text-center" },
+      { data: "ESTADO", className: "text-center" },
       { data: "ACCIONES", className: "text-center" },
     ],
     columnDefs: [

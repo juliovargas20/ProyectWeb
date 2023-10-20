@@ -479,6 +479,19 @@ class Contrato extends Controller
         $data = $this->model->ListaContrato();
 
         for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]['ESTADO'] == 1) {
+                $data[$i]['ESTADO'] = '
+                    <span class="badge badge-center rounded-pill bg-label-success">
+                        <i class="mdi mdi-check"></i>
+                    </span>
+                ';
+            }else{
+                $data[$i]['ESTADO'] = '
+                    <span class="badge rounded-pill bg-label-danger">
+                        Deuda
+                    </span>
+                ';
+            }
             $data[$i]['ACCIONES'] = '
                 <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

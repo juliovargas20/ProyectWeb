@@ -12,6 +12,7 @@
                         <th>NOMBRES</th>
                         <th class="text-center">MONTO</th>
                         <th class="text-center">FECHA</th>
+                        <th class="text-center">ESTADO</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>

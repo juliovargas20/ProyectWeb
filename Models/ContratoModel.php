@@ -66,7 +66,7 @@ class ContratoModel extends Query
 
     public function ListaContrato()
     {
-        $sql = "SELECT c.FECHA, c.ID, c.ID_PACIENTE, c.SUB_TRAB, c.MONTO, r.NOMBRES FROM contratos c INNER JOIN registro r ON c.ID_PACIENTE = r.ID_PACIENTE";
+        $sql = "SELECT c.FECHA, c.ID, c.ID_PACIENTE, c.SUB_TRAB, c.MONTO, r.NOMBRES, c.ESTADO FROM contratos c INNER JOIN registro r ON c.ID_PACIENTE = r.ID_PACIENTE";
         return $this->selectAll($sql);
     }
 
