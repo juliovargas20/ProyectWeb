@@ -3,10 +3,6 @@
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 class Cotizacion extends Controller
 {
     public function __construct()
@@ -51,11 +47,27 @@ class Cotizacion extends Controller
                             <i class="mdi mdi-eye-outline mdi-20px mx-1"></i> 
                             Visualizar
                         </button>
+                        <button type="button" class="dropdown-item" onclick="EliminarCoti(' . $data[$i]['ID'] . ')">
+                            <i class="mdi mdi-trash-can mdi-20px mx-1"></i> 
+                            Eliminar
+                        </button>
                     </div>
                 </div>
             ';
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function EliminarCoti($id)
+    {
+        $data = $this->model->EliminarCoti($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Cotización Eliminada');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Cotización Eliminada');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
         die();
     }
 
@@ -226,51 +238,4 @@ class Cotizacion extends Controller
 
     /************** </ IMPRIMIR COTIZACION > **************/
 
-
-    /************** < CORREO COTIZACION > **************/
-
-
-    public function EnviarCorreo($id)
-    {   
-        $mail = new PHPMailer(true);
-
-        try {
-            //Server settings
-            $mail->SMTPDebug = 2;
-            $mail->isSMTP();
-            $mail->Host       = SMP;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = USER_EMAIL;
-            $mail->Password   = PASS_EMAIL;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port       = PORT_SSL;
-
-
-            $mail->setFrom(USER_EMAIL, 'Administración');
-            $mail->addAddress('sistemas@kypbioingenieria.com');
-
-                /*Attachments
-            $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-            */;
-
-            $mail->CharSet = 'UTF-8';
-
-            //Content
-            $mail->isHTML(true);
-            $mail->Subject = 'Prueba Envia de Cotizacion';
-            $mail->Body    = 'Mira el PDF';
-
-            $mail->addAttachment('archivo.pdf');
-
-
-            $mail->send();
-            echo 'El correo se envió correctamente.';
-        } catch (Exception $e) {
-            echo "Error: {$mail->ErrorInfo}";
-        }
-    }
-
-
-    /************** </ CORREO COTIZACION > **************/
 }

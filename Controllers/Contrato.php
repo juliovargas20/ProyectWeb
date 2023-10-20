@@ -578,6 +578,18 @@ class Contrato extends Controller
         die();
     }
 
+    public function EliminarPago($id)
+    {
+        $data = $this->model->EliminarPago($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Pago Eliminado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Pago Eliminada');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
     public function ListarPagos($id)
     {
         $data = $this->model->ListarPagos($id);

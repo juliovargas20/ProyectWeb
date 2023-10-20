@@ -122,6 +122,10 @@ function ListarPagos() {
                           <i class="mdi mdi-file-pdf-box mdi-20px mx-1"></i> 
                           Recibo
                       </button>
+                      <button type="button" class="dropdown-item" onclick="EliminarPago(${row["ID"]})">
+                          <i class="mdi mdi-trash-can mdi-20px mx-1"></i> 
+                          Eliminar
+                      </button>
                   </div>
               </div>
             </td>
@@ -139,6 +143,56 @@ function Comprobante(id) {
 }
 
 function Recibo(id) {
-  const url = base_url + 'Contrato/MostrarRecibo/' + id;
-  window.open(url, '_blank');
+  const url = base_url + "Contrato/MostrarRecibo/" + id;
+  window.open(url, "_blank");
+}
+
+function EliminarPago(id) {
+  Swal.fire({
+    title: "¿Estas Seguro de Eliminar el pago realizado?",
+    text: "EL pago se eliminara definitivamente!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sí, Eliminar!",
+    customClass: {
+      confirmButton: "btn btn-primary me-3 waves-effect waves-light",
+      cancelButton: "btn btn-label-danger waves-effect",
+    },
+    buttonsStyling: false,
+  }).then(function (result) {
+    if (result.value) {
+      const url = base_url + "Contrato/EliminarPago/" + id;
+      const http = new XMLHttpRequest();
+      http.open("GET", url, true);
+      http.send();
+      http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == "success") {
+            setTimeout(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Eliminado!",
+                text: "El pago ha sido eliminado.",
+                showConfirmButton: true,
+                timer: 2000,
+                didClose: () => {
+                  window.location.reload();
+                },
+              });
+            }, 2000);
+          }
+        }
+      };
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire({
+        title: "Cancelado",
+        text: "Acción cancelada!",
+        icon: "error",
+        customClass: {
+          confirmButton: "btn btn-success waves-effect",
+        },
+      });
+    }
+  });
 }

@@ -1,6 +1,5 @@
 let DataListaCotizacion;
 document.addEventListener("DOMContentLoaded", function () {
-  
   DataListaCotizacion = $("#TblListaCotizacion").DataTable({
     ajax: {
       url: base_url + "Cotizacion/Listar",
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         targets: 0,
         render: function (data, type, full, meta) {
           var $id = full["ID_PACIENTE"];
-          var $cod = full['ID'];
+          var $cod = full["ID"];
           // Creates full output for row
           var $row_output = "<span>#" + $id + " - " + $cod + "</span>";
           return $row_output;
@@ -52,11 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
         targets: 2,
         render: function (data, type, full, meta) {
           var $total = full["MONTO"];
-          return '<span class="badge bg-label-success">S/. ' + $total + "</span>";
+          return (
+            '<span class="badge bg-label-success">S/. ' + $total + "</span>"
+          );
         },
       },
     ],
-    "order": [[0, 'desc']] ,
+    order: [[0, "desc"]],
     dom:
       '<"row ms-2 me-3"' +
       '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-3"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
@@ -113,10 +114,56 @@ document.addEventListener("DOMContentLoaded", function () {
       url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
     },
   });
-
-
 });
 
 function Prevista(id) {
   window.location.href = base_url + "Cotizacion/imprimir/" + id;
+}
+
+function EliminarCoti(id) {
+  Swal.fire({
+    title: "¿Estas Seguro de Eliminar la siguiente cotización?",
+    text: "La cotización de eliminara definitivamente!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sí, Eliminar!",
+    customClass: {
+      confirmButton: "btn btn-primary me-3 waves-effect waves-light",
+      cancelButton: "btn btn-label-danger waves-effect",
+    },
+    buttonsStyling: false,
+  }).then(function (result) {
+    if (result.value) {
+      const url = base_url + "Cotizacion/EliminarCoti/" + id;
+      const http = new XMLHttpRequest();
+      http.open("GET", url, true);
+      http.send();
+
+      http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == 'success') {
+            Swal.fire({
+              icon: "success",
+              title: "Eliminado!",
+              text: "La cotización ha sido eliminada.",
+              customClass: {
+                confirmButton: "btn btn-success waves-effect",
+              },
+            });
+            DataListaCotizacion.ajax.reload();
+          }
+        }
+      };
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire({
+        title: "Cancelado",
+        text: "Acción cancelada!",
+        icon: "error",
+        customClass: {
+          confirmButton: "btn btn-success waves-effect",
+        },
+      });
+    }
+  });
 }

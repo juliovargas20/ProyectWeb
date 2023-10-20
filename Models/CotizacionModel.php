@@ -29,6 +29,13 @@ class CotizacionModel extends Query{
         return $this->selectAll($sql);
     }
 
+    public function EliminarCoti($id)
+    {
+        $sql = "DELETE FROM cotizacion WHERE ID = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
     /************** <!-- REGISTRAR COTIZACION --> **************/
 
     public function Existe($id)

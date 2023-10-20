@@ -113,6 +113,13 @@ class ContratoModel extends Query
         return $res;
     }
 
+    public function EliminarPago($id)
+    {
+        $sql = "DELETE FROM pagoscontrato WHERE ID = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
     public function ListarPagos($id)
     {
         $sql = "SELECT ID, ID_CONTRATO, ID_PACIENTE, FECHA, NPAGO, ABONO, TIP_PAGO, METODO FROM pagoscontrato WHERE ID_CONTRATO = $id";

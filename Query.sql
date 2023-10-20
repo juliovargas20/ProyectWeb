@@ -168,6 +168,54 @@ ADD CONSTRAINT fk_pagoscontrato_contratos
 FOREIGN KEY (ID_CONTRATO) REFERENCES contratos(ID);
 
 
+DELIMITER //
+CREATE TRIGGER update_contrato_estado
+AFTER INSERT ON pagoscontrato
+FOR EACH ROW
+BEGIN
+    DECLARE total_abonos DECIMAL(10, 2);
+    SELECT SUM(ABONO) INTO total_abonos
+    FROM pagoscontrato
+    WHERE ID_CONTRATO = NEW.ID_CONTRATO;
+
+    IF total_abonos = (SELECT MONTO FROM contratos WHERE ID = NEW.ID_CONTRATO) THEN
+        UPDATE contratos
+        SET ESTADO = 1
+        WHERE ID = NEW.ID_CONTRATO;
+    ELSE
+        UPDATE contratos
+        SET ESTADO = 0
+        WHERE ID = NEW.ID_CONTRATO;
+    END IF;
+END;
+//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER update_contrato_estado_on_delete
+AFTER DELETE ON pagoscontrato
+FOR EACH ROW
+BEGIN
+    DECLARE total_abonos DECIMAL(10, 2);
+    SELECT SUM(ABONO) INTO total_abonos
+    FROM pagoscontrato
+    WHERE ID_CONTRATO = OLD.ID_CONTRATO;
+
+    IF total_abonos = (SELECT MONTO FROM contratos WHERE ID = OLD.ID_CONTRATO) THEN
+        UPDATE contratos
+        SET ESTADO = 1
+        WHERE ID = OLD.ID_CONTRATO;
+    ELSE
+        UPDATE contratos
+        SET ESTADO = 0
+        WHERE ID = OLD.ID_CONTRATO;
+    END IF;
+END;
+//
+DELIMITER ;
+
+
 /* HISTORIAL *****************/
 CREATE TABLE historial 
 (
