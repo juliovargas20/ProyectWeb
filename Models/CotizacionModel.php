@@ -25,7 +25,7 @@ class CotizacionModel extends Query{
 
     public function getSubTrab($id)
     {
-        $sql = "SELECT * FROM subtrabajo s INNER JOIN tipomiembro t ON s.id_tipo = t.Id WHERE TIPOMIEMBRO = '$id'";
+        $sql = "SELECT * FROM subtrabajo s INNER JOIN tipomiembro t ON s.id_tipo = t.Id WHERE t.TIPOMIEMBRO = '$id'";
         return $this->selectAll($sql);
     }
 
