@@ -3,7 +3,7 @@ function AlertaPerzonalizada(type, mensaje) {
     icon: type,
     title: mensaje,
     showConfirmButton: true,
-    timer: 1500,
+    timer: 2000,
   });
 }
 

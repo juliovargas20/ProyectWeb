@@ -97,10 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
-                // Obtener la velocidad de descarga actual
-                const downloadSpeedMbps = getDownloadSpeedMbps();
-                // Calcular el tiempo de espera en función de la velocidad de descarga
-                const timeoutDuration = calculateTimeoutDuration(downloadSpeedMbps);
                 setTimeout(function () {
                     AlertaPerzonalizada(res.tipo, res.mensaje);
                     if (res.tipo = 'success') {
@@ -113,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Restaurar el contenido original del botón
                         btnGuardar.innerHTML = 'Guardar';
                     }
-                }, timeoutDuration);
+                }, 3000);
             }
         }
     })
