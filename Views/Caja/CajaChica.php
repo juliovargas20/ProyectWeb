@@ -20,7 +20,7 @@
                                 Nuevo Ingreso
                             </a>
                         </li>
-                        <li><a class="dropdown-item">Recibo</a></li>
+                        <li><a class="dropdown-item" id="btnNICR">Recibo</a></li>
                     </ul>
                 </div>
                 <button type="button" class="btn btn-label-danger waves-effect" id="btnNE">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="row g-3 mb-5">
+    <div class="row g-3 mb-4">
         <div class="col-lg-4 col-sm-6">
             <div class="card">
                 <div class="card-body">
@@ -97,6 +97,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="demo-inline-spacing">
+            <button type="button" class="btn btn-outline-dark">Resumen Caja</button>
+            <button type="button" class="btn btn-outline-success">Reporte Excel</button>
+            <button type="button" class="btn btn-outline-info" id="BtnLR">Lista de Recibo</button>
         </div>
     </div>
 
@@ -169,7 +177,7 @@
             <form id="FrmNI" class="needs-validation" novalidate autocomplete="off" >
                 <div class="modal-body py-3 py-md-0">
                     <div class="row mb-3 g-3">
-                        <input type="hidden" name="ID" id="ID">
+                        <input type="hidden" name="ID_IN" id="ID_IN" readonly>
                         <div class="col-md-4">
                             <div class="form-floating form-floating-outline">
                                 <select name="Tranx" id="Tranx" class="form-select" required>
@@ -252,6 +260,104 @@
                 <hr>
                 <div class="modal-footer">
                     <button type="submit" id="btnResgistarNI" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- NUEVO INGRESO CON RECIBO -->
+<div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="NuevoIngresoRecibo">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="mb-4">Nuevo Ingreso con Recibo</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <hr>
+            <form id="FrmNICR" class="needs-validation" novalidate autocomplete="off" >
+                <div class="modal-body py-3 py-md-0">
+                    <div class="row mb-3 g-3">
+                        <input type="hidden" name="ID_IN" id="ID_IN" readonly>
+                        <div class="col-md-4">
+                            <div class="form-floating form-floating-outline">
+                                <select name="Tranx" id="Tranx" class="form-select" required>
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="Ventas">Ventas</option>
+                                    <option value="Ingreso Caja Chica">Ingreso Caja Chica</option>
+                                </select>
+                                <label for="">Transacción</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-floating form-floating-outline">
+                                <input type="text" class="form-control" name="Responsable" id="Responsable" placeholder="Responsable" required>
+                                <label for="">Responsable</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-floating form-floating-outline">
+                                <input type="text" name="Comprobante" id="Comprobante" class="form-control" value="Recibo" placeholder="Comprobante" readonly required>
+                                <label for="">Comprobante</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-floating form-floating-outline">
+                                <input type="text" class="form-control" name="NCom" id="NCom" placeholder="N° Comprobante" readonly required>
+                                <label for="">N° Comprobante</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-floating form-floating-outline">
+                                <select name="TipPago" id="TipPago" class="form-select" required>
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                    <option value="Pago con Tarjeta">Pago con Tarjeta</option>
+                                </select>
+                                <label for="">Tipo de Pago</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-floating form-floating-outline">
+                                <select name="Area" id="Area" class="form-select" required>
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="Fronk Desk">Fronk Desk</option>
+                                    <option value="Biomecánica">Biomecánica</option>
+                                    <option value="Sistemas">Sistemas</option>
+                                    <option value="Diseño y Marketing">Diseño y Marketing</option>
+                                    <option value="Ingeniería M.S.">Ingeniería M.S.</option>
+                                    <option value="Ingeniería M.I.">Ingeniería M.I.</option>
+                                    <option value="Limpieza">Limpieza</option>
+                                    <option value="Servicio Generales">Servicio Generales</option>
+                                    <option value="Textil">Textil</option>
+                                    <option value="RR.HH">RR.HH</option>
+                                    <option value="Administración">Administración</option>
+                                </select>
+                                <label for="">Área</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-floating form-floating-outline">
+                                <input type="text" class="form-control" name="Dsc" id="Dsc" placeholder="Descripción" required>
+                                <label for="">Descripción</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text">S/.</span>
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" class="form-control" name="Monto" id="Monto" placeholder="Monto" required>
+                                    <label for="">Monto</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="modal-footer">
+                    <button type="submit" id="btnResgistarNIRC" class="btn btn-primary">Registrar</button>
                 </div>
             </form>
 
@@ -359,6 +465,34 @@
 
         </div>
     </div>
+</div>
+
+<!-- LISTA DE RECIBOS -->
+<div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="ListaRecibos">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="mb-4">Buscar Recibos</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <hr>
+      <div class="modal-body py-3 py-md-0">
+        <div class="card-datatable table-responsive">
+          <table class="invoice-list-table table" id="TblCajaRecibo">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">N°</th>
+                <th class="text-center">Fecha</th>
+                <th>Responsable</th>
+                <th class="text-center">Monto</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php include "Views/templates/footer.php"; ?>
