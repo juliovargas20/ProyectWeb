@@ -109,8 +109,9 @@ class Caja extends Controller
     {
         $data = $this->model->ListarRecibos();
         for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['IN_MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. '. $data[$i]['IN_MONTO'] .'</span>';
             $data[$i]['ACCIONES'] = '
-            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="">
+            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="ReciboPdf('. $data[$i]['IN_ID'] .')">
                 <i class="mdi mdi-file-document-outline">
                 </i>
             </button>';
@@ -346,29 +347,119 @@ class Caja extends Controller
         die();
     }
 
-    public function Reporte()
+    public function CerrarCaja()
     {
         require('./include/fpdf_box.php');
 
-        $pdf = new PDF('P', 'pt');
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->MultiCell(0, 20, 'Example to build a table over more than one page');
-        $pdf->SetFont('Arial', '', 10);
+        $datos = $this->model->ListarIngresosCaja();
+        $salida = $this->model->ListarEgresosCaja();
+        $totalIngreso = $this->model->TotalIngresosCaja();
+        $totalEgreso = $this->model->TotalEgresosCaja();
 
-        $pdf->tablewidths = array(100, 90, 90, 90, 90, 90);
+        $total = $totalIngreso['IN_MONTO'] - $totalEgreso['SAL_MONTO'];
+
+        $pdf = new PDF('L', 'pt');
+        $pdf->AddPage();
+        
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->SetTextColor(220,50,50);
+        $pdf->Cell(0, 20, utf8_decode('Reporte Caja Chica'), 0, 1, 'L', false);
+        $pdf->Ln(25);
+
+        $pdf->SetFont('RubikMedium', '', 18);
+        $pdf->SetTextColor(33, 163, 102);
+        $pdf->Cell(0, 20, utf8_decode('KYP BIOINGEN S.A.C'), 0, 1, 'L', false);
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 16);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0, 20, utf8_decode('Resumen TOTAL S/. '. $total), 0, 1, 'L', false);
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->Cell(0, 20, utf8_decode('Reporte Ingresos del '. $totalIngreso['IN_FECHA']), 0, 1, 'L', false);
+        $pdf->Ln(2);
+
+        $pdf->SetFont('RubikRegular', '', 9);
+        $pdf->Cell(0, 20, utf8_decode('Total Ingresos      S/. ' . $totalIngreso['IN_MONTO']), 0, 1, 'L', false);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 10);
+        $pdf->SetDrawColor(155, 155, 155);
+        $pdf->tablewidths = array(70, 80, 90, 85, 90, 90, 100, 90, 90);
         for ($i = 0; $i < 1; $i++) {
-            $data[] = array('TITULO 1', 'TITULO 1', 'TITULO 1', 'TITULO 1', 'TITULO 1', 'TITULO 1');
+            $data[] = array('FECHA', 'TRANSACCION', 'COMPROBANTE', utf8_decode('N° COMPROB.'), 'RESPONSABLE', 'TIPO DE PAGO', 'DESCRIPCION', 'AREA', 'MONTO');
         }
 
         $pdf->Ln(10);
 
-        $pdf->tablewidths = array(100, 90, 90, 90, 90, 90);
-        for ($i = 0; $i < 4; $i++) {
-            $data[] = array('JULIO EDGAR VARGAS TELLO "="#($($(xddddddddddfdfddfdfdfd', 'JULIO EDGAR VARGAS TELLO "="#($($(', 'JULIO EDGAR VARGAS TELLO "="#($($(', 'JULIO EDGAR VARGAS TELLO "="#($($(', 'JULIO EDGAR VARGAS TELLO "="#($($(', 'JULIO EDGAR VARGAS TELLO "="#($($(');
+        $pdf->tablewidths = array(70, 80, 90, 85, 90, 90, 100, 90, 90);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        foreach ($datos as $row) {
+            $data[] = array($row['IN_FECHA'], $row['IN_TRANSACCION'], $row['IN_COMPROBANTE'], $row['IN_NCOMPRO'], utf8_decode($row['IN_RESPONSABLE']), $row['IN_TIP_PAGO'], utf8_decode($row['IN_DESCRIPCION']), utf8_decode($row['IN_AREA']), 'S/. '.$row['IN_MONTO']);
         }
+
         $pdf->morepagestable($data, 20);
-        $pdf->Output();
+        $pdf->Ln(50);
+
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        //$pdf->SetTextColor(220,50,50);
+        $pdf->Cell(0, 20, utf8_decode('Reporte Egresos del '. $totalEgreso['SAL_FECHA']), 0, 1, 'L', false);
+        $pdf->Ln(2);
+
+        $pdf->SetFont('RubikRegular', '', 9);
+        $pdf->Cell(0, 20, utf8_decode('Total Egresos    S/. '. $totalEgreso['SAL_MONTO']), 0, 1, 'L', false);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+
+        $pdf->tablewidths = array(70, 80, 90, 85, 90, 90, 100, 90, 90);
+        for ($i = 0; $i < 1; $i++) {
+            $data2[] = array('FECHA', 'TRANSACCION', 'COMPROBANTE', utf8_decode('N° COMPROB.'), 'RESPONSABLE', 'TIPO DE PAGO', 'DESCRIPCION', 'AREA', 'MONTO');
+        }
+
+        $pdf->Ln(10);
+
+        $pdf->tablewidths = array(70, 80, 90, 85, 90, 90, 100, 90, 90);
+
+        foreach ($salida as $row) {
+            $data2[] = array($row['SAL_FECHA'], $row['SAL_TRANSACCION'], $row['SAL_COMPROBANTE'], $row['SAL_NCOMPRO'], utf8_decode($row['SAL_RESPONSABLE']), $row['SAL_TIP_PAGO'], utf8_decode($row['SAL_DESCRIPCION']), utf8_decode($row['SAL_AREA']), 'S/. '.$row['SAL_MONTO']);
+        }
+
+        $pdf->morepagestable($data2, 20);
+
+        $Servi = $pdf->Output('S', 'Reporte '. $totalIngreso['IN_FECHA'], true);
+        $this->model->CerrarCaja($total, $Servi);
+        $pdf->Output('I', 'Reporte '. $totalIngreso['IN_FECHA']);
+        die();
+    }
+
+    public function ListaResumenCaja()
+    {
+        $data = $this->model->ListaResumenCaja();
+        for ($i=0; $i < count($data); $i++) { 
+            $data[$i]['MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. '. $data[$i]['MONTO'] .'</span>';
+            $data[$i]['ACCIONES'] = '<button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="VerPDFcaja('. $data[$i]['ID'] .')">
+            <i class="mdi mdi-file-document-outline">
+            </i>
+        </button>';
+        }
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function VerPDFCaja($id)
+    {
+        $data = $this->model->VerPDFCaja($id);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

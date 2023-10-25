@@ -27,7 +27,7 @@
                     <i class="mdi mdi-arrow-left-thin me-1"></i>
                     Egresos
                 </button>
-                <button type="button" class="btn btn-label-warning waves-effect">
+                <button type="button" class="btn btn-label-warning waves-effect" id="btnCloseBOx">
                     <i class="mdi mdi-close-box-multiple-outline me-1"></i>
                     Cerrar Caja
                 </button>
@@ -102,7 +102,7 @@
 
     <div class="row g-3 mb-4">
         <div class="demo-inline-spacing">
-            <button type="button" class="btn btn-outline-dark">Resumen Caja</button>
+            <button type="button" class="btn btn-outline-dark" id="BtnRC">Resumen Caja</button>
             <button type="button" class="btn btn-outline-success">Reporte Excel</button>
             <button type="button" class="btn btn-outline-info" id="BtnLR">Lista de Recibo</button>
         </div>
@@ -484,6 +484,33 @@
                 <th class="text-center">N°</th>
                 <th class="text-center">Fecha</th>
                 <th>Responsable</th>
+                <th class="text-center">Monto</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESUMEN DE CAJA -->
+<div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="ResumenCaja">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="mb-4">Resumen Caja</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <hr>
+      <div class="modal-body py-3 py-md-0">
+        <div class="card-datatable table-responsive">
+          <table class="invoice-list-table table" id="TblResumenCaja">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">N°</th>
+                <th class="text-center">Fecha</th>
                 <th class="text-center">Monto</th>
                 <th class="text-center">Acciones</th>
               </tr>

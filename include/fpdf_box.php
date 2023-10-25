@@ -57,16 +57,6 @@ class PDF extends FPDF {
         $this->CurRotation = $rotation;
     }
     
-    function Footer() {
-        // Check if Footer for this page already exists (do the same for Header())
-        if(!isset($this->footerset[$this->page])) {
-            $this->SetY(-15);
-            // Page number
-            $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-            // set footerset
-            $this->footerset[$this->page] = true;
-        }
-    }
     
     function morepagestable($datas, $lineheight=10) {
         // some things to set and 'remember'

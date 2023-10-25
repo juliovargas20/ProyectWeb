@@ -28,9 +28,16 @@ const btnListaRecibos = document.querySelector("#BtnLR");
 const ModalListaRecibos = document.querySelector("#ListaRecibos");
 const ModalListaRecibosOpen = new bootstrap.Modal(ModalListaRecibos);
 
+const btnCerrarCaja = document.querySelector("#btnCloseBOx");
+
+/******* RESUMEN CAJA *******/
+const btnResumenCaja = document.querySelector("#BtnRC");
+const ModalResumenCaja = document.querySelector("#ResumenCaja");
+const ModalResumenCajasOpen = new bootstrap.Modal(ModalResumenCaja);
+
 let TblNI_data;
 let TblNE_data;
-let TblLR_data
+let TblLR_data;
 
 document.addEventListener("DOMContentLoaded", function () {
   TotalIngresos();
@@ -202,6 +209,58 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
+  $("#TblResumenCaja").DataTable({
+    ajax: {
+      url: base_url + "Caja/ListaResumenCaja",
+      dataSrc: "",
+    },
+    columns: [
+      { data: "ID", className: "text-center" },
+      { data: "FECHA", className: "text-center" },
+      { data: "MONTO", className: "text-center" },
+      { data: "ACCIONES", className: "text-center" },
+    ],
+    displayLength: 7,
+    lengthMenu: [7, 10, 25, 50, 75, 100],
+    responsive: {
+      details: {
+        display: $.fn.dataTable.Responsive.display.modal({
+          header: function (row) {
+            var data = row.data();
+            return "Details of " + data["full_name"];
+          },
+        }),
+        type: "column",
+        renderer: function (api, rowIdx, columns) {
+          var data = $.map(columns, function (col, i) {
+            return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
+              ? '<tr data-dt-row="' +
+                  col.rowIndex +
+                  '" data-dt-column="' +
+                  col.columnIndex +
+                  '">' +
+                  "<td>" +
+                  col.title +
+                  ":" +
+                  "</td> " +
+                  "<td>" +
+                  col.data +
+                  "</td>" +
+                  "</tr>"
+              : "";
+          }).join("");
+
+          return data
+            ? $('<table class="table"/><tbody />').append(data)
+            : false;
+        },
+      },
+    },
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
+    },
+  });
+
   btnNuevoIngreso.addEventListener("click", function (e) {
     e.preventDefault();
     frmNI.reset();
@@ -230,6 +289,16 @@ document.addEventListener("DOMContentLoaded", function () {
   btnListaRecibos.addEventListener("click", function (e) {
     e.preventDefault();
     ModalListaRecibosOpen.show();
+  });
+
+  btnCerrarCaja.addEventListener("click", function (e) {
+    e.preventDefault();
+    CerrarCaja();
+  });
+
+  btnResumenCaja.addEventListener("click", function (e) {
+    e.preventDefault();
+    ModalResumenCajasOpen.show();
   });
 
   frmNI.addEventListener("submit", handleFrmNI, false);
@@ -433,18 +502,33 @@ function MostrarIngresos(id) {
 }
 
 function EliminarIngres(id) {
-  const url = base_url + `Caja/EliminarIngreso/${id}`;
-  Eliminar(
-    "Deseas Eliminar el ingreso",
-    "El ingreso será eliminado del sistema",
-    "Sí",
-    url,
-    TblNI_data
-  );
-  TblLR_data.ajax.reload();
-  TotalIngresos();
-  TotalEgresos();
-  RestaTotal();
+  Swal.fire({
+    title: "¿Deseas Eliminar el ingreso?",
+    text: "El ingreso será eliminado del sistema",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const url = base_url + `Caja/EliminarIngreso/${id}`;
+      const http = new XMLHttpRequest();
+      http.open("GET", url, true);
+      http.send();
+      http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          AlertaPerzonalizada(res.tipo, res.mensaje);
+          TblNI_data.ajax.reload();
+          TblLR_data.ajax.reload();
+          TotalIngresos();
+          TotalEgresos();
+          RestaTotal();
+        }
+      };
+    }
+  });
 }
 
 function MostrarEgresos(id) {
@@ -501,6 +585,7 @@ function RegistrarRecibo(id) {
         AlertaPerzonalizada(res.tipo, res.msg);
         if (res.tipo == "success") {
           TblNI_data.ajax.reload();
+          TblLR_data.ajax.reload();
           btnRegistrarNICR.innerHTML = "Registrar";
           btnRegistrarNICR.disabled = false;
           ReciboPdf(id);
@@ -545,4 +630,26 @@ function MostrarIngresosRecibo(id) {
       ModalNuevoIngresoCROpen.show();
     }
   };
+}
+
+function CerrarCaja() {
+  Swal.fire({
+    title: "¿Deseas Cerrar caja?",
+    text: "",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const url = base_url + `Caja/CerrarCaja`;
+      window.open(url, "_blank");
+    }
+  });
+}
+
+function VerPDFcaja(id) {
+  const url = base_url + `Caja/VerPDFCaja/${id}`;
+  window.open(url, "_blank");
 }

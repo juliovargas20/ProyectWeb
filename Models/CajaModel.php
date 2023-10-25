@@ -112,8 +112,73 @@ class CajaModel extends Query{
 
     public function ListarRecibos()
     {
-        $sql = "SELECT r.ID, r.FECHA, i.IN_RESPONSABLE, i.IN_MONTO FROM ingreso_recibo r INNER JOIN ingreso i ON r.IN_ID = i.IN_ID";
+        $sql = "SELECT r.ID, r.FECHA, i.IN_RESPONSABLE, i.IN_MONTO, r.IN_ID FROM ingreso_recibo r INNER JOIN ingreso i ON r.IN_ID = i.IN_ID";
         return $this->selectAll($sql);
+    }
+
+    public function ListarIngresosCaja($fecha="")
+    {
+        if (!empty($fecha)) {
+            $sql = "SELECT * FROM ingreso WHERE IN_FECHA = '$fecha'";
+        } else{
+            $sql = "SELECT * FROM ingreso WHERE IN_FECHA = CURDATE()";
+        }
+        
+        return $this->selectAll($sql);
+    }
+
+    public function ListarEgresosCaja($fecha="")
+    {
+        if (!empty($fecha)) {
+            $sql = "SELECT * FROM salida WHERE SAL_FECHA = '$fecha'";
+        } else {
+            $sql = "SELECT * FROM salida WHERE SAL_FECHA = CURDATE()";
+        }
+        
+        return $this->selectAll($sql);
+    }
+
+    public function TotalIngresosCaja($fecha="")
+    {
+        if (!empty($fecha)) {
+            $sql = "SELECT SUM(IN_MONTO) AS IN_MONTO, DATE_FORMAT(IN_FECHA, '%d, %b de %Y') AS IN_FECHA FROM ingreso WHERE IN_FECHA = '$fecha'";
+        } else {
+            $sql = "SELECT SUM(IN_MONTO) AS IN_MONTO, DATE_FORMAT(IN_FECHA, '%d, %b de %Y') AS IN_FECHA FROM ingreso WHERE IN_FECHA = CURDATE()";
+        }
+        
+        return $this->select($sql);
+    }
+
+    public function TotalEgresosCaja($fecha="")
+    {
+        if (!empty($fecha)) {
+            $sql = "SELECT SUM(SAL_MONTO) AS SAL_MONTO, DATE_FORMAT(SAL_FECHA, '%d, %b de %Y') AS SAL_FECHA FROM salida WHERE SAL_FECHA = '$fecha'";
+        } else {
+            $sql = "SELECT SUM(SAL_MONTO) AS SAL_MONTO, DATE_FORMAT(SAL_FECHA, '%d, %b de %Y') AS SAL_FECHA FROM salida WHERE SAL_FECHA = CURDATE()";
+        }
+        
+        return $this->select($sql);
+    }
+
+    public function CerrarCaja($monto, $blob)
+    {
+        $sql = "INSERT INTO cerrar_caja (MONTO, PDF) VALUE(?,?)";
+        $datos = array($monto, $blob);
+        return $this->save($sql,$datos);
+    }
+
+    public function ListaResumenCaja()
+    {
+        $sql = "SELECT ID, FECHA, MONTO FROM cerrar_caja";
+        return $this->selectAll($sql);
+    }
+
+    public function VerPDFCaja($id)
+    {
+        $sql = "SELECT PDF FROM cerrar_caja WHERE ID = $id";
+        $filename = "CC20D23DG.pdf";
+        $data = $this->PDF($sql, $filename);
+        return $data;
     }
 }
 
