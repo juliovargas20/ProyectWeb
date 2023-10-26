@@ -164,8 +164,8 @@ class Pacientes extends Controller
 
         $data = $this->model->Registrar($nombre, $dni, $genero, $edad, $celular, $naci, $dire, $sede, $local, $correo, $estado, $canal, $time, $motivo, $afec, $aler, $obs);
 
-        if ($data != NULL) {
-            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Registrado', 'id' => $data);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Registrado');
         } else {
             $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Registrado');
         }

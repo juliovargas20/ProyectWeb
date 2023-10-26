@@ -30,7 +30,7 @@ class PacientesModel extends Query{
         $fecha = date('Y-m-d');
         $sql = "INSERT INTO registro (FECHA, NOMBRES, DNI, GENERO, CELULAR, DIRECCION, LOCACION, EDAD, SEDE, ESTADO, TIME_AMP, CANAL, MOTIVO, OBSERVACION, CORREO, FECHANAC, AFECCIONES, ALERGIAS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $datos = array($fecha, $nombre, $dni, $genero, $celular, $dire, $local, $edad, $sede, $estado, $time, $canal, $motivo, $obs, $correo, $naci, $afec, $aler);
-        return $this->getID($sql, $datos);
+        return $this->save($sql, $datos);
     }
 
     /************** </REGISTRO DE PACIENTES> **************/

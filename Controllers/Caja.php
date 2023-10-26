@@ -78,7 +78,7 @@ class Caja extends Controller
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
                         </button>
-                        <button type="button" class="dropdown-item" onclick="">
+                        <button type="button" class="dropdown-item" onclick="EliminarIngres(' . $data[$i]['IN_ID'] . ')">
                             <i class="mdi mdi-trash-can-outline me-1"></i> 
                             Eliminar
                         </button>
@@ -104,7 +104,7 @@ class Caja extends Controller
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
                         </button>
-                        <button type="button" class="dropdown-item" onclick="">
+                        <button type="button" class="dropdown-item" onclick="EliminarEgres(' . $data[$i]['SAL_ID'] . ')">
                             <i class="mdi mdi-trash-can-outline me-1"></i> 
                             Eliminar
                         </button>
@@ -456,14 +456,31 @@ class Caja extends Controller
         $data = $this->model->ListaResumenCaja();
         for ($i = 0; $i < count($data); $i++) {
             $data[$i]['MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. ' . $data[$i]['MONTO'] . '</span>';
-            $data[$i]['ACCIONES'] = '<button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="VerPDFcaja(' . $data[$i]['ID'] . ')">
+            $data[$i]['ACCIONES'] = '<button type="button" class="btn btn-icon btn-label-secondary waves-effect" onclick="VerPDFcaja(' . $data[$i]['ID'] . ')">
             <i class="mdi mdi-file-document-outline">
+            </i>
+        </button>
+        <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="EliminarCerrarCaja(' . $data[$i]['ID'] . ')">
+            <i class="mdi mdi-trash-can-outline">
             </i>
         </button>';
         }
 
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
+    }
+
+    public function EliminarResumenCaja($id)
+    {
+        $data = $this->model->EliminarResumenCaja($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'msg' => 'Caja Eliminada');
+        } else {
+            $res = array('tipo' => 'error', 'msg' => 'error Caja Eliminado');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+
     }
 
     public function VerPDFCaja($id)

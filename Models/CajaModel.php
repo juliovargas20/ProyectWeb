@@ -192,6 +192,13 @@ class CajaModel extends Query{
         $data = $this->PDF($sql, $filename);
         return $data;
     }
+
+    public function EliminarResumenCaja($id)
+    {
+        $sql = "DELETE FROM cerrar_caja WHERE ID = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
 }
 
 ?>

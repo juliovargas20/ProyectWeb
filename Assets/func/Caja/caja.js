@@ -40,6 +40,7 @@ const btnExcel = document.querySelector("#BtnEx");
 let TblNI_data;
 let TblNE_data;
 let TblLR_data;
+let TblRC_data;
 
 document.addEventListener("DOMContentLoaded", function () {
   TotalIngresos();
@@ -211,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  $("#TblResumenCaja").DataTable({
+  TblRC_data = $("#TblResumenCaja").DataTable({
     ajax: {
       url: base_url + "Caja/ListaResumenCaja",
       dataSrc: "",
@@ -539,6 +540,36 @@ function EliminarIngres(id) {
   });
 }
 
+function EliminarEgres(id) {
+  Swal.fire({
+    title: "¿Deseas Eliminar el egreso?",
+    text: "El egreso será eliminado del sistema",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const url = base_url + `Caja/EliminarEgreso/${id}`;
+      const http = new XMLHttpRequest();
+      http.open("GET", url, true);
+      http.send();
+      http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          AlertaPerzonalizada(res.tipo, res.msg);
+          TblNE_data.ajax.reload();
+          TblNE_data.ajax.reload();
+          TotalIngresos();
+          TotalEgresos();
+          RestaTotal();
+        }
+      };
+    }
+  });
+}
+
 function MostrarEgresos(id) {
   const url = base_url + `Caja/MostrarEgresos/${id}`;
   const http = new XMLHttpRequest();
@@ -653,6 +684,7 @@ function CerrarCaja() {
     if (result.isConfirmed) {
       const url = base_url + `Caja/CerrarCaja`;
       window.open(url, "_blank");
+      TblRC_data.ajax.reload();
     }
   });
 }
@@ -660,4 +692,19 @@ function CerrarCaja() {
 function VerPDFcaja(id) {
   const url = base_url + `Caja/VerPDFCaja/${id}`;
   window.open(url, "_blank");
+}
+
+function EliminarCerrarCaja(id) {
+  const url = base_url + `Caja/EliminarResumenCaja/${id}`;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const res = JSON.parse(this.responseText);
+      if (res.tipo == "success") {
+        TblRC_data.ajax.reload();
+      }
+    }
+  };
 }
