@@ -478,6 +478,7 @@ class Caja extends Controller
         $spreadsheet = new Spreadsheet();
 
         $listIngresos = $this->model->ListarIngresosExcel();
+        $listEgresos = $this->model->ListarEgresosExcel();
 
         // Crear la hoja de "Ingresos"
         $sheetIngresos = $spreadsheet->getActiveSheet();
@@ -507,7 +508,6 @@ class Caja extends Controller
             $sheetIngresos->setCellValue('G' . $row, $rowData['IN_DESCRIPCION']);
             $sheetIngresos->setCellValue('H' . $row, $rowData['IN_AREA']);
             $sheetIngresos->setCellValue('I' . $row, $rowData['IN_MONTO']);
-            $sheetIngresos->getStyle('I' . $row)->getNumberFormat()->setFormatCode('#,##0.00 S/.');
 
             $sheetIngresos->getColumnDimension('A')->setAutoSize(true);
             $sheetIngresos->getColumnDimension('B')->setAutoSize(true);
@@ -525,21 +525,40 @@ class Caja extends Controller
         $sheetEgresos = $spreadsheet->createSheet();
         $sheetEgresos->setTitle("Egresos");
 
-        // Agregar datos a la hoja de "Egresos" (tabla de ejemplo)
         $sheetEgresos->setCellValue('A1', 'Fecha');
-        $sheetEgresos->setCellValue('B1', 'Monto');
+        $sheetEgresos->setCellValue('B1', 'Transacción');
+        $sheetEgresos->setCellValue('C1', 'Comprobante');
+        $sheetEgresos->setCellValue('D1', 'N° Comprobante');
+        $sheetEgresos->setCellValue('E1', 'Responsable');
+        $sheetEgresos->setCellValue('F1', 'Tipo de Pago');
+        $sheetEgresos->setCellValue('G1', 'Descripción');
+        $sheetEgresos->setCellValue('H1', 'Area');
+        $sheetEgresos->setCellValue('I1', 'Monto');
 
-        $egresosData = [
-            ['2023-10-01', 50],
-            ['2023-10-02', 75],
-            ['2023-10-03', 120],
-        ];
 
-        $row = 2;
-        foreach ($egresosData as $rowData) {
-            $sheetEgresos->setCellValue('A' . $row, $rowData[0]);
-            $sheetEgresos->setCellValue('B' . $row, $rowData[1]);
-            $row++;
+        $rowE = 2;
+        foreach ($listEgresos as $rowData) {
+            $sheetEgresos->setCellValue('A' . $rowE, $rowData['SAL_FECHA']);
+            $sheetEgresos->getStyle('A' . $rowE)->getNumberFormat()->setFormatCode('yyyy-mm-dd');
+            $sheetEgresos->setCellValue('B' . $rowE, $rowData['SAL_TRANSACCION']);
+            $sheetEgresos->setCellValue('C' . $rowE, $rowData['SAL_COMPROBANTE']);
+            $sheetEgresos->setCellValue('D' . $rowE, $rowData['SAL_NCOMPRO']);
+            $sheetEgresos->setCellValue('E' . $rowE, $rowData['SAL_RESPONSABLE']);
+            $sheetEgresos->setCellValue('F' . $rowE, $rowData['SAL_TIP_PAGO']);
+            $sheetEgresos->setCellValue('G' . $rowE, $rowData['SAL_DESCRIPCION']);
+            $sheetEgresos->setCellValue('H' . $rowE, $rowData['SAL_AREA']);
+            $sheetEgresos->setCellValue('I' . $rowE, $rowData['SAL_MONTO']);
+
+            $sheetEgresos->getColumnDimension('A')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('B')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('C')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('D')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('E')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('F')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('G')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('H')->setAutoSize(true);
+            $sheetEgresos->getColumnDimension('I')->setAutoSize(true);
+            $rowE++;
         }
 
         // Crear un archivo Excel

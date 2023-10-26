@@ -35,6 +35,8 @@ const btnResumenCaja = document.querySelector("#BtnRC");
 const ModalResumenCaja = document.querySelector("#ResumenCaja");
 const ModalResumenCajasOpen = new bootstrap.Modal(ModalResumenCaja);
 
+const btnExcel = document.querySelector("#BtnEx");
+
 let TblNI_data;
 let TblNE_data;
 let TblLR_data;
@@ -299,6 +301,12 @@ document.addEventListener("DOMContentLoaded", function () {
   btnResumenCaja.addEventListener("click", function (e) {
     e.preventDefault();
     ModalResumenCajasOpen.show();
+  });
+
+  btnExcel.addEventListener("click", function (e) {
+    e.preventDefault();
+    const url = base_url + "Caja/ReportExcel";
+    window.open(url);
   });
 
   frmNI.addEventListener("submit", handleFrmNI, false);

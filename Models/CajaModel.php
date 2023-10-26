@@ -17,6 +17,12 @@ class CajaModel extends Query{
         return $this->selectAll($sql);
     }
 
+    public function ListarEgresosExcel()
+    {
+        $sql = "SELECT * FROM salida";
+        return $this->selectAll($sql);
+    }
+
     public function ListarEgresos()
     {
         $sql = "SELECT * FROM salida WHERE SAL_FECHA = CURDATE()";

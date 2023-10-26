@@ -103,7 +103,7 @@
     <div class="row g-3 mb-4">
         <div class="demo-inline-spacing">
             <button type="button" class="btn btn-outline-dark" id="BtnRC">Resumen Caja</button>
-            <button type="button" class="btn btn-outline-success">Reporte Excel</button>
+            <button type="button" class="btn btn-outline-success" id="BtnEx">Reporte Excel</button>
             <button type="button" class="btn btn-outline-info" id="BtnLR">Lista de Recibo</button>
         </div>
     </div>
