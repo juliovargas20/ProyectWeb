@@ -1,4 +1,14 @@
 <?php
+
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Table;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+
 class Caja extends Controller
 {
     public function __construct()
@@ -109,9 +119,9 @@ class Caja extends Controller
     {
         $data = $this->model->ListarRecibos();
         for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['IN_MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. '. $data[$i]['IN_MONTO'] .'</span>';
+            $data[$i]['IN_MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. ' . $data[$i]['IN_MONTO'] . '</span>';
             $data[$i]['ACCIONES'] = '
-            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="ReciboPdf('. $data[$i]['IN_ID'] .')">
+            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="ReciboPdf(' . $data[$i]['IN_ID'] . ')">
                 <i class="mdi mdi-file-document-outline">
                 </i>
             </button>';
@@ -360,13 +370,13 @@ class Caja extends Controller
 
         $pdf = new PDF('L', 'pt');
         $pdf->AddPage();
-        
+
 
         $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
         $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
 
         $pdf->SetFont('RubikMedium', '', 14);
-        $pdf->SetTextColor(220,50,50);
+        $pdf->SetTextColor(220, 50, 50);
         $pdf->Cell(0, 20, utf8_decode('Reporte Caja Chica'), 0, 1, 'L', false);
         $pdf->Ln(25);
 
@@ -376,13 +386,13 @@ class Caja extends Controller
         $pdf->Ln(15);
 
         $pdf->SetFont('RubikMedium', '', 16);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->Cell(0, 20, utf8_decode('Resumen TOTAL S/. '. $total), 0, 1, 'L', false);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(0, 20, utf8_decode('Resumen TOTAL S/. ' . $total), 0, 1, 'L', false);
         $pdf->Ln(15);
 
         $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->Cell(0, 20, utf8_decode('Reporte Ingresos del '. $totalIngreso['IN_FECHA']), 0, 1, 'L', false);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(0, 20, utf8_decode('Reporte Ingresos del ' . $totalIngreso['IN_FECHA']), 0, 1, 'L', false);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 9);
@@ -402,7 +412,7 @@ class Caja extends Controller
 
         $pdf->SetFont('RubikRegular', '', 10);
         foreach ($datos as $row) {
-            $data[] = array($row['IN_FECHA'], $row['IN_TRANSACCION'], $row['IN_COMPROBANTE'], $row['IN_NCOMPRO'], utf8_decode($row['IN_RESPONSABLE']), $row['IN_TIP_PAGO'], utf8_decode($row['IN_DESCRIPCION']), utf8_decode($row['IN_AREA']), 'S/. '.$row['IN_MONTO']);
+            $data[] = array($row['IN_FECHA'], $row['IN_TRANSACCION'], $row['IN_COMPROBANTE'], $row['IN_NCOMPRO'], utf8_decode($row['IN_RESPONSABLE']), $row['IN_TIP_PAGO'], utf8_decode($row['IN_DESCRIPCION']), utf8_decode($row['IN_AREA']), 'S/. ' . $row['IN_MONTO']);
         }
 
         $pdf->morepagestable($data, 20);
@@ -411,11 +421,11 @@ class Caja extends Controller
 
         $pdf->SetFont('RubikMedium', '', 12);
         //$pdf->SetTextColor(220,50,50);
-        $pdf->Cell(0, 20, utf8_decode('Reporte Egresos del '. $totalEgreso['SAL_FECHA']), 0, 1, 'L', false);
+        $pdf->Cell(0, 20, utf8_decode('Reporte Egresos del ' . $totalEgreso['SAL_FECHA']), 0, 1, 'L', false);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 9);
-        $pdf->Cell(0, 20, utf8_decode('Total Egresos    S/. '. $totalEgreso['SAL_MONTO']), 0, 1, 'L', false);
+        $pdf->Cell(0, 20, utf8_decode('Total Egresos    S/. ' . $totalEgreso['SAL_MONTO']), 0, 1, 'L', false);
         $pdf->Ln(10);
 
         $pdf->SetFont('RubikRegular', '', 10);
@@ -430,23 +440,23 @@ class Caja extends Controller
         $pdf->tablewidths = array(70, 80, 90, 85, 90, 90, 100, 90, 90);
 
         foreach ($salida as $row) {
-            $data2[] = array($row['SAL_FECHA'], $row['SAL_TRANSACCION'], $row['SAL_COMPROBANTE'], $row['SAL_NCOMPRO'], utf8_decode($row['SAL_RESPONSABLE']), $row['SAL_TIP_PAGO'], utf8_decode($row['SAL_DESCRIPCION']), utf8_decode($row['SAL_AREA']), 'S/. '.$row['SAL_MONTO']);
+            $data2[] = array($row['SAL_FECHA'], $row['SAL_TRANSACCION'], $row['SAL_COMPROBANTE'], $row['SAL_NCOMPRO'], utf8_decode($row['SAL_RESPONSABLE']), $row['SAL_TIP_PAGO'], utf8_decode($row['SAL_DESCRIPCION']), utf8_decode($row['SAL_AREA']), 'S/. ' . $row['SAL_MONTO']);
         }
 
         $pdf->morepagestable($data2, 20);
 
-        $Servi = $pdf->Output('S', 'Reporte '. $totalIngreso['IN_FECHA'], true);
+        $Servi = $pdf->Output('S', 'Reporte ' . $totalIngreso['IN_FECHA'], true);
         $this->model->CerrarCaja($total, $Servi);
-        $pdf->Output('I', 'Reporte '. $totalIngreso['IN_FECHA']);
+        $pdf->Output('I', 'Reporte ' . $totalIngreso['IN_FECHA']);
         die();
     }
 
     public function ListaResumenCaja()
     {
         $data = $this->model->ListaResumenCaja();
-        for ($i=0; $i < count($data); $i++) { 
-            $data[$i]['MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. '. $data[$i]['MONTO'] .'</span>';
-            $data[$i]['ACCIONES'] = '<button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="VerPDFcaja('. $data[$i]['ID'] .')">
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. ' . $data[$i]['MONTO'] . '</span>';
+            $data[$i]['ACCIONES'] = '<button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="VerPDFcaja(' . $data[$i]['ID'] . ')">
             <i class="mdi mdi-file-document-outline">
             </i>
         </button>';
@@ -461,5 +471,84 @@ class Caja extends Controller
         $data = $this->model->VerPDFCaja($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
+    }
+
+    public function ReportExcel()
+    {
+        $spreadsheet = new Spreadsheet();
+
+        $listIngresos = $this->model->ListarIngresosExcel();
+
+        // Crear la hoja de "Ingresos"
+        $sheetIngresos = $spreadsheet->getActiveSheet();
+        $sheetIngresos->setTitle("Ingresos");
+
+        // Agregar datos a la hoja de "Ingresos" (tabla de ejemplo)
+        $sheetIngresos->setCellValue('A1', 'Fecha');
+        $sheetIngresos->setCellValue('B1', 'Transacción');
+        $sheetIngresos->setCellValue('C1', 'Comprobante');
+        $sheetIngresos->setCellValue('D1', 'N° Comprobante');
+        $sheetIngresos->setCellValue('E1', 'Responsable');
+        $sheetIngresos->setCellValue('F1', 'Tipo de Pago');
+        $sheetIngresos->setCellValue('G1', 'Descripción');
+        $sheetIngresos->setCellValue('H1', 'Area');
+        $sheetIngresos->setCellValue('I1', 'Monto');
+
+
+        $row = 2;
+        foreach ($listIngresos as $rowData) {
+            $sheetIngresos->setCellValue('A' . $row, $rowData['IN_FECHA']);
+            $sheetIngresos->getStyle('A' . $row)->getNumberFormat()->setFormatCode('yyyy-mm-dd');
+            $sheetIngresos->setCellValue('B' . $row, $rowData['IN_TRANSACCION']);
+            $sheetIngresos->setCellValue('C' . $row, $rowData['IN_COMPROBANTE']);
+            $sheetIngresos->setCellValue('D' . $row, $rowData['IN_NCOMPRO']);
+            $sheetIngresos->setCellValue('E' . $row, $rowData['IN_RESPONSABLE']);
+            $sheetIngresos->setCellValue('F' . $row, $rowData['IN_TIP_PAGO']);
+            $sheetIngresos->setCellValue('G' . $row, $rowData['IN_DESCRIPCION']);
+            $sheetIngresos->setCellValue('H' . $row, $rowData['IN_AREA']);
+            $sheetIngresos->setCellValue('I' . $row, $rowData['IN_MONTO']);
+            $sheetIngresos->getStyle('I' . $row)->getNumberFormat()->setFormatCode('#,##0.00 S/.');
+
+            $sheetIngresos->getColumnDimension('A')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('B')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('C')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('D')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('E')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('F')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('G')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('H')->setAutoSize(true);
+            $sheetIngresos->getColumnDimension('I')->setAutoSize(true);
+            $row++;
+        }
+
+        // Crear la hoja de "Egresos"
+        $sheetEgresos = $spreadsheet->createSheet();
+        $sheetEgresos->setTitle("Egresos");
+
+        // Agregar datos a la hoja de "Egresos" (tabla de ejemplo)
+        $sheetEgresos->setCellValue('A1', 'Fecha');
+        $sheetEgresos->setCellValue('B1', 'Monto');
+
+        $egresosData = [
+            ['2023-10-01', 50],
+            ['2023-10-02', 75],
+            ['2023-10-03', 120],
+        ];
+
+        $row = 2;
+        foreach ($egresosData as $rowData) {
+            $sheetEgresos->setCellValue('A' . $row, $rowData[0]);
+            $sheetEgresos->setCellValue('B' . $row, $rowData[1]);
+            $row++;
+        }
+
+        // Crear un archivo Excel
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'reporte_ingresos_egresos.xlsx';
+
+        // Descargar el archivo Excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        $writer->save('php://output');
     }
 }
