@@ -4,7 +4,6 @@ let TblListadoPacienteData;
 const ModalAcc = document.querySelector("#BuscarRecibos");
 const ModalOpenAcc = new bootstrap.Modal(ModalAcc);
 
-//const flatpickrRange = document.querySelector("#flatpickr-range");
 
 document.addEventListener("DOMContentLoaded", function () {
   TblListadoPacienteData = $("#TblListadoPacientes").DataTable({
@@ -278,29 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
       url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
     },
   });
-
-  /*flatpickrRange.flatpickr({
-    mode: "range",
-    onClose: function (selectedDates, dateStr, instance) {
-      var dateRange = dateStr.split(" to ");
-      var startDate = dateRange[0].trim();
-      var endDate = dateRange[1].trim();
-
-      TblListadoPacienteData.column(7) // Asegúrate de que este sea el índice correcto de la columna de fecha
-        .data()
-        .each(function (value, index) {
-          var date = new Date(value);
-          if (date >= new Date(startDate) && date <= new Date(endDate)) {
-            TblListadoPacienteData.row(index)
-              .nodes()
-              .to$()
-              .addClass("in-range");
-          }
-        });
-
-      TblListadoPacienteData.draw();
-    },
-  });*/
 });
 
 function AbrirRegistro() {
@@ -339,10 +315,6 @@ function MI() {
   document.getElementById("IDTipI").value = cod;
 }
 
-function Este() {
-  const cod = document.getElementById("IDTipServicio").value;
-  document.getElementById("IDEste").value = cod;
-}
 
 function Contrato(id) {
   window.location.href = base_url + "Contrato/generar/" + id;
@@ -400,3 +372,11 @@ function EvaluacionTransradial() {
   const url = base_url + "Pacientes/FichaEvaluacionTransradial/" + id;
   window.open(url, "_blank");
 }
+
+function EvaluacionEstetica(e) {
+  e.preventDefault();
+  const id = document.querySelector("#IDTipServicio").value;
+  const url = base_url + "Pacientes/FichaEvaluacionEstetica/" + id;
+  window.open(url, "_blank");
+}
+

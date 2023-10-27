@@ -76,7 +76,7 @@
           </div>
           <div class="col-12">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="customRadioTemp3" data-bs-target="#Estetica" data-bs-toggle="modal" onclick="Este();">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="customRadioTemp3" onclick="EvaluacionEstetica(event);">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp3" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-allergy mdi-36px me-3"></i>
@@ -302,57 +302,6 @@
   </div>
 </div>
 <!-- /Tipo de Servicio - Miembro Inferior -->
-
-
-<!-- Tipo de Servicio - Estetica -->
-<div class="modal fade" id="Estetica" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-simple">
-    <div class="modal-content p-3 p-md-5">
-      <div class="modal-body py-3 py-md-0">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="text-center mb-4">
-          <h3 class="mb-0">Estética</h3>
-        </div>
-        <div class="row pt-1">
-          <input type="hidden" id="IDEste" readonly>
-          <div class="col-6 mb-3">
-            <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
-                <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
-                <span class="d-flex align-items-center">
-                  <i class="mdi mdi-allergy mdi-36px me-3"></i>
-                  <span>
-                    <span class="custom-option-header">
-                      <span class="h5 mb-1">Falange</span>
-                    </span>
-
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-          <div class="col-6 mb-3">
-            <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
-                <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
-                <span class="d-flex align-items-center">
-                  <i class="mdi mdi-allergy mdi-36px me-3"></i>
-                  <span>
-                    <span class="custom-option-header">
-                      <span class="h5 mb-1">Microtia</span>
-                    </span>
-
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /Tipo de Servicio - Estetica -->
 
 
 

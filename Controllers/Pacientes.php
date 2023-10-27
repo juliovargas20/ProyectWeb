@@ -1263,5 +1263,108 @@ class Pacientes extends Controller
         die();
     }
 
+    public function FichaEvaluacionEstetica($id)
+    {
+        require('include/fpdf_temp.php');
+
+        $datos = $this->model->Mostrar($id);
+
+        $pdf = new PDF($datos['ID_PACIENTE']);
+
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN ESTÉTICA"), 0, 1, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(40, 7, utf8_decode(' PACIENTE: '), 1);
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode(' Información de la Prótesis: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Tipo de Prótesis: '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Propósito de la Prótesis: '), 1);
+        $pdf->Cell(0, 8, utf8_decode('Estética'), 1, 0, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Color de la Prótesis Deseado: '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1, 0, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Material Preferido: '), 1);
+        $pdf->Cell(0, 8, utf8_decode('Silicona'), 1, 0, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Fecha Estimado de Uso: '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1, 0, 'C');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode(' Información Médica: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Causa de la Pérdida: '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Información Extensión de la Pérdida: '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1, 0, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    Existencia Condicion Médicas Relevantes:
+        '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1, 0, 'C');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode(' Expectativa del Paciente: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    ¿Qué espera lograr con la prótesis? '), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 11);
+        $pdf->Cell(90, 8, utf8_decode('    ¿Preferencia sobre la apariencia de la prótesis?'), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(90, 8, utf8_decode('    ¿Cuál es su nivel de actividad diaria?'), 1);
+        $pdf->Cell(0, 8, utf8_decode(''), 1, 0, 'C');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode(' Comentarios Adicionales: '), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('arial', '', 12);
+        $pdf->MultiCell(0, 8, '____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________', 0);
+        $pdf->Ln(15);
+        
+        $pdf->Output('I', 'EvaluacionEstetica.pdf');
+        die();
+    }
+
     /************** </EVALUACIÓN TRANSFEMORAL> **************/
 }
