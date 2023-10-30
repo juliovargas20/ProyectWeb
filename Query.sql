@@ -321,3 +321,10 @@ CREATE TABLE cerrar_caja
   MONTO DECIMAL(10,2),
   PDF LONGBLOB
 )
+
+
+
+SELECT registro.ID_PACIENTE, registro.NOMBRES 
+INTO OUTFILE 'C:/Users/jvdar/OneDrive/Escritorio/Backup2023V.2/archivo_salida.csv' 
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n'
+FROM registro ;
