@@ -218,7 +218,6 @@ document.addEventListener("DOMContentLoaded", function () {
       dataSrc: "",
     },
     columns: [
-      { data: "ID", className: "text-center" },
       { data: "FECHA", className: "text-center" },
       { data: "MONTO", className: "text-center" },
       { data: "ACCIONES", className: "text-center" },

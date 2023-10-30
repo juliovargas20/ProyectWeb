@@ -349,6 +349,12 @@ function EvaluacionTranstibial() {
   window.open(url, "_blank");
 }
 
+function EvaluacionCadera() {
+  const id = document.querySelector("#IDTipI").value;
+  const url = base_url + "Pacientes/FichaEvaluacionCadera/" + id;
+  window.open(url, "_blank");
+}
+
 function EvaluacionBiTransfemoral() {
   const id = document.querySelector("#IDTipI").value;
   const url = base_url + "Pacientes/FichaEvaluacionBiTransfemoral/" + id;

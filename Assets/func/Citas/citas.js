@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ">",
     buttons: [
       {
-        text: '<i class="mdi mdi-plus me-md-1"></i><span class="d-md-inline-block d-none">Registrar Visita Médica</span>',
+        text: '<i class="mdi mdi-plus me-md-1"></i><span class="d-md-inline-block d-none">Registrar Visita</span>',
         className: "btn btn-dark",
         attr: {
           type: "button",

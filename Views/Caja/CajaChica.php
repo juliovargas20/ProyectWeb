@@ -509,7 +509,6 @@
           <table class="invoice-list-table table" id="TblResumenCaja">
             <thead class="table-light">
               <tr>
-                <th class="text-center">N°</th>
                 <th class="text-center">Fecha</th>
                 <th class="text-center">Monto</th>
                 <th class="text-center">Acciones</th>
