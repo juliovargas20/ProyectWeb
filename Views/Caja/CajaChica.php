@@ -400,6 +400,7 @@
                                     <option value="" disabled selected>Seleccione...</option>
                                     <option value="Factura">Factura</option>
                                     <option value="Boleta">Boleta</option>
+                                    <option value="Recibo">Recibo</option>
                                 </select>
                                 <label for="">Comprobante</label>
                             </div>

@@ -322,6 +322,20 @@ CREATE TABLE cerrar_caja
   PDF LONGBLOB
 )
 
+DELIMITER //
+
+CREATE PROCEDURE CalculaResta()
+BEGIN
+  DECLARE in_total DECIMAL(10, 2);
+  DECLARE sal_total DECIMAL(10, 2);
+
+  SELECT IFNULL(SUM(IN_MONTO), 0.00) INTO in_total FROM ingreso;
+  SELECT IFNULL(SUM(SAL_MONTO), 0.00) INTO sal_total FROM salida;
+
+  SELECT (in_total - sal_total) AS RESTA;
+END //
+
+DELIMITER ;
 
 
 SELECT registro.ID_PACIENTE, registro.NOMBRES 

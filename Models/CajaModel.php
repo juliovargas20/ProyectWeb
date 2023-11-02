@@ -97,9 +97,7 @@ class CajaModel extends Query{
 
     public function TotalIngresoEgresos()
     {
-        $sql = "SELECT (SUM(IN_TOTAL) - SUM(SAL_TOTAL)) AS RESTA
-        FROM (SELECT SUM(IN_MONTO) AS IN_TOTAL FROM ingreso) AS t1
-        JOIN (SELECT SUM(SAL_MONTO) AS SAL_TOTAL FROM salida) AS t2";
+        $sql = "CALL CalculaResta()";
         return $this->select($sql);
     }
 
