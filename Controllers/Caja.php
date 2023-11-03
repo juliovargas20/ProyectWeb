@@ -19,10 +19,22 @@ class Caja extends Controller
 
     public function index()
     {
-        $data['title'] = 'Caja Empresarial - Caja | KYPBioingeniería';
-        $data['activeCaja'] = 'active';
-        $data['scripts'] = 'Caja/caja.js';
-        $this->views->getView('Caja', 'CajaChica', $data);
+
+        if (empty($_SESSION['activo'])) {
+            header("location: " . BASE_URL);
+        }
+
+        $id_caja = $_SESSION['id'];
+        $verificar = $this->model->Verificar($id_caja, 8);
+
+        if (!empty($verificar)) {
+            $data['title'] = 'Caja Empresarial - Caja | KYPBioingeniería';
+            $data['activeCaja'] = 'active';
+            $data['scripts'] = 'Caja/caja.js';
+            $this->views->getView('Caja', 'CajaChica', $data);
+        } else {
+            header('Location: ' . BASE_URL . 'MyError');
+        }
     }
 
     public function TotalIngresos()
@@ -480,7 +492,6 @@ class Caja extends Controller
         }
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
         die();
-
     }
 
     public function VerPDFCaja($id)

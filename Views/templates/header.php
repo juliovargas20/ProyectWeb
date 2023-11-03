@@ -204,15 +204,14 @@
 
           <!-- /Visitas Médicas -->
           <?php endif; ?>
+  
 
+          <?php if (!empty($_SESSION['cajaadmin'])) : ?>
           <!-- Caja Empresiarial -->
 
           <li class="menu-header fw-light mt-4">
             <span class="menu-header-text">Caja Empresiarial</span>
           </li>
-
-
-          <!-- /Caja Empresiarial -->
 
           <li class="menu-item <?php echo !empty($data['activeCaja']) ? $data['activeCaja'] : ''; ?>">
             <a href="<?php echo BASE_URL . 'Caja' ?>" class="menu-link">
@@ -221,7 +220,11 @@
             </a>
           </li>
 
-          <!-- Ordenes Internas -->
+          <!-- /Caja Empresiarial -->
+
+          <?php endif; ?>
+
+          <!-- Ordenes Internas 
           <li class="menu-header fw-light mt-4">
             <span class="menu-header-text">Ordenes Internas</span>
           </li>
@@ -231,7 +234,7 @@
               <i class="menu-icon tf-icons mdi mdi-clipboard-file-outline"></i>
               <div data-i18n="Orden de Trabajo">Orden de Trabajo</div>
             </a>
-          </li>
+          </li>-->
 
           <!-- /Ordenes Internas -->
 

@@ -197,6 +197,12 @@ class CajaModel extends Query{
         $datos = array($id);
         return $this->save($sql, $datos);
     }
+
+    public function Verificar($id_rol, $id_permiso)
+    {
+        $sql = "SELECT d.ID_PERMISO FROM permisos p INNER JOIN detalle_permiso d ON d.ID_PERMISO = p.ID WHERE d.ID_ROL = $id_rol AND p.ID = $id_permiso";
+        return $this->select($sql);
+    }
 }
 
 ?>
