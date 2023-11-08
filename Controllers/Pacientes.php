@@ -33,7 +33,7 @@ class Pacientes extends Controller
         $data = $this->model->Listado();
         for ($i = 0; $i < count($data); $i++) {
 
-            if ($data[$i]['ESTADO'] == 'Contrato' || $data[$i]['ESTADO'] == 'Donación') {
+            if ($data[$i]['ESTADO'] == 'Contrato' || $data[$i]['ESTADO'] == 'Donación' || $data[$i]['ESTADO'] == 'Es Salud') {
                 $data[$i]['ACCIONES'] = '
                 <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

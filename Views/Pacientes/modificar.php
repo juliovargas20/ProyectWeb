@@ -121,6 +121,7 @@
                                 <option value="Cotización">Cotización</option>
                                 <option value="Donación">Donación</option>
                                 <option value="Accesorios">Accesorios</option>
+                                <option value="Es Salud">Es Salud</option>
                             </select>
                             <label for="Estado">Estado</label>
                         </div>
