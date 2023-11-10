@@ -22,13 +22,28 @@ const btnRegistrarNE = document.querySelector("#btnResgistarNE");
 const ModalNuevoEgreso = document.querySelector("#NuevoEgreso");
 const ModalNuevoEgresoOpen = new bootstrap.Modal(ModalNuevoEgreso);
 
-/******* LISTA RECIBOS *******/
-const btnListaRecibos = document.querySelector("#BtnLR");
+/******* EGRESOS CON RECIBO *******/
+const btnNuevoEgresoCR = document.querySelector("#btnNECR");
+const frmNECR = document.querySelector("#FrmNECR");
+const btnRegistrarNECR = document.querySelector("#btnResgistarNERC");
+
+const ModalNuevoEgresoCR = document.querySelector("#NuevoEgresoRecibo");
+const ModalNuevoEgresoCROpen = new bootstrap.Modal(ModalNuevoEgresoCR);
+
+/******* LISTA RECIBOS INGRESOS *******/
+const btnListaRecibos = document.querySelector("#BtnLRI");
 
 const ModalListaRecibos = document.querySelector("#ListaRecibos");
 const ModalListaRecibosOpen = new bootstrap.Modal(ModalListaRecibos);
 
 const btnCerrarCaja = document.querySelector("#btnCloseBOx");
+
+/******* LISTA RECIBOS EGRESOS *******/
+const btnListaRecibosEgreso = document.querySelector("#BtnLRE");
+
+const ModalListaRecibosEgreso = document.querySelector("#ListaRecibosEgreso");
+const ModalListaRecibosEgresoOpen = new bootstrap.Modal(ModalListaRecibosEgreso);
+
 
 /******* RESUMEN CAJA *******/
 const btnResumenCaja = document.querySelector("#BtnRC");
@@ -40,6 +55,7 @@ const btnExcel = document.querySelector("#BtnEx");
 let TblNI_data;
 let TblNE_data;
 let TblLR_data;
+let TblLrE_data;
 let TblRC_data;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -212,6 +228,59 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
+  TblLrE_data = $("#TblCajaReciboEgreso").DataTable({
+    ajax: {
+      url: base_url + "Caja/ListarRecibosEgreso",
+      dataSrc: "",
+    },
+    columns: [
+      { data: "ID", className: "text-center" },
+      { data: "FECHA", className: "text-center" },
+      { data: "SAL_RESPONSABLE" },
+      { data: "SAL_MONTO", className: "text-center" },
+      { data: "ACCIONES", className: "text-center" },
+    ],
+    displayLength: 7,
+    lengthMenu: [7, 10, 25, 50, 75, 100],
+    responsive: {
+      details: {
+        display: $.fn.dataTable.Responsive.display.modal({
+          header: function (row) {
+            var data = row.data();
+            return "Details of " + data["full_name"];
+          },
+        }),
+        type: "column",
+        renderer: function (api, rowIdx, columns) {
+          var data = $.map(columns, function (col, i) {
+            return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
+              ? '<tr data-dt-row="' +
+                  col.rowIndex +
+                  '" data-dt-column="' +
+                  col.columnIndex +
+                  '">' +
+                  "<td>" +
+                  col.title +
+                  ":" +
+                  "</td> " +
+                  "<td>" +
+                  col.data +
+                  "</td>" +
+                  "</tr>"
+              : "";
+          }).join("");
+
+          return data
+            ? $('<table class="table"/><tbody />').append(data)
+            : false;
+        },
+      },
+    },
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
+    },
+  });
+
   TblRC_data = $("#TblResumenCaja").DataTable({
     ajax: {
       url: base_url + "Caja/ListaResumenCaja",
@@ -288,9 +357,23 @@ document.addEventListener("DOMContentLoaded", function () {
     ModalNuevoIngresoCROpen.show();
   });
 
+  btnNuevoEgresoCR.addEventListener("click", function (e) {
+    e.preventDefault();
+    frmNECR.reset();
+    frmNECR.ID.value = "";
+    IdMaxEgreso();
+    frmNICR.classList.remove("was-validated");
+    ModalNuevoEgresoCROpen.show();
+  });
+
   btnListaRecibos.addEventListener("click", function (e) {
     e.preventDefault();
     ModalListaRecibosOpen.show();
+  });
+
+  btnListaRecibosEgreso.addEventListener("click", function (e) {
+    e.preventDefault();
+    ModalListaRecibosEgresoOpen.show();
   });
 
   btnCerrarCaja.addEventListener("click", function (e) {
@@ -312,6 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
   frmNI.addEventListener("submit", handleFrmNI, false);
   frmNE.addEventListener("submit", handleFrmNE, false);
   frmNICR.addEventListener("submit", handleFrmNICR, false);
+  frmNECR.addEventListener("submit", handleFrmNECR, false);
 });
 
 function handleFrmNI(event) {
@@ -437,6 +521,49 @@ function handleFrmNICR(event) {
   }
   FrmNICRH.classList.add("was-validated");
 }
+
+function handleFrmNECR(event) {
+  event.preventDefault();
+  const FrmNECRH = event.target;
+  const bsValidationForms = document.querySelectorAll(".needs-validation");
+
+  if (!FrmNECRH.checkValidity()) {
+    event.stopPropagation();
+  } else {
+    btnRegistrarNECR.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
+    btnRegistrarNECR.disabled = true;
+
+    const url = base_url + "Caja/RegistrarEgreso";
+    const data = new FormData(FrmNECRH);
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(data);
+    http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const res = JSON.parse(this.responseText);
+        if (res.tipo == "success" && res.condicion == "registrado") {
+          RegistrarReciboEgreso(res.id);
+        } else if (res.tipo == "success" && res.condicion == "modificado") {
+          TblNE_data.ajax.reload();
+          TblLR_data.ajax.reload();
+          btnRegistrarNECR.innerHTML = "Registrar";
+          btnRegistrarNECR.disabled = false;
+          ReciboPDFEgreso(FrmNECRH.ID.value);
+          TotalIngresos();
+          TotalEgresos();
+          RestaTotal();
+          ModalNuevoEgresoCROpen.hide();
+        } else {
+          AlertaPerzonalizada(res.tipo, res.msg);
+          btnRegistrarNECR.innerHTML = "Registrar";
+          btnRegistrarNECR.disabled = false;
+        }
+      }
+    };
+  }
+  FrmNECRH.classList.add("was-validated");
+}
+
 
 function TotalIngresos() {
   const url = base_url + "Caja/TotalIngresos";
@@ -610,9 +737,26 @@ function IdMax() {
   };
 }
 
+function IdMaxEgreso() {
+  const url = base_url + `Caja/IdMaxReciboEgreso`;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const res = JSON.parse(this.responseText);
+      if (res.ID == null) {
+        frmNECR.NCom.value = "001";
+      } else {
+        frmNECR.NCom.value = "00" + (parseInt(res.ID) + 1);
+      }
+    }
+  };
+}
+
 function RegistrarRecibo(id) {
   const url = base_url + `Caja/RegistrarRecibo/${id}`;
-  const data = new FormData(frmNICR);
+  const data = new FormData(frmNECR);
   const http = new XMLHttpRequest();
   http.open("POST", url, true);
   http.send(data);
@@ -641,8 +785,44 @@ function RegistrarRecibo(id) {
   };
 }
 
+function RegistrarReciboEgreso(id) {
+  const url = base_url + `Caja/RegistrarReciboEgreso/${id}`;
+  const data = new FormData(frmNECR);
+  const http = new XMLHttpRequest();
+  http.open("POST", url, true);
+  http.send(data);
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const res = JSON.parse(this.responseText);
+      setTimeout(function () {
+        AlertaPerzonalizada(res.tipo, res.msg);
+        if (res.tipo == "success") {
+          TblNE_data.ajax.reload();
+          TblLR_data.ajax.reload();
+          btnRegistrarNECR.innerHTML = "Registrar";
+          btnRegistrarNECR.disabled = false;
+          ReciboPDFEgreso(id);
+          TotalIngresos();
+          TotalEgresos();
+          RestaTotal();
+          ModalNuevoEgresoCROpen.hide();
+        } else {
+          AlertaPerzonalizada(res.tipo, res.msg);
+          btnRegistrarNECR.innerHTML = "Registrar";
+          btnRegistrarNECR.disabled = false;
+        }
+      }, 3000);
+    }
+  };
+}
+
 function ReciboPdf(id) {
   const url = base_url + `Caja/ReciboPDF/${id}`;
+  window.open(url, "_blank");
+}
+
+function ReciboPDFEgreso(id) {
+  const url = base_url + `Caja/ReciboPDFEgreso/${id}`;
   window.open(url, "_blank");
 }
 
@@ -666,6 +846,30 @@ function MostrarIngresosRecibo(id) {
       frmNICR.Dsc.value = res.IN_DESCRIPCION;
       frmNICR.Monto.value = res.IN_MONTO;
       ModalNuevoIngresoCROpen.show();
+    }
+  };
+}
+
+function MostrarEgresosRecibo(id) {
+  const url = base_url + `Caja/MostrarEgresos/${id}`;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const res = JSON.parse(this.responseText);
+      frmNECR.reset();
+      frmNECR.classList.remove("was-validated");
+      frmNECR.ID.value = res.SAL_ID;
+      frmNECR.Tranx.value = res.SAL_TRANSACCION;
+      frmNECR.Responsable.value = res.SAL_RESPONSABLE;
+      frmNECR.Comprobante.value = res.SAL_COMPROBANTE;
+      frmNECR.NCom.value = res.SAL_NCOMPRO;
+      frmNECR.TipPago.value = res.SAL_TIP_PAGO;
+      frmNECR.Area.value = res.SAL_AREA;
+      frmNECR.Dsc.value = res.SAL_DESCRIPCION;
+      frmNECR.Monto.value = res.SAL_MONTO;
+      ModalNuevoEgresoCROpen.show();
     }
   };
 }

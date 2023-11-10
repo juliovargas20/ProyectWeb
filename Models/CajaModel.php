@@ -107,9 +107,22 @@ class CajaModel extends Query{
         return $this->select($sql);
     }
 
+    public function IdReciboEgreso()
+    {
+        $sql = "SELECT MAX(ID) AS ID FROM salida_recibo";
+        return $this->select($sql);
+    }
+
     public function RegistrarRecibo($id)
     {
         $sql = "INSERT INTO ingreso_recibo (`IN_ID`) VALUES (?)";
+        $datos = array($id);
+        return $this->insertar($sql, $datos);
+    }
+
+    public function RegistrarReciboEgreso($id)
+    {
+        $sql = "INSERT INTO salida_recibo (`SAL_ID`) VALUES (?)";
         $datos = array($id);
         return $this->insertar($sql, $datos);
     }
@@ -120,11 +133,24 @@ class CajaModel extends Query{
         return $this->select($sql);
     }
 
+    public function DatosReciboIDEgreso($id)
+    {
+        $sql = "SELECT * FROM salida_recibo WHERE SAL_ID = $id";
+        return $this->select($sql);
+    }
+
     public function ListarRecibos()
     {
         $sql = "SELECT r.ID, r.FECHA, i.IN_RESPONSABLE, i.IN_MONTO, r.IN_ID FROM ingreso_recibo r INNER JOIN ingreso i ON r.IN_ID = i.IN_ID";
         return $this->selectAll($sql);
     }
+
+    public function ListarRecibosEgreso()
+    {
+        $sql = "SELECT r.ID, r.FECHA, s.SAL_RESPONSABLE, s.SAL_MONTO, r.SAL_ID FROM salida_recibo r INNER JOIN salida s ON r.SAL_ID = s.SAL_ID";
+        return $this->selectAll($sql);
+    }
+
 
     public function ListarIngresosCaja($fecha="")
     {

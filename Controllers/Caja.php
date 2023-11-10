@@ -106,7 +106,25 @@ class Caja extends Controller
     {
         $data = $this->model->ListarEgresos();
         for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['ACCIONES'] = '
+            if ($data[$i]['SAL_COMPROBANTE'] == "Recibo") {
+                $data[$i]['ACCIONES'] = '
+                <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="mdi mdi-dots-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button type="button" class="dropdown-item" onclick="MostrarEgresosRecibo(' . $data[$i]['SAL_ID'] . ')">
+                            <i class="mdi mdi-pencil-outline me-1"></i> 
+                            Editar
+                        </button>
+                        <button type="button" class="dropdown-item" onclick="EliminarEgres(' . $data[$i]['SAL_ID'] . ')">
+                            <i class="mdi mdi-trash-can-outline me-1"></i> 
+                            Eliminar
+                        </button>
+                    </div>
+                </div>';
+            } else {
+                $data[$i]['ACCIONES'] = '
                 <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="mdi mdi-dots-vertical"></i>
@@ -122,6 +140,7 @@ class Caja extends Controller
                         </button>
                     </div>
                 </div>';
+            }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
@@ -134,6 +153,21 @@ class Caja extends Controller
             $data[$i]['IN_MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. ' . $data[$i]['IN_MONTO'] . '</span>';
             $data[$i]['ACCIONES'] = '
             <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="ReciboPdf(' . $data[$i]['IN_ID'] . ')">
+                <i class="mdi mdi-file-document-outline">
+                </i>
+            </button>';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function ListarRecibosEgreso()
+    {
+        $data = $this->model->ListarRecibosEgreso();
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['SAL_MONTO'] = '<span class="badge rounded-pill bg-label-info">S/. ' . $data[$i]['SAL_MONTO'] . '</span>';
+            $data[$i]['ACCIONES'] = '
+            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="ReciboPDFEgreso(' . $data[$i]['SAL_ID'] . ')">
                 <i class="mdi mdi-file-document-outline">
                 </i>
             </button>';
@@ -208,14 +242,14 @@ class Caja extends Controller
         if (empty($id)) {
             $data = $this->model->RegistrarEgreso($tranx, $com, $n, $respo, $tip, $des, $area, $monto);
             if ($data > 0) {
-                $res = array('tipo' => 'success', 'msg' => 'Egreso Registrado');
+                $res = array('tipo' => 'success', 'msg' => 'Egreso Registrado', 'id' => $data, 'condicion' => 'registrado');
             } else {
                 $res = array('tipo' => 'error', 'msg' => 'error Egreso Registrado');
             }
         } else {
             $data = $this->model->ModificarEgreso($id, $tranx, $com, $n, $respo, $tip, $des, $area, $monto);
             if ($data > 0) {
-                $res = array('tipo' => 'success', 'msg' => 'Egreso Modificado');
+                $res = array('tipo' => 'success', 'msg' => 'Egreso Modificado', 'condicion' => 'modificado');
             } else {
                 $res = array('tipo' => 'error', 'msg' => 'error Egreso Modificado');
             }
@@ -251,6 +285,13 @@ class Caja extends Controller
         die();
     }
 
+    public function IdMaxReciboEgreso()
+    {
+        $data = $this->model->IdReciboEgreso();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
     public function RegistrarRecibo($id)
     {
         $data = $this->model->RegistrarRecibo($id);
@@ -258,6 +299,19 @@ class Caja extends Controller
             $res = array('tipo' => 'success', 'msg' => 'Recibo Registrado', 'id' => $data);
         } else {
             $res = array('tipo' => 'error', 'msg' => 'error Recibo Registrado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function RegistrarReciboEgreso($id)
+    {
+        $data = $this->model->RegistrarReciboEgreso($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'msg' => 'Recibo Registrado Egreso', 'id' => $data);
+        } else {
+            $res = array('tipo' => 'error', 'msg' => 'error Recibo Registrado Egreso');
         }
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
@@ -352,6 +406,111 @@ class Caja extends Controller
 
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->Cell(0, 8, utf8_decode('  TOTAL: S/. ' . $datos['IN_MONTO']), 0, 0, 'R');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(95, 8, '__________________', 0, 0, 'C', false);
+        $pdf->Cell(95, 8, '__________________', 0, 0, 'C', false);
+        $pdf->Ln(4);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(95, 8, utf8_decode('Administración'), 0, 0, 'C');
+        $pdf->Cell(95, 8, 'Responsable', 0, 0, 'C');
+        $pdf->Ln(6);
+
+        $pdf->Output("I", "Recibo.pdf");
+
+        die();
+    }
+
+    public function ReciboPDFEgreso($id)
+    {
+        require('Assets/vendor/libs/fpdf/fpdf.php');
+
+        $datos = $this->model->MostraEgresos($id);
+        $id_recibo = $this->model->DatosReciboIDEgreso($datos['SAL_ID']);
+
+        $pdf = new FPDF();
+        $pdf->AddPage('PORTRAIT', 'A4');
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 18);
+        $pdf->Cell(0, 10, utf8_decode('RECIBO'), 0, 0, 'C');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(95, 10, utf8_decode('Fecha: ' . $id_recibo['FECHA']), 0, 0, 'L');
+        $pdf->Cell(0, 10, utf8_decode('N° Recibo: 00' . $id_recibo['ID']), 0, 0, 'R');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(95, 6, utf8_decode('Responsable: ' . $datos['SAL_RESPONSABLE']), 0, 0, 'L');
+        $pdf->Ln(6);
+        $pdf->Cell(95, 6, utf8_decode('Transacción: ' . $datos['SAL_TRANSACCION']), 0, 0, 'L');
+        $pdf->Ln(6);
+        $pdf->Cell(95, 6, utf8_decode('Tipo de Pago: ' . $datos['SAL_TIP_PAGO']), 0, 0, 'L');
+        $pdf->Ln(6);
+        $pdf->Cell(95, 6, utf8_decode('Área: ' . $datos['SAL_AREA']), 0, 0, 'L');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->SetFillColor(192, 192, 192);
+        $pdf->Cell(0, 8, utf8_decode('  Descripción'), 0, 0, 'L', true);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 11);
+        $pdf->MultiCell(0, 5, utf8_decode($datos['SAL_DESCRIPCION']), 0, 'L');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 8, utf8_decode('  TOTAL: S/. ' . $datos['SAL_MONTO']), 0, 0, 'R');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(95, 8, '__________________', 0, 0, 'C', false);
+        $pdf->Cell(95, 8, '__________________', 0, 0, 'C', false);
+        $pdf->Ln(4);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(95, 8, utf8_decode('Administración'), 0, 0, 'C');
+        $pdf->Cell(95, 8, 'Responsable', 0, 0, 'C');
+        $pdf->Ln(30);
+
+
+
+
+        $pdf->SetFont('RubikMedium', '', 18);
+        $pdf->Cell(0, 10, utf8_decode('RECIBO'), 0, 0, 'C');
+        $pdf->Ln(15);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(95, 10, utf8_decode('Fecha: ' . $id_recibo['FECHA']), 0, 0, 'L');
+        $pdf->Cell(0, 10, utf8_decode('N° Recibo: 00' . $id_recibo['ID']), 0, 0, 'R');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(95, 6, utf8_decode('Responsable: ' . $datos['SAL_RESPONSABLE']), 0, 0, 'L');
+        $pdf->Ln(6);
+        $pdf->Cell(95, 6, utf8_decode('Transacción: ' . $datos['SAL_TRANSACCION']), 0, 0, 'L');
+        $pdf->Ln(6);
+        $pdf->Cell(95, 6, utf8_decode('Tipo de Pago: ' . $datos['SAL_TIP_PAGO']), 0, 0, 'L');
+        $pdf->Ln(6);
+        $pdf->Cell(95, 6, utf8_decode('Área: ' . $datos['SAL_AREA']), 0, 0, 'L');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->SetFillColor(192, 192, 192);
+        $pdf->Cell(0, 8, utf8_decode('  Descripción'), 0, 0, 'L', true);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikRegular', '', 11);
+        $pdf->MultiCell(0, 5, utf8_decode($datos['SAL_DESCRIPCION']), 0, 'L');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 8, utf8_decode('  TOTAL: S/. ' . $datos['SAL_MONTO']), 0, 0, 'R');
         $pdf->Ln(15);
 
         $pdf->SetFont('RubikRegular', '', 10);

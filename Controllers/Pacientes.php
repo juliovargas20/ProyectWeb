@@ -1459,4 +1459,27 @@ class Pacientes extends Controller
     }
 
     /************** </EVALUACIÓN TRANSFEMORAL> **************/
+
+    /************** <COMPRAS DE PRODUCTOS> **************/
+
+    public function compras()
+    {
+        if (empty($_SESSION['activo'])) {
+            header("location: " . BASE_URL);
+        }
+
+        $id_caja = $_SESSION['id'];
+        $verificar = $this->model->Verificar($id_caja, 2);
+
+        if (!empty($verificar)) {
+            $data['title'] = 'Gestión de Pacientes - Compra de Productos | KYPBioingeniería';
+            $data['activeCompra'] = 'active';
+            $data['scripts'] = 'Pacientes/compra.js';
+            $this->views->getView('Pacientes', 'compra', $data);
+        } else {
+            header('Location: ' . BASE_URL . 'MyError');
+        }
+    }
+
+    /************** </COMPRAS DE PRODUCTOS> **************/
 }

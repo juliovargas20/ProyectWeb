@@ -366,6 +366,7 @@ class Usuarios extends Controller
             $_SESSION['Coti'] = json_decode(json_encode($verCoti), true);
             $_SESSION['histo'] = json_decode(json_encode($verHisto), true);
             $_SESSION['Contra'] = json_decode(json_encode($verContra), true);
+            $_SESSION['compra'] = json_decode(json_encode($verListPa), true);
             $_SESSION['citas'] = json_decode(json_encode($verCitas), true);
             $_SESSION['cajaadmin'] = json_decode(json_encode($verCajaAdmin), true);
 

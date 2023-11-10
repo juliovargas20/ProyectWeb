@@ -27,7 +27,7 @@ class UsuariosModel extends Query{
 
     public function Modificar($id, $nombre, $correo, $clave, $rol)
     {
-        $sql = "UPDATE usuarios SET NOMBRES = ?, USUARIOS = ?, PASSWORD = ?, ROL = ? WHERE ID = ?";
+        $sql = "UPDATE usuarios SET NOMBRES = ?, USUARIOS = ?, PASSWORD = ?, ID_CAJA = ? WHERE ID = ?";
         $datos = array($nombre, $correo, $clave, $rol, $id);
         return $this->save($sql, $datos);
     }
