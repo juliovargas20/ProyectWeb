@@ -202,7 +202,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="form-floating form-floating-outline">
-                                <input type="text" class="form-control" name="Responsable" id="Responsable" placeholder="Responsable" required>
+                                <input type="text" class="form-control" name="Responsable" id="Responsable" placeholder="Responsable" value="Diego Saenz" required>
                                 <label for="">Responsable</label>
                             </div>
                         </div>
@@ -304,7 +304,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="form-floating form-floating-outline">
-                                <input type="text" class="form-control" name="Responsable" id="Responsable" placeholder="Responsable" required>
+                                <input type="text" class="form-control" name="Responsable" id="Responsable" placeholder="Responsable" value="Diego Saenz" required>
                                 <label for="">Responsable</label>
                             </div>
                         </div>

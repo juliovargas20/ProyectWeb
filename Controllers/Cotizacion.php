@@ -3,6 +3,7 @@
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
+
 class Cotizacion extends Controller
 {
     public function __construct()
@@ -230,12 +231,11 @@ class Cotizacion extends Controller
             $data['lista'] = $this->model->MostraListaCoti($id);
             $data['get'] = $this->model->getImprimir($id);
             $this->views->getView('Cotizacion', 'imprimir', $data);
-       } else {
+        } else {
             header('Location: ' . BASE_URL . 'MyError');
         }
     }
 
 
     /************** </ IMPRIMIR COTIZACION > **************/
-
 }

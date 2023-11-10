@@ -429,20 +429,6 @@ const transfemoral_tmp = `
           <option value="1 Pie Fibra de Carbono Tobillo Bajo Win Walker 26D">Fibra de Carbono Tobillo Bajo Win Walker 26D</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo Win Walker 27D">Fibra de Carbono Tobillo Bajo Win Walker 27D</option>
 
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 22I">Fibra de Carbono Tobillo Alto LIMP 22I</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 23I">Fibra de Carbono Tobillo Alto LIMP 23I</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 24I">Fibra de Carbono Tobillo Alto LIMP 24I</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 25I">Fibra de Carbono Tobillo Alto LIMP 25I</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 26I">Fibra de Carbono Tobillo Alto LIMP 26I</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 27I">Fibra de Carbono Tobillo Alto LIMP 27I</option>
-
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 22D">Fibra de Carbono Tobillo Alto LIMP 22D</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 23D">Fibra de Carbono Tobillo Alto LIMP 23D</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 24D">Fibra de Carbono Tobillo Alto LIMP 24D</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 25D">Fibra de Carbono Tobillo Alto LIMP 25D</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 26D">Fibra de Carbono Tobillo Alto LIMP 26D</option>
-          <option value="1 Pie Fibra de Carbono Tobillo Alto LIMP 27D">Fibra de Carbono Tobillo Alto LIMP 27D</option>
-
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 22I">Fibra de Carbono Tobillo Bajo LIMP 22I</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 23I">Fibra de Carbono Tobillo Bajo LIMP 23I</option>
           <option value="1 Pie Fibra de Carbono Tobillo Bajo LIMP 24I">Fibra de Carbono Tobillo Bajo LIMP 24I</option>
