@@ -184,19 +184,19 @@
           </li>
 
           <?php endif; ?>
-<!--
-          <?php //if (!empty($_SESSION['compra'])) : ?>
 
-          <li class="menu-item <?php //echo !empty($data['activeCompra']) ? $data['activeCompra'] : ''; ?>">
-            <a href="<?php //echo BASE_URL . 'Pacientes/compras' ?>" class="menu-link">
+          <?php if (!empty($_SESSION['compra'])) : ?>
+
+          <li class="menu-item <?php echo !empty($data['activeCompra']) ? $data['activeCompra'] : ''; ?>">
+            <a href="<?php echo BASE_URL . 'Pacientes/compras' ?>" class="menu-link">
               <i class="menu-icon tf-icons mdi mdi-cart-variant"></i>
               <div data-i18n="Compra de Productos">Compra de Productos</div>
             </a>
           </li>
--->
-          <!-- /Gestion de Pacientes -->
 
-          <?php //endif; ?>
+          <?php endif; ?>
+
+          <!-- /Gestion de Pacientes -->
 
           <?php if (!empty($_SESSION['citas'])) : ?>
           <!-- Visitas Médicas -->

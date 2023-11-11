@@ -474,7 +474,7 @@ class Pacientes extends Controller
 
     public function PDFPago($id_paciente)
     {
-        require('./Assets/vendor/libs/fpdf/fpdf.php');
+        require('Assets/vendor/libs/fpdf/fpdf.php');
         $id_user = $_SESSION['id_usuario'];
         $datos = $this->model->ListaDetallePago($id_user, $id_paciente);
         $count = $this->model->Maxpagos();
@@ -1479,6 +1479,45 @@ class Pacientes extends Controller
         } else {
             header('Location: ' . BASE_URL . 'MyError');
         }
+    }
+
+    public function InsertDetalleCompras()
+    {
+        $id_user = $_SESSION['id_usuario'];
+        $des = $_POST['des'];
+        $can = $_POST['can'];
+        $pre = $_POST['pre'];
+        $sub = $can * $pre;
+
+        $data = $this->model->InsertDetalleCompras($id_user, $des, $can, $pre, $sub);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Ingresado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Ingresado');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function ListaDetalleCompras()
+    {
+        $id_user = $_SESSION['id_usuario'];
+        $data['detalle'] = $this->model->ListaDetalleCompras($id_user);
+        $data['total'] = $this->model->CalcularTotalCompras($id_user);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function EliminarDetalleCompras($id)
+    {
+        $data = $this->model->EliminarDetalleCompras($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Eliminado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Eliminado');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
     }
 
     /************** </COMPRAS DE PRODUCTOS> **************/

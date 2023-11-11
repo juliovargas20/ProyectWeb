@@ -120,6 +120,36 @@ class PacientesModel extends Query{
 
     /************** </ACCESORIOS> **************/
 
+    /************** <COMPRAS> **************/
+
+    public function InsertDetalleCompras($id_user, $des, $can, $pre, $sub)
+    {
+        $sql = "INSERT INTO detalle_compras (ID_USER, DESCRIPCION, CANTIDAD, PRECIO_U, SUB_TOTAL) VALUE (?,?,?,?,?)";
+        $datos = array($id_user, $des, $can, $pre, $sub);
+        return $this->save($sql, $datos);
+    }
+
+    public function ListaDetalleCompras($id_user)
+    {
+        $sql = "SELECT * FROM detalle_compras WHERE ID_USER = $id_user";
+        return $this->selectAll($sql);
+    }
+
+    public function EliminarDetalleCompras($id)
+    {
+        $sql = "DELETE FROM detalle_compras WHERE ID = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function CalcularTotalCompras($id_user)
+    {
+        $sql = "SELECT SUM(SUB_TOTAL) AS TOTAL FROM detalle_compras WHERE ID_USER = $id_user";
+        return $this->select($sql);
+    }
+
+    /************** </COMPRAS> **************/
+
     public function Verificar($id_rol, $id_permiso)
     {
         $sql = "SELECT d.ID_PERMISO FROM permisos p INNER JOIN detalle_permiso d ON d.ID_PERMISO = p.ID WHERE d.ID_ROL = $id_rol AND p.ID = $id_permiso";
