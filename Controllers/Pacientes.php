@@ -464,7 +464,7 @@ class Pacientes extends Controller
         if ($data > 0) {
             $this->model->EliminarTodosDetalles($id_user, $id_pa);
             $res = array('tipo' => 'success', 'mensaje' => 'Pago Realizado', 'id' => $data);
-        } else{
+        } else {
             $res = array('tipo' => 'error', 'mensaje' => 'error Pago Realizado');
         }
 
@@ -483,7 +483,7 @@ class Pacientes extends Controller
 
         if ($count['ID'] == NULL) {
             $max = 1;
-        } else{
+        } else {
             $max = $count['ID'] + 1;
         }
 
@@ -502,20 +502,20 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikMedium', '', 10);
         $pdf->Cell(40, 7, 'KYP BIOINGEN S.A.C', 0);
         $pdf->SetFont('RubikRegular', '', 10);
-        $pdf->Cell(0, 7, utf8_decode('N° Recibo: #00'.$max), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode('N° Recibo: #00' . $max), 0, 0, 'R');
         $pdf->Ln(4);
 
         $pdf->SetFont('RubikRegular', '', 8);
         $pdf->Cell(43, 7, utf8_decode('Cal. Max Palma Arrúe Nro. 1117'), 0);
 
         $pdf->SetFont('RubikRegular', '', 10);
-        $pdf->Cell(0, 7, utf8_decode('Fecha: '.date('Y-m-d')), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode('Fecha: ' . date('Y-m-d')), 0, 0, 'R');
         $pdf->Ln(7);
 
-        $pdf->Cell(0, 7, utf8_decode('Nombre: '. $get['NOMBRES']), 0, 0);
+        $pdf->Cell(0, 7, utf8_decode('Nombre: ' . $get['NOMBRES']), 0, 0);
         $pdf->Ln(4);
 
-        $pdf->Cell(0, 7, utf8_decode('DNI: '. $get['DNI']), 0, 0);
+        $pdf->Cell(0, 7, utf8_decode('DNI: ' . $get['DNI']), 0, 0);
         $pdf->Ln(10);
 
 
@@ -530,9 +530,9 @@ class Pacientes extends Controller
         foreach ($datos as $row) {
             $pdf->SetFont('RubikRegular', '', 10);
             $pdf->Cell(30, 7, utf8_decode($row['CANTIDAD']), 0, 0, 'C');
-            $pdf->Cell(73, 7, utf8_decode('  '. $row['DESCRIPCION']), 0, 0, 'L');
-            $pdf->Cell(40, 7, utf8_decode('S/. '. $row['PRECIO_U']), 0, 0, 'C');
-            $pdf->Cell(0, 7, utf8_decode('S/. '. $row['SUB_TOTAL']), 0, 0, 'C');
+            $pdf->Cell(73, 7, utf8_decode('  ' . $row['DESCRIPCION']), 0, 0, 'L');
+            $pdf->Cell(40, 7, utf8_decode('S/. ' . $row['PRECIO_U']), 0, 0, 'C');
+            $pdf->Cell(0, 7, utf8_decode('S/. ' . $row['SUB_TOTAL']), 0, 0, 'C');
             $pdf->Ln(7);
         }
         $pdf->Ln(2);
@@ -541,7 +541,7 @@ class Pacientes extends Controller
         $pdf->Cell(30, 7, utf8_decode(''), 0, 0, 'C');
         $pdf->Cell(73, 7, utf8_decode(''), 0, 0, 'L');
         $pdf->Cell(40, 7, utf8_decode('TOTAL'), 0, 0, 'C');
-        $pdf->Cell(0, 7, utf8_decode('S/. '. $total['TOTAL']), 0, 0, 'C');
+        $pdf->Cell(0, 7, utf8_decode('S/. ' . $total['TOTAL']), 0, 0, 'C');
         $pdf->Ln(18);
 
         $pdf->SetFont('RubikRegular', '', 12);
@@ -562,24 +562,24 @@ class Pacientes extends Controller
         $pdf->Cell(30, 7, 'Recibo', 0);
         $pdf->Ln(13);
 
-        
+
         $pdf->SetFont('RubikMedium', '', 10);
         $pdf->Cell(40, 7, 'KYP BIOINGEN S.A.C', 0);
         $pdf->SetFont('RubikRegular', '', 10);
-        $pdf->Cell(0, 7, utf8_decode('N° Recibo: #00'.$max), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode('N° Recibo: #00' . $max), 0, 0, 'R');
         $pdf->Ln(4);
 
         $pdf->SetFont('RubikRegular', '', 8);
         $pdf->Cell(43, 7, utf8_decode('Cal. Max Palma Arrúe Nro. 1117'), 0);
 
         $pdf->SetFont('RubikRegular', '', 10);
-        $pdf->Cell(0, 7, utf8_decode('Fecha: '.date('Y-m-d')), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode('Fecha: ' . date('Y-m-d')), 0, 0, 'R');
         $pdf->Ln(7);
 
-        $pdf->Cell(0, 7, utf8_decode('Nombre: '.$get['NOMBRES']), 0, 0);
+        $pdf->Cell(0, 7, utf8_decode('Nombre: ' . $get['NOMBRES']), 0, 0);
         $pdf->Ln(4);
 
-        $pdf->Cell(0, 7, utf8_decode('DNI: '.$get['DNI']), 0, 0);
+        $pdf->Cell(0, 7, utf8_decode('DNI: ' . $get['DNI']), 0, 0);
         $pdf->Ln(10);
 
 
@@ -594,9 +594,9 @@ class Pacientes extends Controller
         foreach ($datos as $row) {
             $pdf->SetFont('RubikRegular', '', 10);
             $pdf->Cell(30, 7, utf8_decode($row['CANTIDAD']), 0, 0, 'C');
-            $pdf->Cell(73, 7, utf8_decode('  '. $row['DESCRIPCION']), 0, 0, 'L');
-            $pdf->Cell(40, 7, utf8_decode('S/. '. $row['PRECIO_U']), 0, 0, 'C');
-            $pdf->Cell(0, 7, utf8_decode('S/. '. $row['SUB_TOTAL']), 0, 0, 'C');
+            $pdf->Cell(73, 7, utf8_decode('  ' . $row['DESCRIPCION']), 0, 0, 'L');
+            $pdf->Cell(40, 7, utf8_decode('S/. ' . $row['PRECIO_U']), 0, 0, 'C');
+            $pdf->Cell(0, 7, utf8_decode('S/. ' . $row['SUB_TOTAL']), 0, 0, 'C');
             $pdf->Ln(7);
         }
         $pdf->Ln(2);
@@ -605,7 +605,7 @@ class Pacientes extends Controller
         $pdf->Cell(30, 7, utf8_decode(''), 0, 0, 'C');
         $pdf->Cell(73, 7, utf8_decode(''), 0, 0, 'L');
         $pdf->Cell(40, 7, utf8_decode('TOTAL'), 0, 0, 'C');
-        $pdf->Cell(0, 7, utf8_decode('S/. '. $total['TOTAL']), 0, 0, 'C');
+        $pdf->Cell(0, 7, utf8_decode('S/. ' . $total['TOTAL']), 0, 0, 'C');
         $pdf->Ln(18);
 
         $pdf->SetFont('RubikRegular', '', 12);
@@ -620,16 +620,15 @@ class Pacientes extends Controller
         $servi = $pdf->Output('S', 'ReciboPago.pdf');
 
         return $servi;
-
     }
 
     public function ListarRecibos()
     {
         $data = $this->model->ListarRecibos();
         for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['TOTAL'] = '<span class="badge bg-label-info">S/. '.$data[$i]['TOTAL'].'</span>';
+            $data[$i]['TOTAL'] = '<span class="badge bg-label-info">S/. ' . $data[$i]['TOTAL'] . '</span>';
             $data[$i]['ACCIONES'] = '
-            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="PDfPago('.$data[$i]['ID'].')">
+            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="PDfPago(' . $data[$i]['ID'] . ')">
                 <i class="mdi mdi-file-document-outline">
                 </i>
             </button>';
@@ -684,7 +683,7 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->Cell(70, 7, utf8_decode('TIPO DE ENCAJE'), 0);
         $pdf->Ln(9);
-        
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
@@ -775,7 +774,7 @@ class Pacientes extends Controller
         $pdf->Image($M1, 0, 0, 210, 297);
 
         $pdf->Output('I', 'EvaluacionTransfemoral.pdf');
-        die();        
+        die();
     }
 
     public function FichaEvaluacionTranstibial($id)
@@ -811,7 +810,7 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->Cell(70, 7, utf8_decode('TIPO DE ENCAJE'), 0);
         $pdf->Ln(9);
-        
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
@@ -885,7 +884,7 @@ class Pacientes extends Controller
         $pdf->Image($M1, 0, 0, 210, 297);
 
         $pdf->Output('I', 'EvaluacionTransfemoral.pdf');
-        die();        
+        die();
     }
 
     public function FichaEvaluacionCadera($id)
@@ -918,7 +917,7 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->Cell(70, 7, utf8_decode('TIPO DE ENCAJE'), 0);
         $pdf->Ln(9);
-        
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
@@ -977,7 +976,7 @@ class Pacientes extends Controller
         $pdf->Cell(100, 7, utf8_decode('MONTO COTIZADO: S/. _______________'), 0);
 
         $pdf->Output('I', 'EvaluacionCadera.pdf');
-        die();        
+        die();
     }
 
     public function FichaEvaluacionBiTransfemoral($id)
@@ -1010,7 +1009,7 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->Cell(70, 7, utf8_decode('2 TIPO DE ENCAJE'), 0);
         $pdf->Ln(9);
-        
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
@@ -1112,7 +1111,7 @@ class Pacientes extends Controller
         $pdf->Image($M1, 0, 0, 210, 297);
 
         $pdf->Output('I', 'EvaluacionBilateralTransfemoral.pdf');
-        die();        
+        die();
     }
 
     public function FichaEvaluacionBiTranstibial($id)
@@ -1145,7 +1144,7 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->Cell(70, 7, utf8_decode('2 TIPO DE ENCAJE'), 0);
         $pdf->Ln(9);
-        
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Vidrio'), 0);
         $pdf->Cell(50, 7, utf8_decode('( )  Fibra de Carbono'), 0);
@@ -1225,7 +1224,7 @@ class Pacientes extends Controller
         $pdf->Image($M1, 0, 0, 210, 297);
 
         $pdf->Output('I', 'EvaluacionBilateralTranstibial.pdf');
-        die();        
+        die();
     }
 
     public function FichaEvaluacionManoParcial($id)
@@ -1453,7 +1452,7 @@ class Pacientes extends Controller
         $pdf->SetFont('arial', '', 12);
         $pdf->MultiCell(0, 8, '____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________', 0);
         $pdf->Ln(15);
-        
+
         $pdf->Output('I', 'EvaluacionEstetica.pdf');
         die();
     }
@@ -1517,6 +1516,205 @@ class Pacientes extends Controller
             $res = array('tipo' => 'error', 'mensaje' => 'error Eliminado');
         }
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function RealizarPagoCompras()
+    {
+        $id_user = $_SESSION['id_usuario'];
+        $nombres = $_POST['CompraNombres'];
+        $dni = $_POST['CompraDNI'];
+        $tip = $_POST['CompraTipPago'];
+        $pago = $_POST['CompraPago'];
+        $total = $_POST['CompraTotal'];
+        $obs = $_POST['CompraObs'];
+        $blob = $this->PDFPagoCompras($nombres, $dni, $obs, $total);
+
+        $data = $this->model->RealizarPagoCompras($nombres, $dni, $tip, $pago, $total, $obs, $blob);
+        if ($data > 0) {
+            $this->model->EliminarTodosDetallesCompras($id_user);
+            $res = array('tipo' => 'success', 'mensaje' => 'Compra Realizada', 'id' => $data);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Compra Realizada');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function PDFPagoCompras($nombres, $dni, $obs, $total)
+    {
+        require('Assets/vendor/libs/fpdf/fpdf.php');
+        $id_user = $_SESSION['id_usuario'];
+        //$datos = $this->model->getDatosCompras($id);
+        $lista = $this->model->getListaCompras($id_user);
+        $count = $this->model->MaxCompras();
+        if ($count['ID'] == NULL) {
+            $max = 1;
+        } else {
+            $max = $count['ID'] + 1;
+        }
+
+        $pdf = new FPDF();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->AddPage();
+        $pdf->SetFont('RubikMedium', '', 28);
+        $pdf->Cell(30, 7, 'Recibo', 0);
+        $pdf->Ln(13);
+
+        $pdf->Image(BASE_URL . 'Assets/img/encabezado.png', 163, 6, 35, 13, 'png');
+
+        $pdf->SetFont('RubikMedium', '', 10);
+        $pdf->Cell(40, 7, 'KYP BIOINGEN S.A.C', 0);
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(0, 7, utf8_decode('N° Recibo: #00' . $max), 0, 0, 'R');
+        $pdf->Ln(4);
+
+        $pdf->SetFont('RubikRegular', '', 8);
+        $pdf->Cell(43, 7, utf8_decode('Cal. Max Palma Arrúe Nro. 1117'), 0);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(0, 7, utf8_decode('Fecha: ' . date('Y-m-d')), 0, 0, 'R');
+        $pdf->Ln(7);
+
+        $pdf->Cell(0, 7, utf8_decode('Nombre: ' . $nombres), 0, 0);
+        $pdf->Ln(4);
+
+        $pdf->Cell(0, 7, utf8_decode('DNI: ' . $dni), 0, 0);
+        $pdf->Ln(10);
+
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->SetFillColor(117, 185, 202);
+        $pdf->Cell(30, 8, utf8_decode('Cantidad'), 0, 0, 'C', true);
+        $pdf->Cell(73, 8, utf8_decode('  Descripción'), 0, 0, 'L', true);
+        $pdf->Cell(40, 8, utf8_decode('Precio U.'), 0, 0, 'C', true);
+        $pdf->Cell(0, 8, utf8_decode('Sub-Total'), 0, 0, 'C', true);
+        $pdf->Ln(10);
+
+        foreach ($lista as $row) {
+            $pdf->SetFont('RubikRegular', '', 10);
+            $pdf->Cell(30, 7, utf8_decode($row['CANTIDAD']), 0, 0, 'C');
+            $pdf->Cell(73, 7, utf8_decode('  ' . $row['DESCRIPCION']), 0, 0, 'L');
+            $pdf->Cell(40, 7, utf8_decode('S/. ' . $row['PRECIO_U']), 0, 0, 'C');
+            $pdf->Cell(0, 7, utf8_decode('S/. ' . $row['SUB_TOTAL']), 0, 0, 'C');
+            $pdf->Ln(7);
+        }
+        $pdf->Ln(2);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(30, 7, utf8_decode(''), 0, 0, 'C');
+        $pdf->Cell(73, 7, utf8_decode(''), 0, 0, 'L');
+        $pdf->Cell(40, 7, utf8_decode('TOTAL'), 0, 0, 'C');
+        $pdf->Cell(0, 7, utf8_decode('S/. ' . $total), 0, 0, 'C');
+        $pdf->Ln(18);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(95, 7, '-----------------------------------', 0, 0, 'C');
+        $pdf->Cell(95, 7, '-----------------------------------', 0, 0, 'C');
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(95, 7, utf8_decode('Administración'), 0, 0, 'C');
+        $pdf->Cell(95, 7, utf8_decode($nombres), 0, 0, 'C');
+        $pdf->Ln(20);
+
+        /*==================== DUPLICADO ====================*/
+        /*===================================================*/
+        $pdf->Image(BASE_URL . 'Assets/img/encabezado.png', 163, $pdf->GetY(), 35, 13, 'png');
+
+        $pdf->SetFont('RubikMedium', '', 28);
+        $pdf->Cell(30, 7, 'Recibo', 0);
+        $pdf->Ln(13);
+
+
+        $pdf->SetFont('RubikMedium', '', 10);
+        $pdf->Cell(40, 7, 'KYP BIOINGEN S.A.C', 0);
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(0, 7, utf8_decode('N° Recibo: #00' . $max), 0, 0, 'R');
+        $pdf->Ln(4);
+
+        $pdf->SetFont('RubikRegular', '', 8);
+        $pdf->Cell(43, 7, utf8_decode('Cal. Max Palma Arrúe Nro. 1117'), 0);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(0, 7, utf8_decode('Fecha: ' . date('Y-m-d')), 0, 0, 'R');
+        $pdf->Ln(7);
+
+        $pdf->Cell(0, 7, utf8_decode('Nombre: ' . $nombres), 0, 0);
+        $pdf->Ln(4);
+
+        $pdf->Cell(0, 7, utf8_decode('DNI: ' . $dni), 0, 0);
+        $pdf->Ln(10);
+
+
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->SetFillColor(117, 185, 202);
+        $pdf->Cell(30, 8, utf8_decode('Cantidad'), 0, 0, 'C', true);
+        $pdf->Cell(73, 8, utf8_decode('  Descripción'), 0, 0, 'L', true);
+        $pdf->Cell(40, 8, utf8_decode('Precio U.'), 0, 0, 'C', true);
+        $pdf->Cell(0, 8, utf8_decode('Sub-Total'), 0, 0, 'C', true);
+        $pdf->Ln(10);
+
+        foreach ($lista as $row) {
+            $pdf->SetFont('RubikRegular', '', 10);
+            $pdf->Cell(30, 7, utf8_decode($row['CANTIDAD']), 0, 0, 'C');
+            $pdf->Cell(73, 7, utf8_decode('  ' . $row['DESCRIPCION']), 0, 0, 'L');
+            $pdf->Cell(40, 7, utf8_decode('S/. ' . $row['PRECIO_U']), 0, 0, 'C');
+            $pdf->Cell(0, 7, utf8_decode('S/. ' . $row['SUB_TOTAL']), 0, 0, 'C');
+            $pdf->Ln(7);
+        }
+        $pdf->Ln(2);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(30, 7, utf8_decode(''), 0, 0, 'C');
+        $pdf->Cell(73, 7, utf8_decode(''), 0, 0, 'L');
+        $pdf->Cell(40, 7, utf8_decode('TOTAL'), 0, 0, 'C');
+        $pdf->Cell(0, 7, utf8_decode('S/. ' . $total), 0, 0, 'C');
+        $pdf->Ln(18);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(95, 7, '-----------------------------------', 0, 0, 'C');
+        $pdf->Cell(95, 7, '-----------------------------------', 0, 0, 'C');
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(95, 7, utf8_decode('Administración'), 0, 0, 'C');
+        $pdf->Cell(95, 7, utf8_decode($nombres), 0, 0, 'C');
+
+        $servi = $pdf->Output('S', 'ReciboPago.pdf');
+
+        return $servi;
+    }
+
+    public function MostrarReciboCompras($id)
+    {
+        $data = $this->model->MostrarReciboCompras($id);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function ListarRecibosCompras()
+    {
+        $data = $this->model->ListarReciboCompras();
+        for ($i = 0; $i < count($data); $i++) {
+
+            if ($data[$i]['OBSERVACION'] == NULL) {
+                $data[$i]['OBSERVACION'] = '<span > - </span>';
+            }
+
+            $data[$i]['TOTAL'] = '<span class="badge bg-label-info">S/. ' . $data[$i]['TOTAL'] . '</span>';
+            $data[$i]['ACCIONES'] = '
+            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="PDfCompras(' . $data[$i]['ID'] . ')">
+                <i class="mdi mdi-file-document-outline">
+                </i>
+            </button>';
+        }
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
 

@@ -4,11 +4,11 @@
 
     <h4 class="fw-bold py-3 mb-3"><span class="text-muted fw-light">Gestión de Pacientes / </span> Compras de Productos </h4>
 
-    <button class="btn btn-primary">Listado Recibos</button>
+    <button id="btnCompraRecibos" class="btn btn-primary">Listado Recibos</button>
 
     <hr class="mb-4">
 
-        <form action="" class="row g-2">
+        <form id="frmCompras" class="row g-2">
             <div class="col-12 mb-3">
                 <div class="card">
                     <div class="card-body">
@@ -142,5 +142,34 @@
         </form>
 
 </div>
+
+<div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="BuscarCompras">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="mb-4">Buscar Recibos</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-3 py-md-0">
+        <div class="card-datatable table-responsive">
+          <table class="invoice-list-table table" id="TblComprasRecibo">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">DNI</th>
+                <th>Nombres</th>
+                <th class="text-center">Tipo de Pago</th>
+                <th class="text-center">Pago</th>
+                <th class="text-center">Monto</th>
+                <th>Observaciones</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <?php include "Views/templates/footer.php"; ?>

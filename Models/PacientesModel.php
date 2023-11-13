@@ -147,6 +147,52 @@ class PacientesModel extends Query{
         $sql = "SELECT SUM(SUB_TOTAL) AS TOTAL FROM detalle_compras WHERE ID_USER = $id_user";
         return $this->select($sql);
     }
+    
+    public function RealizarPagoCompras($nombres, $dni, $tip, $pago, $total, $obs, $blob)
+    {
+        $sql = "INSERT INTO compras (NOMBRES, DNI, TIP_PAGO, PAGO, TOTAL, OBSERVACION, PDF) VALUES (?,?,?,?,?,?,?)";
+        $datos = array($nombres, $dni, $tip, $pago, $total, $obs, $blob);
+        return $this->insertar($sql, $datos);
+    }
+
+    public function EliminarTodosDetallesCompras($id_user)
+    {
+        $sql = "DELETE FROM detalle_compras WHERE ID_USER = ?";
+        $datos = array($id_user);
+        return $this->save($sql, $datos);
+    }
+
+    public function getDatosCompras($id)
+    {
+        $sql = "SELECT FECHA, NOMBRES, DNI, TOTAL FROM compras WHERE ID = $id";
+        return $this->select($sql);
+    }
+
+    public function getListaCompras($id_user)
+    {
+        $sql = "SELECT * FROM detalle_compras WHERE ID_USER = $id_user";
+        return $this->selectAll($sql);
+    }
+
+    public function MaxCompras()
+    {
+        $sql = "SELECT MAX(ID) AS ID FROM compras";
+        return $this->select($sql);
+    }
+
+    public function MostrarReciboCompras($id)
+    {
+        $sql = "SELECT PDF FROM compras WHERE ID = $id";
+        $filename = "RCOM20D23DF.pdf";
+        $data = $this->PDF($sql, $filename);
+        return $data;
+    }
+
+    public function ListarReciboCompras()
+    {
+        $sql = "SELECT ID, FECHA, NOMBRES, DNI, TIP_PAGO, PAGO, TOTAL, OBSERVACION FROM compras";
+        return $this->selectAll($sql);
+    }
 
     /************** </COMPRAS> **************/
 
