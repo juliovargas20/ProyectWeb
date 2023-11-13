@@ -19,6 +19,41 @@ class PacientesModel extends Query{
         return $this->save($sql, $datos);
     }
 
+    public function CambioEstadoContrato($id) 
+    {
+        $sql = "UPDATE registro SET ESTADO = 'Contrato' WHERE ID_PACIENTE = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function CambioEstadoCotizacion($id) 
+    {
+        $sql = "UPDATE registro SET ESTADO = 'Cotización' WHERE ID_PACIENTE = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function CambioEstadoDonacion($id) 
+    {
+        $sql = "UPDATE registro SET ESTADO = 'Donación' WHERE ID_PACIENTE = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function CambioEstadoEsSalud($id) 
+    {
+        $sql = "UPDATE registro SET ESTADO = 'Es Salud' WHERE ID_PACIENTE = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function CambioEstadoAccesorios($id) 
+    {
+        $sql = "UPDATE registro SET ESTADO = 'Accesorios' WHERE ID_PACIENTE = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
     /************** </LISTADO DE PACIENTES> **************/
 
 

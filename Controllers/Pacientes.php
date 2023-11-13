@@ -95,8 +95,22 @@ class Pacientes extends Controller
                         </button>
                     </div>
                 </div>
-            ';
+                ';
             }
+
+            $data[$i]['ESTADO'] = '
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-text-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-none d-sm-block">'.$data[$i]['ESTADO'].'</span></button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <button type="button" class="dropdown-item" onclick="CambioEstadoEsSalud(\'' . $data[$i]['ID_PACIENTE'] . '\')">Es Salud</button>
+                        <button type="button" class="dropdown-item" onclick="CambioEstadoCotizacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">Cotización</button>
+                        <button type="button" class="dropdown-item" onclick="CambioEstadoContrato(\'' . $data[$i]['ID_PACIENTE'] . '\')">Contrato</button>
+                        <button type="button" class="dropdown-item" onclick="CambioEstadoDonacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">Donación</button>
+                        <button type="button" class="dropdown-item" onclick="CambioEstadoAccesorios(\'' . $data[$i]['ID_PACIENTE'] . '\')">Accesorios</button>
+                    </div>
+                </div>
+            ';
+
         }
         // \''.$data[$i]['ID_PACIENTE'].'\'; Tipo String
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -110,6 +124,71 @@ class Pacientes extends Controller
             $res = array('tipo' => 'success', 'mensaje' => 'Paciente Eliminado');
         } else {
             $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Eliminado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function CambioEstadoContrato($id)
+    {
+        $data = $this->model->CambioEstadoContrato($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Modificado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Modificado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function CambioEstadoCotizacion($id)
+    {
+        $data = $this->model->CambioEstadoCotizacion($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Modificado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Modificado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function CambioEstadoEsSalud($id)
+    {
+        $data = $this->model->CambioEstadoEsSalud($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Modificado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Modificado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function CambioEstadoDonacion($id)
+    {
+        $data = $this->model->CambioEstadoDonacion($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Modificado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Modificado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function CambioEstadoAccesorios($id)
+    {
+        $data = $this->model->CambioEstadoAccesorios($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Paciente Modificado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Paciente Modificado');
         }
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);

@@ -215,7 +215,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('4.1. El plazo de contrato será de UN AÑO, el mismo que comenzará a regir desde el ' . $fecha_hoy . ' hasta el ' . $fecha_resultado. ' (13 MESES).'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('4.1. El plazo de contrato será de UN AÑO, el mismo que comenzará a regir desde el ' . $fecha_hoy . ' hasta el ' . $fecha_resultado . ' (13 MESES).'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikMedium', '', 11);
@@ -263,7 +263,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('8.1. "EL LOCADOR" se compromete a tomar en cuenta los usos y cuidados de PROTESIS DE '.mb_strtoupper($datos['SUB_TRAB']).' materia del presente contrato y mantener en perfectas condiciones, de acuerdo a las recomendaciones dadas por el contratista.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('8.1. "EL LOCADOR" se compromete a tomar en cuenta los usos y cuidados de PROTESIS DE ' . mb_strtoupper($datos['SUB_TRAB']) . ' materia del presente contrato y mantener en perfectas condiciones, de acuerdo a las recomendaciones dadas por el contratista.'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikMedium', '', 11);
@@ -271,7 +271,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('9.1. Se deja expresamente establecido que el pago por cualquier situación externa que se genere por el mal uso de PROTESIS '.mb_strtoupper($datos['SUB_TRAB']).' por parte de "EL CONTRATANTE", o cualquier otra que se genere por causal distinta, serán asumidos por EL CONTRATANTE”, debiendo éste asumir las previsiones necesarias.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('9.1. Se deja expresamente establecido que el pago por cualquier situación externa que se genere por el mal uso de PROTESIS ' . mb_strtoupper($datos['SUB_TRAB']) . ' por parte de "EL CONTRATANTE", o cualquier otra que se genere por causal distinta, serán asumidos por EL CONTRATANTE”, debiendo éste asumir las previsiones necesarias.'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
@@ -291,7 +291,7 @@ class Contrato extends Controller
         $pdf->Ln(25);
 
 
-       
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, '---------------------------------', 0, 0, 'L');
         $pdf->Cell(100, 7, '---------------------------------', 0, 0, 'R');
@@ -307,28 +307,30 @@ class Contrato extends Controller
         $pdf->Cell(100, 7, utf8_decode('DNI: ' . $datos['DNI']), 0, 0, 'R');
         $pdf->Ln(7);
 
-        $pdf->AddPage();
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+            $pdf->AddPage();
 
-        $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->SetFillColor(200, 220, 255);
-        $pdf->Cell(0, 7, "ORDEN DE PEDIDO", 0, 1, 'L', true);
-        $pdf->Ln(8);
+            $pdf->SetFont('RubikMedium', '', 12);
+            $pdf->SetFillColor(200, 220, 255);
+            $pdf->Cell(0, 7, "ORDEN DE PEDIDO", 0, 1, 'L', true);
+            $pdf->Ln(8);
 
-        $pdf->SetFont('RubikRegular', '', 12);
-        $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
-        $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
-        $pdf->Ln(8);
-
-        $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->Cell(0, 7, utf8_decode("Lista de Componentes"), 0, 1, 'L', false);
-        $pdf->Ln(5);
-
-        foreach ($lista as $row) {
             $pdf->SetFont('RubikRegular', '', 12);
-            $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
-            $pdf->Ln(6);
+            $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
+            $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
+            $pdf->Ln(8);
+
+            $pdf->SetFont('RubikMedium', '', 12);
+            $pdf->Cell(0, 7, utf8_decode("Lista de Componentes"), 0, 1, 'L', false);
+            $pdf->Ln(5);
+
+            foreach ($lista as $row) {
+                $pdf->SetFont('RubikRegular', '', 12);
+                $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
+                $pdf->Ln(6);
+            }
+            $pdf->Ln(8);
         }
-        $pdf->Ln(8);
 
 
         $pdfFileName = 'Contrato.pdf'; // Nombre del archivo PDF
@@ -463,7 +465,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('4.1. El plazo de contrato será de UN AÑO, el mismo que comenzará a regir desde el ' . $fecha_hoy . ' hasta el ' . $fecha_resultado. ' (13 MESES).'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('4.1. El plazo de contrato será de UN AÑO, el mismo que comenzará a regir desde el ' . $fecha_hoy . ' hasta el ' . $fecha_resultado . ' (13 MESES).'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikMedium', '', 11);
@@ -511,7 +513,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('8.1. "EL LOCADOR" se compromete a tomar en cuenta los usos y cuidados de PROTESIS DE '.mb_strtoupper($datos['SUB_TRAB']).' materia del presente contrato y mantener en perfectas condiciones, de acuerdo a las recomendaciones dadas por el contratista.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('8.1. "EL LOCADOR" se compromete a tomar en cuenta los usos y cuidados de PROTESIS DE ' . mb_strtoupper($datos['SUB_TRAB']) . ' materia del presente contrato y mantener en perfectas condiciones, de acuerdo a las recomendaciones dadas por el contratista.'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikMedium', '', 11);
@@ -519,7 +521,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('9.1. Se deja expresamente establecido que el pago por cualquier situación externa que se genere por el mal uso de PROTESIS '.mb_strtoupper($datos['SUB_TRAB']).' por parte de "EL CONTRATANTE", o cualquier otra que se genere por causal distinta, serán asumidos por EL CONTRATANTE”, debiendo éste asumir las previsiones necesarias.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('9.1. Se deja expresamente establecido que el pago por cualquier situación externa que se genere por el mal uso de PROTESIS ' . mb_strtoupper($datos['SUB_TRAB']) . ' por parte de "EL CONTRATANTE", o cualquier otra que se genere por causal distinta, serán asumidos por EL CONTRATANTE”, debiendo éste asumir las previsiones necesarias.'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('RubikRegular', '', 11);
@@ -539,7 +541,7 @@ class Contrato extends Controller
         $pdf->Ln(25);
 
 
-       
+
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, '---------------------------------', 0, 0, 'L');
         $pdf->Cell(100, 7, '---------------------------------', 0, 0, 'R');
@@ -555,28 +557,30 @@ class Contrato extends Controller
         $pdf->Cell(100, 7, utf8_decode('DNI: ' . $datos['DNI']), 0, 0, 'R');
         $pdf->Ln(7);
 
-        $pdf->AddPage();
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+            $pdf->AddPage();
 
-        $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->SetFillColor(200, 220, 255);
-        $pdf->Cell(0, 7, "ORDEN DE PEDIDO", 0, 1, 'L', true);
-        $pdf->Ln(8);
+            $pdf->SetFont('RubikMedium', '', 12);
+            $pdf->SetFillColor(200, 220, 255);
+            $pdf->Cell(0, 7, "ORDEN DE PEDIDO", 0, 1, 'L', true);
+            $pdf->Ln(8);
 
-        $pdf->SetFont('RubikRegular', '', 12);
-        $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
-        $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
-        $pdf->Ln(8);
-
-        $pdf->SetFont('RubikMedium', '', 12);
-        $pdf->Cell(0, 7, utf8_decode("Lista de Componentes"), 0, 1, 'L', false);
-        $pdf->Ln(5);
-
-        foreach ($lista as $row) {
             $pdf->SetFont('RubikRegular', '', 12);
-            $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
-            $pdf->Ln(6);
+            $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
+            $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
+            $pdf->Ln(8);
+
+            $pdf->SetFont('RubikMedium', '', 12);
+            $pdf->Cell(0, 7, utf8_decode("Lista de Componentes"), 0, 1, 'L', false);
+            $pdf->Ln(5);
+
+            foreach ($lista as $row) {
+                $pdf->SetFont('RubikRegular', '', 12);
+                $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
+                $pdf->Ln(6);
+            }
+            $pdf->Ln(8);
         }
-        $pdf->Ln(8);
 
 
         $servi = $pdf->Output('S', 'Contrato.pdf');
@@ -925,7 +929,7 @@ class Contrato extends Controller
             } else if ($datos['TIP_TRAB' == 'Miembro Superior']) {
                 $mail->addAddress('subgerencia@kypbioingenieria.com');
             }
-            
+
 
             /*Attachments
             $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments

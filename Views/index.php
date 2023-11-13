@@ -11,7 +11,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL . 'Assets/img/favicon/favicon.ico'; ?>" />
+    <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL . 'Assets/img/favicon/kyp.ico'; ?>" />
 
     <!-- Fonts -->
     <link href="<?php echo BASE_URL . 'Assets/vendor/fonts/fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'; ?>" rel="stylesheet" />

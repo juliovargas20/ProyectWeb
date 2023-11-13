@@ -386,3 +386,77 @@ function EvaluacionEstetica(e) {
   window.open(url, "_blank");
 }
 
+function CambioEstadoContrato(id) {
+    const url = base_url + 'Pacientes/CambioEstadoContrato/' + id;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            if (res.tipo == 'success') {
+              TblListadoPacienteData.ajax.reload();
+            }
+        }
+    };
+}
+
+function CambioEstadoCotizacion(id) {
+  const url = base_url + 'Pacientes/CambioEstadoCotizacion/' + id;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == 'success') {
+            TblListadoPacienteData.ajax.reload();
+          }
+      }
+  };
+}
+
+function CambioEstadoEsSalud(id) {
+  const url = base_url + 'Pacientes/CambioEstadoEsSalud/' + id;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == 'success') {
+            TblListadoPacienteData.ajax.reload();
+          }
+      }
+  };
+}
+
+function CambioEstadoDonacion(id) {
+  const url = base_url + 'Pacientes/CambioEstadoDonacion/' + id;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == 'success') {
+            TblListadoPacienteData.ajax.reload();
+          }
+      }
+  };
+}
+
+function CambioEstadoAccesorios(id) {
+  const url = base_url + 'Pacientes/CambioEstadoAccesorios/' + id;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == 'success') {
+            TblListadoPacienteData.ajax.reload();
+          }
+      }
+  };
+}
