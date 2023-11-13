@@ -42,8 +42,9 @@ const btnCerrarCaja = document.querySelector("#btnCloseBOx");
 const btnListaRecibosEgreso = document.querySelector("#BtnLRE");
 
 const ModalListaRecibosEgreso = document.querySelector("#ListaRecibosEgreso");
-const ModalListaRecibosEgresoOpen = new bootstrap.Modal(ModalListaRecibosEgreso);
-
+const ModalListaRecibosEgresoOpen = new bootstrap.Modal(
+  ModalListaRecibosEgreso
+);
 
 /******* RESUMEN CAJA *******/
 const btnResumenCaja = document.querySelector("#BtnRC");
@@ -93,18 +94,18 @@ document.addEventListener("DOMContentLoaded", function () {
           var data = $.map(columns, function (col, i) {
             return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
               ? '<tr data-dt-row="' +
-                  col.rowIndex +
-                  '" data-dt-column="' +
-                  col.columnIndex +
-                  '">' +
-                  "<td>" +
-                  col.title +
-                  ":" +
-                  "</td> " +
-                  "<td>" +
-                  col.data +
-                  "</td>" +
-                  "</tr>"
+              col.rowIndex +
+              '" data-dt-column="' +
+              col.columnIndex +
+              '">' +
+              "<td>" +
+              col.title +
+              ":" +
+              "</td> " +
+              "<td>" +
+              col.data +
+              "</td>" +
+              "</tr>"
               : "";
           }).join("");
 
@@ -149,18 +150,18 @@ document.addEventListener("DOMContentLoaded", function () {
           var data = $.map(columns, function (col, i) {
             return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
               ? '<tr data-dt-row="' +
-                  col.rowIndex +
-                  '" data-dt-column="' +
-                  col.columnIndex +
-                  '">' +
-                  "<td>" +
-                  col.title +
-                  ":" +
-                  "</td> " +
-                  "<td>" +
-                  col.data +
-                  "</td>" +
-                  "</tr>"
+              col.rowIndex +
+              '" data-dt-column="' +
+              col.columnIndex +
+              '">' +
+              "<td>" +
+              col.title +
+              ":" +
+              "</td> " +
+              "<td>" +
+              col.data +
+              "</td>" +
+              "</tr>"
               : "";
           }).join("");
 
@@ -202,18 +203,18 @@ document.addEventListener("DOMContentLoaded", function () {
           var data = $.map(columns, function (col, i) {
             return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
               ? '<tr data-dt-row="' +
-                  col.rowIndex +
-                  '" data-dt-column="' +
-                  col.columnIndex +
-                  '">' +
-                  "<td>" +
-                  col.title +
-                  ":" +
-                  "</td> " +
-                  "<td>" +
-                  col.data +
-                  "</td>" +
-                  "</tr>"
+              col.rowIndex +
+              '" data-dt-column="' +
+              col.columnIndex +
+              '">' +
+              "<td>" +
+              col.title +
+              ":" +
+              "</td> " +
+              "<td>" +
+              col.data +
+              "</td>" +
+              "</tr>"
               : "";
           }).join("");
 
@@ -255,18 +256,18 @@ document.addEventListener("DOMContentLoaded", function () {
           var data = $.map(columns, function (col, i) {
             return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
               ? '<tr data-dt-row="' +
-                  col.rowIndex +
-                  '" data-dt-column="' +
-                  col.columnIndex +
-                  '">' +
-                  "<td>" +
-                  col.title +
-                  ":" +
-                  "</td> " +
-                  "<td>" +
-                  col.data +
-                  "</td>" +
-                  "</tr>"
+              col.rowIndex +
+              '" data-dt-column="' +
+              col.columnIndex +
+              '">' +
+              "<td>" +
+              col.title +
+              ":" +
+              "</td> " +
+              "<td>" +
+              col.data +
+              "</td>" +
+              "</tr>"
               : "";
           }).join("");
 
@@ -306,18 +307,18 @@ document.addEventListener("DOMContentLoaded", function () {
           var data = $.map(columns, function (col, i) {
             return col.title !== "" // ? Do not show row in modal popup if title is blank (for check box)
               ? '<tr data-dt-row="' +
-                  col.rowIndex +
-                  '" data-dt-column="' +
-                  col.columnIndex +
-                  '">' +
-                  "<td>" +
-                  col.title +
-                  ":" +
-                  "</td> " +
-                  "<td>" +
-                  col.data +
-                  "</td>" +
-                  "</tr>"
+              col.rowIndex +
+              '" data-dt-column="' +
+              col.columnIndex +
+              '">' +
+              "<td>" +
+              col.title +
+              ":" +
+              "</td> " +
+              "<td>" +
+              col.data +
+              "</td>" +
+              "</tr>"
               : "";
           }).join("");
 
@@ -563,7 +564,6 @@ function handleFrmNECR(event) {
   }
   FrmNECRH.classList.add("was-validated");
 }
-
 
 function TotalIngresos() {
   const url = base_url + "Caja/TotalIngresos";
@@ -886,8 +886,8 @@ function CerrarCaja() {
   }).then((result) => {
     if (result.isConfirmed) {
       const url = base_url + `Caja/CerrarCaja`;
-      window.open(url, "_blank");
       TblRC_data.ajax.reload();
+      window.open(url, "_blank");
     }
   });
 }
@@ -898,16 +898,28 @@ function VerPDFcaja(id) {
 }
 
 function EliminarCerrarCaja(id) {
-  const url = base_url + `Caja/EliminarResumenCaja/${id}`;
-  const http = new XMLHttpRequest();
-  http.open("GET", url, true);
-  http.send();
-  http.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const res = JSON.parse(this.responseText);
-      if (res.tipo == "success") {
-        TblRC_data.ajax.reload();
-      }
+  Swal.fire({
+    title: "¿Deseas Cerrar caja?",
+    text: "",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const url = base_url + `Caja/EliminarResumenCaja/${id}`;
+      const http = new XMLHttpRequest();
+      http.open("GET", url, true);
+      http.send();
+      http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          if (res.tipo == "success") {
+            TblRC_data.ajax.reload();
+          }
+        }
+      };
     }
-  };
+  });
 }

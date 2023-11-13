@@ -35,44 +35,44 @@ class Pacientes extends Controller
 
             if ($data[$i]['ESTADO'] == 'Contrato' || $data[$i]['ESTADO'] == 'Donación' || $data[$i]['ESTADO'] == 'Es Salud') {
                 $data[$i]['ACCIONES'] = '
-                <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                <div class="d-inline-block">
+                    <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="mdi mdi-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <button type="button" class="dropdown-item" onclick="editar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end m-0">
+                        <a href="javascript:;" class="dropdown-item" onclick="editar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="eliminar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="eliminar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-trash-can-outline me-1"></i> 
                             Eliminar
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="getFicha(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="getFicha(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-file-pdf-box me-1"></i> 
                             Ver Ficha
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="Contrato(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="Contrato(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-file-document-edit me-1"></i> 
                             Contrato
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="FichaEvaluacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="FichaEvaluacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-file-document-refresh-outline me-1"></i> 
                             Ficha Evaluación
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="Accesorios(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="Accesorios(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-cart-variant me-1"></i> 
                             Accesorios
-                        </button>
+                        </a>
                     </div>
                 </div>';
             } else {
                 $data[$i]['ACCIONES'] = '
-                <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                <div class="d-inline-block">
+                    <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="mdi mdi-dots-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end m-0">
                         <button type="button" class="dropdown-item" onclick="editar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
@@ -100,7 +100,7 @@ class Pacientes extends Controller
 
             $data[$i]['ESTADO'] = '
                 <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-text-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-none d-sm-block">'.$data[$i]['ESTADO'].'</span></button>
+                    <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-text-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-none d-sm-block">' . $data[$i]['ESTADO'] . '</span></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <button type="button" class="dropdown-item" onclick="CambioEstadoEsSalud(\'' . $data[$i]['ID_PACIENTE'] . '\')">Es Salud</button>
                         <button type="button" class="dropdown-item" onclick="CambioEstadoCotizacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">Cotización</button>
@@ -110,7 +110,6 @@ class Pacientes extends Controller
                     </div>
                 </div>
             ';
-
         }
         // \''.$data[$i]['ID_PACIENTE'].'\'; Tipo String
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
