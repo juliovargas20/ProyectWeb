@@ -334,7 +334,7 @@ class Contrato extends Controller
 
 
         $pdfFileName = 'Contrato.pdf'; // Nombre del archivo PDF
-        $pdf->Output('F', $pdfFileName); // Guardar el PDF en el servidor
+        //$pdf->Output('F', $pdfFileName); // Guardar el PDF en el servidor
         $pdf->Output('I', $pdfFileName);
 
         die();
@@ -974,73 +974,4 @@ class Contrato extends Controller
         }
     }
 
-    public function EnviarCorreoImpor()
-    {
-
-        $id_contrato = $_POST['id_contrato'];
-        $id_coti = $_POST['id_coti'];
-
-        $mail = new PHPMailer(true);
-        $datos = $this->model->getDatosMailer($id_contrato);
-        $lista = $this->model->getListaComponentes($id_coti);
-        $obs = $this->model->getDatosCotizacion($id_coti);
-
-        try {
-            //Server settings
-            $mail->SMTPDebug = 2;
-            $mail->isSMTP();
-            $mail->Host       = SMP;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = USER_EMAIL;
-            $mail->Password   = PASS_EMAIL;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port       = PORT_SSL;
-
-
-            $mail->setFrom(USER_EMAIL, 'Administración');
-            $mail->addAddress('sistemas@kypbioingenieria.com');
-
-            /*Attachments
-            $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-            */
-
-
-            $mail->CharSet = 'UTF-8';
-
-            //Content
-            $mail->isHTML(true);
-            $mail->Subject = 'Paciente ' . $datos['NOMBRES'] . ' hizo Contrato';
-            $mail->Body    = '
-                <h5>PACIENTE: ' . $datos['NOMBRES'] . '</h5>
-                <ul>
-                    <li>Codigo: ' . $datos['ID_PACIENTE'] . '</li>
-                    <li>Servicio: ' . $datos['SUB_TRAB'] . '</li>
-                    <li>Fecha de Contrato ' . $datos['FECHA'] . '</li>
-                    <li>Peso del Paciente (Kg.): ' . $datos['PESO'] . '</li>
-                </ul>   
-                <p><strong>Componentes:</strong></p>
-                <ul>
-            ';
-
-            foreach ($lista as $row) {
-                $mail->Body .= '<li>' . $row['LISTA'] . '</li>';
-            }
-            $mail->Body .= '</ul>';
-
-            if (!empty($obs['OBSERVACION'])) {
-                $mail->Body .= '
-                <p><strong>Observaciones</strong></p>
-                <p>' . $obs['OBSERVACION'] . '</p>
-                ';
-            }
-
-            $mail->addAttachment('Contrato.pdf');
-
-            $mail->send();
-            echo "Enviado";
-        } catch (Exception $e) {
-            echo "Error: {$mail->ErrorInfo}";
-        }
-    }
 }

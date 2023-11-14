@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "SEDE", className: "text-center" },
       { data: "ESTADO", className: "text-center" },
       { data: "FECHA", className: "text-center" },
-      { data: "ACCIONES", className: "text-center" },
+      { data: 'ACCIONES', className: "text-center"},
     ],
     columnDefs: [
       {
@@ -42,6 +42,28 @@ document.addEventListener("DOMContentLoaded", function () {
         targets: 3,
         visible: false,
       },
+      /*{
+        // Actions
+        targets: -1,
+        title: 'Acciones',
+        orderable: false,
+        render: function (data, type, full, meta) {
+          return (
+            '<div class="d-inline-block">' +
+            '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>' +
+            '<div class="dropdown-menu dropdown-menu-end m-0">' +
+            '<a href="javascript:;" class="dropdown-item">Details</a>' +
+            '<a href="javascript:;" class="dropdown-item">Details</a>' +
+            '<a href="javascript:;" class="dropdown-item">Details</a>' +
+            '<a href="javascript:;" class="dropdown-item">Archive</a>' +
+            '<div class="dropdown-divider"></div>' +
+            '<a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>' +
+            '</div>' +
+            '</div>' +
+            '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon item-edit"><i class="mdi mdi-pencil-outline"></i></a>'
+          );
+        }
+      }*/
     ],
     order: [[1, "desc"]],
     dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',

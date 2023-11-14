@@ -6,8 +6,8 @@
 
   <!-- DataTable with Buttons -->
   <div class="card mb-5">
-    <div class="card-datatable table-responsive">
-      <table class="invoice-list-table table" id="TblListadoPacientes">
+    <div class="card-datatable text-nowrap">
+      <table class="dt-complex-header table" id="TblListadoPacientes">
         <thead class="table-light">
           <tr>
             <th></th>

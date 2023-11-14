@@ -109,23 +109,23 @@ function ListarPagos() {
             <td>${row["METODO"]}</td>
             <td class="text-center"><span class="badge bg-label-primary">S/. ${row["ABONO"]}</span></td>
             <td class="text-center">
-              <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+              <div class="d-inline-block">
+                  <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                       <i class="mdi mdi-dots-vertical"></i>
-                  </button>
-                  <div class="dropdown-menu">
-                      <button type="button" class="dropdown-item" onclick="Comprobante(${row["ID"]})">
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end m-0">
+                      <a href="javascript:;" class="dropdown-item" onclick="Comprobante(${row["ID"]})">
                           <i class="mdi mdi-image-check-outline mdi-20px mx-1"></i> 
                           Comprobante
-                      </button>
-                      <button type="button" class="dropdown-item" onclick="Recibo(${row["ID"]})">
+                      </a>
+                      <a href="javascript:;" class="dropdown-item" onclick="Recibo(${row["ID"]})">
                           <i class="mdi mdi-file-pdf-box mdi-20px mx-1"></i> 
                           Recibo
-                      </button>
-                      <button type="button" class="dropdown-item" onclick="EliminarPago(${row["ID"]})">
+                      </a>
+                      <a href="javascript:;" class="dropdown-item" onclick="EliminarPago(${row["ID"]})">
                           <i class="mdi mdi-trash-can mdi-20px mx-1"></i> 
                           Eliminar
-                      </button>
+                      </a>
                   </div>
               </div>
             </td>

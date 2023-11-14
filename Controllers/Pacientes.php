@@ -73,26 +73,26 @@ class Pacientes extends Controller
                         <i class="mdi mdi-dots-vertical"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end m-0">
-                        <button type="button" class="dropdown-item" onclick="editar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        <a href="javascript:;" class="dropdown-item" onclick="editar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="eliminar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="eliminar(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-trash-can-outline me-1"></i> 
                             Eliminar
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="getFicha(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="getFicha(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-file-pdf-box me-1"></i> 
                             Ver Ficha
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="FichaEvaluacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="FichaEvaluacion(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-file-document-refresh-outline me-1"></i> 
                             Ficha Evaluación
-                        </button>
-                        <button type="button" class="dropdown-item" onclick="Accesorios(\'' . $data[$i]['ID_PACIENTE'] . '\')">
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="Accesorios(\'' . $data[$i]['ID_PACIENTE'] . '\')">
                             <i class="mdi mdi-cart-variant me-1"></i> 
                             Accesorios
-                        </button>
+                        </a>
                     </div>
                 </div>
                 ';
