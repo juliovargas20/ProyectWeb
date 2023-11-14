@@ -284,10 +284,7 @@
 
     <h5 class="fw-bold">Términos y Condiciones:</h5>
     <ul class="list-unstyled mt-2">
-      <li style="font-size: 11px;">Cada cotización realizada tiene que ser evaluado por un especialista para garantizar que sean los componentes adecuados para el paciente con previa evaluación.</li>
-      <li style="font-size: 11px;">Los precios no incluyen IGV, si desea un precio con IGV este tiene que ser añadido al sub total del precio de los componentes cotizados.</li>
-      <li style="font-size: 11px;">Si el cliente desea una prótesis con una cotización sin IGV solo se le entregará como verificación de pago una carta de cancelación. Si desea boleta de venta o factura tendrá que añadirse el IGV del 18% al precio cotizado.</li>
-      <li style="font-size: 11px;">Si el Método de Pago es por via POS se tiene que dar adicional una comisión del 4%. No hay derecho a reclamo si el cliente ha sido informado con anterioridad del cobro adiconal del 4% por el Método de Pago POS.</li>
+      <li style="font-size: 11px;">Cada cotización realizada tiene que ser evaluado por un especialista para garantizar que sean los componentes adecuados para el paciente con previa evaluación. Los precios sí incluyen IGV.</li>
     </ul>
 
   </div>
