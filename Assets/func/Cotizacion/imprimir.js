@@ -5,16 +5,11 @@ function redirectToPreviousPage() {
 (function () {
     window.print();
 
-    window.onbeforeprint = function () {
-        // No se hace nada cuando se inicia la impresión
-        //redirectToPreviousPage();
-    };
-    
     // Detectar si se cancela la impresión
     window.onafterprint = function () {
-        // Redirigir a la página anterior
-        redirectToPreviousPage();
+        // Redirigir a la página anterior después de un pequeño retraso (500 milisegundos)
+        setTimeout(function () {
+            redirectToPreviousPage();
+        }, 500);
     };
-
 })();
-
