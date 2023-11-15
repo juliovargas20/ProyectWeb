@@ -98,7 +98,7 @@ class Pacientes extends Controller
                 ';
             }
 
-            $data[$i]['ESTADO'] = '
+            $data[$i]['ESTADODEV'] = '
                 <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-text-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-none d-sm-block">' . $data[$i]['ESTADO'] . '</span></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">

@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "CELULAR", className: "text-center" },
       { data: "SEDE", className: "text-center" },
       { data: "ESTADO", className: "text-center" },
+      { data: "ESTADODEV", className: "text-center" },
       { data: "FECHA", className: "text-center" },
       { data: 'ACCIONES', className: "text-center"},
     ],
@@ -42,28 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
         targets: 3,
         visible: false,
       },
-      /*{
-        // Actions
-        targets: -1,
-        title: 'Acciones',
-        orderable: false,
-        render: function (data, type, full, meta) {
-          return (
-            '<div class="d-inline-block">' +
-            '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>' +
-            '<div class="dropdown-menu dropdown-menu-end m-0">' +
-            '<a href="javascript:;" class="dropdown-item">Details</a>' +
-            '<a href="javascript:;" class="dropdown-item">Details</a>' +
-            '<a href="javascript:;" class="dropdown-item">Details</a>' +
-            '<a href="javascript:;" class="dropdown-item">Archive</a>' +
-            '<div class="dropdown-divider"></div>' +
-            '<a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>' +
-            '</div>' +
-            '</div>' +
-            '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon item-edit"><i class="mdi mdi-pencil-outline"></i></a>'
-          );
-        }
-      }*/
+      {
+        targets: 6,
+        visible: false,
+      },
     ],
     order: [[1, "desc"]],
     dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -80,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: '<i class="mdi mdi-printer-outline me-1" ></i>Imprimir',
             className: "dropdown-item",
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7],
+              columns: [1, 2, 3, 4, 5, 6, 8],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {
@@ -120,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: '<i class="mdi mdi-file-document-outline me-1" ></i>Csv',
             className: "dropdown-item",
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7],
+              columns: [1, 2, 3, 4, 5, 6, 8],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {
@@ -147,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: '<i class="mdi mdi-file-excel-outline me-1"></i>Excel',
             className: "dropdown-item",
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7],
+              columns: [1, 2, 3, 4, 5, 6, 8],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {
@@ -174,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: '<i class="mdi mdi-file-pdf-box me-1"></i>Pdf',
             className: "dropdown-item",
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7],
+              columns: [1, 2, 3, 4, 5, 6, 8],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {
@@ -201,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: '<i class="mdi mdi-content-copy me-1" ></i>Copy',
             className: "dropdown-item",
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7],
+              columns: [1, 2, 3, 4, 5, 6, 8],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {

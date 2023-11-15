@@ -16,6 +16,7 @@
             <th>DNI</th>
             <th class="text-center">Contacto</th>
             <th class="text-center">Sede</th>
+            <th>Estado</th>
             <th class="text-center">Estado</th>
             <th class="text-center">Fecha</th>
             <th class="text-center">Acciones</th>
