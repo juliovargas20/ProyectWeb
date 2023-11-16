@@ -536,6 +536,7 @@ class Caja extends Controller
         $salida = $this->model->ListarEgresosCaja();
         $totalIngreso = $this->model->TotalIngresosCaja();
         $totalEgreso = $this->model->TotalEgresosCaja();
+        $saldo = $this->model->TotalIngresoEgresos();
 
         $total = $totalIngreso['IN_MONTO'] - $totalEgreso['SAL_MONTO'];
 
@@ -558,7 +559,7 @@ class Caja extends Controller
 
         $pdf->SetFont('RubikMedium', '', 16);
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->Cell(0, 20, utf8_decode('Resumen TOTAL S/. ' . $total), 0, 1, 'L', false);
+        $pdf->Cell(0, 20, utf8_decode('Resumen Saldo TOTAL S/. ' . $saldo['RESTA']), 0, 1, 'L', false);
         $pdf->Ln(15);
 
         $pdf->SetFont('RubikMedium', '', 12);
