@@ -360,6 +360,7 @@ class Usuarios extends Controller
             $verContra = $this->model->Verificar($_SESSION['id'], 5);
             $verCitas = $this->model->Verificar($_SESSION['id'], 6);
             $verCajaAdmin = $this->model->Verificar($_SESSION['id'], 8);
+            $verArchivo = $this->model->Verificar($_SESSION['id'], 9);
 
             $_SESSION['user'] = json_decode(json_encode($verUser), true);
             $_SESSION['ListPa'] = json_decode(json_encode($verListPa), true);
@@ -369,6 +370,7 @@ class Usuarios extends Controller
             $_SESSION['compra'] = json_decode(json_encode($verListPa), true);
             $_SESSION['citas'] = json_decode(json_encode($verCitas), true);
             $_SESSION['cajaadmin'] = json_decode(json_encode($verCajaAdmin), true);
+            $_SESSION['archivos'] = json_decode(json_encode($verArchivo), true);
 
             $res = array('tipo' => 'success', 'mensaje' => 'Bienvenido al Sistema');
         } else {

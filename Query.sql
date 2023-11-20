@@ -367,4 +367,19 @@ CREATE TABLE compras
   TOTAL DECIMAL(10,2),
   OBSERVACION TEXT,
   PDF LONGBLOB
-)
+);
+
+/************** ARCHIVOS **************/
+CREATE TABLE archivo
+(
+  ID INT(11) PRIMARY KEY AUTO_INCREMENT,
+  ID_BASE INT(11),
+  NOMBRES TEXT,
+  DOCUMENTO LONGBLOB,
+  TIPO VARCHAR(20)
+);
+
+
+ALTER TABLE archivo
+ADD CONSTRAINT fk_archivo_base_historial
+FOREIGN KEY (ID_BASE) REFERENCES base_historial(ID);

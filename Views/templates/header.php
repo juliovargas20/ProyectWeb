@@ -196,6 +196,17 @@
 
           <?php endif; ?>
 
+          <?php if (!empty($_SESSION['archivos'])) : ?>
+
+          <li class="menu-item <?php echo !empty($data['activeArchivo']) ? $data['activeArchivo'] : ''; ?>">
+            <a href="<?php echo BASE_URL . 'Archivos/Listado' ?>" class="menu-link">
+              <i class="menu-icon tf-icons mdi mdi-folder-account"></i>
+              <div data-i18n="Archivos Pacientes">Archivos Pacientes</div>
+            </a>
+          </li>
+
+          <?php endif; ?>
+
           <!-- /Gestion de Pacientes -->
 
           <?php if (!empty($_SESSION['citas'])) : ?>
