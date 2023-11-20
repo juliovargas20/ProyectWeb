@@ -7,13 +7,12 @@ class Ordenes extends Controller
         parent::__construct();
     }
 
-
-    public function trabajo()
+    /***** ORDEN DE COMPRA *****/
+    public function compra()
     {
-        $data['title'] = 'Ordenes Internas - Orden de Trabajo | KYPBioingeniería';
-        $data['activeTrabajo'] = 'active';
-        $data['scripts'] = 'Ordenes/ordenTrabajo.js';
-        $this->views->getView('Ordenes', 'trabajo', $data);
+        $data['title'] = 'Ordenes Internas - Orden de Compra | KYPBioingeniería';
+        $data['activeOrdenCompra'] = 'active';
+        $data['scripts'] = 'Ordenes/ordenCompra.js';
+        $this->views->getView('Ordenes', 'compra', $data);
     }
-
 }
