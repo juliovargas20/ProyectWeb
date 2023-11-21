@@ -42,8 +42,10 @@
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css'; ?>">
 
   <!-- Page CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/swiper/swiper.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/css/pages/cards-statistics.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/css/pages/app-invoice.css'; ?>" />
+
   <!-- Helpers -->
   <script src="<?php echo BASE_URL . 'Assets/vendor/js/helpers.js'; ?>"></script>
 

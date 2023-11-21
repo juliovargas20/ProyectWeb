@@ -70,9 +70,11 @@
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/jquery-repeater/jquery-repeater.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/dropzone/dropzone-min.js'; ?>"></script>
 
+<script src="<?php echo BASE_URL . 'Assets/vendor/libs/swiper/swiper.js'; ?>"></script>
+
 <!-- Main JS -->
 <script src="<?php echo BASE_URL . 'Assets/js/main.js'; ?>"></script>
-
+<script src="<?php echo BASE_URL . 'Assets/js/cards-statistics.js'; ?>"></script>
 <!-- Page JS -->
 <script src="<?php echo BASE_URL . 'Assets/func/alert.js'; ?>"></script>
 
