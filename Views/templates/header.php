@@ -148,16 +148,20 @@
 
           <!-- Ordenes Internas -->
 
-          <li class="menu-header fw-light mt-4">
-            <span class="menu-header-text">Ordenes Internas</span>
-          </li>
+          <?php if (!empty($_SESSION['OC'])) : ?>
 
-          <li class="menu-item <?php echo !empty($data['activeOrdenCompra']) ? $data['activeOrdenCompra'] : ''; ?>">
+            <li class="menu-header fw-light mt-4">
+              <span class="menu-header-text">Ordenes Internas</span>
+            </li>
+
+            <li class="menu-item <?php echo !empty($data['activeOrdenCompra']) ? $data['activeOrdenCompra'] : ''; ?>">
               <a href="<?php echo BASE_URL . 'Ordenes/compra' ?>" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-cash"></i>
                 <div data-i18n="Orden de Compra">Orden de Compra</div>
               </a>
             </li>
+
+            <?php endif; ?>
 
           <!-- /Ordenes Internas -->
 
@@ -276,21 +280,6 @@
             <!-- /Caja Empresiarial -->
 
           <?php endif; ?>
-
-          <!-- Ordenes Internas 
-          <li class="menu-header fw-light mt-4">
-            <span class="menu-header-text">Ordenes Internas</span>
-          </li>
-
-          <li class="menu-item <?php echo !empty($data['activeTrabajo']) ? $data['activeTrabajo'] : ''; ?>">
-            <a href="<?php echo BASE_URL . 'Ordenes/trabajo' ?>" class="menu-link">
-              <i class="menu-icon tf-icons mdi mdi-clipboard-file-outline"></i>
-              <div data-i18n="Orden de Trabajo">Orden de Trabajo</div>
-            </a>
-          </li>-->
-
-          <!-- /Ordenes Internas -->
-
 
           <!-- Gestion de Proyectos 
           <li class="menu-header fw-light mt-4">

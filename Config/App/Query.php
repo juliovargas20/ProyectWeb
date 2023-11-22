@@ -67,6 +67,22 @@ class Query extends Conexion
         return $res;
     }
 
+    public function getIDString(string $sql, array $datos, string $sql2)
+    {
+        $this->sql = $sql;
+        $this->datos = $datos;
+        $insert = $this->con->prepare($this->sql);
+        $data = $insert->execute($this->datos);
+        if ($data) {
+            $stmt = $this->con->prepare("$sql2");
+            $stmt->execute();
+            $res = $stmt->fetchColumn();
+        } else {
+            $res = NULL;
+        }
+        return $res;
+    }
+
     public function downloadImage($sql, $filename, $img)
     {
         $this->sql = $sql;

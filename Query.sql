@@ -386,9 +386,9 @@ FOREIGN KEY (ID_BASE) REFERENCES base_historial(ID);
 
 
 /************** ORDEN DE COMPRA **************/
-CREATE TABLE OrdenCompra
+CREATE TABLE ordencompra
 (
-  ID INT(11) PRIMARY KEY AUTO_INCREMENT,
+  ID VARCHAR(10) PRIMARY KEY,
   FECHA DATE DEFAULT CURDATE(),
   AREA VARCHAR(50),
   NECESIDAD VARCHAR(80),
@@ -396,7 +396,7 @@ CREATE TABLE OrdenCompra
   TOTAL DECIMAL(10,2)
 );
 
-CREATE TABLE detalle_OrdenCompra
+CREATE TABLE detalle_ordencompra
 (
   ID INT(11) PRIMARY KEY AUTO_INCREMENT,
   ID_USER INT(11),
@@ -406,3 +406,26 @@ CREATE TABLE detalle_OrdenCompra
   PRECIO_U DECIMAL(10,2),
   SUB_TOTAL DECIMAL(10,2)
 );
+
+DELIMITER $$
+
+CREATE TRIGGER before_insert_orden_compra
+BEFORE INSERT ON ordencompra
+FOR EACH ROW
+BEGIN
+ DECLARE nuevo_numero INT;
+
+    -- Obtener el último número de factura
+    SELECT IFNULL(MAX(CONVERT(SUBSTRING(ID, 3), SIGNED INTEGER)), 0) INTO nuevo_numero
+    FROM ordencompra;
+
+    -- Incrementar el número
+    SET nuevo_numero = nuevo_numero + 1;
+
+    -- Formatear el nuevo número con ceros a la izquierda y asignar a la columna ID
+    SET NEW.ID = CONCAT('OC', LPAD(nuevo_numero, 6, '0'));
+    
+END 
+$$
+DELIMITER ;
+

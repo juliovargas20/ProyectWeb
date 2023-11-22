@@ -79,7 +79,7 @@ class PDF extends FPDF {
             foreach($data AS $col => $txt) {
                 $this->page = $currpage;
                 $this->SetXY($l,$h);
-                $this->MultiCell($this->tablewidths[$col],$lineheight,$txt);
+                $this->MultiCell($this->tablewidths[$col],$lineheight,$txt, 0, 'C');
                 $l += $this->tablewidths[$col];
     
                 if(!isset($tmpheight[$row.'-'.$this->page]))

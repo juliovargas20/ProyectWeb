@@ -30,6 +30,54 @@ class OrdenesModel extends Query{
         $datos = array($id);
         return $this->save($sql, $datos);
     }
+
+    public function EliminarTodosDetalles($id)
+    {
+        $sql = "DELETE FROM detalle_ordencompra WHERE ID_USER = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function RegistrarOrdenCompra($area, $nece, $concep, $total, $blob)
+    {
+        $sql = "INSERT INTO ordencompra (`AREA`, `NECESIDAD`, `CONCEPTO`, `TOTAL`, `PDF`) VALUES (?,?,?,?,?)";
+        $sql2 = "SELECT MAX(ID) FROM ordencompra";
+        $datos = array($area, $nece, $concep, $total, $blob);
+        return $this->getIDString($sql, $datos, $sql2);
+    }
+
+    public function MaxAu1()
+    {
+        $sql = "SELECT CONCAT('OC', LPAD(IFNULL(MAX(CONVERT(SUBSTRING(ID, 3), SIGNED INTEGER)), 0) + 1, 6, '0')) AS nuevo_numero FROM OrdenCompra;";
+        return $this->select($sql);
+    }
+
+    public function ListarDatos($id)
+    {
+        $sql = "SELECT * FROM detalle_ordencompra WHERE ID_USER = $id";
+        return $this->selectAll($sql);
+    }
+
+    public function MostrarPDF($id)
+    {
+        $sql = "SELECT PDF FROM ordencompra WHERE ID = '$id'";
+        $filename = "OC20D24DF.pdf";
+        $data = $this->PDF($sql, $filename);
+        return $data;
+    }
+
+    public function ListarOrdenCompra()
+    {
+        $sql = "SELECT ID, FECHA, AREA, NECESIDAD, CONCEPTO, TOTAL FROM ordencompra";
+        return $this->selectAll($sql);
+    }
+
+    public function Verificar($id_rol, $id_permiso)
+    {
+        $sql = "SELECT d.ID_PERMISO FROM permisos p INNER JOIN detalle_permiso d ON d.ID_PERMISO = p.ID WHERE d.ID_ROL = $id_rol AND p.ID = $id_permiso";
+        return $this->select($sql);
+    }
+
 }
 
 ?>

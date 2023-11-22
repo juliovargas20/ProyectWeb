@@ -3,6 +3,8 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Ordenes Internas /</span> Orden de Compra</h4>
 
+    <button id="BtnOCModal" type="button" class="btn btn-outline-warning waves-effect">Lista de Ordenes</button>
+
     <hr>
 
     <div class="card mb-4">
@@ -11,7 +13,7 @@
             <div class="row g-3">
                 <div class="col-md-2">
                     <div class="form-floating">
-                        <input type="number" class="form-control" placeholder="Cantidad" id="CantidadOC" name="CantidadOC">
+                        <input type="text" class="form-control" placeholder="Cantidad" id="CantidadOC" name="CantidadOC" pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número válido">
                         <label for="">Cantidad</label>
                         <span class="form-floating-focused"></span>
                     </div>
@@ -38,7 +40,7 @@
                     <div class="input-group input-group-floating">
                         <span class="input-group-text">S/.</span>
                         <div class="form-floating">
-                            <input type="number" class="form-control" placeholder="Precio U." id="PrecioOC" name="PrecioOC">
+                            <input type="text" class="form-control" placeholder="Precio U." id="PrecioOC" name="PrecioOC" pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número válido">
                             <label for="">Precio U.</label>
                         </div>
                         <span class="form-floating-focused"></span>
@@ -59,7 +61,7 @@
                         <thead class="table-light">
                             <tr>
                                 <th class="text-center">Cantidad</th>
-                                <th>Descripción</th>
+                                <th style="width: 300px;">Descripción</th>
                                 <th class="text-center">Unidades</th>
                                 <th class="text-center">Precio U.</th>
                                 <th class="text-center">Sub-Total</th>
@@ -117,7 +119,7 @@
                         <label for="Concepto">Concepto</label>
                     </div>
 
-                    <button id="btnGenerarCompra" type="submit" class="btn btn-primary d-grid w-100 mb-3">
+                    <button id="btnGenerarOC" type="button" class="btn btn-primary d-grid w-100 mb-3">
                         <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="mdi mdi-send-outline scaleX-n1-rtl me-1"></i>Generar</span>
                     </button>
                 </div>
@@ -126,6 +128,33 @@
 
     </div>
 
+</div>
+
+<div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="BuscarOC">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="mb-4">Buscar Recibos</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-3 py-md-0">
+        <div class="card-datatable table-responsive">
+          <table class="invoice-list-table table" id="TblResumenOC">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">FECHA</th>
+                <th class="text-center">AREA</th>
+                <th>CONCEPTO</th>
+                <th class="text-center">MONTO</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
