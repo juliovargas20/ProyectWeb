@@ -74,9 +74,10 @@ class Ordenes extends Controller
         $nece = $_POST['Necesidad'];
         $concep = $_POST['Concepto'];
         $total = $_POST['OCTotal'];
-        $blob = $this->Recibo($area, $nece, $concep, $total);
+        $moneda = $_POST['Moneda'];
+        $blob = $this->Recibo($area, $nece, $concep, $total, $moneda);
 
-        $data = $this->model->RegistrarOrdenCompra($area, $nece, $concep, $total, $blob);
+        $data = $this->model->RegistrarOrdenCompra($area, $nece, $concep, $moneda, $total, $blob);
         if ($data != NULL) {
             $this->model->EliminarTodosDetalles($id);
             $res = array('tipo' => 'success', 'mensaje' => 'Orden Compra Realizada', 'id' => $data);
@@ -88,7 +89,7 @@ class Ordenes extends Controller
         die();
     }
 
-    public function Recibo($area, $nece, $concep, $total)
+    public function Recibo($area, $nece, $concep, $total, $moneda)
     {
         require('./include/fpdf_box.php');
 
@@ -136,7 +137,7 @@ class Ordenes extends Controller
 
         $pdf->SetFont('RubikRegular', '', 10);
         foreach ($datos as $row) {
-            $data[] = array($row['CANTIDAD'], utf8_decode($row['DESCRIPCION']), utf8_decode($row['UNIDADES']), $row['PRECIO_U'], $row['SUB_TOTAL']);
+            $data[] = array($row['CANTIDAD'], utf8_decode($row['DESCRIPCION']), utf8_decode($row['UNIDADES']), $moneda.' '.$row['PRECIO_U'],  $moneda.' '.$row['SUB_TOTAL']);
         }
 
 
@@ -148,7 +149,7 @@ class Ordenes extends Controller
         $pdf->Cell(90, 7, '', 0, 0);
         $pdf->Cell(18, 7, '', 0, 0);
         $pdf->Cell(30, 7, 'TOTAL: ', 0, 0, 'C');
-        $pdf->Cell(30, 7, 'S/.' . $total, 0, 0, 'C');
+        $pdf->Cell(30, 7, $moneda. ' ' . $total, 0, 0, 'C');
         $pdf->Ln(25);
 
         $pdf->SetFont('RubikRegular', '', 12);

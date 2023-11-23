@@ -1649,6 +1649,53 @@ class Pacientes extends Controller
         $pdf->Output('I', 'EvaluacionEstetica.pdf');
         die();
     }
+    
+    public function FichaEvaluaciónAmputación($id)
+    {
+        require('include/fpdf_temp.php');
+
+        $datos = $this->model->Mostrar($id);
+
+        $pdf = new PDF($datos['ID_PACIENTE']);
+
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("FICHA DE EVALUACIÓN AMPUTACIÓN DE PIE"), 0, 1, 'C');
+        $pdf->Ln(8);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(25, 7, utf8_decode(' PACIENTE: '), 0);
+        $pdf->Cell(80, 7, utf8_decode($datos['NOMBRES']), 1, 0, 'C');
+        $pdf->Cell(40, 7, utf8_decode(' MONTO S/.  '), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode(''), 1, 0, 'C');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 10);
+        $pdf->Cell(50, 7, utf8_decode('PESO (Kg.): _____'), 0);
+        $pdf->Cell(40, 7, utf8_decode('Selección de Prótesis: '), 0, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode('( ) Chopart'), 0, 0, 'C');
+        $pdf->Cell(30, 7, utf8_decode('( ) Linsfrac'), 0, 0, 'C');
+        $pdf->Cell(30, 7, utf8_decode('( ) Metatarsal'), 0, 0, 'C');
+        $pdf->Ln(20);
+
+        $M1 = BASE_URL . 'Assets/img/AmputadoPie.jpg';
+        $pdf->Image($M1, 30, 68, 150, 180);
+
+        $pdf->SetFont('RubikMedium', '', 10);
+        $pdf->Cell(50, 7, utf8_decode('OBSERVACIONES'), 0);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('arial', '', 10);
+        $pdf->MultiCell(60, 6, utf8_decode('_______________________________________________________________________________________'), 0);
+
+        $pdf->Output('I', utf8_decode('EvaluacionAmputación.pdf'));
+        die();
+    }
 
     /************** </EVALUACIÓN TRANSFEMORAL> **************/
 

@@ -258,7 +258,7 @@
                       <span class="h5 mb-1">Amputación de Pie</span>
                     </span>
                     <span class="custom-option-body">
-                      <span class="mb-0">Protesis Chopart, Protesis Linsfrack, Metatarsal, </span>
+                      <span class="mb-0">Protesis Chopart, Protesis Linsfrack, Metatarsal</span>
                     </span>
                   </span>
                 </span>

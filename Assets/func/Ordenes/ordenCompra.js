@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 frm.append('OCTotal', document.getElementById('OCTotal').value);
                 frm.append('Necesidad', document.getElementById('Necesidad').value);
                 frm.append('Concepto', document.getElementById('Concepto').value);
+                frm.append('Moneda', document.getElementById('Moneda').value);
                 const http = new XMLHttpRequest();
                 http.open("POST", url, true);
                 http.send(frm);
@@ -165,8 +166,8 @@ function ListarDetalles() {
                 <td class="text-center">${row["CANTIDAD"]}</td>
                 <td style="width: 300px;">${row["DESCRIPCION"]}</td>
                 <td class="text-center">${row["UNIDADES"]}</td>
-                <td class="text-center">S/. ${row["PRECIO_U"]}</td>
-                <td class="text-center">S/. ${row["SUB_TOTAL"]}</td>
+                <td class="text-center">${row["PRECIO_U"]}</td>
+                <td class="text-center"> ${row["SUB_TOTAL"]}</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-icon btn-label-danger btn-sm demo waves-effect" onclick="EliminarDetalle(${row['ID']})"><i class="mdi mdi-delete-outline"></i></button>
                 </td>
@@ -197,4 +198,20 @@ function EliminarDetalle(id) {
 function MostrarRecibo(id) {
     const url = base_url + "Ordenes/MostrarRecibo/" + id;
     window.open(url, "_blank");
+}
+
+function CambioMonedaSoles() {
+    const spans = document.querySelector("#SpanMoneda");
+    const input = document.getElementById("Moneda");
+
+    input.value = "S/.";
+    spans.innerHTML = "S/.";
+}
+
+function CambioMonedaDolares() {
+    const spans = document.querySelector("#SpanMoneda");
+    const input = document.getElementById("Moneda");
+
+    input.value = "$";
+    spans.innerHTML = "$";
 }

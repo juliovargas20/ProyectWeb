@@ -37,14 +37,11 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="input-group input-group-floating">
-                        <span class="input-group-text">S/.</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Precio U." id="PrecioOC" name="PrecioOC" pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número válido">
-                            <label for="">Precio U.</label>
-                        </div>
-                        <span class="form-floating-focused"></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Precio U." id="PrecioOC" name="PrecioOC" pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número válido">
+                        <label for="">Precio U.</label>
                     </div>
+                    <span class="form-floating-focused"></span>
                 </div>
             </div>
             <div class="pt-4">
@@ -80,7 +77,13 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="input-group input-group-merge">
-                        <span class="input-group-text">S/.</span>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><input type="text" id="Moneda" class="d-none" value="S/."> <span id="SpanMoneda">S/.</span></button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <button type="button" class="dropdown-item" onclick="CambioMonedaSoles();">S/.</button>
+                                <button type="button" class="dropdown-item" onclick="CambioMonedaDolares();">$</button>
+                            </div>
+                        </div>
                         <div class="form-floating form-floating-outline">
                             <input type="text" class="form-control" id="OCTotal" name="OCTotal" readonly placeholder="Total" required />
                             <label for="Total">Total</label>
@@ -115,7 +118,7 @@
                     </div>
                     <br>
                     <div class="form-floating form-floating-outline mb-4">
-                        <textarea class="form-control h-px-100" id="Concepto" name="Concepto"  placeholder="Concepto"></textarea>
+                        <textarea class="form-control h-px-100" id="Concepto" name="Concepto" placeholder="Concepto"></textarea>
                         <label for="Concepto">Concepto</label>
                     </div>
 
@@ -131,30 +134,30 @@
 </div>
 
 <div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="BuscarOC">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="mb-4">Buscar Recibos</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body py-3 py-md-0">
-        <div class="card-datatable table-responsive">
-          <table class="invoice-list-table table" id="TblResumenOC">
-            <thead class="table-light">
-              <tr>
-                <th class="text-center">ID</th>
-                <th class="text-center">FECHA</th>
-                <th class="text-center">AREA</th>
-                <th>CONCEPTO</th>
-                <th class="text-center">MONTO</th>
-                <th class="text-center">Acciones</th>
-              </tr>
-            </thead>
-          </table>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="mb-4">Buscar Recibos</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-3 py-md-0">
+                <div class="card-datatable table-responsive">
+                    <table class="invoice-list-table table" id="TblResumenOC">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">FECHA</th>
+                                <th class="text-center">AREA</th>
+                                <th>CONCEPTO</th>
+                                <th class="text-center">MONTO</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 
