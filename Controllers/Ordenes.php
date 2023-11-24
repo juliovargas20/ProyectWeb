@@ -187,4 +187,31 @@ class Ordenes extends Controller
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    /***** /ORDEN DE COMPRA *****/
+
+
+
+    /***** ORDEN DE TRABAJO *****/
+
+    public function trabajo()
+    {
+        if (empty($_SESSION['activo'])) {
+            header("location: " . BASE_URL);
+        }
+
+        $id_caja = $_SESSION['id'];
+        $verificar = $this->model->Verificar($id_caja, 11);
+
+        if (!empty($verificar)) {
+            $data['title'] = 'Ordenes Internas - Orden de Trabajo | KYPBioingeniería';
+            $data['activeOrdenTrabajo'] = 'active';
+            $data['scripts'] = 'Ordenes/ordenTrabajo.js';
+            $this->views->getView('Ordenes', 'trabajo', $data);
+        } else {
+            header('Location: ' . BASE_URL . 'MyError');
+        }
+    }
+
+    /***** /ORDEN DE TRABAJO *****/
 }

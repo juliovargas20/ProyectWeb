@@ -362,6 +362,7 @@ class Usuarios extends Controller
             $verCajaAdmin = $this->model->Verificar($_SESSION['id'], 8);
             $verArchivo = $this->model->Verificar($_SESSION['id'], 9);
             $verOC = $this->model->Verificar($_SESSION['id'], 10);
+            $verOT = $this->model->Verificar($_SESSION['id'], 11);
 
             $_SESSION['user'] = json_decode(json_encode($verUser), true);
             $_SESSION['ListPa'] = json_decode(json_encode($verListPa), true);
@@ -373,6 +374,7 @@ class Usuarios extends Controller
             $_SESSION['cajaadmin'] = json_decode(json_encode($verCajaAdmin), true);
             $_SESSION['archivos'] = json_decode(json_encode($verArchivo), true);
             $_SESSION['OC'] = json_decode(json_encode($verOC), true);
+            $_SESSION['OT'] = json_decode(json_encode($verOT), true);
 
             $res = array('tipo' => 'success', 'mensaje' => 'Bienvenido al Sistema');
         } else {

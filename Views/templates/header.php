@@ -163,6 +163,17 @@
 
             <?php endif; ?>
 
+            <?php if (!empty($_SESSION['OT'])) : ?>
+
+            <li class="menu-item <?php echo !empty($data['activeOrdenTrabajo']) ? $data['activeOrdenTrabajo'] : ''; ?>">
+              <a href="<?php echo BASE_URL . 'Ordenes/trabajo' ?>" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-cog-outline"></i>
+                <div data-i18n="Orden de Trabajo">Orden de Trabajo</div>
+              </a>
+            </li>
+
+            <?php endif; ?>
+
           <!-- /Ordenes Internas -->
 
           <!-- Gestion de Pacientes -->
