@@ -213,5 +213,138 @@ class Ordenes extends Controller
         }
     }
 
+    public function InsertarOrdenTrabajo()
+    {
+        $nece = $_POST['Necesidad'];
+        $re_p = $_POST['Req_P'];
+        $apro = $_POST['Aprobado'];
+        $actividad = $_POST['Actividad'];
+        $des = $_POST['Descripcion'];
+        $re_a = $_POST['Req_A'];
+        $resp = $_POST['Responsable'];
+        $tiempo = $_POST['Tiempo'];
+
+        $data = $this->model->InsertarOrdenTrabajo($nece, $re_p, $apro, $actividad, $des, $re_a, $resp, $tiempo);
+        if ($data != NULL) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Orden Trabajo Realizada', 'id' => $data);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Orden Trabajo Realizada');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function Documento($id)
+    {
+        require('include/fpdf_temp.php');
+
+        
+        $get = $this->model->getDatosOT($id);
+        $pdf = new MYPDF($id, $get['FECHA']);
+
+        $pdf->AddPage();
+
+        $pdf->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $pdf->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+        $pdf->SetFont('RubikMedium', '', 16);
+        $pdf->Cell(0, 7, utf8_decode("ORDEN DE TRABAJO"), 0, 1, 'C');
+        $pdf->Ln(10);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Nivel de Necesidad:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['NECESIDAD']), 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Requerido Por:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['RE_P']), 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Aprobado Por:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['APRO']), 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Actividad a Realizar:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['ACTIVIDAD']), 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Descripción:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->MultiCell(0, 5, utf8_decode($get['DESCRIPCION']), 0);
+        $pdf->Ln(5);
+        
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Requerido A:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['RE_A']), 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Responsable de la Ejecución:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['RESPONSABLE']), 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikMedium', '', 14);
+        $pdf->Cell(0, 7, utf8_decode("Fecha o Tiempo de ejecución:"), 0, 1);
+        $pdf->Ln(1);
+
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(0, 7, utf8_decode($get['TIEMPO']), 0, 1);
+        $pdf->Ln(20);
+
+        $pdf->SetFont('arial', '', 12);
+        $pdf->Cell(64, 7, utf8_decode("_____________________"), 0, 0, 'C');
+        $pdf->Cell(63, 7, utf8_decode("_____________________"), 0, 0, 'C');
+        $pdf->Cell(63, 7, utf8_decode("_____________________"), 0, 0, 'C');
+        $pdf->Ln(6);
+        
+        $pdf->SetFont('RubikRegular', '', 12);
+        $pdf->Cell(64, 7, utf8_decode($get['RE_P']), 0, 0, 'C');
+        $pdf->Cell(63, 7, utf8_decode("Administración"), 0, 0, 'C');
+        $pdf->Cell(63, 7, utf8_decode($get['RE_A']), 0, 0, 'C');
+
+
+        $pdf->Output('I', $get['ID'].'.pdf');
+
+    }
+
+    public function ListarOT()
+    {
+        $data = $this->model->ListadoOT();
+        for ($i=0; $i < count($data); $i++) { 
+            $data[$i]['ACCIONES'] = '
+            <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="PdfOT(\'' . $data[$i]['ID'] . '\')">
+                <i class="mdi mdi-file-document-outline">
+                </i>
+            </button>';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
     /***** /ORDEN DE TRABAJO *****/
 }

@@ -72,6 +72,26 @@ class OrdenesModel extends Query{
         return $this->selectAll($sql);
     }
 
+    public function InsertarOrdenTrabajo($nece, $re_p, $apro, $actividad, $des, $re_a, $resp, $tiempo)
+    {
+        $sql = "INSERT INTO `ordentrabajo`(`NECESIDAD`, `RE_P`, `APRO`, `ACTIVIDAD`, `DESCRIPCION`, `RE_A`, `RESPONSABLE`, `TIEMPO`) VALUES (?,?,?,?,?,?,?,?)";
+        $datos = array($nece, $re_p, $apro, $actividad, $des, $re_a, $resp, $tiempo);
+        $sql2 = "SELECT MAX(ID) FROM ordentrabajo";
+        return $this->getIDString($sql, $datos, $sql2);
+    }
+
+    public function getDatosOT($id)
+    {
+        $sql = "SELECT * FROM ordentrabajo WHERE ID = '$id'";
+        return $this->select($sql);
+    }
+
+    public function ListadoOT()
+    {
+        $sql = "SELECT * FROM ordentrabajo";
+        return $this->selectAll($sql);
+    }
+
     public function Verificar($id_rol, $id_permiso)
     {
         $sql = "SELECT d.ID_PERMISO FROM permisos p INNER JOIN detalle_permiso d ON d.ID_PERMISO = p.ID WHERE d.ID_ROL = $id_rol AND p.ID = $id_permiso";

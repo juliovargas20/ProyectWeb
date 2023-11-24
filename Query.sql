@@ -429,3 +429,38 @@ END
 $$
 DELIMITER ;
 
+
+/************** ORDEN DE TRABAJO **************/
+CREATE TABLE ordentrabajo
+(
+  ID VARCHAR(10) PRIMARY KEY,
+  FECHA DATE DEFAULT CURDATE(),
+  NECESIDAD VARCHAR(50),
+  RE_P VARCHAR(50),
+  APRO VARCHAR(100),
+  ACTIVIDAD VARCHAR(100),
+  DESCRIPCION TEXT,
+  RE_A VARCHAR(50),
+  RESPONSABLE VARCHAR(100),
+  TIEMPO DATE
+);
+
+CREATE TRIGGER before_insert_orden_trabajo
+BEFORE INSERT ON ordentrabajo
+FOR EACH ROW
+BEGIN
+ DECLARE nuevo_numero INT;
+
+    -- Obtener el último número de factura
+    SELECT IFNULL(MAX(CONVERT(SUBSTRING(ID, 3), SIGNED INTEGER)), 0) INTO nuevo_numero
+    FROM ordentrabajo;
+
+    -- Incrementar el número
+    SET nuevo_numero = nuevo_numero + 1;
+
+    -- Formatear el nuevo número con ceros a la izquierda y asignar a la columna ID
+    SET NEW.ID = CONCAT('OT', LPAD(nuevo_numero, 6, '0'));
+    
+END 
+$$
+DELIMITER ;

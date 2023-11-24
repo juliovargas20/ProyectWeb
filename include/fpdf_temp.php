@@ -129,3 +129,41 @@ class PDF extends FPDF
         $this->SetTextColor(0);
     }
 }
+
+class MYPDF extends FPDF
+{
+    private $id;
+    private $fecha;
+
+    public function __construct($id, $fecha)
+    {
+        parent::__construct();
+        $this->id = $id;
+        $this->fecha = $fecha;
+    }
+
+    public function Header()
+    {
+
+        $this->AddFont('RubikMedium', '', 'Rubik-Medium.php');
+        $this->AddFont('RubikRegular', '', 'Rubik-Regular.php');
+
+
+        $this->SetFont('arial', 'IB', 12);
+        $this->SetX(150);
+        $this->Cell(50, 5, 'Front Desk', 0, 0,  'R');
+        $this->Ln(5);
+
+        $this->SetFont('RubikRegular', '', 12);
+        $this->SetX(150);
+        $this->Cell(50, 5, 'Fecha: ' . $this->fecha, 0, 0,  'R');
+        $this->Ln(5);
+
+        $this->SetFont('RubikMedium', '', 12);
+        $this->SetX(150);
+        $this->Cell(50, 5, utf8_decode('N°: #' . $this->id), 0, 0, 'R');
+
+        $this->Image(BASE_URL . 'Assets/img/encabezado.png', 10, 8, 38, 15, 'png');
+        $this->Ln(15);
+    }
+}
