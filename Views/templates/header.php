@@ -148,22 +148,11 @@
 
           <!-- Ordenes Internas -->
 
-          <?php if (!empty($_SESSION['OC'])) : ?>
+          <li class="menu-header fw-light mt-4">
+            <span class="menu-header-text">Ordenes Internas</span>
+          </li>
 
-            <li class="menu-header fw-light mt-4">
-              <span class="menu-header-text">Ordenes Internas</span>
-            </li>
-
-            <li class="menu-item <?php echo !empty($data['activeOrdenCompra']) ? $data['activeOrdenCompra'] : ''; ?>">
-              <a href="<?php echo BASE_URL . 'Ordenes/compra' ?>" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-cash"></i>
-                <div data-i18n="Orden de Compra">Orden de Compra</div>
-              </a>
-            </li>
-
-            <?php endif; ?>
-
-            <?php if (!empty($_SESSION['OT'])) : ?>
+          <?php if (!empty($_SESSION['OT'])) : ?>
 
             <li class="menu-item <?php echo !empty($data['activeOrdenTrabajo']) ? $data['activeOrdenTrabajo'] : ''; ?>">
               <a href="<?php echo BASE_URL . 'Ordenes/trabajo' ?>" class="menu-link">
@@ -172,7 +161,7 @@
               </a>
             </li>
 
-            <?php endif; ?>
+          <?php endif; ?>
 
           <!-- /Ordenes Internas -->
 
@@ -254,6 +243,35 @@
           <?php endif; ?>
 
           <!-- /Gestion de Pacientes -->
+
+
+          <!-- LOGÍSTICA -->
+
+          <?php if (!empty($_SESSION['OC'])) : ?>
+
+            <li class="menu-header fw-light mt-4">
+              <span class="menu-header-text">Logística</span>
+            </li>
+
+            <li class="menu-item <?php echo !empty($data['activeOrdenCompra']) ? $data['activeOrdenCompra'] : ''; ?>">
+              <a href="<?php echo BASE_URL . 'Ordenes/compra' ?>" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-cash"></i>
+                <div data-i18n="Orden de Compra">Orden de Compra</div>
+              </a>
+            </li>
+
+          <?php endif; ?>
+
+          <li class="menu-item">
+            <a href="<?php echo BASE_URL . 'Ordenes/trabajo' ?>" class="menu-link">
+              <i class="menu-icon tf-icons mdi mdi-truck-outline"></i>
+              <div data-i18n="Orden Importanción">Orden Importanción</div>
+            </a>
+          </li>
+
+          <!-- /LOGÍSTICA -->
+
+
 
           <?php if (!empty($_SESSION['citas'])) : ?>
             <!-- Visitas Médicas -->
