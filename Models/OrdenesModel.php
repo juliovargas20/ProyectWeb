@@ -38,11 +38,11 @@ class OrdenesModel extends Query{
         return $this->save($sql, $datos);
     }
 
-    public function RegistrarOrdenCompra($area, $nece, $concep, $moneda, $total, $blob)
+    public function RegistrarOrdenCompra($area, $nece, $concep, $moneda, $total, $blob, $forma)
     {
-        $sql = "INSERT INTO ordencompra (`AREA`, `NECESIDAD`, `CONCEPTO`, `MONEDA`, `TOTAL`, `PDF`) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO ordencompra (`AREA`, `NECESIDAD`, `CONCEPTO`, `MONEDA`, `TOTAL`, `PDF`, `FORMAPAGO`) VALUES (?,?,?,?,?,?,?)";
         $sql2 = "SELECT MAX(ID) FROM ordencompra";
-        $datos = array($area, $nece, $concep, $moneda, $total, $blob);
+        $datos = array($area, $nece, $concep, $moneda, $total, $blob, $forma);
         return $this->getIDString($sql, $datos, $sql2);
     }
 

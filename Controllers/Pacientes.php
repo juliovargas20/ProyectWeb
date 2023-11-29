@@ -344,7 +344,7 @@ class Pacientes extends Controller
 
         $pdf->SetFont('RubikMedium', '', 16);
         $pdf->Cell(0, 7, "FICHA DE REGISTRO PARA LOS PACIENTES", 0, 1, 'C');
-        $pdf->Ln(15);
+        $pdf->Ln(5);
 
         $pdf->SetFont('RubikMedium', '', 12);
         $pdf->SetFillColor(200, 220, 255);
@@ -410,17 +410,56 @@ class Pacientes extends Controller
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(70, 7, utf8_decode('MOTIVO DE AMPUTACIÓN'), 1, 0, 'L');
         $pdf->Cell(0, 7, utf8_decode($datos['MOTIVO']), 1, 0, 'C');
-        $pdf->Ln(15);
+        $pdf->Ln(12);
 
         if (!empty($datos['OBSERVACION'])) {
             $pdf->SetFont('RubikMedium', '', 12);
             $pdf->SetFillColor(200, 220, 255);
             $pdf->Cell(0, 9, utf8_decode('Observaciones'), 0, 0, 'L', true);
-            $pdf->Ln(14);
+            $pdf->Ln(12);
 
             $pdf->MultiCell(0, 7, utf8_decode($datos['OBSERVACION']), 0);
+            $pdf->Ln(5);
         }
 
+        $pdf->SetFont('RubikMedium', '', 12);
+        $pdf->Cell(0, 7, utf8_decode('Check List'), 0, 0, 'L', true);
+        $pdf->Ln(12);
+
+        $pdf->SetFont('RubikRegular', '', 10);
+        $pdf->Cell(55, 7, utf8_decode('Ficha de registro'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Cell(20, 7, utf8_decode(''), 0, 0);
+        $pdf->Cell(55, 7, utf8_decode('Consentimiendo Informado 2'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Ln(7);
+        $pdf->Cell(55, 7, utf8_decode('DNI'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Cell(20, 7, utf8_decode(''), 0, 0);
+        $pdf->Cell(55, 7, utf8_decode('Carta Entrega Fibra de Prueba'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Ln(7);
+        $pdf->Cell(55, 7, utf8_decode('Consentimiento Informado'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Cell(20, 7, utf8_decode(''), 0, 0);
+        $pdf->Cell(55, 7, utf8_decode('Carta Entrega Fibra de Carbono'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Ln(7);
+        $pdf->Cell(55, 7, utf8_decode('Cotización'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Cell(20, 7, utf8_decode(''), 0, 0);
+        $pdf->Cell(55, 7, utf8_decode('Consentimiento Uso de Imagen'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Ln(7);
+        $pdf->Cell(55, 7, utf8_decode('Contrato'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Cell(20, 7, utf8_decode(''), 0, 0);
+        $pdf->Cell(55, 7, utf8_decode('Comprobantes de Pago'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+        $pdf->Ln(7);
+        $pdf->Cell(55, 7, utf8_decode('Orden de Pedido'), 1, 0, 'L');
+        $pdf->Cell(30, 7, utf8_decode(''), 1, 0);
+    
         $pdf->AddPage();
 
 
@@ -538,7 +577,7 @@ class Pacientes extends Controller
         $obs = $_POST['Obs'];
         $blob = $this->PDFPago($id_pa);
 
-        $data = $this->model->RealizarPago($id_pa, $tip, $pago, $total, $obs, $blob);
+        $data = $this->model->RealizarPago($id_pa, $tip, $pago, $total, $obs, $blob, $id_user);
         if ($data > 0) {
             $this->model->EliminarTodosDetalles($id_user, $id_pa);
             $res = array('tipo' => 'success', 'mensaje' => 'Pago Realizado', 'id' => $data);
@@ -1683,8 +1722,8 @@ class Pacientes extends Controller
         $pdf->Cell(30, 7, utf8_decode('( ) Metatarsal'), 0, 0, 'C');
         $pdf->Ln(20);
 
-        $M1 = BASE_URL . 'Assets/img/AmputadoPie.jpg';
-        $pdf->Image($M1, 30, 68, 150, 180);
+        $M1 = BASE_URL . 'Assets/img/AmputadoPie.png';
+        $pdf->Image($M1, 0, 0, 210, 297);
 
         $pdf->SetFont('RubikMedium', '', 10);
         $pdf->Cell(50, 7, utf8_decode('OBSERVACIONES'), 0);

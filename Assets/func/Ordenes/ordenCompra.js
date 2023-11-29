@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 frm.append('OCTotal', document.getElementById('OCTotal').value);
                 frm.append('Necesidad', document.getElementById('Necesidad').value);
                 frm.append('Concepto', document.getElementById('Concepto').value);
+                frm.append('FormaPago', document.getElementById('FormaPago').value);
                 frm.append('Moneda', document.getElementById('Moneda').value);
                 const http = new XMLHttpRequest();
                 http.open("POST", url, true);

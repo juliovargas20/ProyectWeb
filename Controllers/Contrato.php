@@ -125,6 +125,7 @@ class Contrato extends Controller
 
         $pdf = new PDF($datos['ID_PACIENTE']);
 
+        $pdf->SetLeftMargin(25.4);
         $pdf->AddPage();
         $pdf->AliasNbPages();
 
@@ -294,17 +295,17 @@ class Contrato extends Controller
 
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, '---------------------------------', 0, 0, 'L');
-        $pdf->Cell(100, 7, '---------------------------------', 0, 0, 'R');
+        $pdf->Cell(0, 7, '---------------------------------', 0, 0, 'R');
         $pdf->Ln(5);
 
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, utf8_decode('Área Administrativa'), 0, 0, 'L');
-        $pdf->Cell(100, 7, utf8_decode($datos['NOMBRES']), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 0, 0, 'R');
         $pdf->Ln(5);
 
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, '', 0, 0, 'L');
-        $pdf->Cell(100, 7, utf8_decode('DNI: ' . $datos['DNI']), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode('DNI: ' . $datos['DNI']), 0, 0, 'R');
         $pdf->Ln(7);
 
         if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
@@ -330,6 +331,43 @@ class Contrato extends Controller
                 $pdf->Ln(6);
             }
             $pdf->Ln(8);
+        }
+
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+            $pdf->AddPage();
+
+            $pdf->SetFont('RubikMedium', '', 14);
+            $pdf->Cell(0, 7, utf8_decode("Consentimiento Informado para Inicio de Protetización"), 0, 1, 'C', false);
+            $pdf->Ln(8);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Yo, ' . $datos['NOMBRES'] . ', identificado con DNI ' . $datos['DNI'] . ' en pleno uso de mis facultades mentales y entendiendo plenamente la naturaleza de este consentimiento, otorgo mi consentimiento informado para que el personal profesional capacitado de la empresa KYP BIO INGEN S.A.C realicen el contacto físico necesario durante el tratamiento y cuidado de mi condición de amputación.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Entiendo y acepto que el contacto físico puede ser necesario para realizar una evaluación adecuada, proporcionar tratamiento PROTÉSICO, llevar a cabo procedimientos terapéuticos y mejorar mi bienestar general como persona amputada. Comprendo que el contacto físico puede incluir, pero no se limita a, la inspección visual, la palpación, la movilización de extremidades y la aplicación de dispositivos médicos y ortopédicos.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Además, se me ha proporcionado información detallada sobre los procedimientos específicos que implicarán contacto físico, así como los riesgos y beneficios asociados. Así mismo me explicaron el uso de la media compresiva (LINNER), su limpieza, manera de colocarla y que el material del cual está fabricado es silicona americana hipoalergénica y si podría producir algún tipo de enrojecimiento es por el tipo de piel que el usuario presenta (sensibilidad, alergia u otro factor) y es de mi completa responsabilidad.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Entiendo el hecho de que mi muñón varíe de volumen teniendo en cuenta, el peso, la alimentación, enfermedades de base, etc. que requerirán cambios de socket. Asimismo, al momento de tener el SOCKET EN FIBRA DE CARBONO FINAL si necesita cambios o uno nuevo DEBERÉ ASUMIR EL COSTO DE ESTE TANTO COMO DE UN NUEVO LINNER SI FUERA NECESARIO. He tenido la oportunidad de hacer preguntas y todas ellas han sido respondidas satisfactoriamente.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('También entiendo que tengo el derecho de retirar mi consentimiento en cualquier aspecto de mi tratamiento o cuidado y mi compromiso al asistir puntualmente y con disponibilidad de tiempo a las citas acordadas; de no ser así comunicarme con antelación de mínimo 1 hora para reprogramar dicha cita.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Declaro que este consentimiento ha sido otorgado de manera voluntaria y sin ninguna forma de coerción o presión. Soy plenamente consciente de las implicaciones y consecuencias del contacto físico y autorizo a los profesionales capacitados de la empresa KYP BIO INGEN S.A.C a llevar a cabo dichos procedimientos en mi persona. Además, doy mi consentimiento para que se documente y almacene de manera segura cualquier información relacionada con el contacto físico en mi historial médico.'), 0);
+            $pdf->Ln(15);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->Cell(0, 5, 'Firma del Paciente/Representante Legal');
+            $pdf->Ln(5);
+            $pdf->Cell(0, 5, 'Fecha:');
         }
 
 
@@ -375,6 +413,7 @@ class Contrato extends Controller
 
         $pdf = new PDF($datos['ID_PACIENTE']);
 
+        $pdf->SetLeftMargin(25.4);
         $pdf->AddPage();
         $pdf->AliasNbPages();
 
@@ -549,12 +588,12 @@ class Contrato extends Controller
 
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, utf8_decode('Área Administrativa'), 0, 0, 'L');
-        $pdf->Cell(100, 7, utf8_decode($datos['NOMBRES']), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode($datos['NOMBRES']), 0, 0, 'R');
         $pdf->Ln(5);
 
         $pdf->SetFont('RubikRegular', '', 12);
         $pdf->Cell(90, 7, '', 0, 0, 'L');
-        $pdf->Cell(100, 7, utf8_decode('DNI: ' . $datos['DNI']), 0, 0, 'R');
+        $pdf->Cell(0, 7, utf8_decode('DNI: ' . $datos['DNI']), 0, 0, 'R');
         $pdf->Ln(7);
 
         if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
@@ -580,6 +619,43 @@ class Contrato extends Controller
                 $pdf->Ln(6);
             }
             $pdf->Ln(8);
+        }
+
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+            $pdf->AddPage();
+
+            $pdf->SetFont('RubikMedium', '', 14);
+            $pdf->Cell(0, 7, utf8_decode("Consentimiento Informado para Inicio de Protetización"), 0, 1, 'C', false);
+            $pdf->Ln(8);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Yo, ' . $datos['NOMBRES'] . ', identificado con DNI ' . $datos['DNI'] . ' en pleno uso de mis facultades mentales y entendiendo plenamente la naturaleza de este consentimiento, otorgo mi consentimiento informado para que el personal profesional capacitado de la empresa KYP BIO INGEN S.A.C realicen el contacto físico necesario durante el tratamiento y cuidado de mi condición de amputación.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Entiendo y acepto que el contacto físico puede ser necesario para realizar una evaluación adecuada, proporcionar tratamiento PROTÉSICO, llevar a cabo procedimientos terapéuticos y mejorar mi bienestar general como persona amputada. Comprendo que el contacto físico puede incluir, pero no se limita a, la inspección visual, la palpación, la movilización de extremidades y la aplicación de dispositivos médicos y ortopédicos.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Además, se me ha proporcionado información detallada sobre los procedimientos específicos que implicarán contacto físico, así como los riesgos y beneficios asociados. Así mismo me explicaron el uso de la media compresiva (LINNER), su limpieza, manera de colocarla y que el material del cual está fabricado es silicona americana hipoalergénica y si podría producir algún tipo de enrojecimiento es por el tipo de piel que el usuario presenta (sensibilidad, alergia u otro factor) y es de mi completa responsabilidad.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Entiendo el hecho de que mi muñón varíe de volumen teniendo en cuenta, el peso, la alimentación, enfermedades de base, etc. que requerirán cambios de socket. Asimismo, al momento de tener el SOCKET EN FIBRA DE CARBONO FINAL si necesita cambios o uno nuevo DEBERÉ ASUMIR EL COSTO DE ESTE TANTO COMO DE UN NUEVO LINNER SI FUERA NECESARIO. He tenido la oportunidad de hacer preguntas y todas ellas han sido respondidas satisfactoriamente.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('También entiendo que tengo el derecho de retirar mi consentimiento en cualquier aspecto de mi tratamiento o cuidado y mi compromiso al asistir puntualmente y con disponibilidad de tiempo a las citas acordadas; de no ser así comunicarme con antelación de mínimo 1 hora para reprogramar dicha cita.'), 0);
+            $pdf->Ln(6);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->MultiCell(0, 5, utf8_decode('Declaro que este consentimiento ha sido otorgado de manera voluntaria y sin ninguna forma de coerción o presión. Soy plenamente consciente de las implicaciones y consecuencias del contacto físico y autorizo a los profesionales capacitados de la empresa KYP BIO INGEN S.A.C a llevar a cabo dichos procedimientos en mi persona. Además, doy mi consentimiento para que se documente y almacene de manera segura cualquier información relacionada con el contacto físico en mi historial médico.'), 0);
+            $pdf->Ln(15);
+
+            $pdf->SetFont('RubikRegular', '', 12);
+            $pdf->Cell(0, 5, 'Firma del Paciente/Representante Legal');
+            $pdf->Ln(5);
+            $pdf->Cell(0, 5, 'Fecha:');
         }
 
 
@@ -973,5 +1049,4 @@ class Contrato extends Controller
             echo "Error: {$mail->ErrorInfo}";
         }
     }
-
 }

@@ -75,6 +75,7 @@
 <!-- Main JS -->
 <script src="<?php echo BASE_URL . 'Assets/js/main.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/js/cards-statistics.js'; ?>"></script>
+<script src="<?php echo BASE_URL . 'Assets/vendor/libs/jquery-repeater/jquery-repeater.js'; ?>"></script>
 <!-- Page JS -->
 <script src="<?php echo BASE_URL . 'Assets/func/alert.js'; ?>"></script>
 

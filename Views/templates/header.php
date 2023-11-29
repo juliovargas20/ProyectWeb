@@ -262,8 +262,8 @@
 
           <?php endif; ?>
 
-          <li class="menu-item">
-            <a href="<?php echo BASE_URL . 'Ordenes/trabajo' ?>" class="menu-link">
+          <li class="menu-item <?php echo !empty($data['activeImport']) ? $data['activeImport'] : ''; ?>">
+            <a href="<?php echo BASE_URL . 'Logistica/importaciones' ?>" class="menu-link">
               <i class="menu-icon tf-icons mdi mdi-truck-outline"></i>
               <div data-i18n="Orden Importanción">Orden Importanción</div>
             </a>

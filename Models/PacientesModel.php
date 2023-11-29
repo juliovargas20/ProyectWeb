@@ -126,10 +126,10 @@ class PacientesModel extends Query{
         return $this->save($sql, $datos);
     }
 
-    public function RealizarPago($id, $tip, $pago, $total, $obs, $blob)
+    public function RealizarPago($id, $tip, $pago, $total, $obs, $blob, $id_user)
     {
-        $sql = "INSERT INTO pagos (ID_PACIENTE, TIP_PAGO, PAGO, TOTAL, OBSERVACION, PDF) VALUES (?,?,?,?,?,?)";
-        $datos = array($id, $tip, $pago, $total, $obs, $blob);
+        $sql = "INSERT INTO pagos (ID_PACIENTE, TIP_PAGO, PAGO, TOTAL, OBSERVACION, PDF, ID_USER) VALUES (?,?,?,?,?,?,?)";
+        $datos = array($id, $tip, $pago, $total, $obs, $blob, $id_user);
         return $this->insertar($sql, $datos);
     }
 
@@ -149,7 +149,7 @@ class PacientesModel extends Query{
 
     public function ListarRecibos()
     {
-        $sql = "SELECT p.ID, p.FECHA, p.ID_PACIENTE, p.TIP_PAGO, p.PAGO, p.TOTAL, r.NOMBRES FROM pagos p INNER JOIN registro r ON p.ID_PACIENTE = r.ID_PACIENTE";
+        $sql = "SELECT p.ID, p.FECHA, p.ID_PACIENTE, p.TIP_PAGO, p.PAGO, p.TOTAL, r.NOMBRES, u.NOMBRES AS USUARIO FROM pagos p INNER JOIN registro r ON p.ID_PACIENTE = r.ID_PACIENTE INNER JOIN usuarios u ON p.ID_USER = u.ID";
         return $this->selectAll($sql);
     }
 

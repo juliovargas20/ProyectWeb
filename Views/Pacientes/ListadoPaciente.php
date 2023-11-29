@@ -249,7 +249,7 @@
           </div>
           <div class="col-6 mb-3">
             <div class="form-check custom-option custom-option-basic custom-option-label">
-              <label class="form-check-label custom-option-content ps-4 py-3" for="">
+              <label class="form-check-label custom-option-content ps-4 py-3" for="" onclick="EvaluacionPie();">
                 <input name="customRadioTemp" class="form-check-input d-none" type="radio" value="" id="customRadioTemp1" />
                 <span class="d-flex align-items-center">
                   <i class="mdi mdi-wheelchair-accessibility mdi-36px me-3"></i>
@@ -324,6 +324,7 @@
                 <th class="text-center">Tipo de Pago</th>
                 <th class="text-center">Pago</th>
                 <th class="text-center">Monto</th>
+                <th class="text-center">Encargado</th>
                 <th class="text-center">Acciones</th>
               </tr>
             </thead>

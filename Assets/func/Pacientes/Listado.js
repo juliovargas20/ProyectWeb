@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "TIP_PAGO", className: "text-center" },
       { data: "PAGO", className: "text-center" },
       { data: "TOTAL", className: "text-center" },
+      { data: "USUARIO", className: "text-center" },
       { data: "ACCIONES", className: "text-center" },
     ],
     language: {
@@ -381,6 +382,12 @@ function EvaluacionManoParcial() {
 function EvaluacionTransradial() {
   const id = document.querySelector("#IDTip").value;
   const url = base_url + "Pacientes/FichaEvaluacionTransradial/" + id;
+  window.open(url, "_blank");
+}
+
+function EvaluacionPie() {
+  const id = document.querySelector("#IDTipI").value;
+  const url = base_url + "Pacientes/FichaEvaluaciónAmputación/" + id;
   window.open(url, "_blank");
 }
 

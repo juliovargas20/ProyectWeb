@@ -73,11 +73,12 @@ class Ordenes extends Controller
         $area = $_POST['Area'];
         $nece = $_POST['Necesidad'];
         $concep = $_POST['Concepto'];
+        $FormaPago = $_POST['FormaPago'];
         $total = $_POST['OCTotal'];
         $moneda = $_POST['Moneda'];
-        $blob = $this->Recibo($area, $nece, $concep, $total, $moneda);
+        $blob = $this->Recibo($area, $nece, $concep, $total, $moneda, $FormaPago);
 
-        $data = $this->model->RegistrarOrdenCompra($area, $nece, $concep, $moneda, $total, $blob);
+        $data = $this->model->RegistrarOrdenCompra($area, $nece, $concep, $moneda, $total, $blob, $FormaPago);
         if ($data != NULL) {
             $this->model->EliminarTodosDetalles($id);
             $res = array('tipo' => 'success', 'mensaje' => 'Orden Compra Realizada', 'id' => $data);
@@ -89,7 +90,7 @@ class Ordenes extends Controller
         die();
     }
 
-    public function Recibo($area, $nece, $concep, $total, $moneda)
+    public function Recibo($area, $nece, $concep, $total, $moneda, $FormaPago)
     {
         require('./include/fpdf_box.php');
 
@@ -117,6 +118,8 @@ class Ordenes extends Controller
         $pdf->Cell(0, 7, utf8_decode('Fecha: ' . date('Y-m-d')), 0, 0, 'R');
         $pdf->Ln(7);
         $pdf->Cell(0, 7, utf8_decode('Concepto: ' . $concep), 0, 0);
+        $pdf->Ln(7);
+        $pdf->Cell(0, 7, utf8_decode('Forma de Pago: ' . $FormaPago), 0, 0);
         $pdf->Ln(15);
 
         $pdf->Image(BASE_URL . 'Assets/img/encabezado.png', 163, 6, 35, 13, 'png');

@@ -1,7 +1,7 @@
 <?php include "Views/templates/header.php"; ?>
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Ordenes Internas /</span> Orden de Compra</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Logística /</span> Orden de Compra</h4>
 
     <button id="BtnOCModal" type="button" class="btn btn-outline-warning waves-effect">Lista de Ordenes</button>
 
@@ -115,6 +115,15 @@
                             <option value="Pendiente">Pendiente</option>
                         </select>
                         <label for="Necesidad">Necesidad</label>
+                    </div>
+                    <br>
+                    <div class="form-floating form-floating-outline">
+                        <select class="form-select" name="FormaPago" id="FormaPago">
+                            <option value="Contado">Contado</option>
+                            <option value="Crédito">Crédito</option>
+                            <option value="Contraentrega">Contraentrega</option>
+                        </select>
+                        <label for="FormaPago">Forma de Pago</label>
                     </div>
                     <br>
                     <div class="form-floating form-floating-outline mb-4">
