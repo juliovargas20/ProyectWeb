@@ -6,7 +6,8 @@
     <div class="col-12 mb-3">
         <div class="card">
             <div class="card-body">
-                <form class="row g-3">
+                <form class="row g-3" id="FrmProve">
+                    <input type="hidden" id="ID_Provee" name="ID_Provee">
                     <div class="col-4">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="mdi mdi-account-hard-hat me-sm-1"></i></span>
@@ -109,11 +110,25 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    <div class="col-4">
+                        <div class="input-group input-group-merge">
+                            <select name="Moneda" id="Moneda" class="form-select">
+                                <option value="" disabled selected>---------</option>
+                                <option value="S/.">S/.</option>
+                                <option value="$">$</option>
+                                <option value="€">€</option>
+                            </select>
+                            <div class="form-floating form-floating-outline">
+                                <input name="Precio" id="Precio" type="text" class="form-control" placeholder="Precio" aria-label="Amount (to the nearest dollar)" />
+                                <label for="Precio">Precio</label>
+                            </div>
+                        </div>
                     </div>
 
-
+                    <div class="demo-inline-spacing">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button id="btnLimpiar" type="button" class="btn btn-primary">Limpiar</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -131,10 +146,11 @@
                                 <th class="text-center">Proveedor</th>
                                 <th class="text-center">País</th>
                                 <th class="text-center">Vendedor</th>
+                                <th class="text-center">Precio</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0" id="">
+                        <tbody class="table-border-bottom-0" id="BodyProo">
 
                         </tbody>
                     </table>
