@@ -31,6 +31,19 @@ class LogisticaModel extends Query{
         return $this->save($sql, $datos);
     }
 
+    public function Eliminar($id)
+    {
+        $sql = "DELETE FROM detalle_proveedor WHERE ID = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function getDatos($id)
+    {
+        $sql = "SELECT * FROM detalle_proveedor WHERE ID_USER = $id";
+        return $this->selectAll($sql);
+    }
+
 }
 
 ?>

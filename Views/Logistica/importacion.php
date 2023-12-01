@@ -116,7 +116,6 @@
                                 <option value="" disabled selected>---------</option>
                                 <option value="S/.">S/.</option>
                                 <option value="$">$</option>
-                                <option value="€">€</option>
                             </select>
                             <div class="form-floating form-floating-outline">
                                 <input name="Precio" id="Precio" type="text" class="form-control" placeholder="Precio" aria-label="Amount (to the nearest dollar)" />

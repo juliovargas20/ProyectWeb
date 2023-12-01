@@ -1,4 +1,4 @@
-const btnClean = document.querySelector("#btnLimpiar"); 
+const btnClean = document.querySelector("#btnLimpiar");
 const Frm = document.querySelector("#FrmProve");
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     btnClean.addEventListener("click", function (e) {
-       e.preventDefault();
-       Frm.reset();
+        e.preventDefault();
+        Frm.reset();
     });
 
     Listar();
@@ -56,7 +56,7 @@ function Listar() {
                         <td class="text-center"> ${row["VENDEDOR"]}</td>
                         <td class="text-center">${row["MONEDA"]} ${row["PRECIO"]}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-icon btn-label-danger btn-sm demo waves-effect" ><i class="mdi mdi-delete-outline"></i></button>
+                            <button type="button" class="btn btn-icon btn-label-danger btn-sm demo waves-effect" onclick="Eliminar(${row['ID']})"><i class="mdi mdi-delete-outline"></i></button>
 
                             <button type="button" class="btn btn-icon btn-label-warning btn-sm demo waves-effect" onclick="Mostrar(${row['ID']})"><i class="mdi mdi-circle-edit-outline"></i></button>
                         </td>
@@ -92,4 +92,32 @@ function Mostrar(id) {
             Frm.Moneda.value = res.MONEDA;
         }
     };
+}
+
+function Eliminar(id) {
+    Swal.fire({
+        title: '¿Esta Seguro?',
+        text: 'La importación agregada se eliminará',
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: 'Sí, Eliminar',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + 'Logistica/Eliminar/' + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    AlertaPerzonalizada(res.tipo, res.mensaje);
+                    if (res.tipo == 'success') {
+                        Listar();
+                    }
+                }
+            };
+        }
+    });
 }
