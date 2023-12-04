@@ -363,6 +363,7 @@ class Usuarios extends Controller
             $verArchivo = $this->model->Verificar($_SESSION['id'], 9);
             $verOC = $this->model->Verificar($_SESSION['id'], 10);
             $verOT = $this->model->Verificar($_SESSION['id'], 11);
+            $consen = $this->model->Verificar($_SESSION['id'], 12);
 
             $_SESSION['user'] = json_decode(json_encode($verUser), true);
             $_SESSION['ListPa'] = json_decode(json_encode($verListPa), true);
@@ -375,6 +376,7 @@ class Usuarios extends Controller
             $_SESSION['archivos'] = json_decode(json_encode($verArchivo), true);
             $_SESSION['OC'] = json_decode(json_encode($verOC), true);
             $_SESSION['OT'] = json_decode(json_encode($verOT), true);
+            $_SESSION['CONSEN'] = json_decode(json_encode($consen), true);
 
             $res = array('tipo' => 'success', 'mensaje' => 'Bienvenido al Sistema');
         } else {

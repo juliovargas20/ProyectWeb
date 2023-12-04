@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.location.href = base_url + "Pacientes";
             }
         });
-    })
+    });
 
 });
 

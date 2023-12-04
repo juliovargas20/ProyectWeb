@@ -242,12 +242,16 @@
 
           <?php endif; ?>
 
-          <li class="menu-item <?php echo !empty($data['activeArchivo']) ? $data['activeArchivo'] : ''; ?>">
-              <a href="<?php echo BASE_URL . 'Archivos/Listado' ?>" class="menu-link">
+          <?php if (!empty($_SESSION['CONSEN'])) : ?>
+
+          <li class="menu-item <?php echo !empty($data['activeConsen']) ? $data['activeConsen'] : ''; ?>">
+              <a href="<?php echo BASE_URL . 'Consentimiento/consen' ?>" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-email-newsletter"></i>
                 <div data-i18n="Carta Consentimiento">Carta Consentimiento</div>
               </a>
             </li>
+
+          <?php endif; ?>
 
           <!-- /Gestion de Pacientes -->
 
