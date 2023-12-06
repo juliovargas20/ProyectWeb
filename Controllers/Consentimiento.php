@@ -38,6 +38,28 @@ class Consentimiento extends Controller
                         </i>
                     </button>
                 ';
+            } else {
+                $data[$i]['ACCIONES'] = '
+                <div class="d-inline-block">
+                    <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="mdi mdi-dots-vertical"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end m-0">
+                        <a href="javascript:;" class="dropdown-item" onclick="CartaSP('.$data[$i]['ID'].')">
+                            <i class="mdi mdi-file-document me-1"></i> 
+                            Provicional
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="CartaSF('.$data[$i]['ID'].')">
+                            <i class="mdi mdi-file-document me-1"></i> 
+                            Final
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="CartaImagen('.$data[$i]['ID'].')">
+                            <i class="mdi mdi-image me-1"></i> 
+                            Imagen
+                        </a>
+                    </div>
+                </div>
+                ';
             }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -67,11 +89,13 @@ class Consentimiento extends Controller
     public function RegistrarDatos()
     {
         $id_paciente = $_POST['id_paciente'];
+        $id_contrato = $_POST['id_contrato'];
         $tip = $_POST['tip_trab'];
         $sub = $_POST['sub_trab'];
 
-        $data = $this->model->RegistrarDatos($id_paciente, $tip, $sub);
+        $data = $this->model->RegistrarDatos($id_contrato, $id_paciente, $tip, $sub);
         if ($data > 0) {
+            $this->model->UpdateConsen($id_contrato);
             $res = array('tipo' => 'success', 'mensaje' => 'Datos Registrado', 'id' => $data);
         } else {
             $res = array('tipo' => 'error', 'mensaje' => 'Error al Datos Contrato');
@@ -100,14 +124,16 @@ class Consentimiento extends Controller
         die();
     }
 
-    public function CartaSP()
+    public function CartaSP($id)
     {
         require('Assets/vendor/libs/fpdf/fpdf.php');
 
         $pdf = new FPDF();
 
-        $get = $this->model->getDatosCarta(2);
-        $lista = $this->model->getLista(2);
+        $get_id = $this->model->getIDPA($id);
+
+        $get = $this->model->getDatosCarta($get_id['ID']);
+        $lista = $this->model->getLista($get_id['ID']);
 
         $pdf->AddPage();
         $pdf->SetLeftMargin(22.4);
@@ -199,21 +225,23 @@ class Consentimiento extends Controller
         $pdf->SetFont('RubikRegular', '', 11);
         $pdf->Cell(85, 5, utf8_decode($get['NOMBRES']), 0, 0);
         $pdf->Cell(80, 5, utf8_decode('ADMINISTRACIÓN'), 0, 1, 'C');
-        $pdf->Cell(85, 5, utf8_decode('DNI '.$get['DNI']), 0, 1);
+        $pdf->Cell(85, 5, utf8_decode('DNI ' . $get['DNI']), 0, 1);
         $pdf->Cell(85, 5, utf8_decode('Cliente'), 0, 1);
         $pdf->Ln(20);
 
         $pdf->Output('I', 'SocketProvisional.pdf');
     }
 
-    public function CartaSF()
+    public function CartaSF($id)
     {
         require('Assets/vendor/libs/fpdf/fpdf.php');
 
         $pdf = new FPDF();
 
-        $get = $this->model->getDatosCarta(2);
-        $lista = $this->model->getLista(2);
+        $get_id = $this->model->getIDPA($id);
+
+        $get = $this->model->getDatosCarta($get_id['ID']);
+        $lista = $this->model->getLista($get_id['ID']);
 
         $pdf->AddPage();
         $pdf->SetLeftMargin(22.4);
@@ -309,20 +337,21 @@ class Consentimiento extends Controller
         $pdf->SetFont('RubikRegular', '', 11);
         $pdf->Cell(85, 5, utf8_decode($get['NOMBRES']), 0, 0);
         $pdf->Cell(80, 5, utf8_decode('ADMINISTRACIÓN'), 0, 1, 'C');
-        $pdf->Cell(85, 5, utf8_decode('DNI '.$get['DNI']), 0, 1);
+        $pdf->Cell(85, 5, utf8_decode('DNI ' . $get['DNI']), 0, 1);
         $pdf->Cell(85, 5, utf8_decode('Cliente'), 0, 1);
         $pdf->Ln(20);
 
         $pdf->Output('I', 'SocketFinal.pdf');
     }
 
-    public function Imagen()
+    public function Imagen($id)
     {
         require('Assets/vendor/libs/fpdf/fpdf.php');
 
         $pdf = new FPDF();
 
-        $get = $this->model->getDatosCarta(2);
+        $get_id = $this->model->getIDPA($id);
+        $get = $this->model->getDatosCarta($get_id['ID']);
 
         $pdf->AddPage();
         $pdf->SetLeftMargin(22.4);
@@ -339,7 +368,7 @@ class Consentimiento extends Controller
         $pdf->Ln(15);
 
         $pdf->SetFont('RubikRegular', '', 12);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Yo, '. $get['NOMBRES'] .', identificado  con  DNI  Nº '. $get['DNI'] .'. con  domicilio  en '.$get['DIRECCION'].', otorgo mi consentimiento expreso a la empresa KYP - BIO INGEN S.A.C., con RUC Nº 20600880081 y domicilio legal en Cal. Max Palma Arrue Nro.1117 Urb. Venus. para utilizar mi imagen en fotografías y/o videos tomados por un equipo profesional.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('Yo, ' . $get['NOMBRES'] . ', identificado  con  DNI  Nº ' . $get['DNI'] . '. con  domicilio  en ' . $get['DIRECCION'] . ', otorgo mi consentimiento expreso a la empresa KYP - BIO INGEN S.A.C., con RUC Nº 20600880081 y domicilio legal en Cal. Max Palma Arrue Nro.1117 Urb. Venus. para utilizar mi imagen en fotografías y/o videos tomados por un equipo profesional.'), 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('RubikRegular', '', 12);
@@ -371,7 +400,7 @@ class Consentimiento extends Controller
         $pdf->Ln(5);
 
         $pdf->SetFont('RubikRegular', '', 12);
-        $pdf->Cell(0, 7, utf8_decode('DNI N°: '. $get['DNI']), 0, 0);
+        $pdf->Cell(0, 7, utf8_decode('DNI N°: ' . $get['DNI']), 0, 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('RubikRegular', '', 12);
@@ -380,5 +409,4 @@ class Consentimiento extends Controller
 
         $pdf->Output('I', 'Imagen.pdf');
     }
-
 }

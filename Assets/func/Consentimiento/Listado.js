@@ -81,3 +81,18 @@ document.addEventListener('DOMContentLoaded', function () {
 function redirect(id) {
   window.location.href = base_url + "Consentimiento/agregar/" + id;
 }
+
+function CartaSP(id) {
+  const link = base_url + "Consentimiento/CartaSP/" + id;
+  window.open(link, '_blank');
+}
+
+function CartaSF(id) {
+  const link = base_url + "Consentimiento/CartaSF/" + id;
+  window.open(link, '_blank');
+}
+
+function CartaImagen(id) {
+  const link = base_url + "Consentimiento/Imagen/" + id;
+  window.open(link, '_blank');
+}

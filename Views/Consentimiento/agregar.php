@@ -4,6 +4,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><?php echo $data['get']['ID_PACIENTE'] ?> - <?php echo $data['get']['NOMBRES'] ?> /</span> <?php echo $data['get']['SUB_TRAB'] ?></h4>
 
     <input type="hidden" id="id_paciente" value="<?php echo $data['get']['ID_PACIENTE'] ?>">
+    <input type="hidden" id="id_contrato" value="<?php echo $data['get']['ID'] ?>">
     <input type="hidden" id="tip_trab" value="<?php echo $data['get']['TIP_TRAB'] ?>">
     <input type="hidden" id="sub_trab" value="<?php echo $data['get']['SUB_TRAB'] ?>">
 

@@ -8,6 +8,8 @@ const btnSP = document.querySelector("#btnSP");
 const btnSF = document.querySelector("#btnSF");
 const btnImage = document.querySelector("#btnImage");
 
+const frm = document.querySelector("#FrmLista");
+
 document.addEventListener('DOMContentLoaded', function () {
 
     btnItem.addEventListener('click', function (e) {
@@ -37,47 +39,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     btnGenerar.addEventListener('click', function (e) {
-        e.preventDefault();
-        const url = base_url + 'Consentimiento/RegistrarDatos';
-        let frm = new FormData();
-        frm.append('id_paciente', document.getElementById('id_paciente').value);
-        frm.append('tip_trab', document.getElementById('tip_trab').value);
-        frm.append('sub_trab', document.getElementById('sub_trab').value);
-        const http = new XMLHttpRequest();
-        http.open("POST", url, true);
-        http.send(frm);
-        http.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                const res = JSON.parse(this.responseText);
-                if (res.tipo == "success") {
-                    RegistrarList(res.id);
+
+        if (frm.elements.length === 0) {
+            alert('Formulario Vacío')
+        } else {
+            e.preventDefault();
+            const url = base_url + 'Consentimiento/RegistrarDatos';
+            let frm = new FormData();
+            frm.append('id_paciente', document.getElementById('id_paciente').value);
+            frm.append('id_contrato', document.getElementById('id_contrato').value);
+            frm.append('tip_trab', document.getElementById('tip_trab').value);
+            frm.append('sub_trab', document.getElementById('sub_trab').value);
+            const http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(frm);
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res.tipo == "success") {
+                        RegistrarList(res.id);
+                    }
                 }
             }
         }
     });
-
-    ModalOpenCarta.show();
-
-    btnSP.addEventListener('click', function (e) {
-        e.preventDefault();
-        CartaSP();
-    });
-
-    btnSF.addEventListener('click', function (e) {
-       e.preventDefault();
-       CartaSF();
-    });
-
-    btnImage.addEventListener('click', function (e) {
-        e.preventDefault();
-        CartaImagen();
-    });
-
 })
 
 function RegistrarList(id) {
     var formulario = document.getElementById("FrmLista");
     var valoresSelect = [];
+
+    const id_pa = document.getElementById("id_contrato").value;
 
     for (var i = 0; i < formulario.elements.length; i++) {
         var elemento = formulario.elements[i];
@@ -101,23 +93,22 @@ function RegistrarList(id) {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
+            Swal.fire({
+                icon: res.tipo,
+                title: res.mensaje,
+                showConfirmButton: true,
+                timer: 2000,
+                didClose: () => {
+                    if ((res.tipo = "success")) {
+                        const link = base_url + "Consentimiento/CartaSP/" + id_pa;
+                        window.open(link, '_blank');
+                        window.location.href = base_url + "Consentimiento/consen";
+                    }
+                },
+            });
+
         }
     };
 
     http.send(JSON.stringify(datos));
-}
-
-function CartaSP() {
-    const url = base_url + "Consentimiento/CartaSP";
-    window.open(url, "_blank");
-}
-
-function CartaSF() {
-    const url = base_url + "Consentimiento/CartaSF";
-    window.open(url, "_blank");
-}
-
-function CartaImagen() {
-    const url = base_url + "Consentimiento/Imagen";
-    window.open(url, "_blank");
 }
