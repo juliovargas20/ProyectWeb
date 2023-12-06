@@ -63,6 +63,16 @@ document.addEventListener('DOMContentLoaded', function () {
         CartaSP();
     });
 
+    btnSF.addEventListener('click', function (e) {
+       e.preventDefault();
+       CartaSF();
+    });
+
+    btnImage.addEventListener('click', function (e) {
+        e.preventDefault();
+        CartaImagen();
+    });
+
 })
 
 function RegistrarList(id) {
@@ -100,4 +110,14 @@ function RegistrarList(id) {
 function CartaSP() {
     const url = base_url + "Consentimiento/CartaSP";
     window.open(url, "_blank");
-  }
+}
+
+function CartaSF() {
+    const url = base_url + "Consentimiento/CartaSF";
+    window.open(url, "_blank");
+}
+
+function CartaImagen() {
+    const url = base_url + "Consentimiento/Imagen";
+    window.open(url, "_blank");
+}

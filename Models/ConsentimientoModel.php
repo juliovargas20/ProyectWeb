@@ -40,6 +40,18 @@ class ConsentimientoModel extends Query{
         return $this->save($sql, $datos);
     }
 
+    public function getDatosCarta($id)
+    {
+        $sql = "SELECT c.ID_PACIENTE, c.SUB_TRAB, r.NOMBRES, r.SEDE, r.DNI, r.DIRECCION FROM consen c INNER JOIN registro r ON c.ID_PACIENTE = r.ID_PACIENTE WHERE ID = $id";
+        return $this->select($sql);
+    }
+
+    public function getLista($id)
+    {
+        $sql = "SELECT * FROM list_consen WHERE ID_CONSEN = $id";
+        return $this->selectAll($sql);
+    }
+
 }
 
 ?>

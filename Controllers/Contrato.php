@@ -183,6 +183,10 @@ class Contrato extends Controller
             $pdf->Ln(5);
         }
 
+        $pdf->SetFont('RubikMedium', '', 11);
+        $pdf->Cell(0, 7, utf8_decode('- El precio estipulado para el desarrollo de la prótesis es de S/. ' . $datos['MONTO']));
+        $pdf->Ln(8);
+
         $pdf->SetFont('RubikRegular', '', 11);
         $pdf->MultiCell(0, 5.5, utf8_decode('2.3. El servicio  DE PROTESIS   cuenta con las siguientes garantías: '), 0);
         $pdf->Ln(2);
@@ -470,6 +474,9 @@ class Contrato extends Controller
             $pdf->MultiCell(0, 7, utf8_decode('    ' . $datos['OBSERVACION']), 0);
             $pdf->Ln(5);
         }
+
+        $pdf->Cell(0, 7, utf8_decode('- El precio estipulado para el desarrollo de la prótesis es de S/. ' . $datos['MONTO']));
+        $pdf->Ln(8);
 
         $pdf->SetFont('RubikRegular', '', 11);
         $pdf->MultiCell(0, 5.5, utf8_decode('2.3. El servicio  DE PROTESIS   cuenta con las siguientes garantías: '), 0);
