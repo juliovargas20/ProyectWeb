@@ -32,6 +32,10 @@ class ComposerStaticInitc941243676d24eeb0c1f9bd9512c27d1
             'MyCLabs\\Enum\\' => 13,
             'Matrix\\' => 7,
         ),
+        'L' => 
+        array (
+            'Luecano\\NumeroALetras\\' => 22,
+        ),
         'C' => 
         array (
             'Complex\\' => 8,
@@ -75,6 +79,10 @@ class ComposerStaticInitc941243676d24eeb0c1f9bd9512c27d1
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'Luecano\\NumeroALetras\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/luecano/numero-a-letras/src',
         ),
         'Complex\\' => 
         array (

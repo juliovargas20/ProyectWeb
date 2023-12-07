@@ -45,7 +45,7 @@ class ContratoModel extends Query
 
     public function getDatosCotizacion($id)
     {
-        $sql = "SELECT r.NOMBRES, c.ID_PACIENTE, r.DNI, c.SUB_TRAB, c.OBSERVACION, c.TIP_TRAB, c.MONTO, r.SEDE, c.PESO, c.CANTIDAD FROM cotizacion c INNER JOIN registro r ON c.ID_PACIENTE = r.ID_PACIENTE WHERE c.ID = $id";
+        $sql = "SELECT r.NOMBRES, c.ID_PACIENTE, r.DNI, c.SUB_TRAB, c.OBSERVACION, c.TIP_TRAB, c.MONTO, r.SEDE, c.PESO, c.CANTIDAD, r.DIRECCION FROM cotizacion c INNER JOIN registro r ON c.ID_PACIENTE = r.ID_PACIENTE WHERE c.ID = $id";
         return $this->select($sql);
     }
 

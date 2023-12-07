@@ -24,35 +24,28 @@ class PDF extends FPDF
 
         setlocale(LC_TIME, 'es_ES');
 
-        $this->AddFont('RubikMedium', '', 'Rubik-Medium.php');
-        $this->AddFont('RubikRegular', '', 'Rubik-Regular.php');
-
-
         $this->SetFont('arial', 'IB', 12);
-        $this->SetX(150);
+        $this->SetX(135);
         $this->Cell(50, 5, 'Front Desk', 0, 0,  'R');
         $this->Ln(5);
 
-        $this->SetFont('RubikRegular', '', 12);
-        $this->SetX(150);
-        $this->Cell(50, 5, 'Fecha: ' . date("Y-M-d"), 0, 0,  'R');
+        $this->SetFont('arial', 'B', 12);
+        $this->SetX(135);
+        $this->Cell(50, 5, 'Fecha: ' . date("Y-m-d"), 0, 0,  'R');
         $this->Ln(5);
 
-        $this->SetFont('RubikMedium', '', 12);
-        $this->SetX(150);
+        $this->SetFont('arial', 'B', 12);
+        $this->SetX(135);
         $this->Cell(50, 5, utf8_decode('N°: ' . $this->id), 0, 0, 'R');
 
-        $this->Image(BASE_URL . 'Assets/img/encabezado.png', 10, 8, 38, 15, 'png');
+        $this->Image(BASE_URL . 'Assets/img/encabezado.png', 25, 8, 38, 15, 'png');
         $this->Ln(15);
     }
 
     function Footer()
     {
-        $this->AddFont('RubikMedium', '', 'Rubik-Medium.php');
-        $this->AddFont('RubikRegular', '', 'Rubik-Regular.php');
-
         $this->SetY(-15);
-        $this->SetFont('RubikRegular', '', 8);
+        $this->SetFont('arial', '', 8);
         $this->Cell(0, 10, 'Pag. ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
