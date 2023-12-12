@@ -1,9 +1,11 @@
 <?php include "Views/templates/header.php"; ?>
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Logística /</span> Orden de Importaciones</h4>
+    <h4 class="fw-bold py-3 mb-2"><span class="text-muted fw-light">Logística /</span> Orden de Importaciones</h4>
 
-    <div class="col-12 mb-3">
+    <button id="btnModalImpor" class="btn btn-danger">Lista de importaciones</button>
+
+    <div class="col-12 mb-3 mt-3">
         <div class="card">
             <div class="card-body">
                 <form class="row g-3" id="FrmProve">
@@ -133,11 +135,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row g-3">
         <div class="col-xl-12 col-md-8 col-12 mb-md-0 mb-4">
             <div class="card">
                 <div class="table-responsive rounded-3 text-nowrap">
-                    <table class="table" id="">
+                    <table class="table" id="TblDetallesImport">
                         <thead class="table-light">
                             <tr>
                                 <th class="text-center">Cantidad</th>
@@ -156,7 +158,61 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-3">
+            <button id="btnImportacion" class="btn btn-success">Generar Importacion</button>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="AreaImport" id="AreaImport">
+                    <option value="" disabled selected>Seleccione----</option>
+                    <option value="Biomecánica">Biomecánica</option>
+                    <option value="Ingeniería M.S.">Ingeniería M.S.</option>
+                    <option value="Producción">Producción</option>
+                    <option value="Sistemas">Sistemas</option>
+                    <option value="Administración">Administración</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="Logística">Logística</option>
+                    <option value="Ingeniería M.I.">Ingeniería M.I.</option>
+                    <option value="Anaplastología">Anaplastología</option>
+                    <option value="Diseño">Diseño</option>
+                    <option value="Limpieza">Limpieza</option>
+                    <option value="Textil">Textil</option>
+                    <option value="Desarrollo Tecnológico">Desarrollo Tecnológico</option>
+                </select>
+                <label for="">Area Solicitante</label>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="BuscarOI">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="mb-4">Buscar Importaciones</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-3 py-md-0">
+                <div class="card-datatable table-responsive">
+                    <table class="invoice-list-table table" id="TblResumenOI">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">FECHA</th>
+                                <th class="text-center">AREA</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <?php include "Views/templates/footer.php"; ?>

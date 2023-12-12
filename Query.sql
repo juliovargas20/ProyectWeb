@@ -486,6 +486,35 @@ CREATE TABLE detalle_proveedor
   PRECIO DECIMAL(10,2)
 )
 
+CREATE TABLE importacion
+(
+  ID VARCHAR(10) PRIMARY KEY,
+  FECHA DATE DEFAULT CURDATE(),
+  AREA VARCHAR(100),
+  PDF LONGBLOB
+);
+
+
+CREATE TRIGGER before_insert_importacion
+BEFORE INSERT ON importacion
+FOR EACH ROW
+BEGIN
+ DECLARE nuevo_numero INT;
+
+    -- Obtener el último número de factura
+    SELECT IFNULL(MAX(CONVERT(SUBSTRING(ID, 3), SIGNED INTEGER)), 0) INTO nuevo_numero
+    FROM importacion;
+
+    -- Incrementar el número
+    SET nuevo_numero = nuevo_numero + 1;
+
+    -- Formatear el nuevo número con ceros a la izquierda y asignar a la columna ID
+    SET NEW.ID = CONCAT('OI', LPAD(nuevo_numero, 6, '0'));
+    
+END 
+$$
+DELIMITER ;
+
 
 /*** CONSENTIMIENTO **/
 CREATE TABLE consen

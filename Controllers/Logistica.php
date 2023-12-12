@@ -7,7 +7,7 @@ class Logistica extends Controller
         parent::__construct();
     }
 
-    /************** <LISTADO DE PACIENTES> **************/
+    /************** <IMPORTACIONES> **************/
 
     public function importaciones()
     {
@@ -84,12 +84,13 @@ class Logistica extends Controller
         die();
     }
 
-    public function Pdf()
+    public function Pdf($area)
     {
         require('include/fpdf_temp.php');
 
-        $id_user = 1;
+        $id_user = $_SESSION['id_usuario'];
         $datos = $this->model->getDatos($id_user);
+        $cod = $this->model->MaxAu3();
 
         $pdf = new PDF_MC_Table('L');
         $pdf->AddPage();
@@ -104,20 +105,25 @@ class Logistica extends Controller
 
         $pdf->SetFont('RubikMedium', '', 14);
         $pdf->SetX(235);
-        $pdf->Cell(50, 5, utf8_decode('N°: OI000001'), 0, 0, 'R');
+        $pdf->Cell(50, 5, utf8_decode('N°: ' . $cod['nuevo_numero']), 0, 0, 'R');
+        $pdf->Ln(5);
+
+        $pdf->SetFont('RubikRegular', '', 14);
+        $pdf->SetX(235);
+        $pdf->Cell(50, 5, utf8_decode('Area: ' . $area), 0, 0,  'R');
 
         $pdf->Image(BASE_URL . 'Assets/img/encabezado.png', 10, 8, 38, 15, 'png');
-        $pdf->Ln(25);
+        $pdf->Ln(15);
 
         foreach ($datos as $row) {
             $pdf->SetFont('RubikRegular', '', 12);
-            $pdf->Cell(120, 7, utf8_decode('Proveedor: '.$row['PRO_NOMBRE']), 0, 0);
+            $pdf->Cell(120, 7, utf8_decode('Proveedor: ' . $row['PRO_NOMBRE']), 0, 0);
             $pdf->Cell(0, 7, utf8_decode('Página Web: enlace de la página'), 0, 1, 'R', false, $row['PAGINA']);
-            $pdf->Cell(120, 7, utf8_decode('Pais Proveedor: '.$row['PAIS']), 0, 0);
-            $pdf->Cell(0, 7, utf8_decode('Vendedor: '.$row['VENDEDOR']), 0, 1, 'R');
-            $pdf->Cell(120, 7, utf8_decode('Telefono Proveedor: '.$row['TEL_PRO']), 0, 0);
-            $pdf->Cell(0, 7, utf8_decode('Telefono Vendedor: '.$row['TEL_VENDEDOR']), 0, 1, 'R');
-            $pdf->Ln(10);
+            $pdf->Cell(120, 7, utf8_decode('Pais Proveedor: ' . $row['PAIS']), 0, 0);
+            $pdf->Cell(0, 7, utf8_decode('Vendedor: ' . $row['VENDEDOR']), 0, 1, 'R');
+            $pdf->Cell(120, 7, utf8_decode('Telefono Proveedor: ' . $row['TEL_PRO']), 0, 0);
+            $pdf->Cell(0, 7, utf8_decode('Telefono Vendedor: ' . $row['TEL_VENDEDOR']), 0, 1, 'R');
+            $pdf->Ln(7);
 
             $pdf->SetFont('RubikRegular', '', 12);
             $pdf->Cell(25, 7, utf8_decode('Cantidad'), 1, 0, 'C');
@@ -132,13 +138,60 @@ class Logistica extends Controller
             $pdf->Cell(90, 7, utf8_decode($row['DESCRIPCION']), 1, 0);
             $pdf->Cell(40, 7, utf8_decode('enlace'), 1, 0, 'C', false, $row['LINK']);
             $pdf->SetFont('Arial', '', 12);
-            $pdf->Cell(0, 7, utf8_decode($row['MONEDA']. ' '. $row['PRECIO']), 1, 0, 'C');
+            $pdf->Cell(0, 7, utf8_decode($row['MONEDA'] . ' ' . $row['PRECIO']), 1, 0, 'C');
+
             $pdf->Ln(15);
+
+            $pdf->Line($pdf->GetX() - 20, $pdf->GetY(), $pdf->GetX() + 287, $pdf->GetY());
+
+            $pdf->Ln(2);
         }
 
-        $pdf->SetFont('RubikRegular', '', 16);
 
-    
-        $pdf->Output();
+        $servi = $pdf->Output('S', 'Importacion.pdf');
+        return $servi;
     }
+
+    public function RegistrarImportacion()
+    {
+        $area = $_POST['AreaImport'];
+        $blob = $this->Pdf($area);
+
+        $id = $_SESSION['id_usuario'];
+
+        $data = $this->model->RegistrarImportacion($area, $blob);
+        if ($data != NULL) {
+            $this->model->EliminarDetalles($id);
+            $res = array('tipo' => 'success', 'mensaje' => 'Orden Importacion Realizada', 'id' => $data);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'error Orden Importacion Realizada');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function MostrarPdf($id)
+    {
+        $data = $this->model->MostrarPdf($id);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function ListarImportacion()
+    {
+        $data = $this->model->ListarImportaciones();
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['ACCIONES'] = '
+                <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="MostrarPDf(\'' . $data[$i]['ID'] . '\')">
+                    <i class="mdi mdi-file-document-outline">
+                    </i>
+                </button>
+            ';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    /************** </IMPORTACIONES> **************/
 }
