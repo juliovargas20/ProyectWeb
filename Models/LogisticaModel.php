@@ -1,5 +1,6 @@
 <?php
-class LogisticaModel extends Query{
+class LogisticaModel extends Query
+{
     public function __construct()
     {
         parent::__construct();
@@ -12,7 +13,7 @@ class LogisticaModel extends Query{
         return $this->save($sql, $datos);
     }
 
-    public function Listar($id_user) 
+    public function Listar($id_user)
     {
         $sql = "SELECT * FROM detalle_proveedor WHERE ID_USER = $id_user";
         return $this->selectAll($sql);
@@ -24,7 +25,7 @@ class LogisticaModel extends Query{
         return $this->select($sql);
     }
 
-    public function Modificar($id, $nombre, $pais, $tel_pro, $pagina, $ven, $tel_ven, $cantidad, $producto, $des, $link, $obs, $moneda, $precio) 
+    public function Modificar($id, $nombre, $pais, $tel_pro, $pagina, $ven, $tel_ven, $cantidad, $producto, $des, $link, $obs, $moneda, $precio)
     {
         $sql = "UPDATE `detalle_proveedor` SET `PRO_NOMBRE`= ?,`PAIS`= ?,`TEL_PRO`= ?,`PAGINA`= ?,`VENDEDOR`= ?,`TEL_VENDEDOR`= ?,`CANTIDAD`= ?,`PRODUCTO`= ?,`DESCRIPCION`= ?,`LINK`= ?,`OBSERVACION`= ?,`MONEDA`= ?,`PRECIO`= ? WHERE ID = ?";
         $datos = array($nombre, $pais, $tel_pro, $pagina, $ven, $tel_ven, $cantidad, $producto, $des, $link, $obs, $moneda, $precio, $id);
@@ -66,6 +67,14 @@ class LogisticaModel extends Query{
         return $data;
     }
 
+    public function ObtenerContenidoPdf($id)
+    {
+        $sql = "SELECT PDF FROM importacion WHERE ID = '$id'";
+        $data = $this->select($sql);
+        // Obtener el contenido del PDF desde la consulta
+        return $data['PDF'];
+    }
+
     public function EliminarDetalles($id)
     {
         $sql = "DELETE FROM detalle_proveedor WHERE ID_USER = ?";
@@ -75,10 +84,7 @@ class LogisticaModel extends Query{
 
     public function ListarImportaciones()
     {
-        $sql = "SELECT ID, FECHA, AREA FROM importacion";
+        $sql = "SELECT ID, FECHA, AREA, STATUS FROM importacion";
         return $this->selectAll($sql);
     }
-
 }
-
-?>

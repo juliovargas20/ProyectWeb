@@ -35,6 +35,8 @@ const pros4 = document.querySelector("#pros4");
 
 const btn = document.querySelector("#ProcesoFin");
 
+const btnHistorialRegistro = document.querySelector("#btnhisto");
+
 const ModalHistorial = document.querySelector("#ModalHistorial");
 const ModalOpenHistorial = new bootstrap.Modal(ModalHistorial);
 
@@ -56,9 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var myDropzone = this;
 
       // First change the button to actually tell Dropzone to process the queue.
-      document
-        .querySelector("#btnhisto")
-        .addEventListener("click", function (e) {
+      btnHistorialRegistro.addEventListener("click", function (e) {
           // Make sure that the form isn't actually being sent.
           e.preventDefault();
 

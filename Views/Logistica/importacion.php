@@ -204,6 +204,7 @@
                                 <th class="text-center">ID</th>
                                 <th class="text-center">FECHA</th>
                                 <th class="text-center">AREA</th>
+                                <th class="text-center">STATUS</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>

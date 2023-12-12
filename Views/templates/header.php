@@ -280,6 +280,13 @@
             </a>
           </li>
 
+          <li class="menu-item <?php echo !empty($data['activeCheckImport']) ? $data['activeCheckImport'] : ''; ?>">
+            <a href="<?php echo BASE_URL . 'Logistica/aprobacion' ?>" class="menu-link">
+              <i class="menu-icon tf-icons mdi mdi-file-check"></i>
+              <div data-i18n="Aprobacion">Aprobacion</div>
+            </a>
+          </li>
+
           <!-- /LOGÍSTICA -->
 
 

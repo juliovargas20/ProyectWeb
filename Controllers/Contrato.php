@@ -142,16 +142,29 @@ class Contrato extends Controller
         $pdf->MultiCell(0, 5.5, utf8_decode('SEGUNDA: OBJETO'), 0);
         $pdf->Ln(2);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO se obliga frente a EL CLIENTE a la elaboración de una prótesis biomecánica funcional de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
-        $pdf->Ln(5);
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO INGEN SAC se obliga frente a EL CLIENTE a la elaboración de una prótesis biomecánica funcional de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
+            $pdf->Ln(5);
+        } else if ($datos['TIP_TRAB'] == 'Estética') {
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO INGEN SAC se obliga frente a EL CLIENTE a la elaboración de una prótesis estética semi realista al 85% de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
+            $pdf->Ln(5);
+        } else if ($datos['TIP_TRAB'] == 'Miembro Superior') {
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO INGEN SAC se obliga frente a EL CLIENTE a la elaboración de una prótesis biomecánica funcional de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
+            $pdf->Ln(5);
+        }
 
         $pdf->SetFont('arial', 'B', 11);
         $pdf->MultiCell(0, 5.5, utf8_decode('TERCERA: DE LA NATURALEZA DEL CONTRATO '), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Se deja expresa constancia que todo lo no previsto en el presente Contrato se aplicarán las disposiciones contenidas en el Código Civil, pues, conforme se aprecia de las condiciones del servicio, el presente contrato tiene naturaleza civil, según lo dispuesto en los artículos 1764° y 1769° del Código Civil peruano, por lo que éste no implica ningún tipo de subordinación ni dependencia laboral alguna de KYP BIO con EL CLIENTE.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('Se deja expresa constancia que todo lo no previsto en el presente Contrato se aplicarán las disposiciones contenidas en el Código Civil, pues, conforme se aprecia de las condiciones del servicio, el presente contrato tiene naturaleza civil, según lo dispuesto en los artículos 1764° y 1769° del Código Civil peruano, por lo que éste no implica ningún tipo de subordinación ni dependencia laboral alguna de KYP BIO INGEN SAC con EL CLIENTE.'), 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('arial', 'B', 11);
@@ -159,7 +172,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Para los efectos de la ejecución del presente contrato, KYP BIO prestará sus servicios profesionales en la forma, fecha, tiempo y demás condiciones acordadas previamente con EL CLIENTE, con sus propios recursos. En tal sentido, KYP BIO tiene plena libertad en el ejercicio de sus servicios.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('Para los efectos de la ejecución del presente contrato, KYP BIO INGEN SAC prestará sus servicios profesionales en la forma, fecha, tiempo y demás condiciones acordadas previamente con EL CLIENTE, con sus propios recursos. En tal sentido, KYP BIO INGEN SAC tiene plena libertad en el ejercicio de sus servicios.'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
@@ -178,8 +191,21 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->Cell(0, 7, utf8_decode('     -    El 50% del monto (más IGV) a la firma del presente contrato.'), 0, 1);
-        $pdf->Cell(0, 7, utf8_decode('     -    El 50% del monto (más IGV) a la entrega de la prótesis con el pre encaje.'), 0);
-        $pdf->Ln(8);
+
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+
+            $pdf->Cell(0, 7, utf8_decode('     -    El 50% del monto (más IGV) a la entrega de la prótesis con el pre encaje.'), 0);
+            $pdf->Ln(8);
+        } else if ($datos['TIP_TRAB'] == 'Estética') {
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('    -     El 50% del monto (más IGV) a la entrega de la prótesis pigmentada con el                            recubrimiento de protección de silicona.'), 0);
+            $pdf->Ln(8);
+        } else if ($datos['TIP_TRAB'] == 'Miembro Superior') {
+
+            $pdf->Cell(0, 7, utf8_decode('     -	    El 50% del monto (más IGV) a la entrega de la prótesis final.'), 0);
+            $pdf->Ln(8);
+        }
+
 
         $pdf->MultiCell(0, 5.5, utf8_decode('Para el pago de la retribución económica, KYP BIO INGEN SAC entregará a EL CLIENTE el respectivo comprobante de pago. En caso se produzca retraso injustificado en el recojo y/o pago de la prótesis por más de 15 días por parte de EL CLIENTE, KYP BIO INGEN SAC tendrá derecho a la no devolución del monto adelantado como penalidad y a exigir el pago de los intereses moratorios, que se devengarán desde la fecha en que se produzca el incumplimiento injustificado del pago.'), 0);
         $pdf->Ln(5);
@@ -202,7 +228,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->Cell(0, 7, utf8_decode('     -    Asumir el pago de la retribución económica según lo estipulado en el presente contrato.'), 0, 1);
-        $pdf->MultiCell(0, 5.5, utf8_decode('     -    Apersonarse a las instalaciones de KYP BIO cada vez que esta lo requiera para la               elaboración de la prótesis.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('     -    Apersonarse a las instalaciones de KYP BIO INGEN SAC cada vez que esta lo                    requiera para la elaboración de la prótesis.'), 0);
         $pdf->Cell(0, 7, utf8_decode('     -    Otras obligaciones que pudiesen emanar de las estipulaciones del presente contrato.'), 0, 1);
         $pdf->Ln(5);
 
@@ -211,7 +237,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('El presente Contrato tendrá un plazo de duración de acuerdo a lo pactado en la hoja de requerimiento suscrito por las partes, salvo KYP BIO comunique a EL CLIENTE, de manera justificada, la necesidad de un mayor plazo.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('El presente Contrato tendrá un plazo de duración de acuerdo a lo pactado en la hoja de requerimiento suscrito por las partes, salvo KYP BIO INGEN SAC comunique a EL CLIENTE, de manera justificada, la necesidad de un mayor plazo.'), 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('arial', 'B', 11);
@@ -219,7 +245,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE se compromete y obliga a no usar en su propio provecho ni divulgar directa o indirectamente a ninguna persona, empresa o entidad de cualquier índole, la información proporcionada por KYP BIO para la prestación del servicio a su cargo.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE se compromete y obliga a no usar en su propio provecho ni divulgar directa o indirectamente a ninguna persona, empresa o entidad de cualquier índole, la información proporcionada por KYP BIO INGEN SAC para la prestación del servicio a su cargo.'), 0);
         $pdf->Ln(2);
 
         $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE se compromete y obliga a no reproducir, entregar o permitir que se entregue o que se acceda y/o use información a que se refiere el numeral precedente, salvo que exista autorización previa y por escrito del KYP BIO INGEN SAC. '), 0);
@@ -228,66 +254,390 @@ class Contrato extends Controller
         $pdf->MultiCell(0, 5.5, utf8_decode('La obligación de confidencialidad a que se refiere la presente cláusula tendrá una vigencia de  (1) año calendario contados a partir de la suscripción del presente documento.'), 0);
         $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('La información y/o documentación que se produzca en la ejecución del presente Contrato será de propiedad exclusiva del KYP BIO, encontrándose incluida dentro de los alcances de reserva y confidencialidad estipulados en la presente cláusula. '), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('La información y/o documentación que se produzca en la ejecución del presente Contrato será de propiedad exclusiva del KYP BIO INGEN SAC, encontrándose incluida dentro de los alcances de reserva y confidencialidad estipulados en la presente cláusula. '), 0);
         $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE declara que la violación de esta obligación facultará a KYP BIO a resolver el presente contrato y a exigir judicial o extrajudicialmente una indemnización por los daños y perjuicios. '), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE declara que la violación de esta obligación facultará a KYP BIO INGEN SAC a resolver el presente contrato y a exigir judicial o extrajudicialmente una indemnización por los daños y perjuicios. '), 0);
         $pdf->Ln(5);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: GARANTIA'), 0);
-        $pdf->Ln(2);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se compromete a otorgar una garantía por el PRE ENCAJE de hasta 30 días calendarios desde su entrega sólo en caso de adaptabilidad y reducción del muñón; siendo que posterior a dicho plazo se dará paso a la elaboración del socket de fibra de carbono para dar por finalizado el servicio contratado.'), 0);
-        $pdf->Ln(2);
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: GARANTIA'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('La no comunicación expresa de EL CLIENTE a KYP BIO respecto al pre encaje conforme a la causal y plazo estipulado en el párrafo anterior implicará la renuncia a cualquier reclamo por parte de EL CLIENTE y su conformidad respecto al mismo.'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se compromete a otorgar una garantía por el PRE ENCAJE de hasta 30 días calendarios desde su entrega sólo en caso de adaptabilidad y reducción del muñón; siendo que posterior a dicho plazo se dará paso a la elaboración del socket de fibra de carbono para dar por finalizado el servicio contratado.'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('Asimismo, al momento de tener el socket en fibra de carbono final si necesita cambios o uno nuevo deberé asumir el costo de este tanto como de un nuevo linner si fuera necesario.'), 0);
-        $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La no comunicación expresa de EL CLIENTE a KYP BIO respecto al pre encaje conforme a la causal y plazo estipulado en el párrafo anterior implicará la renuncia a cualquier reclamo por parte de EL CLIENTE y su conformidad respecto al mismo.'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
-        $pdf->Ln(5);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Asimismo, al momento de tener el socket en fibra de carbono final si necesita cambios o uno nuevo deberé asumir el costo de este tanto como de un nuevo linner si fuera necesario.'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: RESOLUCIÓN DEL CONTRATO'), 0);
-        $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
-        $pdf->Ln(5);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRÓNICO'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
-        $pdf->Ln(10);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRÓNICO'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: COMPETENCIA Y LEGISLACIÓN'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(10);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
-        $pdf->Ln(5);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA TERCERA: DISPOSICIONES FINALES'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(5);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA TERCERA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes. '), 0);
-        $pdf->Ln(5);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de '.$datos['SEDE'].' el ' . $fecha_hoy. '.'), 0);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes. '), 0);
+            $pdf->Ln(5);
 
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+        } else if ($datos['TIP_TRAB'] == 'Estética') {
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: PROCESO DE ELABORACIÓN, CARACTERISTICAS, APROBACION, MULTAS, INTERVENCIONES QUIRUJICAS, PUNTUALIDAD Y MANTENIMIENTO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Proceso de Elaboración:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La elaboración de la prótesis ' . $datos['SUB_TRAB'] . ' abarca un periodo de 45 a 55 días hábiles, distribuidos en 4 fases:'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('i.     Fase I: Toma del molde y medidas.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('ii.    Fase II: Escultura y posible modificación según el gusto del paciente.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iii.   Fase III: Vaciado en silicona con color base.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iv.   Fase IV: Pintado y entrega de la prótesis con el paciente en vivo.'), 0, 1);
+            $pdf->Ln(5);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se recuerda al paciente que las prótesis tienen un propósito netamente estético y de exhibición, sugiriendo evitar cargar objetos o someterlas a pruebas extremas.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Características de las Prótesis:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las prótesis presentan un 80% de realismo en cuanto al color y un 95% en el modelado escultórico.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se recomienda que el paciente mantenga una tonalidad pareja para lograr un resultado más realista y armonioso con otras partes del cuerpo.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Aprobación en Fase II y Multas: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Una vez aprobada la FASE II (escultura), no se admiten modificaciones en la FASE IV, y realizar cambios conlleva una multa.'), 0);
+            $pdf->Ln(2);
+
+            if ($datos['SUB_TRAB'] == "Microtia Tipo 1 y 2" || $datos['SUB_TRAB'] == "Microtia Tipo 3 y 4") {
+                $pdf->MultiCell(0, 5.5, utf8_decode('En caso de microtias, se deja una membrana para mayor adhesión, pero su reducción corre por cuenta del paciente, eximiendo a la empresa de responsabilidad por pérdida de firmeza.'), 0);
+                $pdf->Ln(5);
+            }
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Intervenciones Quirúrgicas y Puntualidad: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El paciente debe informar cualquier intervención quirúrgica durante la elaboración, evitando multas y retrasos.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('A partir de la FASE IV, la empresa no asume responsabilidad por variaciones en medidas no informadas previamente.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se insta a la puntualidad, y en caso de retraso, se avanzará en la elaboración para evitar perjuicios a otros pacientes. Se recomienda a los pacientes de provincia llegar con anticipación.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Cuidados y Mantenimiento: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se aconseja aplicar talco en el muñón según sea necesario para facilitar el deslizamiento de la prótesis.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La extracción debe hacerse con cuidado, evitando fuerza excesiva para prevenir roturas irreparables.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se detallan condiciones de resistencia y debilidades del material de la prótesis, indicando precauciones para su uso adecuado.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Reparaciones y Consideraciones Finales: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier corte en la prótesis debe ser atendido en las instalaciones de la empresa para evitar riesgos. Se desaconseja la reparación por cuenta propia.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se proporcionan recomendaciones específicas, como evitar la inmersión en sales marinas, cargar objetos pesados o realizar flexiones bruscas.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se alerta sobre la posibilidad de alteraciones estéticas en caso de reparaciones.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: GARANTIA'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La no comunicación expresa de EL CLIENTE a KYP BIO INGEN SAC respecto a la escultura y modificación conforme a la causal y plazo estipulado en el párrafo anterior implicará la renuncia a cualquier reclamo por parte de EL CLIENTE y su conformidad respecto al mismo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la protesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal pigmentación por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA PRIMERA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRONICO  '), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA SEGUNDA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA TERCERA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+            $pdf->Ln(2);
+        } else if ($datos['SUB_TRAB'] == 'Mano Parcial Biónica' || $datos['SUB_TRAB'] == 'Mano Completa Biónica') {
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: PROCESO DE ELABORACIÓN, CARACTERISTICAS, INTERVENCIONES QUIRUJICAS, PROGRAMACIÓN DE CITAS, USOS Y CUIDADOS'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Proceso de Elaboración:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La elaboración de la prótesis abarca un periodo de 30 a 40 días hábiles, distribuidos en 5 fases:'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('i.     Fase I: Toma de medidas y escaneo 3D.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('ii.    Fase II: Pruebas de encaje del socket.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->MultiCell(0, 5.5, utf8_decode('iii.   Fase III: Pruebas con el prototipo de la prótesis y adecuación de las señales            mioeléctricas.'), 0);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iv.   Fase IV: Modificaciones y ensamble de la prótesis final.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('v.    Fase V: Entrega de la prótesis final con sus accesorios.'), 0, 1);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Características de las Prótesis:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La prótesis electrónica ofrece la capacidad de realizar diversas actividades cotidianas con facilidad, desde sujetar objetos como vasos, tazas, hasta manipular bolígrafos y teléfonos celulares. La efectividad en estas tareas puede variar en función del nivel de destreza y habilidad individual del paciente.'), 0);
+            $pdf->Ln(5);
+
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Intervenciones Quirúrgicas y Puntualidad: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El paciente no debe realizarse ninguna intervención quirúrgica durante la elaboración de la prótesis para evitar retrasos y variaciones en el diseño del encaje.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('A partir de la FASE III, la empresa no asume responsabilidad por variaciones en medidas del muñón no informadas previamente.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Programación de Citas: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La asistencia puntual a todas las citas programadas con el especialista es de vital importancia durante las diversas fases del desarrollo hasta la entrega final de la prótesis. La falta de asistencia a estas citas puede ocasionar retrasos considerables en la entrega del producto final. Se informa al paciente que la ausencia continua y no justificada a dichas citas podría resultar en la terminación unilateral del contrato por parte del proveedor, sin derecho a reclamos o reembolsos de los pagos efectuados hasta la fecha de rescisión.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Usos y cuidados: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El uso de la prótesis se limita a actividades cotidianas que incluyen sujetar vasos, tazas, bolígrafos, teléfonos celulares y objetos similares. Queda expresamente prohibido exponer la prótesis a temperaturas superiores a 50 °C, así como participar en actividades extremas con su uso. Se advierte al usuario que la capacidad de carga de la prótesis está limitada a objetos de hasta 1.5 kg, evitando cargas superiores para preservar su integridad y funcionamiento óptimo. Se hace constar que cualquier caída o impacto puede ocasionar daños irreparables, por lo que se recomienda precaución para evitar estos incidentes. Adicionalmente, se insta al usuario a evitar el contacto con agua, polvo excesivo y sustancias químicas, ya que podrían comprometer la integridad y durabilidad de la prótesis.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: GARANTIA'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El CLIENTE debe llevar la prótesis para su mantenimiento cada 4 meses a partir de la entrega de la prótesis final, según las fechas indicadas en la ficha de garantía. Si no se cumplen estos plazos de mantenimiento, la garantía quedará anulada y no se podrá realizar ningún reclamo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En caso de que se presente alguna falla en algún componente de la prótesis KYP BIO INGEN SAC, nos comprometemos a evaluar dicho componente defectuoso para determinar el origen del problema. Si la falla se debe a defectos de fabricación, procederemos a reemplazarlo por uno nuevo. Sin embargo, no nos haremos responsables por fallas debido a un uso inadecuado o falta de cuidado de la prótesis. En esos casos, se requerirá el pago del componente dañado para realizar el reemplazo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRONICO '), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA TERCERA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA CUARTA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+            $pdf->Ln(2);
+        } else if ($datos['SUB_TRAB'] == 'Mano Parcial Mecánica' || $datos['SUB_TRAB'] == 'Mano Parcial de articulación manual' || $datos['SUB_TRAB'] == 'Falange Mecánica' || $datos['SUB_TRAB'] == 'Protesis Transhumeral tipo gancho cosmético (Fillauer)' || $datos['SUB_TRAB'] == 'Protesis transradial tipo gancho cosmético (Fillauer)' || $datos['SUB_TRAB'] == 'Protesis Transhumeral tipo gancho cosmético (Aosuo)' || $datos['SUB_TRAB'] == 'Protesis transradial mecánica de TPU' || $datos['SUB_TRAB'] == '') {
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: PROCESO DE ELABORACIÓN, CARACTERISTICAS, INTERVENCIONES QUIRUJICAS, PROGRAMACIÓN DE CITAS, USOS Y CUIDADOS'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Proceso de Elaboración:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La elaboración de la prótesis abarca un periodo de 30 a 40 días hábiles, distribuidos en 5 fases:'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('i.     Fase I: Toma de medidas y escaneo 3D.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('ii.    Fase II: Pruebas de encaje del socket.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iii.   Fase III: Pruebas con el prototipo de la prótesis.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iv.   Fase IV: Modificaciones y ensamble de la prótesis final.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('v.    Fase V: Entrega de la prótesis final con sus accesorios.'), 0, 1);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Características de las Prótesis:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las prótesis accionadas por el cuerpo ofrecen la capacidad de realizar diversas actividades cotidianas con facilidad, desde sujetar objetos como vasos, tazas, hasta manipular bolígrafos y teléfonos celulares. La efectividad en estas tareas puede variar en función del nivel de destreza y habilidad individual del paciente.'), 0);
+            $pdf->Ln(5);
+
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Intervenciones Quirúrgicas y Puntualidad: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El paciente no debe realizarse ninguna intervención quirúrgica durante la elaboración de la prótesis para evitar retrasos y variaciones en el diseño del encaje.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('A partir de la FASE III, la empresa no asume responsabilidad por variaciones en medidas del muñón no informadas previamente.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Programación de Citas: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La asistencia puntual a todas las citas programadas con el especialista es de vital importancia durante las diversas fases del desarrollo hasta la entrega final de la prótesis. La falta de asistencia a estas citas puede ocasionar retrasos considerables en la entrega del producto final. Se informa al paciente que la ausencia continua y no justificada a dichas citas podría resultar en la terminación unilateral del contrato por parte del proveedor, sin derecho a reclamos o reembolsos de los pagos efectuados hasta la fecha de rescisión.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Usos y cuidados: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El uso de la prótesis se limita a actividades cotidianas que incluyen sujetar vasos, tazas, bolígrafos, teléfonos celulares y objetos similares. Queda expresamente prohibido exponer la prótesis a temperaturas superiores a 50 °C. Se advierte al usuario que la capacidad de carga de la prótesis está limitada a objetos de hasta 1.5 kg, evitando cargas superiores para preservar su integridad y funcionamiento óptimo. Soporta caídas de hasta de 1.5 metros. Adicionalmente, se insta al usuario a evitar el contacto con sustancias químicas, ya que podrían comprometer la integridad y durabilidad de la prótesis.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: GARANTIA'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('En caso de que se presente alguna falla en algún componente de la prótesis KYP BIO INGEN SAC, nos comprometemos a evaluar dicho componente defectuoso para determinar el origen del problema. Si la falla se debe a defectos de fabricación, procederemos a reemplazarlo por uno nuevo. Sin embargo, no nos haremos responsables por fallas debido a un uso inadecuado o falta de cuidado de la prótesis. En esos casos, se requerirá el pago del componente dañado para realizar el reemplazo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRONICO '), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA TERCERA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(10);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA CUARTA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+            $pdf->Ln(2);
+        }
 
         $pdf->Ln(30);
         $pdf->SetFont('arial', 'B', 12);
@@ -300,30 +650,28 @@ class Contrato extends Controller
         $pdf->Cell(0, 7, utf8_decode('EL CLIENTE'), 0, 0, 'C');
 
 
-        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
-            $pdf->AddPage();
+        $pdf->AddPage();
 
-            $pdf->SetFont('arial', 'B', 12);
-            $pdf->SetFillColor(200, 220, 255);
-            $pdf->Cell(0, 7, "HOJA DE REQUERIMIENTO", 0, 1, 'L', true);
-            $pdf->Ln(8);
+        $pdf->SetFont('arial', 'B', 12);
+        $pdf->SetFillColor(200, 220, 255);
+        $pdf->Cell(0, 7, "HOJA DE REQUERIMIENTO", 0, 1, 'L', true);
+        $pdf->Ln(8);
 
+        $pdf->SetFont('arial', '', 12);
+        $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
+        $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('arial', 'BI', 12);
+        $pdf->Cell(0, 7, utf8_decode("Lista de Componentes Cotizados:"), 0, 1, 'L', false);
+        $pdf->Ln(5);
+
+        foreach ($lista as $row) {
             $pdf->SetFont('arial', '', 12);
-            $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
-            $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
-            $pdf->Ln(8);
-
-            $pdf->SetFont('arial', 'BI', 12);
-            $pdf->Cell(0, 7, utf8_decode("Lista de Componentes :"), 0, 1, 'L', false);
-            $pdf->Ln(5);
-
-            foreach ($lista as $row) {
-                $pdf->SetFont('arial', '', 12);
-                $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
-                $pdf->Ln(6);
-            }
-            $pdf->Ln(8);
+            $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
+            $pdf->Ln(6);
         }
+        $pdf->Ln(8);
 
         if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
             $pdf->AddPage();
@@ -421,16 +769,29 @@ class Contrato extends Controller
         $pdf->MultiCell(0, 5.5, utf8_decode('SEGUNDA: OBJETO'), 0);
         $pdf->Ln(2);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO se obliga frente a EL CLIENTE a la elaboración de una prótesis biomecánica funcional de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
-        $pdf->Ln(5);
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO INGEN SAC se obliga frente a EL CLIENTE a la elaboración de una prótesis biomecánica funcional de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
+            $pdf->Ln(5);
+        } else if ($datos['TIP_TRAB'] == 'Estética') {
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO INGEN SAC se obliga frente a EL CLIENTE a la elaboración de una prótesis estética semi realista al 85% de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
+            $pdf->Ln(5);
+        } else if ($datos['TIP_TRAB'] == 'Miembro Superior') {
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Por el presente documento, KYP BIO INGEN SAC se obliga frente a EL CLIENTE a la elaboración de una prótesis biomecánica funcional de acuerdo a las especificaciones y plazos anotadas en la hoja de requerimiento. el cual constituye parte integrante del presente contrato.'), 0);
+            $pdf->Ln(5);
+        }
 
         $pdf->SetFont('arial', 'B', 11);
         $pdf->MultiCell(0, 5.5, utf8_decode('TERCERA: DE LA NATURALEZA DEL CONTRATO '), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Se deja expresa constancia que todo lo no previsto en el presente Contrato se aplicarán las disposiciones contenidas en el Código Civil, pues, conforme se aprecia de las condiciones del servicio, el presente contrato tiene naturaleza civil, según lo dispuesto en los artículos 1764° y 1769° del Código Civil peruano, por lo que éste no implica ningún tipo de subordinación ni dependencia laboral alguna de KYP BIO con EL CLIENTE.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('Se deja expresa constancia que todo lo no previsto en el presente Contrato se aplicarán las disposiciones contenidas en el Código Civil, pues, conforme se aprecia de las condiciones del servicio, el presente contrato tiene naturaleza civil, según lo dispuesto en los artículos 1764° y 1769° del Código Civil peruano, por lo que éste no implica ningún tipo de subordinación ni dependencia laboral alguna de KYP BIO INGEN SAC con EL CLIENTE.'), 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('arial', 'B', 11);
@@ -438,7 +799,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Para los efectos de la ejecución del presente contrato, KYP BIO prestará sus servicios profesionales en la forma, fecha, tiempo y demás condiciones acordadas previamente con EL CLIENTE, con sus propios recursos. En tal sentido, KYP BIO tiene plena libertad en el ejercicio de sus servicios.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('Para los efectos de la ejecución del presente contrato, KYP BIO INGEN SAC prestará sus servicios profesionales en la forma, fecha, tiempo y demás condiciones acordadas previamente con EL CLIENTE, con sus propios recursos. En tal sentido, KYP BIO INGEN SAC tiene plena libertad en el ejercicio de sus servicios.'), 0);
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
@@ -457,8 +818,21 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->Cell(0, 7, utf8_decode('     -    El 50% del monto (más IGV) a la firma del presente contrato.'), 0, 1);
-        $pdf->Cell(0, 7, utf8_decode('     -    El 50% del monto (más IGV) a la entrega de la prótesis con el pre encaje.'), 0);
-        $pdf->Ln(8);
+
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+
+            $pdf->Cell(0, 7, utf8_decode('     -    El 50% del monto (más IGV) a la entrega de la prótesis con el pre encaje.'), 0);
+            $pdf->Ln(8);
+        } else if ($datos['TIP_TRAB'] == 'Estética') {
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('    -     El 50% del monto (más IGV) a la entrega de la prótesis pigmentada con el                            recubrimiento de protección de silicona.'), 0);
+            $pdf->Ln(8);
+        } else if ($datos['TIP_TRAB'] == 'Miembro Superior') {
+
+            $pdf->Cell(0, 7, utf8_decode('     -	    El 50% del monto (más IGV) a la entrega de la prótesis final.'), 0);
+            $pdf->Ln(8);
+        }
+
 
         $pdf->MultiCell(0, 5.5, utf8_decode('Para el pago de la retribución económica, KYP BIO INGEN SAC entregará a EL CLIENTE el respectivo comprobante de pago. En caso se produzca retraso injustificado en el recojo y/o pago de la prótesis por más de 15 días por parte de EL CLIENTE, KYP BIO INGEN SAC tendrá derecho a la no devolución del monto adelantado como penalidad y a exigir el pago de los intereses moratorios, que se devengarán desde la fecha en que se produzca el incumplimiento injustificado del pago.'), 0);
         $pdf->Ln(5);
@@ -481,7 +855,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->Cell(0, 7, utf8_decode('     -    Asumir el pago de la retribución económica según lo estipulado en el presente contrato.'), 0, 1);
-        $pdf->MultiCell(0, 5.5, utf8_decode('     -    Apersonarse a las instalaciones de KYP BIO cada vez que esta lo requiera para la               elaboración de la prótesis.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('     -    Apersonarse a las instalaciones de KYP BIO INGEN SAC cada vez que esta lo                    requiera para la elaboración de la prótesis.'), 0);
         $pdf->Cell(0, 7, utf8_decode('     -    Otras obligaciones que pudiesen emanar de las estipulaciones del presente contrato.'), 0, 1);
         $pdf->Ln(5);
 
@@ -490,7 +864,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('El presente Contrato tendrá un plazo de duración de acuerdo a lo pactado en la hoja de requerimiento suscrito por las partes, salvo KYP BIO comunique a EL CLIENTE, de manera justificada, la necesidad de un mayor plazo.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('El presente Contrato tendrá un plazo de duración de acuerdo a lo pactado en la hoja de requerimiento suscrito por las partes, salvo KYP BIO INGEN SAC comunique a EL CLIENTE, de manera justificada, la necesidad de un mayor plazo.'), 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('arial', 'B', 11);
@@ -498,7 +872,7 @@ class Contrato extends Controller
         $pdf->Ln(2);
 
         $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE se compromete y obliga a no usar en su propio provecho ni divulgar directa o indirectamente a ninguna persona, empresa o entidad de cualquier índole, la información proporcionada por KYP BIO para la prestación del servicio a su cargo.'), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE se compromete y obliga a no usar en su propio provecho ni divulgar directa o indirectamente a ninguna persona, empresa o entidad de cualquier índole, la información proporcionada por KYP BIO INGEN SAC para la prestación del servicio a su cargo.'), 0);
         $pdf->Ln(2);
 
         $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE se compromete y obliga a no reproducir, entregar o permitir que se entregue o que se acceda y/o use información a que se refiere el numeral precedente, salvo que exista autorización previa y por escrito del KYP BIO INGEN SAC. '), 0);
@@ -507,66 +881,390 @@ class Contrato extends Controller
         $pdf->MultiCell(0, 5.5, utf8_decode('La obligación de confidencialidad a que se refiere la presente cláusula tendrá una vigencia de  (1) año calendario contados a partir de la suscripción del presente documento.'), 0);
         $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('La información y/o documentación que se produzca en la ejecución del presente Contrato será de propiedad exclusiva del KYP BIO, encontrándose incluida dentro de los alcances de reserva y confidencialidad estipulados en la presente cláusula. '), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('La información y/o documentación que se produzca en la ejecución del presente Contrato será de propiedad exclusiva del KYP BIO INGEN SAC, encontrándose incluida dentro de los alcances de reserva y confidencialidad estipulados en la presente cláusula. '), 0);
         $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE declara que la violación de esta obligación facultará a KYP BIO a resolver el presente contrato y a exigir judicial o extrajudicialmente una indemnización por los daños y perjuicios. '), 0);
+        $pdf->MultiCell(0, 5.5, utf8_decode('EL CLIENTE declara que la violación de esta obligación facultará a KYP BIO INGEN SAC a resolver el presente contrato y a exigir judicial o extrajudicialmente una indemnización por los daños y perjuicios. '), 0);
         $pdf->Ln(5);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: GARANTIA'), 0);
-        $pdf->Ln(2);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se compromete a otorgar una garantía por el PRE ENCAJE de hasta 30 días calendarios desde su entrega sólo en caso de adaptabilidad y reducción del muñón; siendo que posterior a dicho plazo se dará paso a la elaboración del socket de fibra de carbono para dar por finalizado el servicio contratado.'), 0);
-        $pdf->Ln(2);
+        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: GARANTIA'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('La no comunicación expresa de EL CLIENTE a KYP BIO respecto al pre encaje conforme a la causal y plazo estipulado en el párrafo anterior implicará la renuncia a cualquier reclamo por parte de EL CLIENTE y su conformidad respecto al mismo.'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se compromete a otorgar una garantía por el PRE ENCAJE de hasta 30 días calendarios desde su entrega sólo en caso de adaptabilidad y reducción del muñón; siendo que posterior a dicho plazo se dará paso a la elaboración del socket de fibra de carbono para dar por finalizado el servicio contratado.'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('Asimismo, al momento de tener el socket en fibra de carbono final si necesita cambios o uno nuevo deberé asumir el costo de este tanto como de un nuevo linner si fuera necesario.'), 0);
-        $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La no comunicación expresa de EL CLIENTE a KYP BIO respecto al pre encaje conforme a la causal y plazo estipulado en el párrafo anterior implicará la renuncia a cualquier reclamo por parte de EL CLIENTE y su conformidad respecto al mismo.'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
-        $pdf->Ln(5);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Asimismo, al momento de tener el socket en fibra de carbono final si necesita cambios o uno nuevo deberé asumir el costo de este tanto como de un nuevo linner si fuera necesario.'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: RESOLUCIÓN DEL CONTRATO'), 0);
-        $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
-        $pdf->Ln(5);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRÓNICO'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
-        $pdf->Ln(10);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRÓNICO'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: COMPETENCIA Y LEGISLACIÓN'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(10);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
-        $pdf->Ln(5);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
 
-        $pdf->SetFont('arial', 'B', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA TERCERA: DISPOSICIONES FINALES'), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(5);
 
-        $pdf->SetFont('arial', '', 11);
-        $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
-        $pdf->Ln(2);
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA TERCERA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes. '), 0);
-        $pdf->Ln(5);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
 
-        $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de '.$datos['SEDE'].' el ' . $fecha_hoy. '.'), 0);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes. '), 0);
+            $pdf->Ln(5);
 
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+        } else if ($datos['TIP_TRAB'] == 'Estética') {
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: PROCESO DE ELABORACIÓN, CARACTERISTICAS, APROBACION, MULTAS, INTERVENCIONES QUIRUJICAS, PUNTUALIDAD Y MANTENIMIENTO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Proceso de Elaboración:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La elaboración de la prótesis ' . $datos['SUB_TRAB'] . ' abarca un periodo de 45 a 55 días hábiles, distribuidos en 4 fases:'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('i.     Fase I: Toma del molde y medidas.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('ii.    Fase II: Escultura y posible modificación según el gusto del paciente.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iii.   Fase III: Vaciado en silicona con color base.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iv.   Fase IV: Pintado y entrega de la prótesis con el paciente en vivo.'), 0, 1);
+            $pdf->Ln(5);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se recuerda al paciente que las prótesis tienen un propósito netamente estético y de exhibición, sugiriendo evitar cargar objetos o someterlas a pruebas extremas.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Características de las Prótesis:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las prótesis presentan un 80% de realismo en cuanto al color y un 95% en el modelado escultórico.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se recomienda que el paciente mantenga una tonalidad pareja para lograr un resultado más realista y armonioso con otras partes del cuerpo.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Aprobación en Fase II y Multas: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Una vez aprobada la FASE II (escultura), no se admiten modificaciones en la FASE IV, y realizar cambios conlleva una multa.'), 0);
+            $pdf->Ln(2);
+
+            if ($datos['SUB_TRAB'] == "Microtia Tipo 1 y 2" || $datos['SUB_TRAB'] == "Microtia Tipo 3 y 4") {
+                $pdf->MultiCell(0, 5.5, utf8_decode('En caso de microtias, se deja una membrana para mayor adhesión, pero su reducción corre por cuenta del paciente, eximiendo a la empresa de responsabilidad por pérdida de firmeza.'), 0);
+                $pdf->Ln(5);
+            }
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Intervenciones Quirúrgicas y Puntualidad: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El paciente debe informar cualquier intervención quirúrgica durante la elaboración, evitando multas y retrasos.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('A partir de la FASE IV, la empresa no asume responsabilidad por variaciones en medidas no informadas previamente.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se insta a la puntualidad, y en caso de retraso, se avanzará en la elaboración para evitar perjuicios a otros pacientes. Se recomienda a los pacientes de provincia llegar con anticipación.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Cuidados y Mantenimiento: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se aconseja aplicar talco en el muñón según sea necesario para facilitar el deslizamiento de la prótesis.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La extracción debe hacerse con cuidado, evitando fuerza excesiva para prevenir roturas irreparables.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se detallan condiciones de resistencia y debilidades del material de la prótesis, indicando precauciones para su uso adecuado.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Reparaciones y Consideraciones Finales: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier corte en la prótesis debe ser atendido en las instalaciones de la empresa para evitar riesgos. Se desaconseja la reparación por cuenta propia.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se proporcionan recomendaciones específicas, como evitar la inmersión en sales marinas, cargar objetos pesados o realizar flexiones bruscas.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Se alerta sobre la posibilidad de alteraciones estéticas en caso de reparaciones.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: GARANTIA'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La no comunicación expresa de EL CLIENTE a KYP BIO INGEN SAC respecto a la escultura y modificación conforme a la causal y plazo estipulado en el párrafo anterior implicará la renuncia a cualquier reclamo por parte de EL CLIENTE y su conformidad respecto al mismo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la protesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal pigmentación por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA PRIMERA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRONICO  '), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA SEGUNDA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('ONCEAVA TERCERA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+            $pdf->Ln(2);
+        } else if ($datos['SUB_TRAB'] == 'Mano Parcial Biónica' || $datos['SUB_TRAB'] == 'Mano Completa Biónica') {
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: PROCESO DE ELABORACIÓN, CARACTERISTICAS, INTERVENCIONES QUIRUJICAS, PROGRAMACIÓN DE CITAS, USOS Y CUIDADOS'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Proceso de Elaboración:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La elaboración de la prótesis abarca un periodo de 30 a 40 días hábiles, distribuidos en 5 fases:'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('i.     Fase I: Toma de medidas y escaneo 3D.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('ii.    Fase II: Pruebas de encaje del socket.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->MultiCell(0, 5.5, utf8_decode('iii.   Fase III: Pruebas con el prototipo de la prótesis y adecuación de las señales            mioeléctricas.'), 0);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iv.   Fase IV: Modificaciones y ensamble de la prótesis final.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('v.    Fase V: Entrega de la prótesis final con sus accesorios.'), 0, 1);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Características de las Prótesis:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La prótesis electrónica ofrece la capacidad de realizar diversas actividades cotidianas con facilidad, desde sujetar objetos como vasos, tazas, hasta manipular bolígrafos y teléfonos celulares. La efectividad en estas tareas puede variar en función del nivel de destreza y habilidad individual del paciente.'), 0);
+            $pdf->Ln(5);
+
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Intervenciones Quirúrgicas y Puntualidad: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El paciente no debe realizarse ninguna intervención quirúrgica durante la elaboración de la prótesis para evitar retrasos y variaciones en el diseño del encaje.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('A partir de la FASE III, la empresa no asume responsabilidad por variaciones en medidas del muñón no informadas previamente.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Programación de Citas: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La asistencia puntual a todas las citas programadas con el especialista es de vital importancia durante las diversas fases del desarrollo hasta la entrega final de la prótesis. La falta de asistencia a estas citas puede ocasionar retrasos considerables en la entrega del producto final. Se informa al paciente que la ausencia continua y no justificada a dichas citas podría resultar en la terminación unilateral del contrato por parte del proveedor, sin derecho a reclamos o reembolsos de los pagos efectuados hasta la fecha de rescisión.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Usos y cuidados: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El uso de la prótesis se limita a actividades cotidianas que incluyen sujetar vasos, tazas, bolígrafos, teléfonos celulares y objetos similares. Queda expresamente prohibido exponer la prótesis a temperaturas superiores a 50 °C, así como participar en actividades extremas con su uso. Se advierte al usuario que la capacidad de carga de la prótesis está limitada a objetos de hasta 1.5 kg, evitando cargas superiores para preservar su integridad y funcionamiento óptimo. Se hace constar que cualquier caída o impacto puede ocasionar daños irreparables, por lo que se recomienda precaución para evitar estos incidentes. Adicionalmente, se insta al usuario a evitar el contacto con agua, polvo excesivo y sustancias químicas, ya que podrían comprometer la integridad y durabilidad de la prótesis.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: GARANTIA'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El CLIENTE debe llevar la prótesis para su mantenimiento cada 4 meses a partir de la entrega de la prótesis final, según las fechas indicadas en la ficha de garantía. Si no se cumplen estos plazos de mantenimiento, la garantía quedará anulada y no se podrá realizar ningún reclamo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En caso de que se presente alguna falla en algún componente de la prótesis KYP BIO INGEN SAC, nos comprometemos a evaluar dicho componente defectuoso para determinar el origen del problema. Si la falla se debe a defectos de fabricación, procederemos a reemplazarlo por uno nuevo. Sin embargo, no nos haremos responsables por fallas debido a un uso inadecuado o falta de cuidado de la prótesis. En esos casos, se requerirá el pago del componente dañado para realizar el reemplazo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRONICO '), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA TERCERA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA CUARTA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+            $pdf->Ln(2);
+        } else if ($datos['SUB_TRAB'] == 'Mano Parcial Mecánica' || $datos['SUB_TRAB'] == 'Mano Parcial de articulación manual' || $datos['SUB_TRAB'] == 'Falange Mecánica' || $datos['SUB_TRAB'] == 'Protesis Transhumeral tipo gancho cosmético (Fillauer)' || $datos['SUB_TRAB'] == 'Protesis transradial tipo gancho cosmético (Fillauer)' || $datos['SUB_TRAB'] == 'Protesis Transhumeral tipo gancho cosmético (Aosuo)' || $datos['SUB_TRAB'] == 'Protesis transradial mecánica de TPU' || $datos['SUB_TRAB'] == '') {
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('NOVENA: PROCESO DE ELABORACIÓN, CARACTERISTICAS, INTERVENCIONES QUIRUJICAS, PROGRAMACIÓN DE CITAS, USOS Y CUIDADOS'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Proceso de Elaboración:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La elaboración de la prótesis abarca un periodo de 30 a 40 días hábiles, distribuidos en 5 fases:'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('i.     Fase I: Toma de medidas y escaneo 3D.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('ii.    Fase II: Pruebas de encaje del socket.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iii.   Fase III: Pruebas con el prototipo de la prótesis.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('iv.   Fase IV: Modificaciones y ensamble de la prótesis final.'), 0, 1);
+            $pdf->SetX(40);
+            $pdf->Cell(0, 5, utf8_decode('v.    Fase V: Entrega de la prótesis final con sus accesorios.'), 0, 1);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Características de las Prótesis:'), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las prótesis accionadas por el cuerpo ofrecen la capacidad de realizar diversas actividades cotidianas con facilidad, desde sujetar objetos como vasos, tazas, hasta manipular bolígrafos y teléfonos celulares. La efectividad en estas tareas puede variar en función del nivel de destreza y habilidad individual del paciente.'), 0);
+            $pdf->Ln(5);
+
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Intervenciones Quirúrgicas y Puntualidad: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El paciente no debe realizarse ninguna intervención quirúrgica durante la elaboración de la prótesis para evitar retrasos y variaciones en el diseño del encaje.'), 0);
+            $pdf->Ln(2);
+            $pdf->MultiCell(0, 5.5, utf8_decode('A partir de la FASE III, la empresa no asume responsabilidad por variaciones en medidas del muñón no informadas previamente.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Programación de Citas: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('La asistencia puntual a todas las citas programadas con el especialista es de vital importancia durante las diversas fases del desarrollo hasta la entrega final de la prótesis. La falta de asistencia a estas citas puede ocasionar retrasos considerables en la entrega del producto final. Se informa al paciente que la ausencia continua y no justificada a dichas citas podría resultar en la terminación unilateral del contrato por parte del proveedor, sin derecho a reclamos o reembolsos de los pagos efectuados hasta la fecha de rescisión.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->Cell(0, 7, utf8_decode('Usos y cuidados: '), 0, 1);
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('El uso de la prótesis se limita a actividades cotidianas que incluyen sujetar vasos, tazas, bolígrafos, teléfonos celulares y objetos similares. Queda expresamente prohibido exponer la prótesis a temperaturas superiores a 50 °C. Se advierte al usuario que la capacidad de carga de la prótesis está limitada a objetos de hasta 1.5 kg, evitando cargas superiores para preservar su integridad y funcionamiento óptimo. Soporta caídas de hasta de 1.5 metros. Adicionalmente, se insta al usuario a evitar el contacto con sustancias químicas, ya que podrían comprometer la integridad y durabilidad de la prótesis.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA: GARANTIA'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('En caso de que se presente alguna falla en algún componente de la prótesis KYP BIO INGEN SAC, nos comprometemos a evaluar dicho componente defectuoso para determinar el origen del problema. Si la falla se debe a defectos de fabricación, procederemos a reemplazarlo por uno nuevo. Sin embargo, no nos haremos responsables por fallas debido a un uso inadecuado o falta de cuidado de la prótesis. En esos casos, se requerirá el pago del componente dañado para realizar el reemplazo.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC otorgará el servicio de mantenimiento de hasta un (01) año respecto a la prótesis materia de contrato siempre y cuando la misma no haya sufrido ningún daño estructural que permita su normal funcionamiento por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA PRIMERA: RESOLUCIÓN DEL CONTRATO'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('KYP BIO INGEN SAC se encuentra facultado a resolver el presente Contrato, durante la vigencia del mismo, bastando para ello que curse una comunicación simple con cinco (05) días de anticipación a la fecha en que solicita opere la resolución, en caso se dé el incumplimiento a las obligaciones estipuladas en el presente Contrato y/o en la hoja de requerimiento del servicio por parte de EL CLIENTE.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA SEGUNDA: NOTIFICACION EN DOMICILIO Y/O CORREO ELECTRONICO '), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Para la validez de todas las comunicaciones y notificaciones entre las partes, con motivo de la ejecución de este contrato, estas se realizarán a través de sus domicilios y/o correos electrónicos, señalados en la introducción de este documento. La variación de domicilio de cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio a la otra parte, por cualquier medio escrito.'), 0);
+            $pdf->Ln(5);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DÉCIMA TERCERA: COMPETENCIA Y LEGISLACIÓN'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('LAS PARTES acuerdan que para efectos de cualquier controversia que se genere con motivo de la celebración y/o ejecución de este contrato, serán resueltas de manera definitiva mediante ARBITRAJE.'), 0);
+            $pdf->Ln(10);
+
+            $pdf->SetFont('arial', 'B', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('DECIMA CUARTA: DISPOSICIONES FINALES'), 0);
+            $pdf->Ln(2);
+
+            $pdf->SetFont('arial', '', 11);
+            $pdf->MultiCell(0, 5.5, utf8_decode('Las partes declaran que el Contrato constituye el acuerdo y entendimiento íntegros a los que han llegado con relación al objeto materia del presente documento y que el Contrato sustituye todas las negociaciones y todos los acuerdos que hubieran sido celebrados previamente. '), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('Cualquier modificación o ampliación de los términos del presente Contrato deberá realizarse por escrito y con participación de las partes.'), 0);
+            $pdf->Ln(2);
+
+            $pdf->MultiCell(0, 5.5, utf8_decode('En señal de conformidad, las partes suscriben el presente documento en dos (2) ejemplares originales en los mismos términos y con la misma validez, en la ciudad de ' . $datos['SEDE'] . ' el ' . $fecha_hoy . '.'), 0);
+            $pdf->Ln(2);
+        }
 
         $pdf->Ln(30);
         $pdf->SetFont('arial', 'B', 12);
@@ -579,30 +1277,28 @@ class Contrato extends Controller
         $pdf->Cell(0, 7, utf8_decode('EL CLIENTE'), 0, 0, 'C');
 
 
-        if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
-            $pdf->AddPage();
+        $pdf->AddPage();
 
-            $pdf->SetFont('arial', 'B', 12);
-            $pdf->SetFillColor(200, 220, 255);
-            $pdf->Cell(0, 7, "HOJA DE REQUERIMIENTO", 0, 1, 'L', true);
-            $pdf->Ln(8);
+        $pdf->SetFont('arial', 'B', 12);
+        $pdf->SetFillColor(200, 220, 255);
+        $pdf->Cell(0, 7, "HOJA DE REQUERIMIENTO", 0, 1, 'L', true);
+        $pdf->Ln(8);
 
+        $pdf->SetFont('arial', '', 12);
+        $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
+        $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
+        $pdf->Ln(8);
+
+        $pdf->SetFont('arial', 'BI', 12);
+        $pdf->Cell(0, 7, utf8_decode("Lista de Componentes Cotizados:"), 0, 1, 'L', false);
+        $pdf->Ln(5);
+
+        foreach ($lista as $row) {
             $pdf->SetFont('arial', '', 12);
-            $pdf->Cell(0, 7, utf8_decode("N° Paciente: " . $datos['ID_PACIENTE']), 0, 1, 'L', false);
-            $pdf->Cell(0, 7, utf8_decode("Nombre del Paciente: " . $datos['NOMBRES']), 0, 1, 'L', false);
-            $pdf->Ln(8);
-
-            $pdf->SetFont('arial', 'BI', 12);
-            $pdf->Cell(0, 7, utf8_decode("Lista de Componentes :"), 0, 1, 'L', false);
-            $pdf->Ln(5);
-
-            foreach ($lista as $row) {
-                $pdf->SetFont('arial', '', 12);
-                $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
-                $pdf->Ln(6);
-            }
-            $pdf->Ln(8);
+            $pdf->Cell(0, 7, utf8_decode('    -   ' . $row['LISTA']));
+            $pdf->Ln(6);
         }
+        $pdf->Ln(8);
 
         if ($datos['TIP_TRAB'] == 'Miembro Inferior') {
             $pdf->AddPage();

@@ -1,4 +1,12 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
 class Logistica extends Controller
 {
     public function __construct()
@@ -182,8 +190,29 @@ class Logistica extends Controller
     {
         $data = $this->model->ListarImportaciones();
         for ($i = 0; $i < count($data); $i++) {
+
+            if ($data[$i]['STATUS'] == 0) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge rounded-pill bg-label-warning">
+                        <i class="mdi mdi-alert-circle-outline"></i>
+                    </span>
+                ';
+            } else if ($data[$i]['STATUS'] == 1) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-success">
+                        <i class="mdi mdi-check"></i>
+                    </span>
+                ';
+            }else {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-danger">
+                        <i class="mdi mdi-window-close"></i>
+                    </span>
+                ';
+            }
+
             $data[$i]['ACCIONES'] = '
-                <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="MostrarPDf(\'' . $data[$i]['ID'] . '\')">
+                <button type="button" class="btn btn-icon btn-label-info waves-effect" onclick="MostrarPDf(\'' . $data[$i]['ID'] . '\')">
                     <i class="mdi mdi-file-document-outline">
                     </i>
                 </button>
@@ -191,6 +220,60 @@ class Logistica extends Controller
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
+    }
+
+    public function MostrarPdfEmail($id)
+    {
+        $pdfContent = $this->model->ObtenerContenidoPdf($id);
+        return $pdfContent;
+    }
+
+    public function EnviarCorreo()
+    {
+        $id_importacion = $_POST['id_importacion'];
+        $area = $_POST['area'];
+        $mail = new PHPMailer(true);
+
+        try {
+            // Configuración del servidor SMTP
+            $mail->SMTPDebug = 2;
+            $mail->isSMTP();
+            $mail->Host       = SMP;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $_SESSION['email'];
+            $mail->Password   = $_SESSION['pass'];
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = PORT_SSL;
+
+            // Configuración del remitente y destinatario
+            $mail->setFrom($_SESSION['email'], $_SESSION['nombres']);
+            $mail->addAddress('jvdark2020@gmail.com');
+
+            // Adjunta el archivo PDF al correo
+            $pdfContent = $this->MostrarPdfEmail($id_importacion);
+            $mail->addStringAttachment($pdfContent, 'Importacion_' . $id_importacion . '.pdf');
+
+            $mail->CharSet = 'UTF-8';
+
+            // Contenido del correo
+            $mail->isHTML(true);
+            $mail->Subject = 'Importacion ' . $area . ' - ' . $id_importacion;
+            $mail->Body = 'Importacion ' . $area . ' - ' . $id_importacion;
+
+            // Envía el correo
+            $mail->send();
+            echo "Enviado";
+        } catch (Exception $e) {
+            echo "Error: {$mail->ErrorInfo}";
+        }
+    }
+
+    public function Aprobacion()
+    {
+        $data['title'] = 'Logística - Aprobación de Importaciones | KYPBioingeniería';
+        $data['activeCheckImport'] = 'active';
+        $data['scripts'] = 'Logistica/importaciones.js';
+        $this->views->getView('Logistica', 'aprobacion', $data);
     }
 
     /************** </IMPORTACIONES> **************/

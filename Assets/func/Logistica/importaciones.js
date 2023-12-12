@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         http.send(data);
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
-                console.log(this.responseText);
                 const res = JSON.parse(this.responseText);
                 AlertaPerzonalizada(res.tipo, res.mensaje)
                 if (res.tipo == 'success') {
@@ -72,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         timer: 2000,
                         didClose: () => {
                             if (res.tipo == 'success') {
+                                EnviarCorreo(res.id)
                                 MostrarPDf(res.id);
                                 Listar();
                                 Frm.reset();
@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { data: "ID", className: "text-center" },
             { data: "FECHA", className: "text-center" },
             { data: "AREA", className: "text-center" },
+            { data: "STATUS", className: "text-center" },
             { data: "ACCIONES", className: "text-center" },
         ],
         displayLength: 7,
@@ -243,3 +244,18 @@ function MostrarPDf(id) {
     const url = base_url + 'Logistica/MostrarPdf/' + id;
     window.open(url, '_blank');
 }
+
+function EnviarCorreo(id_importacion) {
+    let formData = new FormData();
+    formData.append("id_importacion", id_importacion);
+    formData.append("area", document.getElementById("AreaImport").value);
+    const url = base_url + 'Logistica/EnviarCorreo';
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(formData);
+    http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    }
+  }

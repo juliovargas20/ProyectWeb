@@ -350,6 +350,7 @@ class Usuarios extends Controller
             $_SESSION['id_usuario'] = $data['ID'];
             $_SESSION['email'] = $data['USUARIOS'];
             $_SESSION['nombres'] = $data['NOMBRES'];
+            $_SESSION['pass'] = $data['PASSWORD'];
             $_SESSION['activo'] = $data['ESTADO'];
             $_SESSION['id'] = $data['ID_CAJA'];
 
