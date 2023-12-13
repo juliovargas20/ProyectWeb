@@ -87,4 +87,11 @@ class LogisticaModel extends Query
         $sql = "SELECT ID, FECHA, AREA, STATUS FROM importacion";
         return $this->selectAll($sql);
     }
+
+    public function updateStatus($id, $status)
+    {
+        $sql = "UPDATE importacion SET STATUS = ? WHERE ID = ?";
+        $datos = array($status, $id);
+        return $this->save($sql, $datos);
+    }
 }

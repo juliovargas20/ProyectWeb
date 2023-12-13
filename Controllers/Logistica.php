@@ -194,18 +194,21 @@ class Logistica extends Controller
             if ($data[$i]['STATUS'] == 0) {
                 $data[$i]['STATUS'] = '
                     <span class="badge rounded-pill bg-label-warning">
+                        <span class="d-none">Espera</span>
                         <i class="mdi mdi-alert-circle-outline"></i>
                     </span>
                 ';
             } else if ($data[$i]['STATUS'] == 1) {
                 $data[$i]['STATUS'] = '
                     <span class="badge badge-center rounded-pill bg-label-success">
+                        <span class="d-none">Aprobado</span>
                         <i class="mdi mdi-check"></i>
                     </span>
                 ';
-            }else {
+            } else {
                 $data[$i]['STATUS'] = '
                     <span class="badge badge-center rounded-pill bg-label-danger">
+                        <span class="d-none">Denegado</span>
                         <i class="mdi mdi-window-close"></i>
                     </span>
                 ';
@@ -272,8 +275,109 @@ class Logistica extends Controller
     {
         $data['title'] = 'Logística - Aprobación de Importaciones | KYPBioingeniería';
         $data['activeCheckImport'] = 'active';
-        $data['scripts'] = 'Logistica/importaciones.js';
+        $data['scripts'] = 'Logistica/aprobacion.js';
         $this->views->getView('Logistica', 'aprobacion', $data);
+    }
+
+    public function ListarImportacionAprobacion()
+    {
+        $data = $this->model->ListarImportaciones();
+        for ($i = 0; $i < count($data); $i++) {
+
+            if ($data[$i]['STATUS'] == 0) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge rounded-pill bg-label-warning">
+                        <span class="d-none">Espera</span>
+                        <i class="mdi mdi-alert-circle-outline"></i>
+                    </span>
+                ';
+            } else if ($data[$i]['STATUS'] == 1) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-success">
+                        <span class="d-none">Aprobado</span>
+                        <i class="mdi mdi-check"></i>
+                    </span>
+                ';
+            } else {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-danger">
+                        <span class="d-none">Denegado</span>
+                        <i class="mdi mdi-window-close"></i>
+                    </span>
+                ';
+            }
+
+            $data[$i]['ACCIONES'] = '
+                <div class="d-inline-block">
+                    <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="mdi mdi-dots-vertical"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end m-0">
+                        <a href="javascript:;" class="dropdown-item" onclick="MostrarPDf(\'' . $data[$i]['ID'] . '\')">
+                            <i class="mdi mdi-file-document-outline me-1"></i> 
+                            Ver Documento
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="Aprobacion(\'' . $data[$i]['ID'] . '\')">
+                            <i class="mdi mdi-check me-1"></i> 
+                            Aprobar
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="Espera(\'' . $data[$i]['ID'] . '\')">
+                            <i class="mdi mdi-alert-circle-outline me-1"></i> 
+                            En Espera
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="Denegado(\'' . $data[$i]['ID'] . '\')">
+                            <i class="mdi mdi-window-close me-1"></i> 
+                            Denegado
+                        </a>
+                        
+                    </div>
+                </div>
+            ';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function AprobacionStatus($id)
+    {
+        $data = $this->model->updateStatus($id, 1);
+        
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Aprobado Registrado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Aprobado Detalle');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function EsperaStatus($id)
+    {
+        $data = $this->model->updateStatus($id, 0);
+        
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Espera Registrado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Espera Detalle');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function DenegadoStatus($id)
+    {
+        $data = $this->model->updateStatus($id, 2);
+        
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Denegado Registrado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Denegado Detalle');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
     }
 
     /************** </IMPORTACIONES> **************/
