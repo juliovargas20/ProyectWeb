@@ -33,14 +33,20 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="Tab-Compra">
-                                <p>
-                                    Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice cream. Gummies
-                                    halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream cheesecake fruitcake.
-                                </p>
-                                <p class="mb-0">
-                                    Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah cotton candy
-                                    liquorice caramels.
-                                </p>
+                                <div class="card-datatable text-nowrap">
+                                    <table class="dt-complex-header table" id="TblResumenOC">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">FECHA</th>
+                                                <th class="text-center">AREA</th>
+                                                <th class="text-center">MONTO</th>
+                                                <th class="text-center">STATUS</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

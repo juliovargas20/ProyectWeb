@@ -287,7 +287,7 @@ class Logistica extends Controller
             if ($data[$i]['STATUS'] == 0) {
                 $data[$i]['STATUS'] = '
                     <span class="badge rounded-pill bg-label-warning">
-                        <span class="d-none">Espera</span>
+                        <span class="d-none">En Espera</span>
                         <i class="mdi mdi-alert-circle-outline"></i>
                     </span>
                 ';
@@ -341,7 +341,7 @@ class Logistica extends Controller
     public function AprobacionStatus($id)
     {
         $data = $this->model->updateStatus($id, 1);
-        
+
         if ($data > 0) {
             $res = array('tipo' => 'success', 'mensaje' => 'Aprobado Registrado');
         } else {
@@ -355,7 +355,7 @@ class Logistica extends Controller
     public function EsperaStatus($id)
     {
         $data = $this->model->updateStatus($id, 0);
-        
+
         if ($data > 0) {
             $res = array('tipo' => 'success', 'mensaje' => 'Espera Registrado');
         } else {
@@ -369,7 +369,7 @@ class Logistica extends Controller
     public function DenegadoStatus($id)
     {
         $data = $this->model->updateStatus($id, 2);
-        
+
         if ($data > 0) {
             $res = array('tipo' => 'success', 'mensaje' => 'Denegado Registrado');
         } else {
@@ -377,6 +377,108 @@ class Logistica extends Controller
         }
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function AprobacionStatusCompra($id)
+    {
+        $data = $this->model->updateStatusCompra($id, 1);
+
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Aprobado Registrado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Aprobado Detalle');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function EsperaStatusCompra($id)
+    {
+        $data = $this->model->updateStatusCompra($id, 0);
+
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Espera Registrado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Espera Detalle');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function DenegadoStatusCompra($id)
+    {
+        $data = $this->model->updateStatusCompra($id, 2);
+
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Denegado Registrado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Denegado Detalle');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function ListarOC()
+    {
+        $data = $this->model->ListarOrdenCompra();
+        for ($i = 0; $i < count($data); $i++) {
+
+            if ($data[$i]['STATUS'] == 0) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge rounded-pill bg-label-warning">
+                        <span class="d-none">Espera</span>
+                        <i class="mdi mdi-alert-circle-outline"></i>
+                    </span>
+                ';
+            } else if ($data[$i]['STATUS'] == 1) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-success">
+                        <span class="d-none">Aprobado</span>
+                        <i class="mdi mdi-check"></i>
+                    </span>
+                ';
+            } else {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-danger">
+                        <span class="d-none">Denegado</span>
+                        <i class="mdi mdi-window-close"></i>
+                    </span>
+                ';
+            }
+
+            $data[$i]['TOTAL'] = '<span class="badge bg-label-info">S/. ' . $data[$i]['TOTAL'] . '</span>';
+            $data[$i]['ACCIONES'] = '
+            <div class="d-inline-block">
+            <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                <i class="mdi mdi-dots-vertical"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end m-0">
+                <a href="javascript:;" class="dropdown-item" onclick="MostrarPDfCompra(\'' . $data[$i]['ID'] . '\')">
+                    <i class="mdi mdi-file-document-outline me-1"></i> 
+                    Ver Recibo
+                </a>
+                <a href="javascript:;" class="dropdown-item" onclick="AprobacionCompra(\'' . $data[$i]['ID'] . '\')">
+                    <i class="mdi mdi-check me-1"></i> 
+                    Aprobar
+                </a>
+                <a href="javascript:;" class="dropdown-item" onclick="EsperaCompra(\'' . $data[$i]['ID'] . '\')">
+                    <i class="mdi mdi-alert-circle-outline me-1"></i> 
+                    En Espera
+                </a>
+                <a href="javascript:;" class="dropdown-item" onclick="DenegadoCompra(\'' . $data[$i]['ID'] . '\')">
+                    <i class="mdi mdi-window-close me-1"></i> 
+                    Denegado
+                </a>
+                
+            </div>
+        </div>
+            ';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
 

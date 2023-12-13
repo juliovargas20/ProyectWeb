@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { data: "AREA", className: "text-center" },
             { data: "CONCEPTO" },
             { data: "TOTAL", className: "text-center" },
+            { data: "STATUS", className: "text-center" },
             { data: "ACCIONES", className: "text-center" },
         ],
         displayLength: 7,

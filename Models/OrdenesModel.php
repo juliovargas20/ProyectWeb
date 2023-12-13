@@ -68,7 +68,7 @@ class OrdenesModel extends Query{
 
     public function ListarOrdenCompra()
     {
-        $sql = "SELECT ID, FECHA, AREA, NECESIDAD, CONCEPTO, TOTAL FROM ordencompra";
+        $sql = "SELECT ID, FECHA, AREA, NECESIDAD, CONCEPTO, TOTAL, STATUS FROM ordencompra";
         return $this->selectAll($sql);
     }
 

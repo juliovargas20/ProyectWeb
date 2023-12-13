@@ -94,4 +94,17 @@ class LogisticaModel extends Query
         $datos = array($status, $id);
         return $this->save($sql, $datos);
     }
+
+    public function updateStatusCompra($id, $status)
+    {
+        $sql = "UPDATE ordencompra SET STATUS = ? WHERE ID = ?";
+        $datos = array($status, $id);
+        return $this->save($sql, $datos);
+    }
+
+    public function ListarOrdenCompra()
+    {
+        $sql = "SELECT ID, FECHA, AREA, NECESIDAD, CONCEPTO, TOTAL, STATUS FROM ordencompra";
+        return $this->selectAll($sql);
+    }
 }

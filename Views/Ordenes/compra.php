@@ -159,6 +159,7 @@
                                 <th class="text-center">AREA</th>
                                 <th>CONCEPTO</th>
                                 <th class="text-center">MONTO</th>
+                                <th class="text-center">STATUS</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>

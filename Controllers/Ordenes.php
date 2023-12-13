@@ -179,6 +179,30 @@ class Ordenes extends Controller
     {
         $data = $this->model->ListarOrdenCompra();
         for ($i = 0; $i < count($data); $i++) {
+
+            if ($data[$i]['STATUS'] == 0) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge rounded-pill bg-label-warning">
+                        <span class="d-none">Espera</span>
+                        <i class="mdi mdi-alert-circle-outline"></i>
+                    </span>
+                ';
+            } else if ($data[$i]['STATUS'] == 1) {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-success">
+                        <span class="d-none">Aprobado</span>
+                        <i class="mdi mdi-check"></i>
+                    </span>
+                ';
+            } else {
+                $data[$i]['STATUS'] = '
+                    <span class="badge badge-center rounded-pill bg-label-danger">
+                        <span class="d-none">Denegado</span>
+                        <i class="mdi mdi-window-close"></i>
+                    </span>
+                ';
+            }
+
             $data[$i]['TOTAL'] = '<span class="badge bg-label-info">S/. ' . $data[$i]['TOTAL'] . '</span>';
             $data[$i]['ACCIONES'] = '
                 <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="MostrarRecibo(\'' . $data[$i]['ID'] . '\')">
