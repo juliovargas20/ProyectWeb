@@ -301,8 +301,6 @@ class Logistica extends Controller
         } else {
             header('Location: ' . BASE_URL . 'MyError');
         }
-
-        
     }
 
     public function ListarImportacionAprobacion()
@@ -509,4 +507,18 @@ class Logistica extends Controller
     }
 
     /************** </IMPORTACIONES> **************/
+
+
+    /************** <PRODUCTOS> **************/
+
+    public function productos()
+    {
+        $data['title'] = 'Logística - Listado de Productos | KYPBioingeniería';
+        $data['activeProduct'] = 'active';
+        $data['activeOpen'] = 'active open';
+        $data['scripts'] = 'Logistica/importaciones.js';
+        $this->views->getView('Logistica', 'productos', $data);
+    }
+
+    /************** </PRODUCTOS> **************/
 }

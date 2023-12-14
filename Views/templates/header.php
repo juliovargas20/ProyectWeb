@@ -300,6 +300,36 @@
 
           <?php endif; ?>
 
+            <li class="menu-item <?php echo !empty($data['activeOpen']) ? $data['activeOpen'] : ''; ?>">
+              <a class="menu-link menu-toggle waves-effect" href="javascript:void(0);">
+                <i class="menu-icon tf-icons mdi mdi-archive-outline"></i>
+                <div data-i18n="Almacén">Almacén</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item <?php echo !empty($data['activeProduct']) ? $data['activeProduct'] : ''; ?>">
+                  <a class="menu-link" href="<?php echo BASE_URL . 'Logistica/productos' ?>">
+                    <div data-i18n="Productos">Productos</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a class="menu-link" href="#">
+                    <div data-i18n="Entradas">Entradas</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a class="menu-link" href="#">
+                    <div data-i18n="Salidas">Salidas</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a class="menu-link" href="#">
+                    <div data-i18n="Inventario">Inventario</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
           <!-- /LOGÍSTICA -->
 
 
