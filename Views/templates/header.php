@@ -146,11 +146,14 @@
 
           <?php endif; ?>
 
+          <?php if (!empty($_SESSION['OT'])) : ?>
           <!-- Ordenes Internas -->
 
-          <li class="menu-header fw-light mt-4">
-            <span class="menu-header-text">Ordenes Internas</span>
-          </li>
+            <li class="menu-header fw-light mt-4">
+              <span class="menu-header-text">Ordenes Internas</span>
+            </li>
+
+          <?php endif; ?>
 
           <?php if (!empty($_SESSION['OT'])) : ?>
 
@@ -258,12 +261,15 @@
 
           <!-- LOGÍSTICA -->
 
-          <?php if (!empty($_SESSION['OC'])) : ?>
+          <?php if (!empty($_SESSION['OC']) || !empty($_SESSION['IMPORT']) || !empty($_SESSION['APRO'])) : ?>
 
             <li class="menu-header fw-light mt-4">
               <span class="menu-header-text">Logística</span>
             </li>
 
+          <?php endif; ?>
+
+          <?php if (!empty($_SESSION['OC'])) : ?>
             <li class="menu-item <?php echo !empty($data['activeOrdenCompra']) ? $data['activeOrdenCompra'] : ''; ?>">
               <a href="<?php echo BASE_URL . 'Ordenes/compra' ?>" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-cash"></i>
@@ -273,19 +279,26 @@
 
           <?php endif; ?>
 
-          <li class="menu-item <?php echo !empty($data['activeImport']) ? $data['activeImport'] : ''; ?>">
-            <a href="<?php echo BASE_URL . 'Logistica/importaciones' ?>" class="menu-link">
-              <i class="menu-icon tf-icons mdi mdi-truck-outline"></i>
-              <div data-i18n="Orden Importanción">Orden Importanción</div>
-            </a>
-          </li>
+          <?php if (!empty($_SESSION['IMPORT'])) : ?>
 
-          <li class="menu-item <?php echo !empty($data['activeCheckImport']) ? $data['activeCheckImport'] : ''; ?>">
-            <a href="<?php echo BASE_URL . 'Logistica/aprobacion' ?>" class="menu-link">
-              <i class="menu-icon tf-icons mdi mdi-file-check"></i>
-              <div data-i18n="Aprobacion">Aprobacion</div>
-            </a>
-          </li>
+            <li class="menu-item <?php echo !empty($data['activeImport']) ? $data['activeImport'] : ''; ?>">
+              <a href="<?php echo BASE_URL . 'Logistica/importaciones' ?>" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-truck-outline"></i>
+                <div data-i18n="Orden Importanción">Orden Importanción</div>
+              </a>
+            </li>
+
+          <?php endif; ?>
+
+          <?php if (!empty($_SESSION['APRO'])) : ?>
+            <li class="menu-item <?php echo !empty($data['activeCheckImport']) ? $data['activeCheckImport'] : ''; ?>">
+              <a href="<?php echo BASE_URL . 'Logistica/aprobacion' ?>" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-check"></i>
+                <div data-i18n="Aprobacion">Aprobacion</div>
+              </a>
+            </li>
+
+          <?php endif; ?>
 
           <!-- /LOGÍSTICA -->
 

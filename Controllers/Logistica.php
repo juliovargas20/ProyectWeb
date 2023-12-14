@@ -19,10 +19,22 @@ class Logistica extends Controller
 
     public function importaciones()
     {
-        $data['title'] = 'Logística - Orden de Importaciones | KYPBioingeniería';
-        $data['activeImport'] = 'active';
-        $data['scripts'] = 'Logistica/importaciones.js';
-        $this->views->getView('Logistica', 'importacion', $data);
+
+        if (empty($_SESSION['activo'])) {
+            header("location: " . BASE_URL);
+        }
+
+        $id_caja = $_SESSION['id'];
+        $verificar = $this->model->Verificar($id_caja, 13);
+
+        if (!empty($verificar)) {
+            $data['title'] = 'Logística - Orden de Importaciones | KYPBioingeniería';
+            $data['activeImport'] = 'active';
+            $data['scripts'] = 'Logistica/importaciones.js';
+            $this->views->getView('Logistica', 'importacion', $data);
+        } else {
+            header('Location: ' . BASE_URL . 'MyError');
+        }
     }
 
     public function RegistroDetallePro()
@@ -273,10 +285,24 @@ class Logistica extends Controller
 
     public function Aprobacion()
     {
-        $data['title'] = 'Logística - Aprobación de Importaciones | KYPBioingeniería';
-        $data['activeCheckImport'] = 'active';
-        $data['scripts'] = 'Logistica/aprobacion.js';
-        $this->views->getView('Logistica', 'aprobacion', $data);
+
+        if (empty($_SESSION['activo'])) {
+            header("location: " . BASE_URL);
+        }
+
+        $id_caja = $_SESSION['id'];
+        $verificar = $this->model->Verificar($id_caja, 14);
+
+        if (!empty($verificar)) {
+            $data['title'] = 'Logística - Aprobación de Importaciones | KYPBioingeniería';
+            $data['activeCheckImport'] = 'active';
+            $data['scripts'] = 'Logistica/aprobacion.js';
+            $this->views->getView('Logistica', 'aprobacion', $data);
+        } else {
+            header('Location: ' . BASE_URL . 'MyError');
+        }
+
+        
     }
 
     public function ListarImportacionAprobacion()

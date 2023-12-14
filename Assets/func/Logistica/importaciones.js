@@ -52,38 +52,49 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         if (TBodyOI.rows.length > 0) {
-            btnImport.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
-            btnImport.disabled = true;
 
-            const url = base_url + "Logistica/RegistrarImportacion";
-            let frm = new FormData();
-            frm.append('AreaImport', document.getElementById('AreaImport').value);
-            const http = new XMLHttpRequest();
-            http.open("POST", url, true);
-            http.send(frm);
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    const res = JSON.parse(this.responseText);
-                    Swal.fire({
-                        icon: res.tipo,
-                        title: res.mensaje,
-                        showConfirmButton: true,
-                        timer: 2000,
-                        didClose: () => {
-                            if (res.tipo == 'success') {
-                                EnviarCorreo(res.id)
-                                MostrarPDf(res.id);
-                                Listar();
-                                Frm.reset();
-                                TblOi_data.ajax.reload();
-                                btnImport.innerHTML = `Generar Importacion`;
-                                btnImport.disabled = false;
-                            }
-                        },
-                    });
+            if (document.getElementById('AreaImport').value == "") {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo Area Vacía',
+                    showConfirmButton: true,
+                    timer: 2000,
+                });
+            } else {
 
-                }
-            };
+                btnImport.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
+                btnImport.disabled = true;
+
+                const url = base_url + "Logistica/RegistrarImportacion";
+                let frm = new FormData();
+                frm.append('AreaImport', document.getElementById('AreaImport').value);
+                const http = new XMLHttpRequest();
+                http.open("POST", url, true);
+                http.send(frm);
+                http.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        const res = JSON.parse(this.responseText);
+                        Swal.fire({
+                            icon: res.tipo,
+                            title: res.mensaje,
+                            showConfirmButton: true,
+                            timer: 2000,
+                            didClose: () => {
+                                if (res.tipo == 'success') {
+                                    EnviarCorreo(res.id)
+                                    MostrarPDf(res.id);
+                                    Listar();
+                                    Frm.reset();
+                                    TblOi_data.ajax.reload();
+                                    btnImport.innerHTML = `Generar Importacion`;
+                                    btnImport.disabled = false;
+                                }
+                            },
+                        });
+
+                    }
+                };
+            }
         } else {
             Swal.fire({
                 icon: 'warning',
@@ -254,8 +265,8 @@ function EnviarCorreo(id_importacion) {
     http.open("POST", url, true);
     http.send(formData);
     http.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-      }
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
     }
-  }
+}
