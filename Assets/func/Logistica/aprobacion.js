@@ -58,7 +58,11 @@ function Aprobacion(id) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             if (res.tipo == 'success') {
-                TblOi_data.ajax.reload();
+                var currentPage = TblOi_data.page();
+                TblOi_data.ajax.reload(function () {
+                    // Restaurar la página después de que la tabla se haya recargado
+                    TblOi_data.page(currentPage).draw('page');
+                });
             }
         }
     };
@@ -74,7 +78,11 @@ function Espera(id) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             if (res.tipo == 'success') {
-                TblOi_data.ajax.reload();
+                var currentPage = TblOi_data.page();
+                TblOi_data.ajax.reload(function () {
+                    // Restaurar la página después de que la tabla se haya recargado
+                    TblOi_data.page(currentPage).draw('page');
+                });
             }
         }
     };
@@ -90,7 +98,11 @@ function Denegado(id) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             if (res.tipo == 'success') {
-                TblOi_data.ajax.reload();
+                var currentPage = TblOi_data.page();
+                TblOi_data.ajax.reload(function () {
+                    // Restaurar la página después de que la tabla se haya recargado
+                    TblOi_data.page(currentPage).draw('page');
+                });
             }
         }
     };
@@ -111,7 +123,11 @@ function AprobacionCompra(id) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             if (res.tipo == 'success') {
-                TblOC_data.ajax.reload();
+                var currentPage = TblOC_data.page();
+                TblOC_data.ajax.reload(function () {
+                    // Restaurar la página después de que la tabla se haya recargado
+                    TblOC_data.page(currentPage).draw('page');
+                });
             }
         }
     };
@@ -127,7 +143,11 @@ function EsperaCompra(id) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             if (res.tipo == 'success') {
-                TblOC_data.ajax.reload();
+                var currentPage = TblOC_data.page();
+                TblOC_data.ajax.reload(function () {
+                    // Restaurar la página después de que la tabla se haya recargado
+                    TblOC_data.page(currentPage).draw('page');
+                });
             }
         }
     };
@@ -143,7 +163,11 @@ function DenegadoCompra(id) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             if (res.tipo == 'success') {
-                TblOC_data.ajax.reload();
+                var currentPage = TblOC_data.page();
+                TblOC_data.ajax.reload(function () {
+                    // Restaurar la página después de que la tabla se haya recargado
+                    TblOC_data.page(currentPage).draw('page');
+                });
             }
         }
     };
