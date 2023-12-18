@@ -509,15 +509,64 @@ class Logistica extends Controller
     /************** </IMPORTACIONES> **************/
 
 
-    /************** <PRODUCTOS> **************/
+    /************** <ALMACENES> **************/
 
-    public function productos()
+    public function almacen()
     {
-        $data['title'] = 'Logística - Listado de Productos | KYPBioingeniería';
-        $data['activeProduct'] = 'active';
+        $data['title'] = 'Logística - Almacenes | KYPBioingeniería';
+        $data['activeAlmacen'] = 'active';
         $data['activeOpen'] = 'active open';
         $data['scripts'] = 'Logistica/importaciones.js';
-        $this->views->getView('Logistica', 'productos', $data);
+        $this->views->getView('Logistica', 'almacen', $data);
+    }
+
+    /************** </ALMACENES> **************/
+
+
+    /************** <PRODUCTOS LIMA> **************/
+
+    public function productos_lima()
+    {
+        $data['title'] = 'Logística - Listado de Productos LIMA | KYPBioingeniería';
+        $data['activeAlmacen'] = 'active';
+        $data['activeOpen'] = 'active open';
+        $data['scripts'] = 'Logistica/Productos/lima.js';
+        $this->views->getView('Logistica', 'Productos-Lima/productos-lima', $data);
+    }
+
+    public function AllProducts()
+    {
+        $data = $this->model->AllProducts();
+        for ($i=0; $i < count($data); $i++) { 
+            $data[$i]['ACCIONES'] = '
+                <div class="d-inline-block">
+                    <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="mdi mdi-dots-vertical"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end m-0">
+                        <a href="javascript:;" class="dropdown-item" onclick="">
+                            <i class="mdi mdi-pencil-outline me-1"></i> 
+                            Editar
+                        </a>
+                        <a href="javascript:;" class="dropdown-item" onclick="">
+                            <i class="mdi mdi-trash-can-outline me-1"></i> 
+                            Eliminar
+                        </a>
+                    </div>
+                </div>
+            ';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function agregar_producto()
+    {
+        $data['title'] = 'Logística - Agregar de Productos | KYPBioingeniería';
+        $data['activeAlmacen'] = 'active';
+        $data['activeOpen'] = 'active open';
+        $data['scripts'] = 'Logistica/Productos/agregar.js';
+        $this->views->getView('Logistica', 'Productos-Lima/agregar', $data);
     }
 
     /************** </PRODUCTOS> **************/

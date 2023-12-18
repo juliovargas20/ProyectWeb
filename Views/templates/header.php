@@ -306,24 +306,14 @@
                 <div data-i18n="Almacén">Almacén</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item <?php echo !empty($data['activeProduct']) ? $data['activeProduct'] : ''; ?>">
-                  <a class="menu-link" href="<?php echo BASE_URL . 'Logistica/productos' ?>">
+                <li class="menu-item <?php echo !empty($data['activeAlmacen']) ? $data['activeAlmacen'] : ''; ?>">
+                  <a class="menu-link" href="<?php echo BASE_URL . 'Logistica/almacen' ?>">
                     <div data-i18n="Productos">Productos</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a class="menu-link" href="#">
-                    <div data-i18n="Entradas">Entradas</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a class="menu-link" href="#">
-                    <div data-i18n="Salidas">Salidas</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a class="menu-link" href="#">
-                    <div data-i18n="Inventario">Inventario</div>
+                    <div data-i18n="Inventario General">Inventario General</div>
                   </a>
                 </li>
               </ul>

@@ -6,6 +6,8 @@ class LogisticaModel extends Query
         parent::__construct();
     }
 
+    /************** <IMPORTACIONES> **************/
+
     public function RegistarDetallePro($nombre, $pais, $tel_pro, $pagina, $ven, $tel_ven, $cantidad, $producto, $des, $link, $obs, $id_user, $moneda, $precio)
     {
         $sql = "INSERT INTO `detalle_proveedor`(`PRO_NOMBRE`, `PAIS`, `TEL_PRO`, `PAGINA`, `VENDEDOR`, `TEL_VENDEDOR`, `CANTIDAD`, `PRODUCTO`, `DESCRIPCION`, `LINK`, `OBSERVACION`, `ID_USER`, `MONEDA`, `PRECIO`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -113,4 +115,17 @@ class LogisticaModel extends Query
         $sql = "SELECT d.ID_PERMISO FROM permisos p INNER JOIN detalle_permiso d ON d.ID_PERMISO = p.ID WHERE d.ID_ROL = $id_rol AND p.ID = $id_permiso";
         return $this->select($sql);
     }
+
+    /************** </IMPORTACIONES> **************/
+
+
+    /************** </PRODUCTOS LIMA> **************/
+
+    public function AllProducts()
+    {
+        $sql = "SELECT * FROM productos ORDER BY PRO_CODIGO ASC";
+        return $this->selectAll($sql);
+    }
+
+    /************** </PRODUCTOS LIMA> **************/
 }
