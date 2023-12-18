@@ -121,10 +121,35 @@ class LogisticaModel extends Query
 
     /************** </PRODUCTOS LIMA> **************/
 
-    public function AllProducts()
+    public function AllProducts($sede)
     {
-        $sql = "SELECT * FROM productos ORDER BY PRO_CODIGO ASC";
+        $sql = "SELECT * FROM productos WHERE SEDE = '$sede' ORDER BY PRO_CODIGO ASC";
         return $this->selectAll($sql);
+    }
+
+    public function InsertProduct($cod, $name, $des, $uni, $sede, $area, $stock)
+    {
+
+        $verificar = "SELECT PRO_CODIGO FROM productos WHERE PRO_CODIGO = '$cod'";
+        $existe = $this->select($verificar);
+
+        if (empty($existe)) {
+            $sql = "INSERT INTO productos (`PRO_CODIGO`, `NOMBRE`, `DESCRIPCION`, `UNIDADES`, `SEDE`, `AREA`, `STOCK_MINIMO`) VALUES (?,?,?,?,?,?,?)";
+            $datos = array($cod, $name, $des, $uni, $sede, $area, $stock);
+
+            $data = $this->save($sql, $datos);
+
+            if ($data > 0) {
+                $res = 'ok';
+            }else{
+                $res = 'error';
+            }
+        } else { 
+            $res = 'existe';
+        }
+
+        return $res;
+
     }
 
     /************** </PRODUCTOS LIMA> **************/

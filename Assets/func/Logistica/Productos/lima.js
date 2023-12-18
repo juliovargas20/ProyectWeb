@@ -1,5 +1,11 @@
+const Frm = document.querySelector("#FrmAddProducts");
+const btnSubmit = document.querySelector("#btnAddProduct");
+
+const bsOffcanvas = new bootstrap.Offcanvas('#offcanvasAddProduct')
+
 let TblProductos_data;
 document.addEventListener("DOMContentLoaded", function () {
+
   TblProductos_data = $(".datatables-products").DataTable({
     ajax: {
       url: base_url + "Logistica/AllProducts",
@@ -13,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "SEDE", className: "text-center" },
       { data: "AREA", className: "text-center" },
       { data: "STOCK_MINIMO", className: "text-center" },
-      { data: "STATUS", className: "text-center" },
       { data: "ACCIONES", className: "text-center" }
     ],
     columnDefs: [
@@ -73,8 +78,9 @@ document.addEventListener("DOMContentLoaded", function () {
       {
         text: '<i class="mdi mdi-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Agregar</span>',
         className: "add-new btn btn-primary ms-n1 waves-effect waves-light mx-2",
-        action: function () {
-          window.location.href = base_url + "Logistica/agregar_producto";
+        attr: {
+          'data-bs-toggle': 'offcanvas',
+          'data-bs-target': '#offcanvasAddProduct'
         },
       },
       {
@@ -135,4 +141,56 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
   });
+
+  Frm.addEventListener("submit", handleFrmProduct, false);
+
 });
+
+function handleFrmProduct(event) {
+  event.preventDefault();
+  const FrmProduct = event.target;
+  const bsValidationForms = document.querySelectorAll(".needs-validation");
+
+  if (!FrmProduct.checkValidity()) {
+    event.stopPropagation();
+  } else {
+
+    btnSubmit.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
+    btnSubmit.disabled = true;
+
+    const url = base_url + "Logistica/InsertProductLima";
+    const data = new FormData(FrmProduct);
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(data);
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+        const res = JSON.parse(this.responseText);
+        Swal.fire({
+            icon: res.tipo,
+            title: res.mensaje,
+            showConfirmButton: true,
+            timer: 3000,
+            didClose: () => {
+                if (res.tipo == 'success') {
+                    FrmProduct.reset();
+                    FrmProduct.classList.remove("was-validated");
+                    btnSubmit.innerHTML = 'Guardar';
+                    btnSubmit.disabled = false;
+                    TblProductos_data.ajax.reload();
+                    bsOffcanvas.hide();
+                } else if (res.tipo == 'warning') {
+                    btnSubmit.innerHTML = 'Guardar';
+                    btnSubmit.disabled = false;
+                } else {
+                    // Restaurar el contenido original del botón
+                    btnSubmit.innerHTML = 'Guardar';
+                    btnSubmit.disabled = false;
+                }
+            }
+        });
+      }
+    };
+  }
+  FrmProduct.classList.add("was-validated");
+}

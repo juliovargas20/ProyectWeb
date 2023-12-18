@@ -536,8 +536,9 @@ class Logistica extends Controller
 
     public function AllProducts()
     {
-        $data = $this->model->AllProducts();
-        for ($i=0; $i < count($data); $i++) { 
+
+        $data = $this->model->AllProducts('Lima');
+        for ($i = 0; $i < count($data); $i++) {
             $data[$i]['ACCIONES'] = '
                 <div class="d-inline-block">
                     <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -560,13 +561,27 @@ class Logistica extends Controller
         die();
     }
 
-    public function agregar_producto()
+    public function InsertProductLima()
     {
-        $data['title'] = 'Logística - Agregar de Productos | KYPBioingeniería';
-        $data['activeAlmacen'] = 'active';
-        $data['activeOpen'] = 'active open';
-        $data['scripts'] = 'Logistica/Productos/agregar.js';
-        $this->views->getView('Logistica', 'Productos-Lima/agregar', $data);
+        $cod = $_POST['CodProduct'];
+        $name = $_POST['NameProduct'];
+        $des = $_POST['DesProduct'];
+        $uni = $_POST['UnidProduct'];
+        $area = $_POST['AreaProduct'];
+        $stock = $_POST['StockProduct'];
+        $sede = 'Lima';
+
+        $data = $this->model->InsertProduct($cod, $name, $des, $uni, $sede, $area, $stock);
+        if ($data == 'ok') {
+            $res = array('tipo' => 'success', 'mensaje' => 'Producto Registrado');
+        } else if ($data == "existe") {
+            $res = array('tipo' => 'warning', 'mensaje' => 'El Código Producto ya Existe');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Registrado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
     }
 
     /************** </PRODUCTOS> **************/
