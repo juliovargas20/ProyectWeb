@@ -58,6 +58,7 @@
 <!-- Vendors JS -->
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/moment/moment.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/select2/select2.js'; ?>"></script>
+<script src="<?php echo BASE_URL . 'Assets/vendor/libs/tagify/tagify.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/bloodhound/bloodhound.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/flatpickr/flatpickr.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js'; ?>"></script>

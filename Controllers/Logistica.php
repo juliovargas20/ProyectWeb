@@ -545,11 +545,11 @@ class Logistica extends Controller
                         <i class="mdi mdi-dots-vertical"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end m-0">
-                        <a href="javascript:;" class="dropdown-item" onclick="">
+                        <a href="javascript:;" class="dropdown-item" onclick="SimpleProducts(' . $data[$i]['PRO_ID'] . ')">
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
                         </a>
-                        <a href="javascript:;" class="dropdown-item" onclick="">
+                        <a href="javascript:;" class="dropdown-item" onclick="DeleteProduct(' . $data[$i]['PRO_ID'] . ')">
                             <i class="mdi mdi-trash-can-outline me-1"></i> 
                             Eliminar
                         </a>
@@ -563,6 +563,7 @@ class Logistica extends Controller
 
     public function InsertProductLima()
     {
+        $id = $_POST['ProID'];
         $cod = $_POST['CodProduct'];
         $name = $_POST['NameProduct'];
         $des = $_POST['DesProduct'];
@@ -571,18 +572,95 @@ class Logistica extends Controller
         $stock = $_POST['StockProduct'];
         $sede = 'Lima';
 
-        $data = $this->model->InsertProduct($cod, $name, $des, $uni, $sede, $area, $stock);
-        if ($data == 'ok') {
-            $res = array('tipo' => 'success', 'mensaje' => 'Producto Registrado');
-        } else if ($data == "existe") {
-            $res = array('tipo' => 'warning', 'mensaje' => 'El Código Producto ya Existe');
+        if ($id == "") {
+            $data = $this->model->InsertProduct($cod, $name, $des, $uni, $sede, $area, $stock);
+            if ($data == 'ok') {
+                $res = array('tipo' => 'success', 'mensaje' => 'Producto Registrado');
+            } else if ($data == "existe") {
+                $res = array('tipo' => 'warning', 'mensaje' => 'El Código Producto ya Existe');
+            } else {
+                $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Registrado');
+            }
         } else {
-            $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Registrado');
+            $data = $this->model->UpdateProducts($id, $cod, $name, $des, $uni, $area, $stock);
+            if ($data == 'ok') {
+                $res = array('tipo' => 'success', 'mensaje' => 'Producto Modificado');
+            } else if ($data == "existe") {
+                $res = array('tipo' => 'warning', 'mensaje' => 'El Código Producto ya Existe');
+            } else {
+                $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Modificado');
+            }
+        }
+
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function SImpleProduct($id)
+    {
+        $data = $this->model->SimpleProducts($id);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function DeleteProduct($id)
+    {
+        $data = $this->model->DeleteProduct($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Producto Eliminado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Eliminado');
         }
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
         die();
     }
 
-    /************** </PRODUCTOS> **************/
+    public function entradas_lima()
+    {
+        $data['title'] = 'Logística - Entradas de Productos LIMA | KYPBioingeniería';
+        $data['activeAlmacen'] = 'active';
+        $data['activeOpen'] = 'active open';
+        $data['scripts'] = 'Logistica/Productos/entradas.js';
+        $data['get'] = $this->model->AllProducts('Lima');
+        $this->views->getView('Logistica', 'Productos-Lima/entradas-lima', $data);
+    }
+
+    public function AllEntriesProducts()
+    {
+        $data = $this->model->AllEntriesProducts();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function UnidProductsSearch($cod)
+    {
+        $data = $this->model->UnidProductsSearch($cod);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function InsertEntriesProducts()
+    {
+        $cod = $_POST['SearchProduct'];
+        $boleta = $_POST['NSerieProducts'];
+        $qual = $_POST['QuantProduct'];
+
+        $data = $this->model->RegisterEntriesProducts($cod, $boleta, $qual);
+        if ($data > 0) {
+            if ($data == 'ok') {
+                $res = array('tipo' => 'success', 'mensaje' => 'Entradas Registradas', 'id' => $data);
+            } else {
+                $res = array('tipo' => 'error', 'mensaje' => 'Error al Entradas Registradas');
+            }
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+
+    }
+
+
+    /************** </PRODUCTOS LIMA> **************/
 }

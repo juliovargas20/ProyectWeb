@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css'; ?>">
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/swiper/swiper.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/select2/select2.css'; ?>" />
+  <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/tagify/tagify.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/flatpickr/flatpickr.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/dropzone/dropzone.css'; ?>" />
 

@@ -152,5 +152,61 @@ class LogisticaModel extends Query
 
     }
 
+    public function SimpleProducts($id)
+    {
+        $sql = "SELECT * FROM productos WHERE PRO_ID = $id";
+        return $this->select($sql);
+    }
+
+    public function UpdateProducts($id, $cod, $name, $des, $uni, $area, $stock)
+    {
+        $verificar = "SELECT PRO_CODIGO FROM productos WHERE PRO_CODIGO = '$cod'";
+        $existe = $this->select($verificar);
+
+        if (empty($existe)) {
+            $sql = "UPDATE `productos` SET `PRO_CODIGO`= ?,`NOMBRE`= ?,`DESCRIPCION`= ?,`UNIDADES`= ?,`AREA`= ?,`STOCK_MINIMO`= ? WHERE PRO_ID = ?";
+            $datos = array($cod, $name, $des, $uni, $area, $stock, $id);
+
+            $data = $this->save($sql, $datos);
+
+            if ($data > 0) {
+                $res = 'ok';
+            }else{
+                $res = 'error';
+            }
+        } else { 
+            $res = 'existe';
+        }
+
+        return $res;
+
+    }
+
+    public function DeleteProduct($id)
+    {
+        $sql = "DELETE FROM productos WHERE PRO_ID = ?";
+        $datos = array($id);
+        return $this->save($sql, $datos);
+    }
+
+    public function AllEntriesProducts()
+    {
+        $sql = "SELECT e.*, p.PRO_CODIGO, p.NOMBRE, p.DESCRIPCION, p.UNIDADES FROM entradas e INNER JOIN productos p ON e.ENT_PRO_CODIGO = p.PRO_CODIGO";
+        return $this->selectAll($sql);
+    }
+
+    public function UnidProductsSearch($cod)
+    {
+        $sql = "SELECT * FROM productos WHERE PRO_CODIGO = '$cod'";
+        return $this->select($sql);
+    }
+
+    public function RegisterEntriesProducts($cod, $boleta, $qual)
+    {
+        $sql = "INSERT INTO `entradas`(`ENT_PRO_CODIGO`, `ENT_BOLETA`, `ENT_CANTIDAD`) VALUES (?,?,?)";
+        $datos = array($cod, $boleta, $qual);
+        return $this->insertar($sql, $datos);
+    }
+
     /************** </PRODUCTOS LIMA> **************/
 }

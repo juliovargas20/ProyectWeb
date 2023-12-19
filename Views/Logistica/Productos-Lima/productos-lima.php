@@ -41,7 +41,7 @@
         <!-- Offcanvas Body -->
         <div class="offcanvas-body border-top">
             <form class="needs-validation" id="FrmAddProducts" novalidate autocomplete="off">
-
+                <input type="hidden" id="ProID" name="ProID">
                 <div class="form-floating form-floating-outline mb-4">
                     <input type="text" class="form-control" placeholder="Código Producto" name="CodProduct" id="CodProduct" required>
                     <label for="CodProduct">Código Producto</label>
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="form-floating form-floating-outline mb-4">
-                    <input type="number" class="form-control" placeholder="Stock Mínimo" name="StockProduct" id="StockProduct" min="0" required>
+                    <input type="text" class="form-control" placeholder="Stock Mínimo" name="StockProduct" id="StockProduct" pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número válido" required>
                     <label for="StockProduct">Stock Mínimo</label>
                 </div>
 

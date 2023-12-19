@@ -1,11 +1,10 @@
 const Frm = document.querySelector("#FrmAddProducts");
 const btnSubmit = document.querySelector("#btnAddProduct");
 
-const bsOffcanvas = new bootstrap.Offcanvas('#offcanvasAddProduct')
+const bsOffcanvas = new bootstrap.Offcanvas("#offcanvasAddProduct");
 
 let TblProductos_data;
 document.addEventListener("DOMContentLoaded", function () {
-
   TblProductos_data = $(".datatables-products").DataTable({
     ajax: {
       url: base_url + "Logistica/AllProducts",
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "SEDE", className: "text-center" },
       { data: "AREA", className: "text-center" },
       { data: "STOCK_MINIMO", className: "text-center" },
-      { data: "ACCIONES", className: "text-center" }
+      { data: "ACCIONES", className: "text-center" },
     ],
     columnDefs: [
       {
@@ -77,17 +76,20 @@ document.addEventListener("DOMContentLoaded", function () {
     buttons: [
       {
         text: '<i class="mdi mdi-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Agregar</span>',
-        className: "add-new btn btn-primary ms-n1 waves-effect waves-light mx-2",
-        attr: {
-          'data-bs-toggle': 'offcanvas',
-          'data-bs-target': '#offcanvasAddProduct'
+        className:
+          "add-new btn btn-primary ms-n1 waves-effect waves-light mx-2",
+        action: function () {
+          bsOffcanvas.show();
+          Frm.classList.remove("was-validated");
+          Frm.reset();
         },
       },
       {
         text: '<i class="mdi mdi-package-variant-closed-check me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Entradas</span>',
-        className: "add-new btn btn-success ms-n1 waves-effect waves-light mx-2",
+        className:
+          "add-new btn btn-success ms-n1 waves-effect waves-light mx-2",
         action: function () {
-          window.location.href = "";
+          window.location.href = base_url + "Logistica/entradas_lima";
         },
       },
       {
@@ -99,7 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         text: '<i class="mdi mdi-file-document-multiple-outline me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Resumen</span>',
-        className: "add-new btn btn-secondary ms-n1 waves-effect waves-light mx-2",
+        className:
+          "add-new btn btn-secondary ms-n1 waves-effect waves-light mx-2",
         action: function () {
           window.location.href = "";
         },
@@ -143,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   Frm.addEventListener("submit", handleFrmProduct, false);
-
 });
 
 function handleFrmProduct(event) {
@@ -154,7 +156,6 @@ function handleFrmProduct(event) {
   if (!FrmProduct.checkValidity()) {
     event.stopPropagation();
   } else {
-
     btnSubmit.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
     btnSubmit.disabled = true;
 
@@ -167,30 +168,61 @@ function handleFrmProduct(event) {
       if (http.readyState == 4 && http.status == 200) {
         const res = JSON.parse(this.responseText);
         Swal.fire({
-            icon: res.tipo,
-            title: res.mensaje,
-            showConfirmButton: true,
-            timer: 3000,
-            didClose: () => {
-                if (res.tipo == 'success') {
-                    FrmProduct.reset();
-                    FrmProduct.classList.remove("was-validated");
-                    btnSubmit.innerHTML = 'Guardar';
-                    btnSubmit.disabled = false;
-                    TblProductos_data.ajax.reload();
-                    bsOffcanvas.hide();
-                } else if (res.tipo == 'warning') {
-                    btnSubmit.innerHTML = 'Guardar';
-                    btnSubmit.disabled = false;
-                } else {
-                    // Restaurar el contenido original del botón
-                    btnSubmit.innerHTML = 'Guardar';
-                    btnSubmit.disabled = false;
-                }
+          icon: res.tipo,
+          title: res.mensaje,
+          showConfirmButton: true,
+          timer: 3000,
+          didClose: () => {
+            if (res.tipo == "success") {
+              FrmProduct.reset();
+              FrmProduct.classList.remove("was-validated");
+              btnSubmit.innerHTML = "Guardar";
+              btnSubmit.disabled = false;
+              TblProductos_data.ajax.reload();
+              bsOffcanvas.hide();
+            } else if (res.tipo == "warning") {
+              btnSubmit.innerHTML = "Guardar";
+              btnSubmit.disabled = false;
+            } else {
+              // Restaurar el contenido original del botón
+              btnSubmit.innerHTML = "Guardar";
+              btnSubmit.disabled = false;
             }
+          },
         });
       }
     };
   }
   FrmProduct.classList.add("was-validated");
+}
+
+function SimpleProducts(id) {
+  const url = base_url + "Logistica/SImpleProduct/" + id;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (http.readyState == 4 && http.status == 200) {
+      const res = JSON.parse(this.responseText);
+      Frm.ProID.value = res.PRO_ID;
+      Frm.CodProduct.value = res.PRO_CODIGO;
+      Frm.NameProduct.value = res.NOMBRE;
+      Frm.DesProduct.value = res.DESCRIPCION;
+      Frm.UnidProduct.value = res.UNIDADES;
+      Frm.AreaProduct.value = res.AREA;
+      Frm.StockProduct.value = res.STOCK_MINIMO;
+      bsOffcanvas.show();
+    }
+  };
+}
+
+function DeleteProduct(id){
+  const url = base_url + "Logistica/DeleteProduct/" + id;
+  Eliminar(
+    "Deseas Eliminar el Producto",
+    "El Producto será eliminado del sistema",
+    "Sí",
+    url,
+    TblProductos_data
+  );
 }
