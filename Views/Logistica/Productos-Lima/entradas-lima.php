@@ -29,6 +29,7 @@
                         <th>Producto</th>
                         <th>Cantidad</th>
                         <th>Unidades</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
             </table>
@@ -39,10 +40,11 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="mb-4">Entradas de Productos</h3>
+                    <h3 class="modal-title">Entradas de Productos</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body py-3 py-md-0">
+                <hr>
+                <form class="modal-body" id="FrmEntriesProduct">
                     <div class="row">
                         <div class="col-md-6 mb-4">
                             <div class="form-floating form-floating-outline">
@@ -57,7 +59,7 @@
                         <div class="col-md-6"></div>
                         <div class="col-md-5">
                             <div class="form-floating form-floating-outline mb-4">
-                                <input type="text" class="form-control" placeholder="Cantidad" name="QuantProduct" id="QuantProduct" pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número válido" required>
+                                <input type="number" class="form-control" placeholder="Cantidad" name="QuantProduct" id="QuantProduct" min="0" required>
                                 <label for="QuantProduct">Cantidad</label>
                             </div>
                         </div>
@@ -69,20 +71,44 @@
                         </div>
                         <div class="col-md-12 mb-4">
                             <div class="form-floating form-floating-outline">
-                                <input id="NSerieProducts" class="form-control h-auto" name="NSerieProducts"/>
+                                <input id="NSerieProducts" class="form-control h-auto" name="NSerieProducts" />
                                 <label for="NSerieProducts">N° de Serie (TIENE QUE SER IGUAL A LA CANTIDAD)</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating form-floating-outline mb-4">
                                 <input type="text" class="form-control" placeholder="N° de Boleta (Orden de Compra o Importacion)" name="NBoleProduct" id="NBoleProduct" required>
-                                <label for="UnidProduct">N° de Boleta (Orden de Compra o Importacion)</label>
+                                <label for="NBoleProduct">N° de Boleta (Orden de Compra o Importacion)</label>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <div class="modal-footer">
-                    <button type="click" class="btn btn-primary" id="">Agregar Entradas</button>
+                    <button type="click" class="btn btn-primary" id="btnEntriesProducts">Agregar Entradas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-top fade show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" id="ModalSerieProduct">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Series de Productos</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <hr>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <small class="text-light fw-medium">Producto: </small>
+                            <div class="demo-inline-spacing mt-3">
+                                <ul class="list-group" id="listSerieProducts">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

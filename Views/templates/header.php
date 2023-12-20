@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css'; ?>">
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/swiper/swiper.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/select2/select2.css'; ?>" />
+  <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/sweetalert2/sweetalert2.min.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/tagify/tagify.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/flatpickr/flatpickr.css'; ?>" />
   <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/vendor/libs/dropzone/dropzone.css'; ?>" />
@@ -55,6 +56,13 @@
   <script src="<?php echo BASE_URL . 'Assets/vendor/js/template-customizer.js'; ?>"></script>
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="<?php echo BASE_URL . 'Assets/js/config.js'; ?>"></script>
+
+  <style>
+    .swal2-container {
+      z-index: 99999;
+      /* Ajusta el valor según sea necesario */
+    }
+  </style>
 </head>
 
 <body>
@@ -148,7 +156,7 @@
           <?php endif; ?>
 
           <?php if (!empty($_SESSION['OT'])) : ?>
-          <!-- Ordenes Internas -->
+            <!-- Ordenes Internas -->
 
             <li class="menu-header fw-light mt-4">
               <span class="menu-header-text">Ordenes Internas</span>
@@ -248,7 +256,7 @@
 
           <?php if (!empty($_SESSION['CONSEN'])) : ?>
 
-          <li class="menu-item <?php echo !empty($data['activeConsen']) ? $data['activeConsen'] : ''; ?>">
+            <li class="menu-item <?php echo !empty($data['activeConsen']) ? $data['activeConsen'] : ''; ?>">
               <a href="<?php echo BASE_URL . 'Consentimiento/consen' ?>" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-email-newsletter"></i>
                 <div data-i18n="Carta Consentimiento">Carta Consentimiento</div>
@@ -301,24 +309,24 @@
 
           <?php endif; ?>
 
-            <li class="menu-item <?php echo !empty($data['activeOpen']) ? $data['activeOpen'] : ''; ?>">
-              <a class="menu-link menu-toggle waves-effect" href="javascript:void(0);">
-                <i class="menu-icon tf-icons mdi mdi-archive-outline"></i>
-                <div data-i18n="Almacén">Almacén</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item <?php echo !empty($data['activeAlmacen']) ? $data['activeAlmacen'] : ''; ?>">
-                  <a class="menu-link" href="<?php echo BASE_URL . 'Logistica/almacen' ?>">
-                    <div data-i18n="Productos">Productos</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a class="menu-link" href="#">
-                    <div data-i18n="Inventario General">Inventario General</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
+          <li class="menu-item <?php echo !empty($data['activeOpen']) ? $data['activeOpen'] : ''; ?>">
+            <a class="menu-link menu-toggle waves-effect" href="javascript:void(0);">
+              <i class="menu-icon tf-icons mdi mdi-archive-outline"></i>
+              <div data-i18n="Almacén">Almacén</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item <?php echo !empty($data['activeAlmacen']) ? $data['activeAlmacen'] : ''; ?>">
+                <a class="menu-link" href="<?php echo BASE_URL . 'Logistica/almacen' ?>">
+                  <div data-i18n="Productos">Productos</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a class="menu-link" href="#">
+                  <div data-i18n="Inventario General">Inventario General</div>
+                </a>
+              </li>
+            </ul>
+          </li>
 
 
           <!-- /LOGÍSTICA -->

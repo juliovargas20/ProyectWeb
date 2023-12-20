@@ -59,7 +59,7 @@
 
                 <div class="form-floating form-floating-outline mb-4">
                     <input type="text" class="form-control" placeholder="Unidades" name="UnidProduct" id="UnidProduct" required>
-                    <label for="UnidProduct">Unidades (bolsa, talla, peso, etc.)</label>
+                    <label for="UnidProduct">Unidades (Que sean contables como unidad)</label>
                 </div>
 
                 <div class="form-floating form-floating-outline mb-4">

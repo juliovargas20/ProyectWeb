@@ -5,11 +5,14 @@ const selectSearchProduct = $(".select2");
 const tagifyBasicEl = document.querySelector("#NSerieProducts");
 const TagifyBasic = new Tagify(tagifyBasicEl);
 
+const AddEntries = document.querySelector("#btnEntriesProducts");
+const FrmEntriesProducts = document.querySelector("#FrmEntriesProduct");
+
+const btnModalNSerie = document.querySelector("#ModalSerieProduct");
+const ModalOpenNseries = new bootstrap.Modal(btnModalNSerie);
 
 let TblEntriesProducts_data;
 document.addEventListener("DOMContentLoaded", function () {
-  
-
   TblEntriesProducts_data = $(".datatables-EntriesProducts").DataTable({
     ajax: {
       url: base_url + "Logistica/AllEntriesProducts",
@@ -20,9 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "ENT_BOLETA", className: "text-center" },
       { data: "ENT_FECHA", className: "text-center" },
       { data: "ENT_PRO_CODIGO", className: "text-center" },
-      { data: "NOMBRES", className: "" },
+      { data: "NOMBRE", className: "" },
       { data: "ENT_CANTIDAD", className: "text-center" },
       { data: "UNIDADES", className: "text-center" },
+      { data: "ACCIONES", className: "text-center" },
     ],
     columnDefs: [
       {
@@ -110,6 +114,44 @@ document.addEventListener("DOMContentLoaded", function () {
       dropdownParent: $this.parent(),
     });
   });
+
+  AddEntries.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const search = document.getElementById("SearchProduct").value;
+    const quant = document.getElementById("QuantProduct").value;
+    const quantInt = parseInt(quant, 10);
+    const unid = document.getElementById("UnidProduct").value;
+    const invoce = document.getElementById("NBoleProduct").value;
+
+    if (
+      search == "" ||
+      quantInt == 0 ||
+      unid == "" ||
+      invoce == "" ||
+      TagifyBasic.value.length === 0 ||
+      quant == ""
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Campos Vacíos",
+        showConfirmButton: true,
+        timer: 2000,
+      });
+    } else {
+      if (TagifyBasic.value.length === quantInt) {
+        RegisterEntries(search, quantInt, invoce);
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title:
+            "La cantidad de numero de Serie debe ser igual a la cantidad ingresada",
+          showConfirmButton: true,
+          timer: 3000,
+        });
+      }
+    }
+  });
 });
 
 function onChangUnid() {
@@ -138,4 +180,88 @@ function onChange(e) {
   const etiquetas = val.split(","); // Suponiendo que las etiquetas están separadas por comas
   const cantidadEtiquetas = etiquetas.length;
   console.log(`La cantidad de etiquetas es: ${cantidadEtiquetas}`);
+}
+
+function RegisterEntries(search, quantInt, invoce) {
+  const url = base_url + "Logistica/InsertEntriesProducts";
+  const http = new XMLHttpRequest();
+  let frm = new FormData();
+  http.open("POST", url, true);
+  frm.append("SearchProduct", search);
+  frm.append("NBoleProduct", invoce);
+  frm.append("QuantProduct", quantInt);
+  http.send(frm);
+  http.onreadystatechange = function () {
+    if (http.readyState == 4 && http.status == 200) {
+      const res = JSON.parse(this.responseText);
+      if (res.tipo == "success") {
+        RegisterNSerieProducts(res.id, search);
+      }
+    }
+  };
+}
+
+function RegisterNSerieProducts(id_entries, search) {
+  AddEntries.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
+  AddEntries.disabled = true;
+
+  const valuesArray = TagifyBasic.value.map((tag) => tag.value);
+  const url = base_url + "Logistica/InsertSerieProducts";
+  const http = new XMLHttpRequest();
+  let frm = new FormData();
+  http.open("POST", url, true);
+  frm.append("SearchProduct", search);
+  frm.append("NSerieProducts", JSON.stringify(valuesArray));
+  frm.append("id_entriesINT", id_entries);
+  http.send(frm);
+  http.onreadystatechange = function () {
+    if (http.readyState == 4 && http.status == 200) {
+      const res = JSON.parse(this.responseText);
+      Swal.fire({
+        icon: res.tipo,
+        title: res.mensaje,
+        showConfirmButton: true,
+        timer: 3000,
+        didClose: () => {
+          if (res.tipo == "success") {
+            AddEntries.innerHTML = `Agregar Entradas`;
+            AddEntries.disabled = false;
+            FrmEntriesProducts.reset();
+            ModalOpenEntries.hide();
+            TblEntriesProducts_data.ajax.reload();
+          } else {
+            // Restaurar el contenido original del botón
+            AddEntries.innerHTML = "Guardar";
+            btnSAddEntriesubmit.disabled = false;
+          }
+        },
+      });
+    }
+  };
+}
+
+function NSerieView(id) {
+  const url = base_url + "Logistica/AllSerieProductCod/" + id;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (http.readyState == 4 && http.status == 200) {
+      const res = JSON.parse(this.responseText);
+      let html = "";
+      res.forEach((row) => {
+        html += `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                ${row['NOMBRE']} - ${row['NSERIE']}
+                <span class="badge rounded-pill bg-label-success">
+                  <i class="mdi mdi-check-decagram"></i>
+                </span>
+            </li>
+          `;
+      });
+      document.querySelector("#listSerieProducts").innerHTML = html;
+      ModalOpenNseries.show();
+    }
+  };
+  
 }

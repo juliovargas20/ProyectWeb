@@ -1371,8 +1371,8 @@ class Contrato extends Controller
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['ESTADO'] == 1) {
                 $data[$i]['ESTADO'] = '
-                    <span class="badge badge-center rounded-pill bg-label-success">
-                        <i class="mdi mdi-check"></i>
+                    <span class="badge rounded-pill bg-label-success">
+                        Pagado
                     </span>
                 ';
             } else {

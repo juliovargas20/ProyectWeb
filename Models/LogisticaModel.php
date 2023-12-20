@@ -141,15 +141,14 @@ class LogisticaModel extends Query
 
             if ($data > 0) {
                 $res = 'ok';
-            }else{
+            } else {
                 $res = 'error';
             }
-        } else { 
+        } else {
             $res = 'existe';
         }
 
         return $res;
-
     }
 
     public function SimpleProducts($id)
@@ -171,15 +170,14 @@ class LogisticaModel extends Query
 
             if ($data > 0) {
                 $res = 'ok';
-            }else{
+            } else {
                 $res = 'error';
             }
-        } else { 
+        } else {
             $res = 'existe';
         }
 
         return $res;
-
     }
 
     public function DeleteProduct($id)
@@ -189,9 +187,9 @@ class LogisticaModel extends Query
         return $this->save($sql, $datos);
     }
 
-    public function AllEntriesProducts()
+    public function AllEntriesProducts($sede)
     {
-        $sql = "SELECT e.*, p.PRO_CODIGO, p.NOMBRE, p.DESCRIPCION, p.UNIDADES FROM entradas e INNER JOIN productos p ON e.ENT_PRO_CODIGO = p.PRO_CODIGO";
+        $sql = "SELECT e.*, p.PRO_CODIGO, p.NOMBRE, p.DESCRIPCION, p.UNIDADES FROM entradas e INNER JOIN productos p ON e.ENT_PRO_CODIGO = p.PRO_CODIGO WHERE P.SEDE = '$sede'";
         return $this->selectAll($sql);
     }
 
@@ -206,6 +204,41 @@ class LogisticaModel extends Query
         $sql = "INSERT INTO `entradas`(`ENT_PRO_CODIGO`, `ENT_BOLETA`, `ENT_CANTIDAD`) VALUES (?,?,?)";
         $datos = array($cod, $boleta, $qual);
         return $this->insertar($sql, $datos);
+    }
+
+    public function RegistarSerieProducts($id_entries, $cod, $serie)
+    {
+
+        $verificar = "SELECT NSERIE FROM productos_serie WHERE NSERIE = '$serie'";
+        $existe = $this->select($verificar);
+
+        if (empty($existe)) {
+            $sql = "INSERT INTO `productos_serie`(`PS_ENT_ID`, `PS_PRO_CODIGO`, `NSERIE`) VALUES (?,?,?)";
+            $datos = array($id_entries, $cod, $serie);
+            $data = $this->save($sql, $datos);
+            if ($data > 0) {
+                $res = 'ok';
+            } else {
+                $res = 'error';
+            }
+        } else {
+            $res = 'existe';
+        }
+
+        return $res;
+    }
+
+    public function DeleteEntriesProductsAfterSerie($id_entries)
+    {
+        $sql = "DELETE FROM entradas WHERE ENT_ID = ?";
+        $datos = array($id_entries);
+        return $this->save($sql, $datos);
+    }
+
+    public function AllSerieProductCod($id)
+    {
+        $sql = "SELECT ps.*, p.NOMBRE FROM productos_serie ps INNER JOIN productos p ON ps.PS_PRO_CODIGO = p.PRO_CODIGO WHERE PS_ENT_ID = $id ";
+        return $this->selectAll($sql);
     }
 
     /************** </PRODUCTOS LIMA> **************/

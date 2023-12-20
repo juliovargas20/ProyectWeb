@@ -629,7 +629,20 @@ class Logistica extends Controller
 
     public function AllEntriesProducts()
     {
-        $data = $this->model->AllEntriesProducts();
+        $data = $this->model->AllEntriesProducts('Lima');
+        for ($i=0; $i < count($data); $i++) { 
+
+            $data[$i]['ENT_BOLETA'] = '
+                <button type="button" class="btn btn-text-info waves-effect waves-light" onclick="NSerieView('.$data[$i]['ENT_ID'].')">'.$data[$i]['ENT_BOLETA'].'</button>
+            ';
+
+            $data[$i]['ACCIONES'] = '
+                <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="">
+                    <i class="mdi mdi-delete-outline">
+                    </i>
+                </button>
+            ';
+        }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
@@ -644,23 +657,61 @@ class Logistica extends Controller
     public function InsertEntriesProducts()
     {
         $cod = $_POST['SearchProduct'];
-        $boleta = $_POST['NSerieProducts'];
+        $boleta = $_POST['NBoleProduct'];
         $qual = $_POST['QuantProduct'];
 
         $data = $this->model->RegisterEntriesProducts($cod, $boleta, $qual);
         if ($data > 0) {
-            if ($data == 'ok') {
-                $res = array('tipo' => 'success', 'mensaje' => 'Entradas Registradas', 'id' => $data);
+            $res = array('tipo' => 'success', 'mensaje' => 'Entradas Registradas', 'id' => $data);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Entradas Registradas');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function InsertSerieProducts()
+    {
+        $id_entries = $_POST['id_entriesINT'];
+        $cod = $_POST['SearchProduct'];
+        $nserie_data = json_decode($_POST['NSerieProducts'], true);
+        $res = array();
+
+        for ($i = 0; $i < count($nserie_data); $i++) {
+            $nserie = $nserie_data[$i];
+            $data = $this->model->RegistarSerieProducts($id_entries, $cod, $nserie);
+
+            if ($data == 'existe') {
+                $this->model->beginTransaction();
+
+                try {
+                    $this->model->DeleteEntriesProductsAfterSerie($id_entries);
+                    $this->model->commit();
+                    $res = array('tipo' => 'warning', 'mensaje' => 'Serie ' . $nserie . ' ya está registrada');
+                } catch (Exception $e) {
+                    $this->model->rollback();
+                    $res = array('tipo' => 'error', 'mensaje' => 'Error al eliminar entradas después de la serie registrada');
+                    // Agregar registro de error en el log
+                    error_log("Error al eliminar entradas después de la serie registrada: " . $e->getMessage());
+                }
+            } elseif ($data == 'ok') {
+                $res = array('tipo' => 'success', 'mensaje' => 'Serie Productos y Entradas Registradas');
             } else {
-                $res = array('tipo' => 'error', 'mensaje' => 'Error al Entradas Registradas');
+                $res = array('tipo' => 'error', 'mensaje' => 'Error al Serie Productos y Entradas Registradas');
             }
         }
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
         die();
-
     }
 
+    public function AllSerieProductCod($id)
+    {
+        $data = $this->model->AllSerieProductCod($id);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 
     /************** </PRODUCTOS LIMA> **************/
 }
