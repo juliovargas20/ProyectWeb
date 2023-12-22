@@ -265,3 +265,14 @@ function NSerieView(id) {
   };
   
 }
+
+function DeleteEntries(id) {
+  const url = base_url + "Logistica/DeleteEntriesByID/" + id;
+  Eliminar(
+    "Deseas Eliminar la Entrada Agregada",
+    "La Entrada será eliminado del sistema",
+    "Sí",
+    url,
+    TblEntriesProducts_data
+  );
+}

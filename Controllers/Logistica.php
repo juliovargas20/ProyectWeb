@@ -630,14 +630,14 @@ class Logistica extends Controller
     public function AllEntriesProducts()
     {
         $data = $this->model->AllEntriesProducts('Lima');
-        for ($i=0; $i < count($data); $i++) { 
+        for ($i = 0; $i < count($data); $i++) {
 
             $data[$i]['ENT_BOLETA'] = '
-                <button type="button" class="btn btn-text-info waves-effect waves-light" onclick="NSerieView('.$data[$i]['ENT_ID'].')">'.$data[$i]['ENT_BOLETA'].'</button>
+                <button type="button" class="btn btn-text-info waves-effect waves-light" onclick="NSerieView(' . $data[$i]['ENT_ID'] . ')">' . $data[$i]['ENT_BOLETA'] . '</button>
             ';
 
             $data[$i]['ACCIONES'] = '
-                <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="">
+                <button type="button" class="btn btn-icon btn-label-danger waves-effect" onclick="DeleteEntries(' . $data[$i]['ENT_ID'] . ')">
                     <i class="mdi mdi-delete-outline">
                     </i>
                 </button>
@@ -711,6 +711,50 @@ class Logistica extends Controller
         $data = $this->model->AllSerieProductCod($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
+    }
+
+    public function DeleteEntriesByID($id)
+    {
+        $data = $this->model->DeleteEntriesProductsAfterSerie($id);
+        if ($data > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Entrada Eliminado');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al Entrada Eliminado');
+        }
+
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function PrintBarCode()
+    {
+        require('Assets/vendor/libs/fpdf/fpdf.php');
+        include './include/barcode.php';
+
+        $barcod = $this->model->AllSerieProductCod(2);
+
+        $pdf = new FPDF();
+        $pdf->AddPage('P', 'mm', 'A4');
+        $pdf->SetAutoPageBreak(true, 20);
+        $y = $pdf->GetY();
+
+        $pdf->SetFont('aria', '', 16);
+
+        $index = 0;
+        while ($index < count($barcod)) {
+            $row = $barcod[$index];
+            $code = $row['NSERIE'];
+
+            barcode('codigos/' . $code . '.png', $code, 20, 'horizontal', 'code128', true);
+
+            $pdf->Image('codigos/' . $code . '.png', 10, $y, 50, 0, 'PNG');
+
+            $y = $y + 15;
+
+            $index++;
+        }
+
+        $pdf->Output();
     }
 
     /************** </PRODUCTOS LIMA> **************/
