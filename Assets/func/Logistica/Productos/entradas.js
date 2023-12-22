@@ -159,17 +159,21 @@ function onChangUnid() {
   if (cod == "") {
     document.getElementById("UnidProduct").value = "";
   } else {
-    const url = base_url + "Logistica/UnidProductsSearch/" + cod;
-    const http = new XMLHttpRequest();
-    http.open("GET", url, true);
-    http.send();
-    http.onreadystatechange = function () {
-      if (http.readyState == 4 && http.status == 200) {
-        const res = JSON.parse(this.responseText);
 
-        document.getElementById("UnidProduct").value = res.UNIDADES;
+    fetch(base_url + "Logistica/UnidProductsSearch/" + cod)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error de red: ${response.status}`);
       }
-    };
+      return response.json(response);
+    })
+    .then(data => {
+      document.getElementById("UnidProduct").value = data.UNIDADES;
+    })
+    .catch(error => {
+      console.log("Error:", error);
+    })
+
   }
 }
 
@@ -182,88 +186,16 @@ function onChange(e) {
   console.log(`La cantidad de etiquetas es: ${cantidadEtiquetas}`);
 }
 
-function RegisterEntries(search, quantInt, invoce) {
-  const url = base_url + "Logistica/InsertEntriesProducts";
-  const http = new XMLHttpRequest();
-  let frm = new FormData();
-  http.open("POST", url, true);
-  frm.append("SearchProduct", search);
-  frm.append("NBoleProduct", invoce);
-  frm.append("QuantProduct", quantInt);
-  http.send(frm);
-  http.onreadystatechange = function () {
-    if (http.readyState == 4 && http.status == 200) {
-      const res = JSON.parse(this.responseText);
-      if (res.tipo == "success") {
-        RegisterNSerieProducts(res.id, search);
-      }
-    }
-  };
-}
+function RegisterEntries() {
 
-function RegisterNSerieProducts(id_entries, search) {
-  AddEntries.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
-  AddEntries.disabled = true;
+  let frmData = new FormData();
+  frmData.append("id_producto", document.getElementById("SearchProduct").value);
+  frmData.append("serie", document.getElementById("QuantProduct").value);
 
-  const valuesArray = TagifyBasic.value.map((tag) => tag.value);
-  const url = base_url + "Logistica/InsertSerieProducts";
-  const http = new XMLHttpRequest();
-  let frm = new FormData();
-  http.open("POST", url, true);
-  frm.append("SearchProduct", search);
-  frm.append("NSerieProducts", JSON.stringify(valuesArray));
-  frm.append("id_entriesINT", id_entries);
-  http.send(frm);
-  http.onreadystatechange = function () {
-    if (http.readyState == 4 && http.status == 200) {
-      const res = JSON.parse(this.responseText);
-      Swal.fire({
-        icon: res.tipo,
-        title: res.mensaje,
-        showConfirmButton: true,
-        timer: 3000,
-        didClose: () => {
-          if (res.tipo == "success") {
-            AddEntries.innerHTML = `Agregar Entradas`;
-            AddEntries.disabled = false;
-            FrmEntriesProducts.reset();
-            ModalOpenEntries.hide();
-            TblEntriesProducts_data.ajax.reload();
-          } else {
-            // Restaurar el contenido original del botón
-            AddEntries.innerHTML = "Guardar";
-            btnSAddEntriesubmit.disabled = false;
-          }
-        },
-      });
-    }
-  };
-}
+  fetch(base_url + "Logistica/RegisterProductsEntries", {
 
-function NSerieView(id) {
-  const url = base_url + "Logistica/AllSerieProductCod/" + id;
-  const http = new XMLHttpRequest();
-  http.open("GET", url, true);
-  http.send();
-  http.onreadystatechange = function () {
-    if (http.readyState == 4 && http.status == 200) {
-      const res = JSON.parse(this.responseText);
-      let html = "";
-      res.forEach((row) => {
-        html += `
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                ${row['NOMBRE']} - ${row['NSERIE']}
-                <span class="badge rounded-pill bg-label-success">
-                  <i class="mdi mdi-check-decagram"></i>
-                </span>
-            </li>
-          `;
-      });
-      document.querySelector("#listSerieProducts").innerHTML = html;
-      ModalOpenNseries.show();
-    }
-  };
-  
+  })
+
 }
 
 function DeleteEntries(id) {

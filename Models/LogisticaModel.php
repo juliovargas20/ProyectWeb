@@ -123,19 +123,19 @@ class LogisticaModel extends Query
 
     public function AllProducts($sede)
     {
-        $sql = "SELECT * FROM productos WHERE SEDE = '$sede' ORDER BY PRO_CODIGO ASC";
+        $sql = "SELECT * FROM productos p INNER JOIN inventario i ON p.ID_PRODUCTO = i.ID_PRODUCTO WHERE i.SEDE = '$sede' ORDER BY p.ID_PRODUCTO ASC";
         return $this->selectAll($sql);
     }
 
     public function InsertProduct($cod, $name, $des, $uni, $sede, $area, $stock)
     {
 
-        $verificar = "SELECT PRO_CODIGO FROM productos WHERE PRO_CODIGO = '$cod'";
+        $verificar = "SELECT CODIGO_PRODUCTO FROM productos WHERE CODIGO_PRODUCTO = '$cod'";
         $existe = $this->select($verificar);
 
         if (empty($existe)) {
-            $sql = "INSERT INTO productos (`PRO_CODIGO`, `NOMBRE`, `DESCRIPCION`, `UNIDADES`, `SEDE`, `AREA`, `STOCK_MINIMO`) VALUES (?,?,?,?,?,?,?)";
-            $datos = array($cod, $name, $des, $uni, $sede, $area, $stock);
+            $sql = "CALL InsertarProductoInventario(?,?,?,?,?,?,?)";
+            $datos = array($cod, $name, $des, $uni, $stock, $sede, $area);
 
             $data = $this->save($sql, $datos);
 
@@ -153,36 +153,30 @@ class LogisticaModel extends Query
 
     public function SimpleProducts($id)
     {
-        $sql = "SELECT * FROM productos WHERE PRO_ID = $id";
+        $sql = "SELECT * FROM productos p INNER JOIN inventario i ON p.ID_PRODUCTO = i.ID_PRODUCTO WHERE p.ID_PRODUCTO = $id";
         return $this->select($sql);
     }
 
     public function UpdateProducts($id, $cod, $name, $des, $uni, $area, $stock)
     {
-        $verificar = "SELECT PRO_CODIGO FROM productos WHERE PRO_CODIGO = '$cod'";
-        $existe = $this->select($verificar);
+        $sql = "CALL UpdateProductoInventario(?,?,?,?,?,?,?)";
+        $datos = array($cod, $name, $des, $uni, $stock, $area, $id);
 
-        if (empty($existe)) {
-            $sql = "UPDATE `productos` SET `PRO_CODIGO`= ?,`NOMBRE`= ?,`DESCRIPCION`= ?,`UNIDADES`= ?,`AREA`= ?,`STOCK_MINIMO`= ? WHERE PRO_ID = ?";
-            $datos = array($cod, $name, $des, $uni, $area, $stock, $id);
+        $data = $this->save($sql, $datos);
 
-            $data = $this->save($sql, $datos);
-
-            if ($data > 0) {
-                $res = 'ok';
-            } else {
-                $res = 'error';
-            }
+        if ($data > 0) {
+            $res = 'ok';
         } else {
-            $res = 'existe';
+            $res = 'error';
         }
+
 
         return $res;
     }
 
     public function DeleteProduct($id)
     {
-        $sql = "DELETE FROM productos WHERE PRO_ID = ?";
+        $sql = "DELETE FROM productos WHERE ID_PRODUCTO = ?";
         $datos = array($id);
         return $this->save($sql, $datos);
     }
@@ -195,43 +189,15 @@ class LogisticaModel extends Query
 
     public function UnidProductsSearch($cod)
     {
-        $sql = "SELECT * FROM productos WHERE PRO_CODIGO = '$cod'";
+        $sql = "SELECT UNIDADES FROM productos WHERE CODIGO_PRODUCTO = '$cod'";
         return $this->select($sql);
     }
 
-    public function RegisterEntriesProducts($cod, $boleta, $qual)
-    {
-        $sql = "INSERT INTO `entradas`(`ENT_PRO_CODIGO`, `ENT_BOLETA`, `ENT_CANTIDAD`) VALUES (?,?,?)";
-        $datos = array($cod, $boleta, $qual);
-        return $this->insertar($sql, $datos);
-    }
-
-    public function RegistarSerieProducts($id_entries, $cod, $serie)
+    public function RegistarSerieProductsEntries($id_producto, $serie, $boleta, $qual)
     {
 
-        $verificar = "SELECT NSERIE FROM productos_serie WHERE NSERIE = '$serie'";
-        $existe = $this->select($verificar);
-
-        if (empty($existe)) {
-            $sql = "INSERT INTO `productos_serie`(`PS_ENT_ID`, `PS_PRO_CODIGO`, `NSERIE`) VALUES (?,?,?)";
-            $datos = array($id_entries, $cod, $serie);
-            $data = $this->save($sql, $datos);
-            if ($data > 0) {
-                $res = 'ok';
-            } else {
-                $res = 'error';
-            }
-        } else {
-            $res = 'existe';
-        }
-
-        return $res;
-    }
-
-    public function DeleteEntriesProductsAfterSerie($id_entries)
-    {
-        $sql = "DELETE FROM entradas WHERE ENT_ID = ?";
-        $datos = array($id_entries);
+        $sql = "CALL Insert_ProductSerie_Entries(?,?,?,?)";
+        $datos = array($id_producto, $serie, $boleta, $qual);
         return $this->save($sql, $datos);
     }
 

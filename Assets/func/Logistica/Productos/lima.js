@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     columns: [
       { data: "", className: "text-center" },
-      { data: "PRO_CODIGO", className: "text-center" },
+      { data: "CODIGO_PRODUCTO", className: "text-center" },
       { data: "DESCRIPCION", className: "" },
       { data: "UNIDADES", className: "text-center" },
       { data: "SEDE", className: "text-center" },
@@ -159,61 +159,71 @@ function handleFrmProduct(event) {
     btnSubmit.innerHTML = `<span class="spinner-border me-1" role="status" aria-hidden="true"></span> Guardando...`;
     btnSubmit.disabled = true;
 
-    const url = base_url + "Logistica/InsertProductLima";
-    const data = new FormData(FrmProduct);
-    const http = new XMLHttpRequest();
-    http.open("POST", url, true);
-    http.send(data);
-    http.onreadystatechange = function () {
-      if (http.readyState == 4 && http.status == 200) {
-        const res = JSON.parse(this.responseText);
-        Swal.fire({
-          icon: res.tipo,
-          title: res.mensaje,
-          showConfirmButton: true,
-          timer: 3000,
-          didClose: () => {
-            if (res.tipo == "success") {
-              FrmProduct.reset();
-              FrmProduct.classList.remove("was-validated");
-              btnSubmit.innerHTML = "Guardar";
-              btnSubmit.disabled = false;
-              TblProductos_data.ajax.reload();
-              bsOffcanvas.hide();
-            } else if (res.tipo == "warning") {
-              btnSubmit.innerHTML = "Guardar";
-              btnSubmit.disabled = false;
-            } else {
-              // Restaurar el contenido original del botón
-              btnSubmit.innerHTML = "Guardar";
-              btnSubmit.disabled = false;
-            }
-          },
-        });
+    const frmData = new FormData(FrmProduct);
+
+    fetch(base_url + "Logistica/InsertProductLima", {
+      method: "POST",
+      body: frmData,
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error de red: ${response.status}`);
       }
-    };
+      return response.json();
+    })
+    .then(data => {
+      Swal.fire({
+        icon: data.tipo,
+        title: data.mensaje,
+        showConfirmButton: true,
+        timer: 3000,
+        didClose: () => {
+          if (data.tipo == "success") {
+            FrmProduct.reset();
+            FrmProduct.classList.remove("was-validated");
+            btnSubmit.innerHTML = "Guardar";
+            btnSubmit.disabled = false;
+            TblProductos_data.ajax.reload();
+            bsOffcanvas.hide();
+          } else if (data.tipo == "warning") {
+            btnSubmit.innerHTML = "Guardar";
+            btnSubmit.disabled = false;
+          } else {
+            // Restaurar el contenido original del botón
+            btnSubmit.innerHTML = "Guardar";
+            btnSubmit.disabled = false;
+          }
+        },
+      });
+    })
+    .catch(error => {
+      console.log('Error:', error.mensaje);
+    })
   }
   FrmProduct.classList.add("was-validated");
 }
 
 function SimpleProducts(id) {
-  const url = base_url + "Logistica/SImpleProduct/" + id;
-  const http = new XMLHttpRequest();
-  http.open("GET", url, true);
-  http.send();
-  http.onreadystatechange = function () {
-    if (http.readyState == 4 && http.status == 200) {
-      const res = JSON.parse(this.responseText);
-      Frm.ProID.value = res.PRO_ID;
-      Frm.CodProduct.value = res.PRO_CODIGO;
-      Frm.NameProduct.value = res.NOMBRE;
-      Frm.DesProduct.value = res.DESCRIPCION;
-      Frm.UnidProduct.value = res.UNIDADES;
-      Frm.AreaProduct.value = res.AREA;
-      Frm.StockProduct.value = res.STOCK_MINIMO;
-      bsOffcanvas.show();
+  fetch(base_url + "Logistica/SImpleProduct/" + id)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Error de red: ${response.status}`);
     }
-  };
+    return response.json();
+  })
+  .then(data => {
+      Frm.ProID.value = data.ID_PRODUCTO;
+      Frm.CodProduct.value = data.CODIGO_PRODUCTO;
+      Frm.NameProduct.value = data.NOMBRE;
+      Frm.DesProduct.value = data.DESCRIPCION;
+      Frm.UnidProduct.value = data.UNIDADES;
+      Frm.AreaProduct.value = data.AREA;
+      Frm.StockProduct.value = data.STOCK_MINIMO;
+      bsOffcanvas.show();
+  })
+  .catch(error => {
+    console.log('Error:', error);
+  })
 }
 
 function DeleteProduct(id){

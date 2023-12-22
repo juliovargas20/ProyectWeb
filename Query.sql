@@ -537,3 +537,183 @@ CREATE TABLE list_consen
 ALTER TABLE list_consen
 ADD CONSTRAINT fk_consen_list_consen
 FOREIGN KEY (ID_CONSEN) REFERENCES consen(ID);
+
+
+
+
+
+
+/*********** LOGISTICA - ALMACEN ***************/
+-- Crear la tabla PRODUCTOS
+CREATE TABLE productos (
+    ID_PRODUCTO INT PRIMARY KEY AUTO_INCREMENT,
+    CODIGO_PRODUCTO VARCHAR(20) UNIQUE,
+    NOMBRE VARCHAR(200),
+    DESCRIPCION TEXT,
+    UNIDADES varchar(20),
+    STOCK_MINIMO DECIMAL(10,2),
+    INDEX (CODIGO_PRODUCTO)
+);
+
+CREATE TABLE inventario (
+    ID_INVENTARIO INT PRIMARY KEY AUTO_INCREMENT,
+    ID_PRODUCTO INT,
+    SEDE VARCHAR(20),
+    AREA VARCHAR(50),
+    STOCK_MINIMO DECIMAL(10,2),
+    FOREIGN KEY (ID_PRODUCTO) REFERENCES productos(ID_PRODUCTO) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Crear la tabla PRODUCTOS_SERIE
+CREATE TABLE productos_series (
+    ID_SERIE INT PRIMARY KEY AUTO_INCREMENT,
+    ID_PRODUCTO INT,
+    NSERIE VARCHAR(50),
+    FECHA DATETIME DEFAULT NOW(),
+    FOREIGN KEY (ID_PRODUCTO) REFERENCES productos(ID_PRODUCTO) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Crear la tabla ENTRADAS
+CREATE TABLE entradas (
+    ID_ENTRADA INT PRIMARY KEY AUTO_INCREMENT,
+    ID_PRODUCTO INT,
+    BOLETA VARCHAR(10),
+    CANTIDAD DECIMAL(10,2),
+    FECHA DATETIME DEFAULT NOW(),
+    FOREIGN KEY (ID_PRODUCTO) REFERENCES productos(ID_PRODUCTO) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Crear la tabla ENTRADAS_SERIE
+CREATE TABLE entradas_Series (
+    ID_ENTRADA_SERIE INT PRIMARY KEY AUTO_INCREMENT,
+    ID_ENTRADA INT,
+    ID_SERIE INT,
+    FOREIGN KEY (ID_ENTRADA) REFERENCES entradas(ID_ENTRADA) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ID_SERIE) REFERENCES productos_series(ID_SERIE) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Crear la tabla SALIDAS
+CREATE TABLE salidas (
+    ID_SALIDA INT PRIMARY KEY AUTO_INCREMENT,
+    ID_PRODUCTO INT,
+    FACTURA VARCHAR(255),
+    EMISOR VARCHAR(255),
+    RECEPTOR VARCHAR(255),
+    AREA VARCHAR(255),
+    CANTIDAD INT,
+    FECHA DATE,
+    ID_PACIENTE INT,
+    FOREIGN KEY (ID_PRODUCTO) REFERENCES productos(ID_PRODUCTO) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Crear la tabla SALIDAS_SERIE
+CREATE TABLE salidas_series (
+    ID_SALIDA_SERIE INT PRIMARY KEY AUTO_INCREMENT,
+    ID_SALIDA INT,
+    ID_SERIE INT,
+    FOREIGN KEY (ID_SALIDA) REFERENCES salidas(ID_SALIDA) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ID_SERIE) REFERENCES productos_series(ID_SERIE) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Crear la vista RESUMEN_INVENTARIO
+CREATE VIEW resumen_inventario AS
+SELECT
+    P.ID_PRODUCTO,
+    P.CODIGO_PRODUCTO,
+    P.NOMBRE,
+    P.UNIDADES AS CANTIDAD_TOTAL,
+    P.STOCK_MINIMO,
+    SUM(E.CANTIDAD) AS entradas,
+    SUM(S.CANTIDAD) AS salidas,
+    P.UNIDADES - SUM(S.CANTIDAD) AS STOCK_EN_EXISTENCIA
+FROM
+    productos P
+    LEFT JOIN entradas E ON P.ID_PRODUCTO = E.ID_PRODUCTO
+    LEFT JOIN salidas S ON P.ID_PRODUCTO = S.ID_PRODUCTO
+GROUP BY
+    P.ID_PRODUCTO;
+
+
+ALTER TABLE salidas ADD FOREIGN KEY (ID_PACIENTE) REFERENCES registro(ID_PACIENTE) ON DELETE SET NULL ON UPDATE CASCADE;
+
+
+DELIMITER //
+
+CREATE PROCEDURE InsertarProductoInventario(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_nombre VARCHAR(200),
+    IN p_descripcion TEXT,
+    IN p_unidades varchar(20),
+    IN p_stock_minimo decimal(10,2),
+    IN p_sede VARCHAR(20),
+    IN p_area VARCHAR(50)
+)
+BEGIN
+    DECLARE producto_id INT;
+
+    -- Insertar en la tabla PRODUCTOS
+    INSERT INTO productos (CODIGO_PRODUCTO, NOMBRE, DESCRIPCION, UNIDADES, STOCK_MINIMO)
+    VALUES (p_codigo_producto, p_nombre, p_descripcion, p_unidades, p_stock_minimo);
+
+    -- Obtener el ID del producto recién insertado
+    SET producto_id = LAST_INSERT_ID();
+
+    -- Insertar en la tabla INVENTARIO
+    INSERT INTO inventario (ID_PRODUCTO, SEDE, AREA, STOCK_MINIMO)
+    VALUES (producto_id, p_sede, p_area, p_stock_minimo);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateProductoInventario(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_nombre VARCHAR(200),
+    IN p_descripcion TEXT,
+    IN p_unidades varchar(20),
+    IN p_stock_minimo decimal(10,2),
+    IN p_area VARCHAR(50),
+    IN p_id_producto INT
+)
+BEGIN
+
+    -- Actualizar en la tabla PRODUCTOS
+    UPDATE productos SET CODIGO_PRODUCTO = p_codigo_producto, NOMBRE = p_nombre, DESCRIPCION = p_descripcion, UNIDADES = p_unidades, STOCK_MINIMO = p_stock_minimo WHERE ID_PRODUCTO = p_id_producto;
+
+    -- Actualizar en la tabla INVENTARIO
+    UPDATE inventario SET AREA = p_area, STOCK_MINIMO = p_stock_minimo WHERE ID_PRODUCTO = p_id_producto;
+
+
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE Insert_ProductSerie_Entries(
+  IN p_id_producto INT,
+  IN p_nserie VARCHAR(50),
+  IN p_boleta VARCHAR(50),
+  IN p_cantidad DECIMAL(10,2)
+)
+BEGIN
+    DECLARE id_product_serie INT;
+    DECLARE id_serie INT;
+
+    -- INSERTAR EN LA TABLA PRODUCTOS_SERIES
+    INSERT INTO productos_series (ID_PRODUCTO, NSERIE) VALUES (p_id_producto, p_nserie);
+
+    SET id_product_serie = LAST_INSERT_ID();
+
+    -- INSERTAR EN LA TABLA ENTRADAS
+    INSERT INTO entradas (ID_PRODUCTO, BOLETA, CANTIDAD) VALUES (p_id_producto, p_boleta, p_cantidad);
+    SET id_serie = LAST_INSERT_ID();
+
+    -- INSERTAR EN LA TABLA ENTRADAS_SERIES
+    INSERT INTO entradas_series (ID_ENTRADA, ID_SERIE) VALUES (id_serie, id_product_serie);
+
+END;
+
+DELIMITER ;

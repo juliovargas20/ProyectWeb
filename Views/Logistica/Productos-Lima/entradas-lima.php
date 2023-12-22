@@ -51,7 +51,7 @@
                                 <select id="SearchProduct" name="SearchProduct" class="select2 form-select form-select-lg" data-allow-clear="true" onchange="onChangUnid();" required>
                                     <option value=""></option>
                                     <?php foreach ($data['get'] as $row) { ?>
-                                        <option value="<?php echo $row['PRO_CODIGO'] ?>"><?php echo $row['PRO_CODIGO'] ?> - <?php echo $row['NOMBRE'] ?></option>
+                                        <option value="<?php echo $row['ID_PRODUCTO'] ?>"><?php echo $row['CODIGO_PRODUCTO'] ?> - <?php echo $row['NOMBRE'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

@@ -545,11 +545,11 @@ class Logistica extends Controller
                         <i class="mdi mdi-dots-vertical"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end m-0">
-                        <a href="javascript:;" class="dropdown-item" onclick="SimpleProducts(' . $data[$i]['PRO_ID'] . ')">
+                        <a href="javascript:;" class="dropdown-item" onclick="SimpleProducts(' . $data[$i]['ID_PRODUCTO'] . ')">
                             <i class="mdi mdi-pencil-outline me-1"></i> 
                             Editar
                         </a>
-                        <a href="javascript:;" class="dropdown-item" onclick="DeleteProduct(' . $data[$i]['PRO_ID'] . ')">
+                        <a href="javascript:;" class="dropdown-item" onclick="DeleteProduct(' . $data[$i]['ID_PRODUCTO'] . ')">
                             <i class="mdi mdi-trash-can-outline me-1"></i> 
                             Eliminar
                         </a>
@@ -568,30 +568,27 @@ class Logistica extends Controller
         $name = $_POST['NameProduct'];
         $des = $_POST['DesProduct'];
         $uni = $_POST['UnidProduct'];
-        $area = $_POST['AreaProduct'];
         $stock = $_POST['StockProduct'];
         $sede = 'Lima';
+        $area = $_POST['AreaProduct'];
 
-        if ($id == "") {
+        if (empty($id)) {
             $data = $this->model->InsertProduct($cod, $name, $des, $uni, $sede, $area, $stock);
             if ($data == 'ok') {
-                $res = array('tipo' => 'success', 'mensaje' => 'Producto Registrado');
-            } else if ($data == "existe") {
-                $res = array('tipo' => 'warning', 'mensaje' => 'El Código Producto ya Existe');
+                $res = array('tipo' =>'success','mensaje' => 'Producto Registrado');
+            } else if ($data == 'existe') {
+                $res = array('tipo' =>'warning','mensaje' => 'EL Codigo producto ya existe');
             } else {
-                $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Registrado');
+                $res = array('tipo' => 'error','mensaje' => 'Error al Registrar Producto');
             }
         } else {
             $data = $this->model->UpdateProducts($id, $cod, $name, $des, $uni, $area, $stock);
             if ($data == 'ok') {
-                $res = array('tipo' => 'success', 'mensaje' => 'Producto Modificado');
-            } else if ($data == "existe") {
-                $res = array('tipo' => 'warning', 'mensaje' => 'El Código Producto ya Existe');
+                $res = array('tipo' =>'success','mensaje' => 'Producto Modificado');
             } else {
-                $res = array('tipo' => 'error', 'mensaje' => 'Error al Producto Modificado');
+                $res = array('tipo' => 'error','mensaje' => 'Error al Modificae Producto');
             }
         }
-
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
         die();
@@ -654,107 +651,22 @@ class Logistica extends Controller
         die();
     }
 
-    public function InsertEntriesProducts()
+    public function RegisterProductsEntries()
     {
-        $cod = $_POST['SearchProduct'];
-        $boleta = $_POST['NBoleProduct'];
-        $qual = $_POST['QuantProduct'];
+        $id_producto = $_POST[''];
+        $serie = $_POST[''];
+        $boleta = $_POST[''];
+        $qual = $_POST[''];
 
-        $data = $this->model->RegisterEntriesProducts($cod, $boleta, $qual);
+        $data = $this->model->RegistarSerieProductsEntries($id_producto, $serie, $boleta, $qual);
         if ($data > 0) {
-            $res = array('tipo' => 'success', 'mensaje' => 'Entradas Registradas', 'id' => $data);
+            $res = array('tipo' =>'success','mensaje' => 'Entrada Registrada');
         } else {
-            $res = array('tipo' => 'error', 'mensaje' => 'Error al Entradas Registradas');
+            $res = array('tipo' => 'error','mensaje' => 'Error al Registrar Entrada');
         }
 
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
         die();
-    }
-
-    public function InsertSerieProducts()
-    {
-        $id_entries = $_POST['id_entriesINT'];
-        $cod = $_POST['SearchProduct'];
-        $nserie_data = json_decode($_POST['NSerieProducts'], true);
-        $res = array();
-
-        for ($i = 0; $i < count($nserie_data); $i++) {
-            $nserie = $nserie_data[$i];
-            $data = $this->model->RegistarSerieProducts($id_entries, $cod, $nserie);
-
-            if ($data == 'existe') {
-                $this->model->beginTransaction();
-
-                try {
-                    $this->model->DeleteEntriesProductsAfterSerie($id_entries);
-                    $this->model->commit();
-                    $res = array('tipo' => 'warning', 'mensaje' => 'Serie ' . $nserie . ' ya está registrada');
-                } catch (Exception $e) {
-                    $this->model->rollback();
-                    $res = array('tipo' => 'error', 'mensaje' => 'Error al eliminar entradas después de la serie registrada');
-                    // Agregar registro de error en el log
-                    error_log("Error al eliminar entradas después de la serie registrada: " . $e->getMessage());
-                }
-            } elseif ($data == 'ok') {
-                $res = array('tipo' => 'success', 'mensaje' => 'Serie Productos y Entradas Registradas');
-            } else {
-                $res = array('tipo' => 'error', 'mensaje' => 'Error al Serie Productos y Entradas Registradas');
-            }
-        }
-
-        echo json_encode($res, JSON_UNESCAPED_UNICODE);
-        die();
-    }
-
-    public function AllSerieProductCod($id)
-    {
-        $data = $this->model->AllSerieProductCod($id);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        die();
-    }
-
-    public function DeleteEntriesByID($id)
-    {
-        $data = $this->model->DeleteEntriesProductsAfterSerie($id);
-        if ($data > 0) {
-            $res = array('tipo' => 'success', 'mensaje' => 'Entrada Eliminado');
-        } else {
-            $res = array('tipo' => 'error', 'mensaje' => 'Error al Entrada Eliminado');
-        }
-
-        echo json_encode($res, JSON_UNESCAPED_UNICODE);
-        die();
-    }
-
-    public function PrintBarCode()
-    {
-        require('Assets/vendor/libs/fpdf/fpdf.php');
-        include './include/barcode.php';
-
-        $barcod = $this->model->AllSerieProductCod(2);
-
-        $pdf = new FPDF();
-        $pdf->AddPage('P', 'mm', 'A4');
-        $pdf->SetAutoPageBreak(true, 20);
-        $y = $pdf->GetY();
-
-        $pdf->SetFont('aria', '', 16);
-
-        $index = 0;
-        while ($index < count($barcod)) {
-            $row = $barcod[$index];
-            $code = $row['NSERIE'];
-
-            barcode('codigos/' . $code . '.png', $code, 20, 'horizontal', 'code128', true);
-
-            $pdf->Image('codigos/' . $code . '.png', 10, $y, 50, 0, 'PNG');
-
-            $y = $y + 15;
-
-            $index++;
-        }
-
-        $pdf->Output();
     }
 
     /************** </PRODUCTOS LIMA> **************/
